@@ -1,0 +1,115 @@
+<div class="container-fluid" style="margin-top: 16px;">
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a>Home</a></li>
+            <li class="breadcrumb-item"><a [routerLink]="'/company'">Companies</a></li>
+            <li class="breadcrumb-item active" *ngIf="isNewCompany">new</li>
+            <li class="breadcrumb-item active" *ngIf="!isNewCompany"><a [routerLink]="'/company/view/' + company.id">{{company.name}}</a></li>
+            <li class="breadcrumb-item active" *ngIf="!isNewCompany">Edit</li>
+        </ol>
+    </nav>
+    <h1 *ngIf="!isNewCompany" class="titre">
+        <button style="float: right;" (click)="delete()" class="btn btn-danger btn-error">
+            Delete
+        </button> Modify company {{company.id}}
+    </h1>
+    <h1 *ngIf="isNewCompany" class="titre">Add a company</h1>
+
+    <div *ngIf="step === 1" class="first-step">
+        <p>
+            Company Infos
+        </p>
+        <div class=" page-contenu ">
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="input-group mb-3">
+                        <span class="input-group-text">Name</span>
+                        <input [(ngModel)]="company.name" type="text" class="form-control">
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="input-group mb-3">
+                        <span class="input-group-text">Type</span>
+                        <select [(ngModel)]="company.type" type="text" class="form-control">
+                            <option value="TYPE1">Type 1</option>
+                            <option value="TYPE2">Type 2</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="input-group mb-3">
+                        <span class="input-group-text">Address</span>
+                        <input [(ngModel)]="company.address" type="text" class="form-control">
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="input-group mb-3">
+                        <span class="input-group-text">Contact</span>
+                        <input [(ngModel)]="company.contact" type="text" class="form-control">
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="input-group mb-3">
+                        <span class="input-group-text">Geolocation</span>
+                        <input [(ngModel)]="company.geolocation" type="text" class="form-control">
+                        <button class="btn btn-outline-secondary" type="button" id="button-addon2">Get current location</button>
+                    </div>
+                </div>
+            </div>
+            <div>
+                <button (click)="endFirstStep()" class="btn btn-primary">Next</button>
+            </div>
+        </div>
+    </div>
+
+    <div *ngIf="step === 2" class="second-step">
+        <p>
+            Owner infos
+        </p>
+        <div class=" page-contenu ">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="input-group mb-3">
+                        <span class="input-group-text">Names</span>
+                        <input [(ngModel)]="company.owner.names" type="text" class="form-control">
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="input-group mb-3">
+                        <span class="input-group-text">Position</span>
+                        <input [(ngModel)]="company.owner.position" type="text" class="form-control">
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="input-group mb-3">
+                        <span class="input-group-text">Phones</span>
+                        <input [(ngModel)]="company.owner.tel" type="text" class="form-control">
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="input-group mb-3">
+                        <span class="input-group-text">Login</span>
+                        <input [(ngModel)]="company.owner.login" type="text" class="form-control">
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="input-group mb-3">
+                        <span class="input-group-text">Password</span>
+                        <input [(ngModel)]="company.owner.password" type="text" class="form-control">
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="input-group mb-3">
+                        <span class="input-group-text">Confirm Password</span>
+                        <input [(ngModel)]="company.owner.password" type="text" class="form-control">
+                    </div>
+                </div>
+            </div>
+            <div>
+                <button (click)="previous()" class="btn btn-outline-primary mr-5">Previous</button>&nbsp;
+                <button (click)="endSecondStep()" class="btn btn-primary">Next</button>
+            </div>
+        </div>
+    </div>
+
+</div>
