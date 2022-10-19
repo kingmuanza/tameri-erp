@@ -42,7 +42,9 @@ export class CommunityViewComponent implements OnInit {
           this.community = data;
           this.isNewCommunity = false;
           this.companyService.getAll('company').then((data) => {
-            this.companies = data;
+            this.companies = data.filter((company) => {
+              return company.community && company.community.id === this.community.id;
+            });
             this.dtTrigger.next('');
           });
         });
