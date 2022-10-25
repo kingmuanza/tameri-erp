@@ -11,7 +11,7 @@
         {{company.name}}
     </h1>
     <div *ngIf="company.community">
-        Community : <a [routerLink]="'/community/edit/' + company.community.id">{{company.community.name}}</a>
+        Community : <a [routerLink]="'/community/view/' + company.community.id">{{company.community.name}}</a>
     </div>
     <p>
         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam maximus aliquam velit, sed malesuada ligula blandit vel.
@@ -90,28 +90,97 @@
                                     <input [(ngModel)]="company.owner.tel" type="text" class="form-control">
                                 </div>
                             </div>
-                            <div class="col-lg-6">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div *ngIf="user" class="second-step card shadow-sm">
+                <div class="card-body">
+                    <p class="card-title">
+                        Authentication infos
+                        <a class="btn btn-link" (click)="showFormPassWord = !showFormPassWord">Change password</a>
+                    </p>
+                    <div class=" page-contenu ">
+                        <div class="row">
+                            <div class="col-lg-12">
                                 <div class="input-group mb-3">
                                     <span class="input-group-text">Login</span>
-                                    <input [(ngModel)]="company.owner.login" type="text" class="form-control">
+                                    <input [(ngModel)]="user.login" readonly type="text" class="form-control">
+                                </div>
+                            </div>
+                            <ng-container *ngIf="showFormPassWord">
+                                <div class="col-lg-6">
+                                    <div class="input-group mb-3">
+                                        <span class="input-group-text">New password</span>
+                                        <input [(ngModel)]="password" type="password" class="form-control" [ngClass]="{'is-invalid': showErrors && (errorSame || errorSize)}">
+                                    </div>
+                                    <div class="errors" style="margin-bottom: 20px; color: red">
+                                        <div *ngIf="errorSize">
+                                            Miminum 4 caracters
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="input-group mb-3">
+                                        <span class="input-group-text">Confirm new password</span>
+                                        <input [(ngModel)]="confirmpassword" type="password" class="form-control" [ngClass]="{'is-invalid': showErrors && (errorSame)}">
+                                    </div>
+                                    <div class="errors" style="margin-bottom: 20px; color: red">
+                                        <div *ngIf="errorSame">
+                                            Passwords are not the same
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <button (click)="savePassword()" class="btn btn-primary">Save</button>
+                                </div>
+                            </ng-container>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div *ngIf="!user" class="second-step card shadow-sm">
+                <div class="card-body">
+                    <p class="card-title">
+                        Authentication infos
+                    </p>
+                    <div class=" page-contenu ">
+                        Aucun utilisateur lié à ce compte
+
+                        <a class="btn btn-link" (click)="showFormUser = !showFormUser">
+                            Ajouter un utilisateur
+                        </a>
+                    </div>
+                    <div *ngIf="showFormUser" class=" page-contenu ">
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <div class="input-group mb-3">
+                                    <span class="input-group-text">Login</span>
+                                    <input [(ngModel)]="login" type="text" class="form-control">
                                 </div>
                             </div>
                             <div class="col-lg-6">
                                 <div class="input-group mb-3">
                                     <span class="input-group-text">Password</span>
-                                    <input [(ngModel)]="company.owner.password" type="text" class="form-control">
+                                    <input [(ngModel)]="password" type="text" class="form-control">
                                 </div>
                             </div>
                             <div class="col-lg-6">
                                 <div class="input-group mb-3">
                                     <span class="input-group-text">Confirm Password</span>
-                                    <input [(ngModel)]="company.owner.password" type="text" class="form-control">
+                                    <input [(ngModel)]="confirmpassword" type="text" class="form-control">
                                 </div>
                             </div>
+                        </div>
+                        <div>
+                            <button (click)="createUser()" class="btn btn-primary">Create User</button>
                         </div>
                     </div>
                 </div>
             </div>
+
         </div>
         <div class="col-lg-6">
             <div class="first-step card shadow-lg">
@@ -217,5 +286,9 @@
             </div>
         </div>
     </div>
+
+</div>
+
+<div style="height: 25vh;">
 
 </div>

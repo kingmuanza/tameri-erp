@@ -1,4 +1,4 @@
-<app-appbar></app-appbar>
+<app-appbar [user]="user"></app-appbar>
 <div class="row gx-0">
     <div class="col-lg-12">
         <div class="app-content">
@@ -10,13 +10,100 @@
 
 <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
     <div class="offcanvas-header">
-        <h5 class="offcanvas-title" id="offcanvasExampleLabel">Menu</h5>
+        <h5 class="offcanvas-title" id="offcanvasExampleLabel">
+            {{user?.company.name}}
+        </h5>
         <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
     </div>
     <div class="offcanvas-body">
         <div>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam ut arcu ipsum. Suspendisse ornare hendrerit quam ncidunt consectetur.
+            <a>@{{user?.login}}</a>,
+
+            <b>{{user?.role}}</b>
+        </div>
+        <div class="mt-4" *ngIf="company && company.option">
+            <div class="options-price">
+                <p class="card-title">
+                    Products
+                </p>
+                <div class="">
+                    <div class="">
+                        <div class="form-check form-switch">
+                            <input [(ngModel)]="company.option.productResource" class="form-check-input" type="checkbox" role="switch" disabled>
+                            <label class="form-check-label">Product with resource</label>
+                        </div>
+                    </div>
+                    <div class="">
+                        <div class="form-check form-switch">
+                            <input [(ngModel)]="company.option.productPack" class="form-check-input" type="checkbox" role="switch" disabled>
+                            <label class="form-check-label">Product with packs</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="options-price">
+                <p class="card-title">
+                    POS views
+                </p>
+                <div class="form-check" *ngFor="let pos of allpos">
+                    <input [(ngModel)]="company.option.view" class="form-check-input" [value]="pos" type="radio" name="pos">
+                    <label class="form-check-label">{{pos}}</label>
+                </div>
+            </div>
+            <div class="options-price">
+                <p class="card-title">
+                    POS
+                </p>
+                <div class="">
+                    <div class="">
+                        <div class="form-check form-switch">
+                            <input [(ngModel)]="company.option.service" class="form-check-input" type="checkbox" role="switch" disabled>
+                            <label class="form-check-label">with services</label>
+                        </div>
+                    </div>
+                    <div class="">
+                        <div class="form-check form-switch">
+                            <input [(ngModel)]="company.option.client" class="form-check-input" type="checkbox" role="switch" disabled>
+                            <label class="form-check-label">with client</label>
+                        </div>
+                    </div>
+                    <div class="">
+                        <div class="form-check form-switch">
+                            <input [(ngModel)]="company.option.pack" class="form-check-input" type="checkbox" role="switch" disabled>
+                            <label class="form-check-label">with pack</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="options-price">
+                <p class="card-title">
+                    Others
+                </p>
+                <div class="row">
+                    <div class="">
+                        <div class="form-check form-switch">
+                            <input [(ngModel)]="company.option.printing" class="form-check-input" type="checkbox" role="switch" disabled>
+                            <label class="form-check-label">Printings</label>
+                        </div>
+                    </div>
+                    <div class="">
+                        <div class="form-check form-switch">
+                            <input [(ngModel)]="company.option.scm" class="form-check-input" type="checkbox" role="switch" disabled>
+                            <label class="form-check-label">SCM</label>
+                        </div>
+                    </div>
+                    <div class="">
+                        <div class="form-check form-switch">
+                            <input [(ngModel)]="company.option.crm" class="form-check-input" type="checkbox" role="switch" disabled>
+                            <label class="form-check-label">CRM</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </div>
 <notifier-container></notifier-container>
+<app-connexion (onConnexion)="connexion($event)">
+
+</app-connexion>

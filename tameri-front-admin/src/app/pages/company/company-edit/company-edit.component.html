@@ -24,7 +24,12 @@
                 <div class="col-lg-6">
                     <div class="input-group mb-3">
                         <span class="input-group-text">Name</span>
-                        <input [(ngModel)]="company.name" type="text" class="form-control">
+                        <input [(ngModel)]="company.name" type="text" class="form-control" [ngClass]="{'is-invalid': showErrors1 && (errorCompanyName)}">
+                    </div>
+                    <div class="errors" style="margin-bottom: 20px; color: red; margin-top: -5px; font-size: 0.9em;">
+                        <div *ngIf="errorCompanyName">
+                            Required field
+                        </div>
                     </div>
                 </div>
                 <div class="col-lg-6">
@@ -71,7 +76,12 @@
                 <div class="col-lg-12">
                     <div class="input-group mb-3">
                         <span class="input-group-text">Names</span>
-                        <input [(ngModel)]="company.owner.names" type="text" class="form-control">
+                        <input [(ngModel)]="company.owner.names" type="text" class="form-control" [ngClass]="{'is-invalid': showErrors2 && (errorOwnerName)}">
+                    </div>
+                    <div class="errors" style="margin-bottom: 20px; color: red; margin-top: -5px; font-size: 0.9em;">
+                        <div *ngIf="errorOwnerName">
+                            Required field
+                        </div>
                     </div>
                 </div>
                 <div class="col-lg-6">
@@ -86,28 +96,42 @@
                         <input [(ngModel)]="company.owner.tel" type="text" class="form-control">
                     </div>
                 </div>
+            </div>
+            <div>
+                <button (click)="previous()" class="btn btn-outline-primary mr-5">Previous</button>&nbsp;
+                <button (click)="endSecondStep()" class="btn btn-primary">Next</button>
+            </div>
+        </div>
+    </div>
+
+    <div *ngIf="step === 3" class="second-step">
+        <p>
+            Authentication infos
+        </p>
+        <div class=" page-contenu ">
+            <div class="row">
                 <div class="col-lg-6">
                     <div class="input-group mb-3">
                         <span class="input-group-text">Login</span>
-                        <input [(ngModel)]="company.owner.login" type="text" class="form-control">
+                        <input [(ngModel)]="login" type="text" class="form-control">
                     </div>
                 </div>
                 <div class="col-lg-6">
                     <div class="input-group mb-3">
                         <span class="input-group-text">Password</span>
-                        <input [(ngModel)]="company.owner.password" type="text" class="form-control">
+                        <input [(ngModel)]="password" type="text" class="form-control" [ngClass]="{'is-invalid': showErrors3 && (errorNotSame)}">
                     </div>
                 </div>
                 <div class="col-lg-6">
                     <div class="input-group mb-3">
                         <span class="input-group-text">Confirm Password</span>
-                        <input [(ngModel)]="company.owner.password" type="text" class="form-control">
+                        <input [(ngModel)]="confirmpassword" type="text" class="form-control" [ngClass]="{'is-invalid': showErrors3 && (errorNotSame)}">
                     </div>
                 </div>
             </div>
             <div>
                 <button (click)="previous()" class="btn btn-outline-primary mr-5">Previous</button>&nbsp;
-                <button (click)="endSecondStep()" class="btn btn-primary">Next</button>
+                <button (click)="createUser()" class="btn btn-primary">Next</button>
             </div>
         </div>
     </div>

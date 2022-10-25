@@ -3,7 +3,7 @@
     "version": 1,
     "newProjectRoot": "projects",
     "projects": {
-        "tameri": {
+        "tameri-front": {
             "projectType": "application",
             "schematics": {
                 "@schematics/angular:component": {
@@ -39,7 +39,7 @@
                 "build": {
                     "builder": "@angular-devkit/build-angular:browser",
                     "options": {
-                        "outputPath": "dist/tameri",
+                        "outputPath": "dist/tameri-front",
                         "index": "src/index.html",
                         "main": "src/main.ts",
                         "polyfills": "src/polyfills.ts",
@@ -58,16 +58,15 @@
                             "src/styles.scss"
                         ],
                         "scripts": [
-                          "node_modules/jquery/dist/jquery.js",
-                          "node_modules/bootstrap/dist/js/bootstrap.bundle.js",
-                          "node_modules/datatables.net/js/jquery.dataTables.js",
-                          "node_modules/jszip/dist/jszip.js",
-                          "node_modules/datatables.net-buttons/js/dataTables.buttons.js",
-                          "node_modules/datatables.net-buttons/js/buttons.colVis.js",
-                          "node_modules/datatables.net-buttons/js/buttons.flash.js",
-                          "node_modules/datatables.net-buttons/js/buttons.html5.js",
-                          "node_modules/datatables.net-buttons/js/buttons.print.js",
-                          "./node_modules/hammerjs/hammer.min.js"
+                            "node_modules/jquery/dist/jquery.js",
+                            "node_modules/bootstrap/dist/js/bootstrap.bundle.js",
+                            "node_modules/datatables.net/js/jquery.dataTables.js",
+                            "node_modules/jszip/dist/jszip.js",
+                            "node_modules/datatables.net-buttons/js/dataTables.buttons.js",
+                            "node_modules/datatables.net-buttons/js/buttons.colVis.js",
+                            "node_modules/datatables.net-buttons/js/buttons.flash.js",
+                            "node_modules/datatables.net-buttons/js/buttons.html5.js",
+                            "node_modules/datatables.net-buttons/js/buttons.print.js"
                         ]
                     },
                     "configurations": {
@@ -104,10 +103,10 @@
                     "builder": "@angular-devkit/build-angular:dev-server",
                     "configurations": {
                         "production": {
-                            "browserTarget": "tameri:build:production"
+                            "browserTarget": "tameri-front:build:production"
                         },
                         "development": {
-                            "browserTarget": "tameri:build:development"
+                            "browserTarget": "tameri-front:build:development"
                         }
                     },
                     "defaultConfiguration": "development"
@@ -115,7 +114,7 @@
                 "extract-i18n": {
                     "builder": "@angular-devkit/build-angular:extract-i18n",
                     "options": {
-                        "browserTarget": "tameri:build"
+                        "browserTarget": "tameri-front:build"
                     }
                 },
                 "test": {
@@ -133,15 +132,13 @@
                         "styles": [
                             "src/styles.scss"
                         ],
-                        "scripts": [
-                          "./node_modules/hammerjs/hammer.min.js"
-                        ]
+                        "scripts": []
                     }
                 }
             }
         }
     },
     "cli": {
-        "analytics": "44ddee0b-e482-4b36-94ce-0d6fb6a69a9b"
+      "analytics": "fb0480ed-3565-42dd-94ec-77815b31f31d"
     }
 }

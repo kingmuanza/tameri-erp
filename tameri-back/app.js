@@ -6,6 +6,7 @@ const path = require('path');
 const testRoutes = require('./_routes/test.route');
 const companyRoutes = require('./_routes/company.route');
 const communityRoutes = require('./_routes/community.route');
+const authRoutes = require('./_routes/auth.route');
 
 const app = express();
 
@@ -25,6 +26,7 @@ app.use(bodyParser.json());
 app.use('/images', express.static(path.join(__dirname, 'images')));
 
 app.use('/test', testRoutes);
+app.use('/auth', authRoutes);
 app.use('/company', companyRoutes);
 app.use('/community', communityRoutes);
 

@@ -29,10 +29,15 @@ export class CrudService<T> {
     this.infos();
     this.showLoader();
     return new Promise((resolve, reject) => {
-      this.http.get(this.URL + table).subscribe((data) => {
-        const result = data as Array<T>;
-        this.hideLoader();
-        resolve(result);
+      this.http.get(this.URL + table).subscribe({
+        next: (data) => {
+          const result = data as Array<T>;
+          this.hideLoader();
+          resolve(result);
+        },
+        error: (e) => {
+          reject(e);
+        }
       });
     });
   }
@@ -41,10 +46,15 @@ export class CrudService<T> {
     this.infos();
     this.showLoader();
     return new Promise((resolve, reject) => {
-      this.http.get(this.URL + table + '/' + id).subscribe((data) => {
-        const result = data as T;
-        this.hideLoader();
-        resolve(result);
+      this.http.get(this.URL + table + '/' + id).subscribe({
+        next: (data) => {
+          const result = data as T;
+          this.hideLoader();
+          resolve(result);
+        },
+        error: (e) => {
+          reject(e);
+        }
       });
     });
   }
@@ -53,9 +63,14 @@ export class CrudService<T> {
     this.infos();
     this.showLoader();
     return new Promise((resolve, reject) => {
-      this.http.post(this.URL + table, objet).subscribe((data) => {
-        this.hideLoader();
-        resolve(data);
+      this.http.post(this.URL + table, objet).subscribe({
+        next: (data) => {
+          this.hideLoader();
+          resolve(data);
+        },
+        error: (e) => {
+          reject(e);
+        }
       });
     });
   }
@@ -64,10 +79,15 @@ export class CrudService<T> {
     this.infos();
     this.showLoader();
     return new Promise((resolve, reject) => {
-      this.http.put(this.URL + table + '/' + id, objet).subscribe((data) => {
-        const result = data as T;
-        this.hideLoader();
-        resolve(result);
+      this.http.put(this.URL + table + '/' + id, objet).subscribe({
+        next: (data) => {
+          const result = data as T;
+          this.hideLoader();
+          resolve(result);
+        },
+        error: (e) => {
+          reject(e);
+        }
       });
     });
   }
@@ -76,9 +96,14 @@ export class CrudService<T> {
     this.infos();
     this.showLoader();
     return new Promise((resolve, reject) => {
-      this.http.delete(this.URL + table + '/' + id).subscribe((data) => {
-        this.hideLoader();
-        resolve(true);
+      this.http.delete(this.URL + table + '/' + id).subscribe({
+        next: (data) => {
+          this.hideLoader();
+          resolve(true);
+        },
+        error: (e) => {
+          reject(e);
+        }
       });
     });
   }
