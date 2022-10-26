@@ -2,16 +2,16 @@
     <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
             <li class="breadcrumb-item"><a>Home</a></li>
-            <li class="breadcrumb-item"><a [routerLink]="'/productpack'">Productpacks</a></li>
-            <li class="breadcrumb-item active" *ngIf="!isNewProductpack">{{productpack.name}}</li>
+            <li class="breadcrumb-item"><a [routerLink]="'/resourcepack'">Resourcepacks</a></li>
+            <li class="breadcrumb-item active" *ngIf="!isNewResourcepack">{{resourcepack.name}}</li>
         </ol>
     </nav>
-    <a [routerLink]="'/productpack/edit/' + productpack.id" style="float: right;">Edit</a>
-    <h1 *ngIf="!isNewProductpack" class="titre">
-        {{productpack.name}}
+    <a [routerLink]="'/resourcepack/edit/' + resourcepack.id" style="float: right;">Edit</a>
+    <h1 *ngIf="!isNewResourcepack" class="titre">
+        {{resourcepack.name}}
     </h1>
     <p>
-        Company : {{productpack.company.name}}
+        Company : {{resourcepack.company.name}}
         <br>
     </p>
     <div class="row">
@@ -19,27 +19,27 @@
             <div class="first-step card shadow-sm">
                 <div class="card-body">
                     <p class="card-title">
-                        Productpack Infos
+                        Resourcepack Infos
                     </p>
                     <div class=" page-contenu ">
                         <div class="row">
                             <div class="col-lg-6">
                                 <div class="input-group mb-3">
                                     <span class="input-group-text">Name</span>
-                                    <input [(ngModel)]="productpack.name" type="text" class="form-control">
+                                    <input [(ngModel)]="resourcepack.name" type="text" class="form-control">
                                 </div>
                             </div>
                             <div class="col-lg-6">
                                 <div class="input-group mb-3">
                                     <span class="input-group-text">Price</span>
-                                    <input [(ngModel)]="productpack.price" type="number" class="form-control">
+                                    <input [(ngModel)]="resourcepack.price" type="number" class="form-control">
                                 </div>
                             </div>
                             <div class="col-lg-6">
                                 <div class="input-group mb-3">
-                                    <span class="input-group-text">Product</span>
-                                    <select [(ngModel)]="productpack.product" type="text" class="form-control">
-                                        <option [ngValue]="p" *ngFor="let p of products">
+                                    <span class="input-group-text">Resource</span>
+                                    <select [(ngModel)]="resourcepack.resource" type="text" class="form-control">
+                                        <option [ngValue]="p" *ngFor="let p of resources">
                                             {{p.name}}
                                         </option>
                                     </select>
@@ -48,7 +48,7 @@
                             <div class="col-lg-6">
                                 <div class="input-group mb-3">
                                     <span class="input-group-text">Quantity</span>
-                                    <input [(ngModel)]="productpack.quantity" type="number" class="form-control">
+                                    <input [(ngModel)]="resourcepack.quantity" type="number" class="form-control">
                                 </div>
                             </div>
                         </div>

@@ -3,22 +3,22 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { NotifierService } from 'angular-notifier';
 import { Community } from 'src/app/_models/community.model';
 import { Company } from 'src/app/_models/company.model';
-import { Product } from 'src/app/_models/product.model';
-import { Productpack } from 'src/app/_models/productpack.model';
+import { Resource } from 'src/app/_models/resource.model';
+import { Resourcepack } from 'src/app/_models/resourcepack.model';
 import { AuthenticationService } from 'src/app/_services/authentication.service';
 import { CrudService } from 'src/app/_services/crud.service';
 
 @Component({
-  selector: 'app-productpack-view',
-  templateUrl: './productpack-view.component.html',
-  styleUrls: ['./productpack-view.component.scss']
+  selector: 'app-resourcepack-view',
+  templateUrl: './resourcepack-view.component.html',
+  styleUrls: ['./resourcepack-view.component.scss']
 })
-export class ProductpackViewComponent implements OnInit {
+export class ResourcepackViewComponent implements OnInit {
 
   step = 1;
 
-  productpack = new Productpack();
-  isNewProductpack = true;
+  resourcepack = new Resourcepack();
+  isNewResourcepack = true;
 
   communities = new Array<Community>();
 
@@ -26,7 +26,7 @@ export class ProductpackViewComponent implements OnInit {
 
   password = '';
   confirmpassword = '';
-  products = new Array<Product>();
+  resources = new Array<Resource>();
 
   showFormPassWord = false;
   showErrors = false;
@@ -43,8 +43,8 @@ export class ProductpackViewComponent implements OnInit {
     private authService: AuthenticationService,
     private route: ActivatedRoute,
     private communityService: CrudService<Community>,
-    private productService: CrudService<Product>,
-    private productpackService: CrudService<Productpack>
+    private resourceService: CrudService<Resource>,
+    private resourcepackService: CrudService<Resourcepack>
   ) {
     this.company = this.authService.user.company;
   }
@@ -53,19 +53,19 @@ export class ProductpackViewComponent implements OnInit {
     this.route.paramMap.subscribe((paramMap) => {
       const id = paramMap.get('id');
       if (id) {
-        this.productpackService.get('productpack', id).then((data) => {
-          this.productpack = data;
-          this.isNewProductpack = false;
+        this.resourcepackService.get('resourcepack', id).then((data) => {
+          this.resourcepack = data;
+          this.isNewResourcepack = false;
 
-          this.productService.getAll('product').then((data) => {
-            console.log('product');
+          this.resourceService.getAll('resource').then((data) => {
+            console.log('resource');
             console.log(data);
-            this.products = data.filter((d) => {
+            this.resources = data.filter((d) => {
               return d.company && d.company.id === this.company.id;
             });
-            this.products.forEach((p) => {
-              if (p.id === this.productpack.product.id) {
-                this.productpack.product = p;
+            this.resources.forEach((p) => {
+              if (p.id === this.resourcepack.resource.id) {
+                this.resourcepack.resource = p;
               }
             });
           });
@@ -87,9 +87,9 @@ export class ProductpackViewComponent implements OnInit {
   }
 
   save() {
-    this.productpackService.modify('productpack', this.productpack.id, this.productpack).then(() => {
+    this.resourcepackService.modify('resourcepack', this.resourcepack.id, this.resourcepack).then(() => {
       this.notifierService.notify('success', "saved successfully");
-      this.router.navigate(['productpack', 'view', this.productpack.id]);
+      this.router.navigate(['resourcepack', 'view', this.resourcepack.id]);
     });
   }
 

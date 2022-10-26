@@ -12,6 +12,9 @@ import { ProductpackViewComponent } from './pages/productpack/productpack-view/p
 import { ResourceEditComponent } from './pages/resource/resource-edit/resource-edit.component';
 import { ResourceListComponent } from './pages/resource/resource-list/resource-list.component';
 import { ResourceViewComponent } from './pages/resource/resource-view/resource-view.component';
+import { ResourcepackEditComponent } from './pages/resourcepack/resourcepack-edit/resourcepack-edit.component';
+import { ResourcepackListComponent } from './pages/resourcepack/resourcepack-list/resourcepack-list.component';
+import { ResourcepackViewComponent } from './pages/resourcepack/resourcepack-view/resourcepack-view.component';
 
 const routes: Routes = [
   
@@ -34,6 +37,11 @@ const routes: Routes = [
   { path: 'resource/edit', component: ResourceEditComponent },
   { path: 'resource/edit/:id', component: ResourceEditComponent },
   { path: 'resource/view/:id', component: ResourceViewComponent },
+
+  { path: 'resourcepack', component: ResourcepackListComponent },
+  { path: 'resourcepack/edit', component: ResourcepackEditComponent },
+  { path: 'resourcepack/edit/:id', component: ResourcepackEditComponent },
+  { path: 'resourcepack/view/:id', component: ResourcepackViewComponent },
 
 ];
 

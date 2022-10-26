@@ -10,6 +10,8 @@ const authRoutes = require('./_routes/auth.route');
 const employeeRoutes = require('./_routes/employee.route');
 const resourceRoutes = require('./_routes/resource.route');
 const productRoutes = require('./_routes/product.route');
+const productpackRoutes = require('./_routes/productpack.route');
+const resourcepackRoutes = require('./_routes/resourcepack.route');
 
 const app = express();
 
@@ -34,6 +36,8 @@ app.use('/company', companyRoutes);
 app.use('/community', communityRoutes);
 app.use('/employee', employeeRoutes);
 app.use('/product', productRoutes);
+app.use('/productpack', productpackRoutes);
 app.use('/resource', resourceRoutes);
+app.use('/resourcepack', resourcepackRoutes);
 
 module.exports = app;

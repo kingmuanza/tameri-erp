@@ -21,6 +21,9 @@ import { ProductViewComponent } from './pages/product/product-view/product-view.
 import { ProductpackEditComponent } from './pages/productpack/productpack-edit/productpack-edit.component';
 import { ProductpackListComponent } from './pages/productpack/productpack-list/productpack-list.component';
 import { ProductpackViewComponent } from './pages/productpack/productpack-view/productpack-view.component';
+import { ResourcepackViewComponent } from './pages/resourcepack/resourcepack-view/resourcepack-view.component';
+import { ResourcepackListComponent } from './pages/resourcepack/resourcepack-list/resourcepack-list.component';
+import { ResourcepackEditComponent } from './pages/resourcepack/resourcepack-edit/resourcepack-edit.component';
 
 @NgModule({
   declarations: [
@@ -39,6 +42,9 @@ import { ProductpackViewComponent } from './pages/productpack/productpack-view/p
     ProductpackEditComponent,
     ProductpackListComponent,
     ProductpackViewComponent,
+    ResourcepackViewComponent,
+    ResourcepackListComponent,
+    ResourcepackEditComponent,
   ],
   imports: [
     BrowserModule,
