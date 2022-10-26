@@ -2,19 +2,19 @@ import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { NotifierService } from 'angular-notifier';
 import { Company } from 'src/app/_models/company.model';
-import { Resource } from 'src/app/_models/resource.model';
+import { Product } from 'src/app/_models/product.model';
 import { AuthenticationService } from 'src/app/_services/authentication.service';
 import { CrudService } from 'src/app/_services/crud.service';
 
 @Component({
-  selector: 'app-resource-edit',
-  templateUrl: './resource-edit.component.html',
-  styleUrls: ['./resource-edit.component.scss']
+  selector: 'app-product-edit',
+  templateUrl: './product-edit.component.html',
+  styleUrls: ['./product-edit.component.scss']
 })
-export class ResourceEditComponent implements OnInit {
+export class ProductEditComponent implements OnInit {
 
-  resource = new Resource();
-  isNewResource = true;
+  product = new Product();
+  isNewProduct = true;
   allpos = ['Restau', 'Bar', 'Shop', 'Service', 'Personnalized'];
   company = new Company();
 
@@ -23,7 +23,7 @@ export class ResourceEditComponent implements OnInit {
     private notifierService: NotifierService,
     private authService: AuthenticationService,
     private route: ActivatedRoute,
-    private resourceService: CrudService<Resource>
+    private productService: CrudService<Product>
   ) { }
 
   ngOnInit(): void {
@@ -31,25 +31,25 @@ export class ResourceEditComponent implements OnInit {
     this.route.paramMap.subscribe((paramMap) => {
       const id = paramMap.get('id');
       if (id) {
-        this.resourceService.get('resource', id).then((data) => {
-          this.resource = data;
-          this.isNewResource = false;
+        this.productService.get('product', id).then((data) => {
+          this.product = data;
+          this.isNewProduct = false;
         }); 
       }
     });
   }
 
   save() {
-    this.resource.company = this.authService.user.company;
-    if (this.isNewResource) {
-      this.resourceService.create('resource', this.resource).then(() => {
+    this.product.company = this.authService.user.company;
+    if (this.isNewProduct) {
+      this.productService.create('product', this.product).then(() => {
         this.notifierService.notify('success', "saved successfully");
-        this.router.navigate(['resource', 'view', this.resource.id]);
+        this.router.navigate(['product', 'view', this.product.id]);
       });
     } else {
-      this.resourceService.modify('resource', this.resource.id, this.resource).then(() => {
+      this.productService.modify('product', this.product.id, this.product).then(() => {
         this.notifierService.notify('success', "saved successfully");
-        this.router.navigate(['resource', 'view', this.resource.id]);
+        this.router.navigate(['product', 'view', this.product.id]);
       });
     }
   }

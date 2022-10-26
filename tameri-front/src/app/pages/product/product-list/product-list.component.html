@@ -2,10 +2,10 @@
     <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
             <li class="breadcrumb-item"><a>Home</a></li>
-            <li class="breadcrumb-item active" aria-current="page">Resources</li>
+            <li class="breadcrumb-item active" aria-current="page">Products</li>
         </ol>
     </nav>
-    <h1>Resources</h1>
+    <h1>Products</h1>
     <p>
         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam maximus aliquam velit, sed malesuada ligula blandit vel.
     </p>
@@ -19,17 +19,17 @@
                             <th>ID</th>
                             <th>Name</th>
                             <th>Category</th>
-                            <th>Unit</th>
+                            <th>Type</th>
                             <th style="text-align: right;">Price</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr *ngFor="let resource of resources" (click)="edit(resource)">
-                            <td>{{resource.id}}</td>
-                            <td>{{resource.name}}</td>
-                            <td>{{resource.category}}</td>
-                            <td>{{resource.unit}}</td>
-                            <td style="text-align: right;">{{resource.price}}</td>
+                        <tr *ngFor="let product of products" (click)="edit(product)">
+                            <td>{{product.id}}</td>
+                            <td>{{product.name}}</td>
+                            <td>{{product.category}}</td>
+                            <td>{{product.type}}</td>
+                            <td style="text-align: right;">{{product.price}}</td>
                         </tr>
                     </tbody>
                 </table>

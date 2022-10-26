@@ -15,6 +15,12 @@ import { EmployeeEditComponent } from './pages/employee/employee-edit/employee-e
 import { ResourceEditComponent } from './pages/resource/resource-edit/resource-edit.component';
 import { ResourceListComponent } from './pages/resource/resource-list/resource-list.component';
 import { ResourceViewComponent } from './pages/resource/resource-view/resource-view.component';
+import { ProductListComponent } from './pages/product/product-list/product-list.component';
+import { ProductEditComponent } from './pages/product/product-edit/product-edit.component';
+import { ProductViewComponent } from './pages/product/product-view/product-view.component';
+import { ProductpackEditComponent } from './pages/productpack/productpack-edit/productpack-edit.component';
+import { ProductpackListComponent } from './pages/productpack/productpack-list/productpack-list.component';
+import { ProductpackViewComponent } from './pages/productpack/productpack-view/productpack-view.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +32,13 @@ import { ResourceViewComponent } from './pages/resource/resource-view/resource-v
     EmployeeEditComponent,
     ResourceEditComponent,
     ResourceListComponent,
-    ResourceViewComponent
+    ResourceViewComponent,
+    ProductListComponent,
+    ProductEditComponent,
+    ProductViewComponent,
+    ProductpackEditComponent,
+    ProductpackListComponent,
+    ProductpackViewComponent,
   ],
   imports: [
     BrowserModule,

@@ -2,49 +2,49 @@
     <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
             <li class="breadcrumb-item"><a>Home</a></li>
-            <li class="breadcrumb-item"><a [routerLink]="'/resource'">Resources</a></li>
-            <li class="breadcrumb-item active" *ngIf="isNewResource">new</li>
+            <li class="breadcrumb-item"><a [routerLink]="'/product'">Products</a></li>
+            <li class="breadcrumb-item active" *ngIf="isNewProduct">new</li>
 
-            <li class="breadcrumb-item active" *ngIf="!isNewResource"><a [routerLink]="'/resource/view/' + resource.id">{{resource.name}}</a></li>
-            <li class="breadcrumb-item active" *ngIf="!isNewResource">Edit</li>
+            <li class="breadcrumb-item active" *ngIf="!isNewProduct"><a [routerLink]="'/product/view/' + product.id">{{product.name}}</a></li>
+            <li class="breadcrumb-item active" *ngIf="!isNewProduct">Edit</li>
         </ol>
     </nav>
-    <h1 *ngIf="!isNewResource" class="titre">
-        Modify resource {{resource.id}}
+    <h1 *ngIf="!isNewProduct" class="titre">
+        Modify product {{product.id}}
     </h1>
-    <h1 *ngIf="isNewResource" class="titre">Add a resource</h1>
+    <h1 *ngIf="isNewProduct" class="titre">Add a product</h1>
     <div style="margin-top: -10px; margin-bottom: 20px;">
         Company : {{company.name}}
     </div>
 
     <div class="first-step">
         <p>
-            Resource Infos
+            Product Infos
         </p>
         <div class=" page-contenu ">
             <div class="row">
                 <div class="col-lg-8">
                     <div class="input-group mb-3">
                         <span class="input-group-text">Name</span>
-                        <input [(ngModel)]="resource.name" type="text" class="form-control">
+                        <input [(ngModel)]="product.name" type="text" class="form-control">
                     </div>
                 </div>
                 <div class="col-lg-4">
                     <div class="input-group mb-3">
                         <span class="input-group-text">Price</span>
-                        <input [(ngModel)]="resource.price" type="number" class="form-control">
+                        <input [(ngModel)]="product.price" type="number" class="form-control">
                     </div>
                 </div>
                 <div class="col-lg-12">
                     <div class="input-group mb-3">
                         <span class="input-group-text">Content</span>
-                        <input [(ngModel)]="resource.content" type="text" class="form-control">
+                        <input [(ngModel)]="product.content" type="text" class="form-control">
                     </div>
                 </div>
                 <div class="col-lg-6">
                     <div class="input-group mb-3">
                         <span class="input-group-text">Category</span>
-                        <select [(ngModel)]="resource.category" type="text" class="form-control">
+                        <select [(ngModel)]="product.category" type="text" class="form-control">
                             <option value="Category1">Category 1</option>
                             <option value="Category2">Category 2</option>
                         </select>
@@ -52,12 +52,10 @@
                 </div>
                 <div class="col-lg-6">
                     <div class="input-group mb-3">
-                        <span class="input-group-text">Unit</span>
-                        <select [(ngModel)]="resource.unit" type="text" class="form-control">
-                            <option value="no">No unit</option>
-                            <option value="Kg">Kg</option>
-                            <option value="M">M</option>
-                            <option value="L">L</option>
+                        <span class="input-group-text">Type</span>
+                        <select [(ngModel)]="product.type" type="text" class="form-control">
+                            <option value="TYPE1">Type 1</option>
+                            <option value="TYPE2">Type 2</option>
                         </select>
                     </div>
                 </div>

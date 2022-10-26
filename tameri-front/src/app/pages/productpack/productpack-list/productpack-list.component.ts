@@ -4,16 +4,16 @@ import { DataTableDirective } from 'angular-datatables';
 import { Subject } from 'rxjs';
 import { DatatablesOptions } from 'src/app/_data/datatable.option';
 import { Company } from 'src/app/_models/company.model';
-import { Resource } from 'src/app/_models/resource.model';
+import { Productpack } from 'src/app/_models/productpack.model';
 import { AuthenticationService } from 'src/app/_services/authentication.service';
 import { CrudService } from 'src/app/_services/crud.service';
 
 @Component({
-  selector: 'app-resource-list',
-  templateUrl: './resource-list.component.html',
-  styleUrls: ['./resource-list.component.scss']
+  selector: 'app-productpack-list',
+  templateUrl: './productpack-list.component.html',
+  styleUrls: ['./productpack-list.component.scss']
 })
-export class ResourceListComponent implements OnInit {
+export class ProductpackListComponent implements OnInit {
 
   // Datatables
   dtOptions: any = DatatablesOptions;
@@ -21,12 +21,12 @@ export class ResourceListComponent implements OnInit {
   @ViewChild(DataTableDirective) dtElement!: DataTableDirective;
   dtInstance!: Promise<DataTables.Api>;
 
-  resources = new Array<Resource>();
+  productpacks = new Array<Productpack>();
   company = new Company();
 
   constructor(
     private router: Router,
-    private resourceService: CrudService<Resource>,
+    private productpackService: CrudService<Productpack>,
     private authService: AuthenticationService,
   ) {
     this.company = this.authService.user.company;
@@ -47,18 +47,18 @@ export class ResourceListComponent implements OnInit {
     return dtOptions;
   }
 
-  edit(resource?:Resource) {
-    if (resource) {
-      this.router.navigate(['resource', 'view', resource.id]);
+  edit(productpack?:Productpack) {
+    if (productpack) {
+      this.router.navigate(['productpack', 'view', productpack.id]);
     } else {
-      this.router.navigate(['resource', 'edit']);
+      this.router.navigate(['productpack', 'edit']);
     }
   }
 
   ngOnInit(): void {
     this.dtOptions = this.initNouveau();
-    this.resourceService.getAll('resource').then((data) => {
-      this.resources = data.filter((d) => {
+    this.productpackService.getAll('productpack').then((data) => {
+      this.productpacks = data.filter((d) => {
         return d.company && d.company.id === this.company.id;
       });
       this.dtTrigger.next('');

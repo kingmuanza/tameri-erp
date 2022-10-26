@@ -1,0 +1,119 @@
+<div class="container-fluid" style="margin-top: 16px;">
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a>Home</a></li>
+            <li class="breadcrumb-item"><a [routerLink]="'/product'">Products</a></li>
+            <li class="breadcrumb-item active" *ngIf="!isNewProduct">{{product.name}}</li>
+        </ol>
+    </nav>
+    <a [routerLink]="'/product/edit/' + product.id" style="float: right;">Edit</a>
+    <h1 *ngIf="!isNewProduct" class="titre">
+        {{product.name}}
+    </h1>
+    <p>
+        Company : {{product.company.name}}
+        <br>
+    </p>
+    <div class="row">
+        <div class="col-lg-6">
+            <div class="first-step card shadow-sm">
+                <div class="card-body">
+                    <p class="card-title">
+                        Product Infos
+                    </p>
+                    <div class=" page-contenu ">
+
+                        <div class="row">
+                            <div class="col-lg-8">
+                                <div class="input-group mb-3">
+                                    <span class="input-group-text">Name</span>
+                                    <input [(ngModel)]="product.name" type="text" class="form-control">
+                                </div>
+                            </div>
+                            <div class="col-lg-4">
+                                <div class="input-group mb-3">
+                                    <span class="input-group-text">Price</span>
+                                    <input [(ngModel)]="product.price" type="number" class="form-control">
+                                </div>
+                            </div>
+                            <div class="col-lg-12">
+                                <div class="input-group mb-3">
+                                    <span class="input-group-text">Content</span>
+                                    <input [(ngModel)]="product.content" type="text" class="form-control">
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="input-group mb-3">
+                                    <span class="input-group-text">Category</span>
+                                    <select [(ngModel)]="product.category" type="text" class="form-control">
+                                        <option value="Category1">Category 1</option>
+                                        <option value="Category2">Category 2</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="input-group mb-3">
+                                    <span class="input-group-text">Type</span>
+                                    <select [(ngModel)]="product.type" type="text" class="form-control">
+                                        <option value="TYPE1">Type 1</option>
+                                        <option value="TYPE2">Type 2</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-6">
+            <div class="first-step card shadow-lg">
+                <div class="card-body">
+                    <p class="card-title">
+                        Resources
+                    </p>
+                    <div class=" page-contenu ">
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <div class="input-group mb-3">
+                                    <span class="input-group-text">Resource</span>
+                                    <select [(ngModel)]="resource" type="text" class="form-control" [ngClass]="{'is-invalid': showErrors && (!resource.name)}">
+                                        <option [ngValue]="r" *ngFor="let r of resources">
+                                            {{r.name}}
+                                        </option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-lg-4">
+                                <div class="input-group mb-3">
+                                    <span class="input-group-text">Quantity</span>
+                                    <input [(ngModel)]="quantity" type="number" class="form-control" [ngClass]="{'is-invalid': showErrors && (quantity <= 0)}">
+                                    <span *ngIf="resource.unit" class="input-group-text">{{resource.unit}}</span>
+                                </div>
+                            </div>
+                            <div class="col-lg-2">
+                                <div class="">
+                                    <button (click)="add()" class="btn btn-primary" style="width: 100%;">
+                                        Add
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <ul>
+                            <li *ngFor="let item of product.resources">
+                                {{item.quantity}} {{item.resource.unit}} {{item.resource.name}} &nbsp;
+                                <a style="color: red; cursor: pointer;" (click)="deleteResource(item)">Supprimer</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<div style="height: 25vh;">
+
+</div>

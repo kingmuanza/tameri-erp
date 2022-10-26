@@ -2,10 +2,10 @@
     <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
             <li class="breadcrumb-item"><a>Home</a></li>
-            <li class="breadcrumb-item active" aria-current="page">Resources</li>
+            <li class="breadcrumb-item active" aria-current="page">Productpacks</li>
         </ol>
     </nav>
-    <h1>Resources</h1>
+    <h1>Productpacks</h1>
     <p>
         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam maximus aliquam velit, sed malesuada ligula blandit vel.
     </p>
@@ -18,18 +18,18 @@
                         <tr>
                             <th>ID</th>
                             <th>Name</th>
-                            <th>Category</th>
-                            <th>Unit</th>
+                            <th>Product</th>
+                            <th>Quantity</th>
                             <th style="text-align: right;">Price</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr *ngFor="let resource of resources" (click)="edit(resource)">
-                            <td>{{resource.id}}</td>
-                            <td>{{resource.name}}</td>
-                            <td>{{resource.category}}</td>
-                            <td>{{resource.unit}}</td>
-                            <td style="text-align: right;">{{resource.price}}</td>
+                        <tr *ngFor="let productpack of productpacks" (click)="edit(productpack)">
+                            <td>{{productpack.id}}</td>
+                            <td>{{productpack.name}}</td>
+                            <td>{{productpack.product.name}}</td>
+                            <td>{{productpack.quantity}}</td>
+                            <td style="text-align: right;">{{productpack.price}}</td>
                         </tr>
                     </tbody>
                 </table>

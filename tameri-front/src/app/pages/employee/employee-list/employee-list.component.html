@@ -18,14 +18,16 @@
                         <tr>
                             <th>ID</th>
                             <th>Name</th>
-                            <th>Type</th>
-                            <th>Description</th>
+                            <th>Login</th>
+                            <th>Position</th>
+                            <th>Role</th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr *ngFor="let employee of employees" (click)="edit(employee)">
                             <td>{{employee.id}}</td>
                             <td>{{employee.names}}</td>
+                            <td>{{employee.login}}</td>
                             <td>{{employee.position}}</td>
                             <td>{{employee.role}}</td>
                         </tr>

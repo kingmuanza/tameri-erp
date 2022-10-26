@@ -1,3 +1,5 @@
+import { Company } from "./company.model";
+
 export class Employee {
     
     id: string = 'EMPLOYEE' + new Date().getTime();
@@ -8,5 +10,6 @@ export class Employee {
     role = '';
     acl = '';
     login = '';
-    passe = '';
+    password = '';
+    company = new Company();
 }

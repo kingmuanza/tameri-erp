@@ -3,7 +3,9 @@ import { Router } from '@angular/router';
 import { DataTableDirective } from 'angular-datatables';
 import { Subject } from 'rxjs';
 import { DatatablesOptions } from 'src/app/_data/datatable.option';
+import { Company } from 'src/app/_models/company.model';
 import { Employee } from 'src/app/_models/employee.model';
+import { AuthenticationService } from 'src/app/_services/authentication.service';
 import { CrudService } from 'src/app/_services/crud.service';
 
 @Component({
@@ -20,11 +22,14 @@ export class EmployeeListComponent implements OnInit {
   dtInstance!: Promise<DataTables.Api>;
 
   employees = new Array<Employee>();
+  company = new Company();
 
   constructor(
     private router: Router,
     private employeeService: CrudService<Employee>,
+    private authService: AuthenticationService,
   ) {
+    this.company = this.authService.user.company;
   }
 
   private initNouveau() {
@@ -53,7 +58,9 @@ export class EmployeeListComponent implements OnInit {
   ngOnInit(): void {
     this.dtOptions = this.initNouveau();
     this.employeeService.getAll('employee').then((data) => {
-      this.employees = data;
+      this.employees = data.filter((d) => {
+        return d.company && d.company.id === this.company.id;
+      });
       this.dtTrigger.next('');
     }).catch((e)=> {
       this.dtTrigger.next('');
