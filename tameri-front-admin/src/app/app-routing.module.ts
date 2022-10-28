@@ -7,9 +7,17 @@ import { CompanyEditComponent } from './pages/company/company-edit/company-edit.
 import { CompanyListComponent } from './pages/company/company-list/company-list.component';
 import { CompanyViewComponent } from './pages/company/company-view/company-view.component';
 import { HomeComponent } from './pages/home/home.component';
+import { PricingEditComponent } from './pages/pricing/pricing-edit/pricing-edit.component';
+import { PricingListComponent } from './pages/pricing/pricing-list/pricing-list.component';
+import { PricingViewComponent } from './pages/pricing/pricing-view/pricing-view.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
+
+  { path: 'pricing', component: PricingListComponent },
+  { path: 'pricing/edit', component: PricingEditComponent },
+  { path: 'pricing/edit/:id', component: PricingEditComponent },
+  { path: 'pricing/view/:id', component: PricingViewComponent },
 
   { path: 'company', component: CompanyListComponent },
   { path: 'company/edit', component: CompanyEditComponent },

@@ -1,0 +1,152 @@
+<div class="container-fluid" style="margin-top: 16px;">
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a>Home</a></li>
+            <li class="breadcrumb-item"><a [routerLink]="'/pricing'">All pricing</a></li>
+            <li class="breadcrumb-item active" *ngIf="isNewPricing">new</li>
+
+            <li class="breadcrumb-item active" *ngIf="!isNewPricing"><a [routerLink]="'/pricing/view/' + pricing.id">{{pricing.name}}</a></li>
+            <li class="breadcrumb-item active" *ngIf="!isNewPricing">Edit</li>
+        </ol>
+    </nav>
+    <h1 *ngIf="!isNewPricing" class="titre">
+        Modify pricing : {{pricing.name}}
+    </h1>
+    <h1 *ngIf="isNewPricing" class="titre">Add a pricing</h1>
+
+    <div class="first-step">
+        <p>
+            Pricing Infos
+        </p>
+        <div class=" page-contenu ">
+
+            <div class="first-step card shadow-lg">
+                <div class="card-body">
+                    <div class="options-price">
+                        <p class="card-title">
+                            Name
+                        </p>
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <div class="input-group mb-3">
+                                    <label class="input-group-text">Name of the pricing</label>
+                                    <input [(ngModel)]="pricing.name" class="form-control" type="texte">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="options-price">
+                        <p class="card-title">
+                            Products
+                        </p>
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <div class="input-group mb-3">
+                                    <label class="input-group-text">Product with resource</label>
+                                    <input [(ngModel)]="pricing.productResource" class="form-control" type="number">
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="input-group mb-3">
+                                    <label class="input-group-text">Product with packs</label>
+                                    <input [(ngModel)]="pricing.productPack" class="form-control" type="number">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="options-price">
+                        <p class="card-title">
+                            POS views
+                        </p>
+                        <div class="row">
+                            <div>
+                                <div class="input-group mb-3">
+                                    <label class="input-group-text">Restau</label>
+                                    <input [(ngModel)]="pricing.restau" class="form-control" type="number">
+                                </div>
+                            </div>
+                            <div>
+                                <div class="input-group mb-3">
+                                    <label class="input-group-text">Bar</label>
+                                    <input [(ngModel)]="pricing.bar" class="form-control" type="number">
+                                </div>
+                            </div>
+                            <div>
+                                <div class="input-group mb-3">
+                                    <label class="input-group-text">Shop</label>
+                                    <input [(ngModel)]="pricing.shop" class="form-control" type="number">
+                                </div>
+                            </div>
+                            <div>
+                                <div class="input-group mb-3">
+                                    <label class="input-group-text">Service</label>
+                                    <input [(ngModel)]="pricing.prestationservice" class="form-control" type="number">
+                                </div>
+                            </div>
+                            <div>
+                                <div class="input-group mb-3">
+                                    <label class="input-group-text">Personnalized</label>
+                                    <input [(ngModel)]="pricing.personnalized" class="form-control" type="number">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="options-price">
+                        <p class="card-title">
+                            POS
+                        </p>
+                        <div class="row">
+                            <div class="col-lg-4">
+                                <div class="input-group mb-3">
+                                    <label class="input-group-text">with services</label>
+                                    <input [(ngModel)]="pricing.service" class="form-control" type="number">
+                                </div>
+                            </div>
+                            <div class="col-lg-4">
+                                <div class="input-group mb-3">
+                                    <label class="input-group-text">with client</label>
+                                    <input [(ngModel)]="pricing.client" class="form-control" type="number">
+                                </div>
+                            </div>
+                            <div class="col-lg-4">
+                                <div class="input-group mb-3">
+                                    <label class="input-group-text">with pack</label>
+                                    <input [(ngModel)]="pricing.pack" class="form-control" type="number">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="options-price">
+                        <p class="card-title">
+                            Others
+                        </p>
+                        <div class="row">
+                            <div class="col-lg-4">
+                                <div class="input-group mb-3">
+                                    <label class="input-group-text">Printings</label>
+                                    <input [(ngModel)]="pricing.printing" class="form-control" type="number">
+                                </div>
+                            </div>
+                            <div class="col-lg-4">
+                                <div class="input-group mb-3">
+                                    <label class="input-group-text">SCM</label>
+                                    <input [(ngModel)]="pricing.scm" class="form-control" type="number">
+                                </div>
+                            </div>
+                            <div class="col-lg-4">
+                                <div class="input-group mb-3">
+                                    <label class="input-group-text">CRM</label>
+                                    <input [(ngModel)]="pricing.crm" class="form-control" type="number">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <button (click)="save()" class="btn btn-primary">Save</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>

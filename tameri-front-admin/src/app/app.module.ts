@@ -18,6 +18,9 @@ import { HttpClientModule } from '@angular/common/http';
 import { CommunityEditComponent } from './pages/community/community-edit/community-edit.component';
 import { CommunityListComponent } from './pages/community/community-list/community-list.component';
 import { CommunityViewComponent } from './pages/community/community-view/community-view.component';
+import { PricingEditComponent } from './pages/pricing/pricing-edit/pricing-edit.component';
+import { PricingListComponent } from './pages/pricing/pricing-list/pricing-list.component';
+import { PricingViewComponent } from './pages/pricing/pricing-view/pricing-view.component';
 
 @NgModule({
   declarations: [
@@ -29,7 +32,10 @@ import { CommunityViewComponent } from './pages/community/community-view/communi
     CompanyViewComponent,
     CommunityEditComponent,
     CommunityListComponent,
-    CommunityViewComponent
+    CommunityViewComponent,
+    PricingEditComponent,
+    PricingListComponent,
+    PricingViewComponent
   ],
   imports: [
     BrowserModule,

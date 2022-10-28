@@ -187,78 +187,133 @@
                 <div class="card-body">
                     <div class="options-price">
                         <p class="card-title">
-                            Products
+                            Pricing
                         </p>
                         <div class="row">
                             <div class="col-lg-6">
-                                <div class="form-check form-switch">
-                                    <input [(ngModel)]="company.option.productResource" class="form-check-input" type="checkbox" role="switch" checked>
-                                    <label class="form-check-label">Product with resource</label>
+                                <div class="input-group mb-3">
+                                    <span class="input-group-text">Pricing</span>
+                                    <select (ngModelChange)="recalculer(this.company, $event)" [(ngModel)]="company.pricing" type="text" class="form-control">
+                                        <option *ngFor="let pricing of pricings" [ngValue]="pricing">
+                                            {{pricing.name}}
+                                        </option>
+                                    </select>
                                 </div>
                             </div>
                             <div class="col-lg-6">
-                                <div class="form-check form-switch">
-                                    <input [(ngModel)]="company.option.productPack" class="form-check-input" type="checkbox" role="switch" checked>
-                                    <label class="form-check-label">Product with packs</label>
+                                <div class="input-group mb-3">
+                                    <span class="input-group-text">Price</span>
+                                    <input [(ngModel)]="price" readonly type="text" class="form-control">
+                                    <button class="btn btn-primary" type="button" id="button-addon2">XAF</button>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div class="options-price">
-                        <p class="card-title">
-                            POS views
-                        </p>
-                        <div class="form-check" *ngFor="let pos of allpos">
-                            <input [(ngModel)]="company.option.view" class="form-check-input" [value]="pos" type="radio" name="pos">
-                            <label class="form-check-label">{{pos}}</label>
-                        </div>
-                    </div>
-                    <div class="options-price">
-                        <p class="card-title">
-                            POS
-                        </p>
-                        <div class="row">
-                            <div class="col-lg-4">
-                                <div class="form-check form-switch">
-                                    <input [(ngModel)]="company.option.service" class="form-check-input" type="checkbox" role="switch" checked>
-                                    <label class="form-check-label">with services</label>
+                    <div (click)="updatePrice()">
+
+                        <div class="options-price">
+                            <p class="card-title">
+                                Products
+                            </p>
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <div class="form-check form-switch">
+                                        <input [(ngModel)]="company.option.productResource" class="form-check-input" type="checkbox" role="switch" checked>
+                                        <label class="form-check-label">Product with resource</label>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="col-lg-4">
-                                <div class="form-check form-switch">
-                                    <input [(ngModel)]="company.option.client" class="form-check-input" type="checkbox" role="switch" checked>
-                                    <label class="form-check-label">with client</label>
-                                </div>
-                            </div>
-                            <div class="col-lg-4">
-                                <div class="form-check form-switch">
-                                    <input [(ngModel)]="company.option.pack" class="form-check-input" type="checkbox" role="switch" checked>
-                                    <label class="form-check-label">with pack</label>
+                                <div class="col-lg-6">
+                                    <div class="form-check form-switch">
+                                        <input [(ngModel)]="company.option.productPack" class="form-check-input" type="checkbox" role="switch" checked>
+                                        <label class="form-check-label">Product with packs</label>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="options-price">
-                        <p class="card-title">
-                            Others
-                        </p>
-                        <div class="row">
-                            <div class="col-lg-4">
-                                <div class="form-check form-switch">
-                                    <input [(ngModel)]="company.option.printing" class="form-check-input" type="checkbox" role="switch">
-                                    <label class="form-check-label">Printings</label>
+                        <div class="options-price">
+                            <p class="card-title">
+                                POS views
+                            </p>
+                            <div class="row">
+                                <div>
+                                    <div class="form-check form-switch">
+                                        <input [(ngModel)]="company.option.restau" class="form-check-input" type="checkbox" role="switch" checked>
+                                        <label class="form-check-label">Restau</label>
+                                    </div>
+                                </div>
+                                <div>
+                                    <div class="form-check form-switch">
+                                        <input [(ngModel)]="company.option.bar" class="form-check-input" type="checkbox" role="switch" checked>
+                                        <label class="form-check-label">Bar</label>
+                                    </div>
+                                </div>
+                                <div>
+                                    <div class="form-check form-switch">
+                                        <input [(ngModel)]="company.option.shop" class="form-check-input" type="checkbox" role="switch" checked>
+                                        <label class="form-check-label">Shop</label>
+                                    </div>
+                                </div>
+                                <div>
+                                    <div class="form-check form-switch">
+                                        <input [(ngModel)]="company.option.prestationservice" class="form-check-input" type="checkbox" role="switch" checked>
+                                        <label class="form-check-label">Service</label>
+                                    </div>
+                                </div>
+                                <div>
+                                    <div class="form-check form-switch">
+                                        <input [(ngModel)]="company.option.personnalized" class="form-check-input" type="checkbox" role="switch" checked>
+                                        <label class="form-check-label">Personnalized</label>
+                                    </div>
                                 </div>
                             </div>
-                            <div class="col-lg-4">
-                                <div class="form-check form-switch">
-                                    <input [(ngModel)]="company.option.scm" class="form-check-input" type="checkbox" role="switch" checked>
-                                    <label class="form-check-label">SCM</label>
+                        </div>
+                        <div class="options-price">
+                            <p class="card-title">
+                                POS
+                            </p>
+                            <div class="row">
+                                <div class="col-lg-4">
+                                    <div class="form-check form-switch">
+                                        <input [(ngModel)]="company.option.service" class="form-check-input" type="checkbox" role="switch" checked>
+                                        <label class="form-check-label">with services</label>
+                                    </div>
+                                </div>
+                                <div class="col-lg-4">
+                                    <div class="form-check form-switch">
+                                        <input [(ngModel)]="company.option.client" class="form-check-input" type="checkbox" role="switch" checked>
+                                        <label class="form-check-label">with client</label>
+                                    </div>
+                                </div>
+                                <div class="col-lg-4">
+                                    <div class="form-check form-switch">
+                                        <input [(ngModel)]="company.option.pack" class="form-check-input" type="checkbox" role="switch" checked>
+                                        <label class="form-check-label">with pack</label>
+                                    </div>
                                 </div>
                             </div>
-                            <div class="col-lg-4">
-                                <div class="form-check form-switch">
-                                    <input [(ngModel)]="company.option.crm" class="form-check-input" type="checkbox" role="switch">
-                                    <label class="form-check-label">CRM</label>
+                        </div>
+                        <div class="options-price">
+                            <p class="card-title">
+                                Others
+                            </p>
+                            <div class="row">
+                                <div class="col-lg-4">
+                                    <div class="form-check form-switch">
+                                        <input [(ngModel)]="company.option.printing" class="form-check-input" type="checkbox" role="switch">
+                                        <label class="form-check-label">Printings</label>
+                                    </div>
+                                </div>
+                                <div class="col-lg-4">
+                                    <div class="form-check form-switch">
+                                        <input [(ngModel)]="company.option.scm" class="form-check-input" type="checkbox" role="switch" checked>
+                                        <label class="form-check-label">SCM</label>
+                                    </div>
+                                </div>
+                                <div class="col-lg-4">
+                                    <div class="form-check form-switch">
+                                        <input [(ngModel)]="company.option.crm" class="form-check-input" type="checkbox" role="switch">
+                                        <label class="form-check-label">CRM</label>
+                                    </div>
                                 </div>
                             </div>
                         </div>

@@ -2,7 +2,13 @@ export class OptionPrice {
 
     productResource = false;
     productPack = false;
-    view = '';
+
+    restau = false;
+    bar = false;
+    shop = false;
+    prestationservice = false;
+    personnalized = false;
+
     service = false;
     client = false;
     pack = false;

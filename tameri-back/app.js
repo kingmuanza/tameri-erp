@@ -12,6 +12,7 @@ const resourceRoutes = require('./_routes/resource.route');
 const productRoutes = require('./_routes/product.route');
 const productpackRoutes = require('./_routes/productpack.route');
 const resourcepackRoutes = require('./_routes/resourcepack.route');
+const pricingRoutes = require('./_routes/pricing.route');
 
 const app = express();
 
@@ -39,5 +40,6 @@ app.use('/product', productRoutes);
 app.use('/productpack', productpackRoutes);
 app.use('/resource', resourceRoutes);
 app.use('/resourcepack', resourcepackRoutes);
+app.use('/pricing', pricingRoutes);
 
 module.exports = app;
