@@ -43,6 +43,16 @@
                             </div>
                             <div class="col-lg-6">
                                 <div class="input-group mb-3">
+                                    <span class="input-group-text">Currency</span>
+                                    <select [(ngModel)]="company.currency" type="text" class="form-control">
+                                        <option value="XAF">Franc CFA</option>
+                                        <option value="USD">Dollar</option>
+                                        <option value="EUR">Euro</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="input-group mb-3">
                                     <span class="input-group-text">Address</span>
                                     <input [(ngModel)]="company.address" type="text" class="form-control">
                                 </div>
@@ -203,8 +213,8 @@
                             <div class="col-lg-6">
                                 <div class="input-group mb-3">
                                     <span class="input-group-text">Price</span>
-                                    <input [(ngModel)]="price" readonly type="text" class="form-control">
-                                    <button class="btn btn-primary" type="button" id="button-addon2">XAF</button>
+                                    <input [ngModel]="price | currency:'':''" readonly type="text" class="form-control">
+                                    <button class="btn btn-primary" type="button" id="button-addon2">{{company.currency}}</button>
                                 </div>
                             </div>
                         </div>

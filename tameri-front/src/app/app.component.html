@@ -11,7 +11,7 @@
 <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
     <div class="offcanvas-header">
         <h5 class="offcanvas-title" id="offcanvasExampleLabel">
-            {{user?.company.name}}
+            {{company.name}}
         </h5>
         <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
     </div>
@@ -20,6 +20,11 @@
             <a>@{{user?.login}}</a>,
 
             <b>{{user?.role}}</b>
+        </div>
+        <div class="mt-4">
+            <a>{{company?.pricing?.name}}</a>
+            <br>
+            <b>{{price}}</b>
         </div>
         <div class="mt-4" *ngIf="company && company.option">
             <div class="options-price">
@@ -41,13 +46,45 @@
                     </div>
                 </div>
             </div>
-            <div class="options-price">
+            <div class="options-price pov">
                 <p class="card-title">
                     POS views
                 </p>
-                <div class="form-check" *ngFor="let pos of allpos">
-                    <input [(ngModel)]="company.option.view" class="form-check-input" [value]="pos" type="radio" name="pos">
-                    <label class="form-check-label">{{pos}}</label>
+                <div class="">
+                    <div class="form-check form-switch">
+                        <input [(ngModel)]="company.option.restau" class="form-check-input" type="checkbox" role="switch" disabled>
+                        <label class="form-check-label">Restau</label>
+                    </div>
+                </div>
+                <div class="">
+                    <div class="form-check form-switch">
+                        <input [(ngModel)]="company.option.bar" class="form-check-input" type="checkbox" role="switch" disabled>
+                        <label class="form-check-label">bar</label>
+                    </div>
+                </div>
+                <div class="">
+                    <div class="form-check form-switch">
+                        <input [(ngModel)]="company.option.shop" class="form-check-input" type="checkbox" role="switch" disabled>
+                        <label class="form-check-label">shop</label>
+                    </div>
+                </div>
+                <div class="">
+                    <div class="form-check form-switch">
+                        <input [(ngModel)]="company.option.prestationservice" class="form-check-input" type="checkbox" role="switch" disabled>
+                        <label class="form-check-label">service</label>
+                    </div>
+                </div>
+                <div class="">
+                    <div class="form-check form-switch">
+                        <input [(ngModel)]="company.option.restau" class="form-check-input" type="checkbox" role="switch" disabled>
+                        <label class="form-check-label">personnalized</label>
+                    </div>
+                </div>
+                <div class="">
+                    <div class="form-check form-switch">
+                        <input [(ngModel)]="company.option.restau" class="form-check-input" type="checkbox" role="switch" disabled>
+                        <label class="form-check-label">Restau</label>
+                    </div>
                 </div>
             </div>
             <div class="options-price">
