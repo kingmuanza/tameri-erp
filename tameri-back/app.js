@@ -16,6 +16,7 @@ const pricingRoutes = require('./_routes/pricing.route');
 const communitytypeRoutes = require('./_routes/communitytype.route');
 const companytypeRoutes = require('./_routes/companytype.route');
 const producttypeRoutes = require('./_routes/producttype.route');
+const resourcetypeRoutes = require('./_routes/resourcetype.route');
 
 const app = express();
 
@@ -47,5 +48,6 @@ app.use('/productpack', productpackRoutes);
 app.use('/producttype', producttypeRoutes);
 app.use('/resource', resourceRoutes);
 app.use('/resourcepack', resourcepackRoutes);
+app.use('/resourcetype', resourcetypeRoutes);
 
 module.exports = app;

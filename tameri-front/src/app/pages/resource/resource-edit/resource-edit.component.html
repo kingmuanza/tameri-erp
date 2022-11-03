@@ -44,9 +44,8 @@
                 <div class="col-lg-6">
                     <div class="input-group mb-3">
                         <span class="input-group-text">Category</span>
-                        <select [(ngModel)]="resource.category" type="text" class="form-control">
-                            <option value="Category1">Category 1</option>
-                            <option value="Category2">Category 2</option>
+                        <select [(ngModel)]="resource.category" class="form-control">
+                            <option *ngFor="let rt of resourcetypes" [value]="rt">{{rt.name}}</option>
                         </select>
                     </div>
                 </div>

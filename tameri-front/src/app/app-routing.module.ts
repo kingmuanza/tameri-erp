@@ -17,6 +17,8 @@ import { ResourceViewComponent } from './pages/resource/resource-view/resource-v
 import { ResourcepackEditComponent } from './pages/resourcepack/resourcepack-edit/resourcepack-edit.component';
 import { ResourcepackListComponent } from './pages/resourcepack/resourcepack-list/resourcepack-list.component';
 import { ResourcepackViewComponent } from './pages/resourcepack/resourcepack-view/resourcepack-view.component';
+import { ResourcetypeEditComponent } from './pages/resourcetype/resourcetype-edit/resourcetype-edit.component';
+import { ResourcetypeListComponent } from './pages/resourcetype/resourcetype-list/resourcetype-list.component';
 
 const routes: Routes = [
   
@@ -35,10 +37,13 @@ const routes: Routes = [
   { path: 'productpack/edit/:id', component: ProductpackEditComponent },
   { path: 'productpack/view/:id', component: ProductpackViewComponent },
 
-  
   { path: 'parameter/producttype', component: ProducttypeListComponent },
   { path: 'parameter/producttype/edit', component: ProducttypeEditComponent },
   { path: 'parameter/producttype/edit/:id', component: ProducttypeEditComponent },
+
+  { path: 'parameter/resourcetype', component: ResourcetypeListComponent },
+  { path: 'parameter/resourcetype/edit', component: ResourcetypeEditComponent },
+  { path: 'parameter/resourcetype/edit/:id', component: ResourcetypeEditComponent },
 
   { path: 'resource', component: ResourceListComponent },
   { path: 'resource/edit', component: ResourceEditComponent },

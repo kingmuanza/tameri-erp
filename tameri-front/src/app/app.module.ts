@@ -26,6 +26,8 @@ import { ResourcepackListComponent } from './pages/resourcepack/resourcepack-lis
 import { ResourcepackEditComponent } from './pages/resourcepack/resourcepack-edit/resourcepack-edit.component';
 import { ProducttypeEditComponent } from './pages/producttype/producttype-edit/producttype-edit.component';
 import { ProducttypeListComponent } from './pages/producttype/producttype-list/producttype-list.component';
+import { ResourcetypeListComponent } from './pages/resourcetype/resourcetype-list/resourcetype-list.component';
+import { ResourcetypeEditComponent } from './pages/resourcetype/resourcetype-edit/resourcetype-edit.component';
 
 @NgModule({
   declarations: [
@@ -49,6 +51,8 @@ import { ProducttypeListComponent } from './pages/producttype/producttype-list/p
     ResourcepackEditComponent,
     ProducttypeEditComponent,
     ProducttypeListComponent,
+    ResourcetypeListComponent,
+    ResourcetypeEditComponent,
   ],
   imports: [
     BrowserModule,

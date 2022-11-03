@@ -3,6 +3,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { NotifierService } from 'angular-notifier';
 import { Company } from 'src/app/_models/company.model';
 import { Resource } from 'src/app/_models/resource.model';
+import { Resourcetype } from 'src/app/_models/resourcetype.model';
 import { AuthenticationService } from 'src/app/_services/authentication.service';
 import { CrudService } from 'src/app/_services/crud.service';
 
@@ -18,15 +19,21 @@ export class ResourceEditComponent implements OnInit {
   allpos = ['Restau', 'Bar', 'Shop', 'Service', 'Personnalized'];
   company = new Company();
 
+  resourcetypes = new Array<any>();
+
   constructor(
     private router: Router,
     private notifierService: NotifierService,
     private authService: AuthenticationService,
     private route: ActivatedRoute,
+    private resourcetypeService: CrudService<Resourcetype>,
     private resourceService: CrudService<Resource>
   ) { }
 
   ngOnInit(): void {
+    this.resourcetypeService.getAll('resourcetype').then((data) => {
+      this.resourcetypes = data;
+    });
     this.company = this.authService.user.company;
     this.route.paramMap.subscribe((paramMap) => {
       const id = paramMap.get('id');
