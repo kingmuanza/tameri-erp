@@ -36,8 +36,7 @@
                     <div class="input-group mb-3">
                         <span class="input-group-text">Type</span>
                         <select [(ngModel)]="company.type" type="text" class="form-control">
-                            <option value="TYPE1">Type 1</option>
-                            <option value="TYPE2">Type 2</option>
+                            <option *ngFor="let ct of companytypes" [value]="ct.name">{{ct.name}}</option>
                         </select>
                     </div>
                 </div>

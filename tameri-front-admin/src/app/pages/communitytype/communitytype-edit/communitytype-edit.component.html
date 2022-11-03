@@ -1,0 +1,47 @@
+<div class="container-fluid" style="margin-top: 16px;">
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a>Home</a></li>
+            <li class="breadcrumb-item"><a [routerLink]="'/parameter/communitytype'">Community Types</a></li>
+            <li class="breadcrumb-item active" *ngIf="isNewCommunitytype">new</li>
+            <li class="breadcrumb-item active" *ngIf="!isNewCommunitytype"><a [routerLink]="'parameter/communitytype/edit/' + communitytype.id">{{communitytype.name}}</a></li>
+            <li class="breadcrumb-item active" *ngIf="!isNewCommunitytype">Edit</li>
+        </ol>
+    </nav>
+    <h1 *ngIf="!isNewCommunitytype" class="titre">
+        <button style="float: right;" (click)="delete()" class="btn btn-danger btn-error">
+            Delete
+        </button> Modify communitytype {{communitytype.id}}
+    </h1>
+    <h1 *ngIf="isNewCommunitytype" class="titre">Add a community type</h1>
+
+    <div *ngIf="step === 1" class="first-step">
+        <p>
+            Communitytype Infos
+        </p>
+        <div class=" page-contenu ">
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="input-group mb-3">
+                        <span class="input-group-text">Name</span>
+                        <input [(ngModel)]="communitytype.name" type="text" class="form-control" [ngClass]="{'is-invalid': showErrors1 && (errorCommunitytypeName)}">
+                    </div>
+                    <div class="errors" style="margin-bottom: 20px; color: red; margin-top: -5px; font-size: 0.9em;">
+                        <div *ngIf="errorCommunitytypeName">
+                            Required field
+                        </div>
+                    </div>
+
+                    <div class="input-group mb-3">
+                        <span class="input-group-text">Description</span>
+                        <textarea [(ngModel)]="communitytype.description" type="text" class="form-control"></textarea>
+                    </div>
+                </div>
+            </div>
+            <div>
+                <button (click)="endFirstStep()" class="btn btn-primary">Save</button>
+            </div>
+        </div>
+    </div>
+
+</div>

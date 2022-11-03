@@ -21,6 +21,10 @@ import { CommunityViewComponent } from './pages/community/community-view/communi
 import { PricingEditComponent } from './pages/pricing/pricing-edit/pricing-edit.component';
 import { PricingListComponent } from './pages/pricing/pricing-list/pricing-list.component';
 import { PricingViewComponent } from './pages/pricing/pricing-view/pricing-view.component';
+import { CommunitytypeListComponent } from './pages/communitytype/communitytype-list/communitytype-list.component';
+import { CommunitytypeEditComponent } from './pages/communitytype/communitytype-edit/communitytype-edit.component';
+import { CompanytypeEditComponent } from './pages/companytype/companytype-edit/companytype-edit.component';
+import { CompanytypeListComponent } from './pages/companytype/companytype-list/companytype-list.component';
 
 @NgModule({
   declarations: [
@@ -35,7 +39,11 @@ import { PricingViewComponent } from './pages/pricing/pricing-view/pricing-view.
     CommunityViewComponent,
     PricingEditComponent,
     PricingListComponent,
-    PricingViewComponent
+    PricingViewComponent,
+    CommunitytypeListComponent,
+    CommunitytypeEditComponent,
+    CompanytypeEditComponent,
+    CompanytypeListComponent
   ],
   imports: [
     BrowserModule,

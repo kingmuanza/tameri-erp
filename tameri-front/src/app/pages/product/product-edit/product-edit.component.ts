@@ -3,6 +3,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { NotifierService } from 'angular-notifier';
 import { Company } from 'src/app/_models/company.model';
 import { Product } from 'src/app/_models/product.model';
+import { Producttype } from 'src/app/_models/producttype.model';
 import { AuthenticationService } from 'src/app/_services/authentication.service';
 import { CrudService } from 'src/app/_services/crud.service';
 
@@ -17,17 +18,23 @@ export class ProductEditComponent implements OnInit {
   isNewProduct = true;
   allpos = ['Restau', 'Bar', 'Shop', 'Service', 'Personnalized'];
   company = new Company();
+  producttypes = new Array<any>();
+
 
   constructor(
     private router: Router,
     private notifierService: NotifierService,
     private authService: AuthenticationService,
     private route: ActivatedRoute,
+    private producttypeService: CrudService<Producttype>,
     private productService: CrudService<Product>
   ) { }
 
   ngOnInit(): void {
     this.company = this.authService.user.company;
+    this.producttypeService.getAll('producttype').then((data) => {
+      this.producttypes = data;
+    });
     this.route.paramMap.subscribe((paramMap) => {
       const id = paramMap.get('id');
       if (id) {

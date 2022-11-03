@@ -13,6 +13,9 @@ const productRoutes = require('./_routes/product.route');
 const productpackRoutes = require('./_routes/productpack.route');
 const resourcepackRoutes = require('./_routes/resourcepack.route');
 const pricingRoutes = require('./_routes/pricing.route');
+const communitytypeRoutes = require('./_routes/communitytype.route');
+const companytypeRoutes = require('./_routes/companytype.route');
+const producttypeRoutes = require('./_routes/producttype.route');
 
 const app = express();
 
@@ -34,12 +37,15 @@ app.use('/images', express.static(path.join(__dirname, 'images')));
 app.use('/test', testRoutes);
 app.use('/auth', authRoutes);
 app.use('/company', companyRoutes);
+app.use('/companytype', companytypeRoutes);
 app.use('/community', communityRoutes);
+app.use('/communitytype', communitytypeRoutes);
 app.use('/employee', employeeRoutes);
+app.use('/pricing', pricingRoutes);
 app.use('/product', productRoutes);
 app.use('/productpack', productpackRoutes);
+app.use('/producttype', producttypeRoutes);
 app.use('/resource', resourceRoutes);
 app.use('/resourcepack', resourcepackRoutes);
-app.use('/pricing', pricingRoutes);
 
 module.exports = app;

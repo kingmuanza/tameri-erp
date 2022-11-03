@@ -3,6 +3,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { Community } from 'src/app/_models/community.model';
 import { CrudService } from 'src/app/_services/crud.service';
 import { NotifierService } from 'angular-notifier';
+import { Communitytype } from 'src/app/_models/communitytype.model';
 
 @Component({
   selector: 'app-community-edit',
@@ -13,15 +14,21 @@ export class CommunityEditComponent implements OnInit {
 
   community = new Community();
   isNewCommunity = true;
+  communitytypes = new Array<Communitytype>();
+
 
   constructor(
     private router: Router,
     private notifierService: NotifierService,
     private route: ActivatedRoute,
+    private communitytypeService: CrudService<Communitytype>,
     private communityService: CrudService<Community>
   ) { }
 
   ngOnInit(): void {
+    this.communitytypeService.getAll('communitytype').then((data) => {
+      this.communitytypes = data;
+    });
     this.route.paramMap.subscribe((paramMap) => {
       const id = paramMap.get('id');
       if (id) {

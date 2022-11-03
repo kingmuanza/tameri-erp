@@ -9,6 +9,8 @@ import { ProductViewComponent } from './pages/product/product-view/product-view.
 import { ProductpackEditComponent } from './pages/productpack/productpack-edit/productpack-edit.component';
 import { ProductpackListComponent } from './pages/productpack/productpack-list/productpack-list.component';
 import { ProductpackViewComponent } from './pages/productpack/productpack-view/productpack-view.component';
+import { ProducttypeEditComponent } from './pages/producttype/producttype-edit/producttype-edit.component';
+import { ProducttypeListComponent } from './pages/producttype/producttype-list/producttype-list.component';
 import { ResourceEditComponent } from './pages/resource/resource-edit/resource-edit.component';
 import { ResourceListComponent } from './pages/resource/resource-list/resource-list.component';
 import { ResourceViewComponent } from './pages/resource/resource-view/resource-view.component';
@@ -32,6 +34,11 @@ const routes: Routes = [
   { path: 'productpack/edit', component: ProductpackEditComponent },
   { path: 'productpack/edit/:id', component: ProductpackEditComponent },
   { path: 'productpack/view/:id', component: ProductpackViewComponent },
+
+  
+  { path: 'parameter/producttype', component: ProducttypeListComponent },
+  { path: 'parameter/producttype/edit', component: ProducttypeEditComponent },
+  { path: 'parameter/producttype/edit/:id', component: ProducttypeEditComponent },
 
   { path: 'resource', component: ResourceListComponent },
   { path: 'resource/edit', component: ResourceEditComponent },

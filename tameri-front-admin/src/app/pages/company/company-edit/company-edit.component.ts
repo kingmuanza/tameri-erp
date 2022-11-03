@@ -5,6 +5,7 @@ import { CrudService } from 'src/app/_services/crud.service';
 import { NotifierService } from 'angular-notifier';
 import { User } from 'src/app/_models/user.model';
 import { AuthenticationService } from 'src/app/_services/authentication.service';
+import { Companytype } from 'src/app/_models/companytype.model';
 
 @Component({
   selector: 'app-company-edit',
@@ -31,6 +32,8 @@ export class CompanyEditComponent implements OnInit {
   password = '';
   confirmpassword = '';
 
+  companytypes = new Array<Companytype>();
+
   user: User | undefined;
 
   constructor(
@@ -38,10 +41,14 @@ export class CompanyEditComponent implements OnInit {
     private notifierService: NotifierService,
     private authService: AuthenticationService,
     private route: ActivatedRoute,
+    private companytypeService: CrudService<Companytype>,
     private companyService: CrudService<Company>
   ) { }
 
   ngOnInit(): void {
+    this.companytypeService.getAll('companytype').then((data) => {
+      this.companytypes = data;
+    });
     this.route.paramMap.subscribe((paramMap) => {
       const id = paramMap.get('id');
       if (id) {
@@ -55,7 +62,7 @@ export class CompanyEditComponent implements OnInit {
               this.login = user.login;
               this.password = user.password;
             }
-          }); 
+          });
         });
       }
     });
@@ -88,13 +95,17 @@ export class CompanyEditComponent implements OnInit {
         this.companyService.create('company', this.company).then(() => {
           this.notifierService.notify('success', "saved successfully");
           this.step++;
-          // this.router.navigate(['company', 'view', this.company.id]);
+          if (!this.isNewCompany) {
+            this.router.navigate(['company', 'view', this.company.id]);
+          }
         });
       } else {
         this.companyService.modify('company', this.company.id, this.company).then(() => {
           this.notifierService.notify('success', "saved successfully");
           this.step++;
-          // this.router.navigate(['company', 'view', this.company.id]);
+          if (!this.isNewCompany) {
+            this.router.navigate(['company', 'view', this.company.id]);
+          }
         });
       }
     } else {
