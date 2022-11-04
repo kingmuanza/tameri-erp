@@ -4,16 +4,16 @@ import { DataTableDirective } from 'angular-datatables';
 import { Subject } from 'rxjs';
 import { DatatablesOptions } from 'src/app/_data/datatable.option';
 import { Company } from 'src/app/_models/company.model';
-import { Producttype } from 'src/app/_models/producttype.model';
+import { Productcategory } from 'src/app/_models/productcategory.model';
 import { AuthenticationService } from 'src/app/_services/authentication.service';
 import { CrudService } from 'src/app/_services/crud.service';
 
 @Component({
-  selector: 'app-producttype-list',
-  templateUrl: './producttype-list.component.html',
-  styleUrls: ['./producttype-list.component.scss']
+  selector: 'app-productcategory-list',
+  templateUrl: './productcategory-list.component.html',
+  styleUrls: ['./productcategory-list.component.scss']
 })
-export class ProducttypeListComponent implements OnInit {
+export class ProductcategoryListComponent implements OnInit {
 
   // Datatables
   dtOptions: any = DatatablesOptions;
@@ -21,12 +21,12 @@ export class ProducttypeListComponent implements OnInit {
   @ViewChild(DataTableDirective) dtElement!: DataTableDirective;
   dtInstance!: Promise<DataTables.Api>;
 
-  producttypes = new Array<any>();
+  productcategorys = new Array<any>();
   company = new Company();
 
   constructor(
     private router: Router,
-    private producttypeService: CrudService<Producttype>,
+    private productcategoryService: CrudService<Productcategory>,
     private authService: AuthenticationService,
   ) {
     this.company = this.authService.user.company;
@@ -47,18 +47,18 @@ export class ProducttypeListComponent implements OnInit {
     return dtOptions;
   }
 
-  edit(producttype?:Producttype) {
-    if (producttype) {
-      this.router.navigate(['parameter/producttype', 'edit', producttype.id]);
+  edit(productcategory?:Productcategory) {
+    if (productcategory) {
+      this.router.navigate(['parameter/productcategory', 'edit', productcategory.id]);
     } else {
-      this.router.navigate(['parameter/producttype', 'edit']);
+      this.router.navigate(['parameter/productcategory', 'edit']);
     }
   }
 
   ngOnInit(): void {
     this.dtOptions = this.initNouveau();
-    this.producttypeService.getAll('producttype').then((data) => {
-      this.producttypes = data.filter((d) => {
+    this.productcategoryService.getAll('productcategory').then((data) => {
+      this.productcategorys = data.filter((d) => {
         return d.company && d.company.id === this.company.id;
       });
       this.dtTrigger.next('');

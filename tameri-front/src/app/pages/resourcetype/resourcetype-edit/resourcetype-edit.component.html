@@ -2,22 +2,22 @@
     <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
             <li class="breadcrumb-item"><a>Home</a></li>
-            <li class="breadcrumb-item"><a [routerLink]="'/parameter/resourcetype'">Resource Types</a></li>
+            <li class="breadcrumb-item"><a [routerLink]="'/parameter/resourcecategory'">Resource Categories</a></li>
             <li class="breadcrumb-item active" *ngIf="isNewResourcetype">new</li>
-            <li class="breadcrumb-item active" *ngIf="!isNewResourcetype"><a [routerLink]="'parameter/resourcetype/edit/' + resourcetype.id">{{resourcetype.name}}</a></li>
+            <li class="breadcrumb-item active" *ngIf="!isNewResourcetype"><a [routerLink]="'parameter/resourcecategory/edit/' + resourcetype.id">{{resourcetype.name}}</a></li>
             <li class="breadcrumb-item active" *ngIf="!isNewResourcetype">Edit</li>
         </ol>
     </nav>
     <h1 *ngIf="!isNewResourcetype" class="titre">
         <button style="float: right;" (click)="delete()" class="btn btn-danger btn-error">
             Delete
-        </button> Modify resourcetype {{resourcetype.id}}
+        </button> Modify resource category {{resourcetype.id}}
     </h1>
-    <h1 *ngIf="isNewResourcetype" class="titre">Add a resource type</h1>
+    <h1 *ngIf="isNewResourcetype" class="titre">Add a resource category</h1>
 
     <div *ngIf="step === 1" class="first-step">
         <p>
-            Resourcetype Infos
+            Resource category Infos
         </p>
         <div class=" page-contenu ">
             <div class="row">

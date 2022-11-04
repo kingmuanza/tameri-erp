@@ -3,6 +3,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { NotifierService } from 'angular-notifier';
 import { Company } from 'src/app/_models/company.model';
 import { Product } from 'src/app/_models/product.model';
+import { Productcategory } from 'src/app/_models/productcategory.model';
 import { Producttype } from 'src/app/_models/producttype.model';
 import { AuthenticationService } from 'src/app/_services/authentication.service';
 import { CrudService } from 'src/app/_services/crud.service';
@@ -19,13 +20,14 @@ export class ProductEditComponent implements OnInit {
   allpos = ['Restau', 'Bar', 'Shop', 'Service', 'Personnalized'];
   company = new Company();
   producttypes = new Array<any>();
-
+  productcategorys = new Array<any>();
 
   constructor(
     private router: Router,
     private notifierService: NotifierService,
     private authService: AuthenticationService,
     private route: ActivatedRoute,
+    private productcategoryService: CrudService<Productcategory>,
     private producttypeService: CrudService<Producttype>,
     private productService: CrudService<Product>
   ) { }
@@ -33,7 +35,14 @@ export class ProductEditComponent implements OnInit {
   ngOnInit(): void {
     this.company = this.authService.user.company;
     this.producttypeService.getAll('producttype').then((data) => {
-      this.producttypes = data;
+      this.producttypes = data.filter((d) => {
+        return d.company && d.company.id === this.company.id;
+      });
+    });
+    this.productcategoryService.getAll('productcategory').then((data) => {
+      this.productcategorys = data.filter((d) => {
+        return d.company && d.company.id === this.company.id;
+      });
     });
     this.route.paramMap.subscribe((paramMap) => {
       const id = paramMap.get('id');

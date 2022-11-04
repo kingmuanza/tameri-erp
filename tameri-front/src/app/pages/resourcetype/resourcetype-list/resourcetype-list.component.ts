@@ -3,7 +3,9 @@ import { Router } from '@angular/router';
 import { DataTableDirective } from 'angular-datatables/src/angular-datatables.directive';
 import { Subject } from 'rxjs';
 import { DatatablesOptions } from 'src/app/_data/datatable.option';
+import { Company } from 'src/app/_models/company.model';
 import { Resourcetype } from 'src/app/_models/resourcetype.model';
+import { AuthenticationService } from 'src/app/_services/authentication.service';
 import { CrudService } from 'src/app/_services/crud.service';
 
 @Component({
@@ -20,11 +22,14 @@ export class ResourcetypeListComponent implements OnInit {
   dtInstance!: Promise<DataTables.Api>;
 
   resourcetypes = new Array<any>();
+  company = new Company();
 
   constructor(
     private router: Router,
     private resourcetypeService: CrudService<Resourcetype>,
+    private authService: AuthenticationService,
   ) {
+    this.company = this.authService.user.company;
   }
 
   private initNouveau() {
@@ -44,16 +49,18 @@ export class ResourcetypeListComponent implements OnInit {
 
   edit(resourcetype?:Resourcetype) {
     if (resourcetype) {
-      this.router.navigate(['parameter/resourcetype', 'edit', resourcetype.id]);
+      this.router.navigate(['parameter/resourcecategory', 'edit', resourcetype.id]);
     } else {
-      this.router.navigate(['parameter/resourcetype', 'edit']);
+      this.router.navigate(['parameter/resourcecategory', 'edit']);
     }
   }
 
   ngOnInit(): void {
     this.dtOptions = this.initNouveau();
     this.resourcetypeService.getAll('resourcetype').then((data) => {
-      this.resourcetypes = data;
+      this.resourcetypes = data.filter((d) => {
+        return d.company && d.company.id === this.company.id;
+      });
       this.dtTrigger.next('');
     });
   }

@@ -6,6 +6,8 @@ import { EmployeeViewComponent } from './pages/employee/employee-view/employee-v
 import { ProductEditComponent } from './pages/product/product-edit/product-edit.component';
 import { ProductListComponent } from './pages/product/product-list/product-list.component';
 import { ProductViewComponent } from './pages/product/product-view/product-view.component';
+import { ProductcategoryEditComponent } from './pages/productcategory/productcategory-edit/productcategory-edit.component';
+import { ProductcategoryListComponent } from './pages/productcategory/productcategory-list/productcategory-list.component';
 import { ProductpackEditComponent } from './pages/productpack/productpack-edit/productpack-edit.component';
 import { ProductpackListComponent } from './pages/productpack/productpack-list/productpack-list.component';
 import { ProductpackViewComponent } from './pages/productpack/productpack-view/productpack-view.component';
@@ -41,9 +43,13 @@ const routes: Routes = [
   { path: 'parameter/producttype/edit', component: ProducttypeEditComponent },
   { path: 'parameter/producttype/edit/:id', component: ProducttypeEditComponent },
 
-  { path: 'parameter/resourcetype', component: ResourcetypeListComponent },
-  { path: 'parameter/resourcetype/edit', component: ResourcetypeEditComponent },
-  { path: 'parameter/resourcetype/edit/:id', component: ResourcetypeEditComponent },
+  { path: 'parameter/productcategory', component: ProductcategoryListComponent },
+  { path: 'parameter/productcategory/edit', component: ProductcategoryEditComponent },
+  { path: 'parameter/productcategory/edit/:id', component: ProductcategoryEditComponent },
+
+  { path: 'parameter/resourcecategory', component: ResourcetypeListComponent },
+  { path: 'parameter/resourcecategory/edit', component: ResourcetypeEditComponent },
+  { path: 'parameter/resourcecategory/edit/:id', component: ResourcetypeEditComponent },
 
   { path: 'resource', component: ResourceListComponent },
   { path: 'resource/edit', component: ResourceEditComponent },

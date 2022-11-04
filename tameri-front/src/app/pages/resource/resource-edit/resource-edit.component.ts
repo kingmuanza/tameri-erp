@@ -32,7 +32,9 @@ export class ResourceEditComponent implements OnInit {
 
   ngOnInit(): void {
     this.resourcetypeService.getAll('resourcetype').then((data) => {
-      this.resourcetypes = data;
+      this.resourcetypes = data.filter((d) => {
+        return d.company && d.company.id === this.company.id;
+      });
     });
     this.company = this.authService.user.company;
     this.route.paramMap.subscribe((paramMap) => {

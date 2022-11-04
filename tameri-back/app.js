@@ -17,6 +17,7 @@ const communitytypeRoutes = require('./_routes/communitytype.route');
 const companytypeRoutes = require('./_routes/companytype.route');
 const producttypeRoutes = require('./_routes/producttype.route');
 const resourcetypeRoutes = require('./_routes/resourcetype.route');
+const productcategoryRoutes = require('./_routes/productcategory.route');
 
 const app = express();
 
@@ -44,6 +45,7 @@ app.use('/communitytype', communitytypeRoutes);
 app.use('/employee', employeeRoutes);
 app.use('/pricing', pricingRoutes);
 app.use('/product', productRoutes);
+app.use('/productcategory', productcategoryRoutes);
 app.use('/productpack', productpackRoutes);
 app.use('/producttype', producttypeRoutes);
 app.use('/resource', resourceRoutes);

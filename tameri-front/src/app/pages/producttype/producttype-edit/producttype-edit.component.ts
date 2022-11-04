@@ -71,6 +71,7 @@ export class ProducttypeEditComponent implements OnInit {
   }
 
   endSecondStep() {
+    this.producttype.company = this.authService.user.company;
     if (this.isNewProducttype) {
       this.producttypeService.create('producttype', this.producttype).then(() => {
         this.notifierService.notify('success', "saved successfully");

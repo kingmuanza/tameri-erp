@@ -28,6 +28,8 @@ import { ProducttypeEditComponent } from './pages/producttype/producttype-edit/p
 import { ProducttypeListComponent } from './pages/producttype/producttype-list/producttype-list.component';
 import { ResourcetypeListComponent } from './pages/resourcetype/resourcetype-list/resourcetype-list.component';
 import { ResourcetypeEditComponent } from './pages/resourcetype/resourcetype-edit/resourcetype-edit.component';
+import { ProductcategoryListComponent } from './pages/productcategory/productcategory-list/productcategory-list.component';
+import { ProductcategoryEditComponent } from './pages/productcategory/productcategory-edit/productcategory-edit.component';
 
 @NgModule({
   declarations: [
@@ -53,6 +55,8 @@ import { ResourcetypeEditComponent } from './pages/resourcetype/resourcetype-edi
     ProducttypeListComponent,
     ResourcetypeListComponent,
     ResourcetypeEditComponent,
+    ProductcategoryListComponent,
+    ProductcategoryEditComponent,
   ],
   imports: [
     BrowserModule,

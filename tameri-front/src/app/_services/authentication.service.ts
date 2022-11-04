@@ -1,6 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs';
+import { Company } from '../_models/company.model';
+import { CrudService } from './crud.service';
 
 @Injectable({
   providedIn: 'root'
@@ -15,6 +17,7 @@ export class AuthenticationService {
 
   constructor(
     private http: HttpClient,
+    private companyService: CrudService<Company>
   ) { }
 
 
@@ -25,8 +28,15 @@ export class AuthenticationService {
           const result = data;
           localStorage.setItem('TameriUser', JSON.stringify(data));
           this.user = data;
-          this.userSubject.next(this.user);
-          resolve(result);
+          this.getCompany(this.user.company).then((company) => {
+            this.user.company = company;
+            this.company = company;
+            this.userSubject.next(this.user);
+
+            console.log('this.company AuthenticationService');
+            console.log(this.company);
+            resolve(result);
+          });
         },
         error: (e) => {
           reject(e);
@@ -34,6 +44,15 @@ export class AuthenticationService {
       });
     });
   }
+
+  getCompany(company: Company) {
+    return new Promise((resolve, reject) => {
+      this.companyService.get('company', company.id).then((data) => {
+        resolve(data);
+      });
+    });
+  }
+
 
   autoConnexion() {
     let user: any;

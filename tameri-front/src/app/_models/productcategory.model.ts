@@ -1,8 +1,8 @@
 import { Company } from "./company.model";
 
-export class Producttype {
+export class Productcategory {
     
-    id: string = 'PRODUCTTYPE' + new Date().getTime();
+    id: string = 'PRODUCTCATEGORY' + new Date().getTime();
     name: string = '';
     description: string = '';
     company = new Company();

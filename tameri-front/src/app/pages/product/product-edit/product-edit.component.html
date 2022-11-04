@@ -45,8 +45,7 @@
                     <div class="input-group mb-3">
                         <span class="input-group-text">Category</span>
                         <select [(ngModel)]="product.category" type="text" class="form-control">
-                            <option value="Category1">Category 1</option>
-                            <option value="Category2">Category 2</option>
+                            <option *ngFor="let pc of productcategorys" [value]="pc.name">{{pc.name}}</option>
                         </select>
                     </div>
                 </div>

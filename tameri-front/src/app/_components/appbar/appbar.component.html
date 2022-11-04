@@ -21,13 +21,13 @@
                 <li class="nav-item">
                     <a class="nav-link " aria-current="page" [routerLink]="'product'" routerLinkActive="active">Products</a>
                 </li>
-                <li class="nav-item">
+                <li class="nav-item" *ngIf="company?.option.productPack">
                     <a class="nav-link " aria-current="page" [routerLink]="'productpack'" routerLinkActive="active">Product Packs</a>
                 </li>
-                <li class="nav-item">
+                <li class="nav-item" *ngIf="company?.option.productResource">
                     <a class="nav-link " aria-current="page" [routerLink]="'resource'" routerLinkActive="active">Resources</a>
                 </li>
-                <li class="nav-item">
+                <li class="nav-item" *ngIf="company?.option.productResource">
                     <a class="nav-link " aria-current="page" [routerLink]="'resourcepack'" routerLinkActive="active">Resource Packs</a>
                 </li>
                 <li class="nav-item dropdown">
@@ -36,7 +36,10 @@
                     </a>
                     <ul class="dropdown-menu">
                         <li><a class="dropdown-item" [routerLink]="'parameter/producttype'">Product Types</a></li>
-                        <li><a class="dropdown-item" [routerLink]="'parameter/resourcetype'">Resource Types</a></li>
+                        <li><a class="dropdown-item" [routerLink]="'parameter/productcategory'">Product Categories</a></li>
+                        <li *ngIf="company?.option.productResource">
+                            <a class="dropdown-item" [routerLink]="'parameter/resourcecategory'">Resource Categories</a>
+                        </li>
                     </ul>
                 </li>
                 <li class="nav-item dropdown" style="width: 160px; text-align: center; border-left: 1px solid #ccc; margin-left: 40px">

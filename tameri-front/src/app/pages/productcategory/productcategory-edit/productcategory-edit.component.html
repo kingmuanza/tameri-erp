@@ -2,39 +2,39 @@
     <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
             <li class="breadcrumb-item"><a>Home</a></li>
-            <li class="breadcrumb-item"><a [routerLink]="'/parameter/producttype'">Product Types</a></li>
-            <li class="breadcrumb-item active" *ngIf="isNewProducttype">new</li>
-            <li class="breadcrumb-item active" *ngIf="!isNewProducttype"><a [routerLink]="'parameter/producttype/edit/' + producttype.id">{{producttype.name}}</a></li>
-            <li class="breadcrumb-item active" *ngIf="!isNewProducttype">Edit</li>
+            <li class="breadcrumb-item"><a [routerLink]="'/parameter/productcategory'">Product Categorys</a></li>
+            <li class="breadcrumb-item active" *ngIf="isNewProductcategory">new</li>
+            <li class="breadcrumb-item active" *ngIf="!isNewProductcategory"><a [routerLink]="'parameter/productcategory/edit/' + productcategory.id">{{productcategory.name}}</a></li>
+            <li class="breadcrumb-item active" *ngIf="!isNewProductcategory">Edit</li>
         </ol>
     </nav>
-    <h1 *ngIf="!isNewProducttype" class="titre">
+    <h1 *ngIf="!isNewProductcategory" class="titre">
         <button style="float: right;" (click)="delete()" class="btn btn-danger btn-error">
             Delete
-        </button> Modify product type {{producttype.id}}
+        </button> Modify product category {{productcategory.id}}
     </h1>
-    <h1 *ngIf="isNewProducttype" class="titre">Add a product type</h1>
+    <h1 *ngIf="isNewProductcategory" class="titre">Add a product category</h1>
 
     <div *ngIf="step === 1" class="first-step">
         <p>
-            Product type Infos
+            Product category Infos
         </p>
         <div class=" page-contenu ">
             <div class="row">
                 <div class="col-lg-6">
                     <div class="input-group mb-3">
                         <span class="input-group-text">Name</span>
-                        <input [(ngModel)]="producttype.name" type="text" class="form-control" [ngClass]="{'is-invalid': showErrors1 && (errorProducttypeName)}">
+                        <input [(ngModel)]="productcategory.name" category="text" class="form-control" [ngClass]="{'is-invalid': showErrors1 && (errorProductcategoryName)}">
                     </div>
                     <div class="errors" style="margin-bottom: 20px; color: red; margin-top: -5px; font-size: 0.9em;">
-                        <div *ngIf="errorProducttypeName">
+                        <div *ngIf="errorProductcategoryName">
                             Required field
                         </div>
                     </div>
 
                     <div class="input-group mb-3">
                         <span class="input-group-text">Description</span>
-                        <textarea [(ngModel)]="producttype.description" type="text" class="form-control"></textarea>
+                        <textarea [(ngModel)]="productcategory.description" category="text" class="form-control"></textarea>
                     </div>
                 </div>
             </div>

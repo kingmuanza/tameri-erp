@@ -1,24 +1,24 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { NotifierService } from 'angular-notifier';
-import { Resourcetype } from 'src/app/_models/resourcetype.model';
+import { Productcategory } from 'src/app/_models/productcategory.model';
 import { AuthenticationService } from 'src/app/_services/authentication.service';
 import { CrudService } from 'src/app/_services/crud.service';
 
 @Component({
-  selector: 'app-resourcetype-edit',
-  templateUrl: './resourcetype-edit.component.html',
-  styleUrls: ['./resourcetype-edit.component.scss']
+  selector: 'app-productcategory-edit',
+  templateUrl: './productcategory-edit.component.html',
+  styleUrls: ['./productcategory-edit.component.scss']
 })
-export class ResourcetypeEditComponent implements OnInit {
+export class ProductcategoryEditComponent implements OnInit {
 
   step = 1;
 
-  resourcetype = new Resourcetype();
-  isNewResourcetype = true;
+  productcategory = new Productcategory();
+  isNewProductcategory = true;
 
   showErrors1 = false;
-  errorResourcetypeName = false;
+  errorProductcategoryName = false;
 
   showErrors2 = false;
   errorOwnerName = false;
@@ -35,7 +35,7 @@ export class ResourcetypeEditComponent implements OnInit {
     private notifierService: NotifierService,
     private authService: AuthenticationService,
     private route: ActivatedRoute,
-    private resourcetypeService: CrudService<Resourcetype>
+    private productcategoryService: CrudService<Productcategory>
   ) { }
 
   ngOnInit(): void {
@@ -43,9 +43,9 @@ export class ResourcetypeEditComponent implements OnInit {
       const id = paramMap.get('id');
       if (id) {
 
-        this.resourcetypeService.get('resourcetype', id).then((data) => {
-          this.resourcetype = data;
-          this.isNewResourcetype = false;
+        this.productcategoryService.get('productcategory', id).then((data) => {
+          this.productcategory = data;
+          this.isNewProductcategory = false;
         });
       }
     });
@@ -61,28 +61,28 @@ export class ResourcetypeEditComponent implements OnInit {
 
   endFirstStep() {
     this.showErrors1 = true;
-    if (this.resourcetype.name) {
+    if (this.productcategory.name) {
       this.endSecondStep();
     } else {
-      if (!this.resourcetype.name) {
-        this.errorResourcetypeName = true;
+      if (!this.productcategory.name) {
+        this.errorProductcategoryName = true;
       }
     }
   }
 
   endSecondStep() {
-    this.resourcetype.company = this.authService.user.company;
-    if (this.isNewResourcetype) {
-      this.resourcetypeService.create('resourcetype', this.resourcetype).then(() => {
+    this.productcategory.company = this.authService.user.company;
+    if (this.isNewProductcategory) {
+      this.productcategoryService.create('productcategory', this.productcategory).then(() => {
         this.notifierService.notify('success', "saved successfully");
         this.step++;
-        this.router.navigate(['parameter/resourcetype']);
+        this.router.navigate(['parameter/productcategory']);
       });
     } else {
-      this.resourcetypeService.modify('resourcetype', this.resourcetype.id, this.resourcetype).then(() => {
+      this.productcategoryService.modify('productcategory', this.productcategory.id, this.productcategory).then(() => {
         this.notifierService.notify('success', "saved successfully");
         this.step++;
-        this.router.navigate(['parameter/resourcetype']);
+        this.router.navigate(['parameter/productcategory']);
       });
     }
   }
@@ -90,8 +90,8 @@ export class ResourcetypeEditComponent implements OnInit {
   delete() {
     const oui = confirm('Are you sure to delete this item?');
     if (oui) {
-      this.resourcetypeService.delete('resourcetype', this.resourcetype.id).then(() => {
-        this.router.navigate(['parameter/resourcetype']);
+      this.productcategoryService.delete('productcategory', this.productcategory.id).then(() => {
+        this.router.navigate(['parameter/productcategory']);
       });
     }
   }
