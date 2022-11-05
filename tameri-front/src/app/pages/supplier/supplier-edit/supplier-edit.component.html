@@ -1,0 +1,91 @@
+<div class="container-fluid" style="margin-top: 16px;">
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a>Home</a></li>
+            <li class="breadcrumb-item"><a [routerLink]="'/supplier'">Suppliers</a></li>
+            <li class="breadcrumb-item active" *ngIf="isNewSupplier">new</li>
+
+            <li class="breadcrumb-item active" *ngIf="!isNewSupplier"><a [routerLink]="'/supplier/view/' + supplier.id">{{supplier.name}}</a></li>
+            <li class="breadcrumb-item active" *ngIf="!isNewSupplier">Edit</li>
+        </ol>
+    </nav>
+    <h1 *ngIf="!isNewSupplier" class="titre">
+        Modify supplier {{supplier.id}}
+    </h1>
+    <h1 *ngIf="isNewSupplier" class="titre">Add a supplier</h1>
+    <div style="margin-top: -10px; margin-bottom: 20px;">
+        Company : {{company.name}}
+    </div>
+
+    <div class="first-step" *ngIf="step === 1 ">
+        <p>
+            Supplier Infos
+        </p>
+        <div class=" page-contenu ">
+            <div class="row">
+                <div class="col-lg-8">
+                    <div class="input-group mb-3">
+                        <span class="input-group-text">Name</span>
+                        <input [(ngModel)]="supplier.name" type="text" class="form-control">
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="input-group mb-3">
+                        <span class="input-group-text">Address</span>
+                        <input [(ngModel)]="supplier.address" type="text" class="form-control">
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="input-group mb-3">
+                        <span class="input-group-text">Tel</span>
+                        <input [(ngModel)]="supplier.tel" type="text" class="form-control">
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="input-group mb-3">
+                        <span class="input-group-text">Email</span>
+                        <input [(ngModel)]="supplier.email" type="text" class="form-control">
+                    </div>
+                </div>
+            </div>
+            <div>
+                <button (click)="step = 2" class="btn btn-primary">Next</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="second-step" *ngIf="step === 2 ">
+        <div class="card-body">
+            <p class="card-title">
+                Owner infos
+            </p>
+            <div class=" page-contenu ">
+                <div class="row">
+
+                    <div class="col-lg-12">
+                        <div class="input-group mb-3">
+                            <span class="input-group-text">Names</span>
+                            <input [(ngModel)]="supplier.owner.names" type="text" class="form-control">
+                        </div>
+                    </div>
+                    <div class="col-lg-12">
+                        <div class="input-group mb-3">
+                            <span class="input-group-text">Position</span>
+                            <input [(ngModel)]="supplier.owner.position" type="text" class="form-control">
+                        </div>
+                    </div>
+                    <div class="col-lg-12">
+                        <div class="input-group mb-3">
+                            <span class="input-group-text">Tel</span>
+                            <input [(ngModel)]="supplier.owner.tel" type="text" class="form-control">
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <button (click)="save()" class="btn btn-primary">Save</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>

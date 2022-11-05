@@ -30,6 +30,9 @@ import { ResourcetypeListComponent } from './pages/resourcetype/resourcetype-lis
 import { ResourcetypeEditComponent } from './pages/resourcetype/resourcetype-edit/resourcetype-edit.component';
 import { ProductcategoryListComponent } from './pages/productcategory/productcategory-list/productcategory-list.component';
 import { ProductcategoryEditComponent } from './pages/productcategory/productcategory-edit/productcategory-edit.component';
+import { SupplierEditComponent } from './pages/supplier/supplier-edit/supplier-edit.component';
+import { SupplierListComponent } from './pages/supplier/supplier-list/supplier-list.component';
+import { SupplierViewComponent } from './pages/supplier/supplier-view/supplier-view.component';
 
 @NgModule({
   declarations: [
@@ -57,6 +60,9 @@ import { ProductcategoryEditComponent } from './pages/productcategory/productcat
     ResourcetypeEditComponent,
     ProductcategoryListComponent,
     ProductcategoryEditComponent,
+    SupplierEditComponent,
+    SupplierListComponent,
+    SupplierViewComponent,
   ],
   imports: [
     BrowserModule,

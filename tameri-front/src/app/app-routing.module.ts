@@ -21,6 +21,9 @@ import { ResourcepackListComponent } from './pages/resourcepack/resourcepack-lis
 import { ResourcepackViewComponent } from './pages/resourcepack/resourcepack-view/resourcepack-view.component';
 import { ResourcetypeEditComponent } from './pages/resourcetype/resourcetype-edit/resourcetype-edit.component';
 import { ResourcetypeListComponent } from './pages/resourcetype/resourcetype-list/resourcetype-list.component';
+import { SupplierEditComponent } from './pages/supplier/supplier-edit/supplier-edit.component';
+import { SupplierListComponent } from './pages/supplier/supplier-list/supplier-list.component';
+import { SupplierViewComponent } from './pages/supplier/supplier-view/supplier-view.component';
 
 const routes: Routes = [
   
@@ -60,6 +63,11 @@ const routes: Routes = [
   { path: 'resourcepack/edit', component: ResourcepackEditComponent },
   { path: 'resourcepack/edit/:id', component: ResourcepackEditComponent },
   { path: 'resourcepack/view/:id', component: ResourcepackViewComponent },
+
+  { path: 'supplier', component: SupplierListComponent },
+  { path: 'supplier/edit', component: SupplierEditComponent },
+  { path: 'supplier/edit/:id', component: SupplierEditComponent },
+  { path: 'supplier/view/:id', component: SupplierViewComponent },
 
 ];
 

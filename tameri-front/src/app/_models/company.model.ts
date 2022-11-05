@@ -10,6 +10,7 @@ export class Company {
     address: string = '';
     contact: string = '';
     geolocation: string = '';
+    currency: string = '';
     owner = new Owner();
     
     community = new Community();

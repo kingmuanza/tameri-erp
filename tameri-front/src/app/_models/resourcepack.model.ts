@@ -1,5 +1,6 @@
 import { Company } from "./company.model";
 import { Resource } from "./resource.model";
+import { Supplier } from "./supplier.model";
 
 export class Resourcepack {
     
@@ -9,6 +10,7 @@ export class Resourcepack {
     quantity = 0;
     price = 0;
     company = new Company();
+    supplier: Supplier | undefined;
 
     constructor() {
         

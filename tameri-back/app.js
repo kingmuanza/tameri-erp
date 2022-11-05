@@ -18,6 +18,7 @@ const companytypeRoutes = require('./_routes/companytype.route');
 const producttypeRoutes = require('./_routes/producttype.route');
 const resourcetypeRoutes = require('./_routes/resourcetype.route');
 const productcategoryRoutes = require('./_routes/productcategory.route');
+const supplierRoutes = require('./_routes/supplier.route');
 
 const app = express();
 
@@ -51,5 +52,6 @@ app.use('/producttype', producttypeRoutes);
 app.use('/resource', resourceRoutes);
 app.use('/resourcepack', resourcepackRoutes);
 app.use('/resourcetype', resourcetypeRoutes);
+app.use('/supplier', supplierRoutes);
 
 module.exports = app;

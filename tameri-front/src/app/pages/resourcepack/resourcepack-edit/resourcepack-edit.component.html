@@ -33,6 +33,9 @@
                     <div class="input-group mb-3">
                         <span class="input-group-text">Price</span>
                         <input [(ngModel)]="resourcepack.price" type="number" class="form-control">
+                        <button class="btn btn-primary">
+                            {{company.currency}}
+                        </button>
                     </div>
                 </div>
                 <div class="col-lg-6">
@@ -49,6 +52,14 @@
                     <div class="input-group mb-3">
                         <span class="input-group-text">Quantity</span>
                         <input [(ngModel)]="resourcepack.quantity" type="number" class="form-control">
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="input-group mb-3">
+                        <span class="input-group-text">Supplier</span>
+                        <select [(ngModel)]="resourcepack.supplier" type="text" class="form-control">
+                            <option *ngFor="let s of suppliers" [ngValue]="s">{{s.name}}</option>
+                        </select>
                     </div>
                 </div>
             </div>

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { NotifierService } from 'angular-notifier';
 import { Community } from 'src/app/_models/community.model';
+import { Company } from 'src/app/_models/company.model';
 import { Resource } from 'src/app/_models/resource.model';
 import { AuthenticationService } from 'src/app/_services/authentication.service';
 import { CrudService } from 'src/app/_services/crud.service';
@@ -30,7 +31,7 @@ export class ResourceViewComponent implements OnInit {
   errorSame = false;
   errorSize = false;
   showFormUser = false;
-  
+  company = new Company();
   login = '';
 
   constructor(
@@ -38,9 +39,14 @@ export class ResourceViewComponent implements OnInit {
     private notifierService: NotifierService,
     private authService: AuthenticationService,
     private route: ActivatedRoute,
+    private companyService: CrudService<Company>,
     private communityService: CrudService<Community>,
     private resourceService: CrudService<Resource>
-  ) { }
+  ) {
+    
+    this.company = this.authService.user.company;
+    this.getCompany(this.company);
+  }
 
   ngOnInit(): void {
     this.route.paramMap.subscribe((paramMap) => {
@@ -52,6 +58,12 @@ export class ResourceViewComponent implements OnInit {
           
         });
       }
+    });
+  }
+
+  getCompany(company: Company) {
+    this.companyService.get('company', company.id).then((data) => {
+      this.company = data;
     });
   }
 

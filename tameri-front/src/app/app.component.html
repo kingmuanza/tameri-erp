@@ -24,7 +24,7 @@
         <div class="mt-4">
             <a>{{company?.pricing?.name}}</a>
             <br>
-            <b>{{price}}</b>
+            <b>{{price | currency:'':''}} {{company?.currency}}</b>
         </div>
         <div class="mt-4" *ngIf="company && company.option">
             <div class="options-price">

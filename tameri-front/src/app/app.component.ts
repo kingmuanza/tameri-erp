@@ -46,7 +46,46 @@ export class AppComponent {
     this.user = event;
   }
 
-  
+  tauxConversion(deviseEntree: string, deviseRetour: string): number {
+    if (deviseRetour === 'XAF') {
+      switch (deviseEntree) {
+        case 'EUR': return 656.43;
+        case 'USD': return 549.97;
+        case 'XAF': return 1;
+        case 'CAD': return 480.22;
+      }
+    }
+    if (deviseRetour === 'EUR') {
+      switch (deviseEntree) {
+        case 'EUR': return 1;
+        case 'USD': return 549.97 / 656.43;
+        case 'XAF': return 1 / 656.43;
+        case 'CAD': return 480.22 / 656.43;
+      }
+    }
+    if (deviseRetour === 'USD') {
+      switch (deviseEntree) {
+        case 'EUR': return 656.43 / 549.97;
+        case 'USD': return 1;
+        case 'XAF': return 1 / 549.97;
+        case 'CAD': return 480.22 / 549.97;
+      }
+    }
+    if (deviseRetour === 'CAD') {
+      switch (deviseEntree) {
+        case 'EUR': return 656.43 / 480.22;
+        case 'USD': return 549.97 / 480.22;
+        case 'XAF': return 1 / 480.22;
+        case 'CAD': return 1;
+      }
+    }
+    return 1;
+  }
+
+  convertPrice(price: number, currencyIn: string, currencyOut: string) {
+    return price * this.tauxConversion(currencyIn, currencyOut);
+  }
+
   calcul(company: Company): number {
     console.log('Calcul');
     let price = 0;
@@ -58,7 +97,7 @@ export class AppComponent {
         price += object[key] ? objectPrix[key] : 0;
       });
     }
-    return price;
+    return this.convertPrice(price, 'XAF', this.company.currency);
   }
 
   updatePrice() {
@@ -82,7 +121,7 @@ export class AppComponent {
       });
     }
 
-    this.price = price;
+    this.price = this.convertPrice(price, 'XAF', this.company.currency);
   }
 
 }
