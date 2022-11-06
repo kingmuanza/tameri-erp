@@ -1,0 +1,72 @@
+<div class="container-fluid" style="margin-top: 16px;">
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a>Home</a></li>
+            <li class="breadcrumb-item"><a [routerLink]="'/purchase'">Purchases</a></li>
+            <li class="breadcrumb-item active" *ngIf="!isNewPurchase">{{purchase.id}}</li>
+        </ol>
+    </nav>
+    <a [routerLink]="'/purchase/edit/' + purchase.id" style="float: right;">Edit</a>
+    <h1 *ngIf="!isNewPurchase" class="titre">
+        {{purchase.id}}
+    </h1>
+    <p>
+        Company : {{purchase.company.name}}
+        <br>
+    </p>
+    <div class="row">
+        <div class="col-lg-7">
+            <div class="first-step card shadow-sm">
+                <div class="card-body">
+                    <p class="card-title">
+                        Purchase Infos
+                    </p>
+                    <div class=" page-contenu ">
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <div class="input-group mb-3">
+                                    <span class="input-group-text">Date</span>
+                                    <input [ngModel]="purchase.date | date: 'yyyy-MM-dd'" (ngModelChange)="purchase.date = $event" type="date" class="form-control">
+                                </div>
+                            </div>
+                            <div class="col-lg-6" *ngIf="purchase.resource">
+                                <div class="input-group mb-3">
+                                    <span class="input-group-text">Resource</span>
+                                    <input readonly [value]="purchase.resource.name" type="text" class="form-control">
+                                </div>
+                            </div>
+                            <div class="col-lg-6" *ngIf="purchase.resourcepack">
+                                <div class="input-group mb-3">
+                                    <span class="input-group-text">Resource Pack</span>
+                                    <input readonly [value]="purchase.resourcepack.name" type="text" class="form-control">
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="input-group mb-3">
+                                    <span class="input-group-text">Quantity</span>
+                                    <input [(ngModel)]="purchase.quantity" type="number" class="form-control">
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="input-group mb-3">
+                                    <span class="input-group-text">Price</span>
+                                    <input [(ngModel)]="purchase.price" type="number" class="form-control">
+                                    <button class="btn btn-primary">
+                                        {{company.currency}}
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-6">
+        </div>
+    </div>
+
+</div>
+
+<div style="height: 25vh;">
+
+</div>

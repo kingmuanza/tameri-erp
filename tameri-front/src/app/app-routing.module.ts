@@ -13,6 +13,9 @@ import { ProductpackListComponent } from './pages/productpack/productpack-list/p
 import { ProductpackViewComponent } from './pages/productpack/productpack-view/productpack-view.component';
 import { ProducttypeEditComponent } from './pages/producttype/producttype-edit/producttype-edit.component';
 import { ProducttypeListComponent } from './pages/producttype/producttype-list/producttype-list.component';
+import { PurchaseEditComponent } from './pages/purchase/purchase-edit/purchase-edit.component';
+import { PurchaseListComponent } from './pages/purchase/purchase-list/purchase-list.component';
+import { PurchaseViewComponent } from './pages/purchase/purchase-view/purchase-view.component';
 import { ResourceEditComponent } from './pages/resource/resource-edit/resource-edit.component';
 import { ResourceListComponent } from './pages/resource/resource-list/resource-list.component';
 import { ResourceViewComponent } from './pages/resource/resource-view/resource-view.component';
@@ -58,6 +61,11 @@ const routes: Routes = [
   { path: 'resource/edit', component: ResourceEditComponent },
   { path: 'resource/edit/:id', component: ResourceEditComponent },
   { path: 'resource/view/:id', component: ResourceViewComponent },
+
+  { path: 'purchase', component: PurchaseListComponent },
+  { path: 'purchase/edit', component: PurchaseEditComponent },
+  { path: 'purchase/edit/:id', component: PurchaseEditComponent },
+  { path: 'purchase/view/:id', component: PurchaseViewComponent },
 
   { path: 'resourcepack', component: ResourcepackListComponent },
   { path: 'resourcepack/edit', component: ResourcepackEditComponent },

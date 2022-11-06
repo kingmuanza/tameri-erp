@@ -1,0 +1,76 @@
+<div class="container-fluid" style="margin-top: 16px;">
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a>Home</a></li>
+            <li class="breadcrumb-item"><a [routerLink]="'/purchase'">Purchases</a></li>
+            <li class="breadcrumb-item active" *ngIf="isNewPurchase">new</li>
+
+            <li class="breadcrumb-item active" *ngIf="!isNewPurchase"><a [routerLink]="'/purchase/view/' + purchase.id">{{purchase.id}}</a></li>
+            <li class="breadcrumb-item active" *ngIf="!isNewPurchase">Edit</li>
+        </ol>
+    </nav>
+    <h1 *ngIf="!isNewPurchase" class="titre">
+        Modify purchase {{purchase.id}}
+    </h1>
+    <h1 *ngIf="isNewPurchase" class="titre">Add a purchase</h1>
+    <div style="margin-top: -10px; margin-bottom: 20px;">
+        Company : {{company.name}}
+    </div>
+
+    <div class="first-step">
+        <p>
+            Purchase Infos
+        </p>
+        <div class=" page-contenu ">
+            <div class="row">
+                <div class="col-lg-4">
+                    <div class="input-group mb-3">
+                        <span class="input-group-text">Date</span>
+                        <input [ngModel]="purchase.date | date: 'yyyy-MM-dd'" (ngModelChange)="purchase.date = $event" type="date" class="form-control">
+                    </div>
+                </div>
+                <div class="col-lg-12">
+                    <div class="mb-2 mt-2">
+                        <input type="radio" [(ngModel)]="type" value="resource" name="type"> Resource &nbsp;&nbsp;&nbsp;
+                        <input type="radio" [(ngModel)]="type" value="resourcepack" name="type"> Resource Pack&nbsp;&nbsp;&nbsp;
+                    </div>
+                </div>
+                <div class="col-lg-6" *ngIf=" type === 'resource' ">
+                    <div class="input-group mb-3">
+                        <span class="input-group-text">Resource</span>
+                        <select [(ngModel)]="purchase.resource" type="text" class="form-control">
+                            <option *ngFor="let s of resources" [ngValue]="s">{{s.name}}</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-lg-6" *ngIf=" type === 'resourcepack' ">
+                    <div class="input-group mb-3">
+                        <span class="input-group-text">Resource Pack</span>
+                        <select [(ngModel)]="purchase.resourcepack" type="text" class="form-control">
+                            <option *ngFor="let s of resourcepacks" [ngValue]="s">{{s.name}}</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-lg-3">
+                    <div class="input-group mb-3">
+                        <span class="input-group-text">Quantity</span>
+                        <input [(ngModel)]="purchase.quantity" type="number" class="form-control">
+                    </div>
+                </div>
+                <div class="col-lg-3">
+                    <div class="input-group mb-3">
+                        <span class="input-group-text">Price</span>
+                        <input [(ngModel)]="purchase.price" type="number" class="form-control">
+                        <button class="btn btn-primary">
+                            {{company.currency}}
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div>
+                <button (click)="save()" class="btn btn-primary">Save</button>
+            </div>
+        </div>
+    </div>
+
+</div>

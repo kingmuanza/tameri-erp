@@ -33,6 +33,9 @@ import { ProductcategoryEditComponent } from './pages/productcategory/productcat
 import { SupplierEditComponent } from './pages/supplier/supplier-edit/supplier-edit.component';
 import { SupplierListComponent } from './pages/supplier/supplier-list/supplier-list.component';
 import { SupplierViewComponent } from './pages/supplier/supplier-view/supplier-view.component';
+import { PurchaseViewComponent } from './pages/purchase/purchase-view/purchase-view.component';
+import { PurchaseListComponent } from './pages/purchase/purchase-list/purchase-list.component';
+import { PurchaseEditComponent } from './pages/purchase/purchase-edit/purchase-edit.component';
 
 @NgModule({
   declarations: [
@@ -63,6 +66,9 @@ import { SupplierViewComponent } from './pages/supplier/supplier-view/supplier-v
     SupplierEditComponent,
     SupplierListComponent,
     SupplierViewComponent,
+    PurchaseViewComponent,
+    PurchaseListComponent,
+    PurchaseEditComponent,
   ],
   imports: [
     BrowserModule,

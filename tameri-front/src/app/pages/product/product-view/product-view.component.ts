@@ -45,12 +45,15 @@ export class ProductViewComponent implements OnInit {
     private authService: AuthenticationService,
     private route: ActivatedRoute,
     private resourceService: CrudService<Resource>,
+    private companyService: CrudService<Company>,
     private productService: CrudService<Product>
   ) {
     this.company = this.authService.user.company;
+    this.getCompany(this.company);
   }
 
   ngOnInit(): void {
+    this.getCompany(this.company);
     this.route.paramMap.subscribe((paramMap) => {
       const id = paramMap.get('id');
       if (id) {
@@ -64,6 +67,12 @@ export class ProductViewComponent implements OnInit {
           })
         });
       }
+    });
+  }
+
+  getCompany(company: Company) {
+    this.companyService.get('company', company.id).then((data) => {
+      this.company = data;
     });
   }
 
