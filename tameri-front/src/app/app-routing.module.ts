@@ -8,6 +8,9 @@ import { ProductListComponent } from './pages/product/product-list/product-list.
 import { ProductViewComponent } from './pages/product/product-view/product-view.component';
 import { ProductcategoryEditComponent } from './pages/productcategory/productcategory-edit/productcategory-edit.component';
 import { ProductcategoryListComponent } from './pages/productcategory/productcategory-list/productcategory-list.component';
+import { ProductitemEditComponent } from './pages/productitem/productitem-edit/productitem-edit.component';
+import { ProductitemListComponent } from './pages/productitem/productitem-list/productitem-list.component';
+import { ProductitemViewComponent } from './pages/productitem/productitem-view/productitem-view.component';
 import { ProductpackEditComponent } from './pages/productpack/productpack-edit/productpack-edit.component';
 import { ProductpackListComponent } from './pages/productpack/productpack-list/productpack-list.component';
 import { ProductpackViewComponent } from './pages/productpack/productpack-view/productpack-view.component';
@@ -39,6 +42,11 @@ const routes: Routes = [
   { path: 'product/edit', component: ProductEditComponent },
   { path: 'product/edit/:id', component: ProductEditComponent },
   { path: 'product/view/:id', component: ProductViewComponent },
+
+  { path: 'productitem', component: ProductitemListComponent },
+  { path: 'productitem/edit', component: ProductitemEditComponent },
+  { path: 'productitem/edit/:id', component: ProductitemEditComponent },
+  { path: 'productitem/view/:id', component: ProductitemViewComponent },
 
   { path: 'productpack', component: ProductpackListComponent },
   { path: 'productpack/edit', component: ProductpackEditComponent },

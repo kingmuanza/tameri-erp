@@ -18,23 +18,40 @@
                 <li class="nav-item">
                     <a class="nav-link " aria-current="page" [routerLink]="'employee'" routerLinkActive="active">Employees</a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link " aria-current="page" [routerLink]="'product'" routerLinkActive="active">Products</a>
-                </li>
-                <li class="nav-item" *ngIf="company?.option.productPack">
-                    <a class="nav-link " aria-current="page" [routerLink]="'productpack'" routerLinkActive="active">Product Packs</a>
-                </li>
-                <li class="nav-item" *ngIf="company?.option.productResource">
-                    <a class="nav-link " aria-current="page" [routerLink]="'resource'" routerLinkActive="active">Resources</a>
-                </li>
-                <li class="nav-item" *ngIf="company?.option.productResource">
-                    <a class="nav-link " aria-current="page" [routerLink]="'resourcepack'" routerLinkActive="active">Resource Packs</a>
-                </li>
                 <li class="nav-item" *ngIf="company?.option.productResource">
                     <a class="nav-link " aria-current="page" [routerLink]="'supplier'" routerLinkActive="active">Suppliers</a>
                 </li>
-                <li class="nav-item" *ngIf="company?.option.productResource">
-                    <a class="nav-link " aria-current="page" [routerLink]="'purchase'" routerLinkActive="active">Purchases</a>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        Products
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li>
+                            <a class="dropdown-item" aria-current="page" [routerLink]="'product'" routerLinkActive="active">Products</a>
+                        </li>
+                        <li *ngIf="company?.option.productPack">
+                            <a class="dropdown-item" aria-current="page" [routerLink]="'productpack'" routerLinkActive="active">Product Packs</a>
+                        </li>
+                        <li>
+                            <a class="dropdown-item" aria-current="page" [routerLink]="'productitem'" routerLinkActive="active">Product Items</a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        Resources
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li *ngIf="company?.option.productResource">
+                            <a class="dropdown-item" aria-current="page" [routerLink]="'resource'" routerLinkActive="active">Resources</a>
+                        </li>
+                        <li *ngIf="company?.option.productResource">
+                            <a class="dropdown-item" aria-current="page" [routerLink]="'resourcepack'" routerLinkActive="active">Resource Packs</a>
+                        </li>
+                        <li *ngIf="company?.option.productResource">
+                            <a class="dropdown-item" aria-current="page" [routerLink]="'purchase'" routerLinkActive="active">Resource items</a>
+                        </li>
+                    </ul>
                 </li>
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -42,7 +59,8 @@
                     </a>
                     <ul class="dropdown-menu">
                         <li><a class="dropdown-item" [routerLink]="'parameter/producttype'">Product Types</a></li>
-                        <li><a class="dropdown-item" [routerLink]="'parameter/productcategory'">Product Categories</a></li>
+                        <li><a class="dropdown-item" [routerLink]="'parameter/productcategory'">Product Categories</a>
+                        </li>
                         <li *ngIf="company?.option.productResource">
                             <a class="dropdown-item" [routerLink]="'parameter/resourcecategory'">Resource Categories</a>
                         </li>

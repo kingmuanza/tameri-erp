@@ -36,6 +36,9 @@ import { SupplierViewComponent } from './pages/supplier/supplier-view/supplier-v
 import { PurchaseViewComponent } from './pages/purchase/purchase-view/purchase-view.component';
 import { PurchaseListComponent } from './pages/purchase/purchase-list/purchase-list.component';
 import { PurchaseEditComponent } from './pages/purchase/purchase-edit/purchase-edit.component';
+import { ProductitemListComponent } from './pages/productitem/productitem-list/productitem-list.component';
+import { ProductitemEditComponent } from './pages/productitem/productitem-edit/productitem-edit.component';
+import { ProductitemViewComponent } from './pages/productitem/productitem-view/productitem-view.component';
 
 @NgModule({
   declarations: [
@@ -69,6 +72,9 @@ import { PurchaseEditComponent } from './pages/purchase/purchase-edit/purchase-e
     PurchaseViewComponent,
     PurchaseListComponent,
     PurchaseEditComponent,
+    ProductitemListComponent,
+    ProductitemEditComponent,
+    ProductitemViewComponent,
   ],
   imports: [
     BrowserModule,

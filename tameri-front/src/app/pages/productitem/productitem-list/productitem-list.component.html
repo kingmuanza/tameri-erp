@@ -2,10 +2,10 @@
     <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
             <li class="breadcrumb-item"><a>Home</a></li>
-            <li class="breadcrumb-item active" aria-current="page">Resource items</li>
+            <li class="breadcrumb-item active" aria-current="page">Product items</li>
         </ol>
     </nav>
-    <h1>Resource items</h1>
+    <h1>Product items</h1>
     <p>
         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam maximus aliquam velit, sed malesuada ligula blandit vel.
     </p>
@@ -18,25 +18,26 @@
                         <tr>
                             <th>ID</th>
                             <th>Date</th>
-                            <th>Resource/Pack</th>
+                            <th>Product</th>
                             <th style="text-align: right;">Quantity</th>
                             <th style="text-align: right;">Price</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr *ngFor="let purchase of purchases" (click)="edit(purchase)">
-                            <td>{{purchase.id}}</td>
-                            <td>{{purchase.date | date: 'yyyy-MM-dd'}}</td>
+                        <tr *ngFor="let productitem of productitems" (click)="edit(productitem)">
+                            <td>{{productitem.id}}</td>
+                            <td>{{productitem.date | date: 'yyyy-MM-dd'}}</td>
                             <td>
-                                <ng-container *ngIf="purchase.resource">
-                                    {{purchase.resource.name}}
+
+                                <ng-container *ngIf="productitem.product">
+                                    {{productitem.product.name}}
                                 </ng-container>
-                                <ng-container *ngIf="purchase.resourcepack">
-                                    {{purchase.resourcepack.name}}
+                                <ng-container *ngIf="productitem.productpack">
+                                    {{productitem.productpack.name}}
                                 </ng-container>
                             </td>
-                            <td style="text-align: right;">{{purchase.quantity}}</td>
-                            <td style="text-align: right;">{{purchase.price | currency:'':''}}</td>
+                            <td style="text-align: right;">{{productitem.quantity}}</td>
+                            <td style="text-align: right;">{{productitem.price | currency:'':''}}</td>
                         </tr>
                     </tbody>
                 </table>

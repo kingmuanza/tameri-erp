@@ -116,4 +116,15 @@ export class PurchaseEditComponent implements OnInit {
     }
   }
 
+  setPrix() {
+    setTimeout(() => {
+      if (this.purchase.resource) {
+        this.purchase.price = this.purchase.resource.price * this.purchase.quantity;
+      }
+      if (this.purchase.resourcepack) {
+        this.purchase.price = this.purchase.resourcepack.price * this.purchase.quantity;
+      }
+    }, 500);
+  }
+
 }

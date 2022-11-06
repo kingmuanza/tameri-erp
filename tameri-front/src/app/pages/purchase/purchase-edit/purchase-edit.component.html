@@ -2,7 +2,7 @@
     <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
             <li class="breadcrumb-item"><a>Home</a></li>
-            <li class="breadcrumb-item"><a [routerLink]="'/purchase'">Purchases</a></li>
+            <li class="breadcrumb-item"><a [routerLink]="'/purchase'">Resource items</a></li>
             <li class="breadcrumb-item active" *ngIf="isNewPurchase">new</li>
 
             <li class="breadcrumb-item active" *ngIf="!isNewPurchase"><a [routerLink]="'/purchase/view/' + purchase.id">{{purchase.id}}</a></li>
@@ -10,9 +10,9 @@
         </ol>
     </nav>
     <h1 *ngIf="!isNewPurchase" class="titre">
-        Modify purchase {{purchase.id}}
+        Modify Resource item {{purchase.id}}
     </h1>
-    <h1 *ngIf="isNewPurchase" class="titre">Add a purchase</h1>
+    <h1 *ngIf="isNewPurchase" class="titre">Add a Resource item</h1>
     <div style="margin-top: -10px; margin-bottom: 20px;">
         Company : {{company.name}}
     </div>
@@ -38,7 +38,7 @@
                 <div class="col-lg-6" *ngIf=" type === 'resource' ">
                     <div class="input-group mb-3">
                         <span class="input-group-text">Resource</span>
-                        <select [(ngModel)]="purchase.resource" type="text" class="form-control">
+                        <select (ngModelChange)="setPrix()" [(ngModel)]="purchase.resource" type="text" class="form-control">
                             <option *ngFor="let s of resources" [ngValue]="s">{{s.name}}</option>
                         </select>
                     </div>
@@ -46,7 +46,7 @@
                 <div class="col-lg-6" *ngIf=" type === 'resourcepack' ">
                     <div class="input-group mb-3">
                         <span class="input-group-text">Resource Pack</span>
-                        <select [(ngModel)]="purchase.resourcepack" type="text" class="form-control">
+                        <select (ngModelChange)="setPrix()" [(ngModel)]="purchase.resourcepack" type="text" class="form-control">
                             <option *ngFor="let s of resourcepacks" [ngValue]="s">{{s.name}}</option>
                         </select>
                     </div>
@@ -54,7 +54,7 @@
                 <div class="col-lg-3">
                     <div class="input-group mb-3">
                         <span class="input-group-text">Quantity</span>
-                        <input [(ngModel)]="purchase.quantity" type="number" class="form-control">
+                        <input (ngModelChange)="setPrix()" [(ngModel)]="purchase.quantity" type="number" class="form-control">
                     </div>
                 </div>
                 <div class="col-lg-3">

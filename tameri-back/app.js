@@ -20,6 +20,7 @@ const resourcetypeRoutes = require('./_routes/resourcetype.route');
 const productcategoryRoutes = require('./_routes/productcategory.route');
 const supplierRoutes = require('./_routes/supplier.route');
 const purchaseRoutes = require('./_routes/purchase.route');
+const productitemRoutes = require('./_routes/productitem.route');
 
 const app = express();
 
@@ -48,6 +49,7 @@ app.use('/employee', employeeRoutes);
 app.use('/pricing', pricingRoutes);
 app.use('/product', productRoutes);
 app.use('/productcategory', productcategoryRoutes);
+app.use('/productitem', productitemRoutes);
 app.use('/productpack', productpackRoutes);
 app.use('/producttype', producttypeRoutes);
 app.use('/resource', resourceRoutes);
