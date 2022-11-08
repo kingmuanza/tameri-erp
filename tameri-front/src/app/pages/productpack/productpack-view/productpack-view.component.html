@@ -2,7 +2,7 @@
     <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
             <li class="breadcrumb-item"><a>Home</a></li>
-            <li class="breadcrumb-item"><a [routerLink]="'/productpack'">Productpacks</a></li>
+            <li class="breadcrumb-item"><a [routerLink]="'/productpack'">Product packs</a></li>
             <li class="breadcrumb-item active" *ngIf="!isNewProductpack">{{productpack.name}}</li>
         </ol>
     </nav>
@@ -33,6 +33,9 @@
                                 <div class="input-group mb-3">
                                     <span class="input-group-text">Price</span>
                                     <input [(ngModel)]="productpack.price" type="number" class="form-control">
+                                    <button class="btn btn-primary">
+                                        {{company.currency}}
+                                    </button>
                                 </div>
                             </div>
                             <div class="col-lg-6">

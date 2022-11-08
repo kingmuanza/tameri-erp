@@ -25,14 +25,16 @@ export class ProductpackEditComponent implements OnInit {
     private notifierService: NotifierService,
     private authService: AuthenticationService,
     private route: ActivatedRoute,
+    private companyService: CrudService<Company>,
     private productService: CrudService<Product>,
     private productpackService: CrudService<Productpack>
   ) {
-
     this.company = this.authService.user.company;
+    this.getCompany(this.company);
   }
 
   ngOnInit(): void {
+    this.getCompany(this.company);
     this.route.paramMap.subscribe((paramMap) => {
       const id = paramMap.get('id');
       if (id) {
@@ -63,6 +65,12 @@ export class ProductpackEditComponent implements OnInit {
           });
         })
       }
+    });
+  }
+
+  getCompany(company: Company) {
+    this.companyService.get('company', company.id).then((data) => {
+      this.company = data;
     });
   }
 
