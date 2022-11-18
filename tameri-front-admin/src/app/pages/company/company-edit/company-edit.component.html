@@ -52,24 +52,13 @@
                 </div>
                 <div class="col-lg-6">
                     <div class="input-group mb-3">
-                        <span class="input-group-text">Address</span>
-                        <input [(ngModel)]="company.address" type="text" class="form-control">
-                    </div>
-                </div>
-                <div class="col-lg-6">
-                    <div class="input-group mb-3">
-                        <span class="input-group-text">Contact</span>
-                        <input [(ngModel)]="company.contact" type="text" class="form-control">
-                    </div>
-                </div>
-                <div class="col-lg-6">
-                    <div class="input-group mb-3">
                         <span class="input-group-text">Geolocation</span>
                         <input [(ngModel)]="company.geolocation" type="text" class="form-control">
                         <button class="btn btn-outline-secondary" type="button" id="button-addon2">Get current location</button>
                     </div>
                 </div>
             </div>
+            <app-contact-display [contact]="company.contact" [updradable]="true"></app-contact-display>
             <div>
                 <button (click)="endFirstStep()" class="btn btn-primary">Next</button>
             </div>
@@ -82,7 +71,7 @@
         </p>
         <div class=" page-contenu ">
             <div class="row">
-                <div class="col-lg-12">
+                <div class="col-lg-6">
                     <div class="input-group mb-3">
                         <span class="input-group-text">Names</span>
                         <input [(ngModel)]="company.owner.names" type="text" class="form-control" [ngClass]="{'is-invalid': showErrors2 && (errorOwnerName)}">
@@ -99,13 +88,8 @@
                         <input [(ngModel)]="company.owner.position" type="text" class="form-control">
                     </div>
                 </div>
-                <div class="col-lg-6">
-                    <div class="input-group mb-3">
-                        <span class="input-group-text">Phones</span>
-                        <input [(ngModel)]="company.owner.tel" type="text" class="form-control">
-                    </div>
-                </div>
             </div>
+            <app-contact-display [contact]="company.owner.contact" [updradable]="true"></app-contact-display>
             <div>
                 <button (click)="previous()" class="btn btn-outline-primary mr-5">Previous</button>&nbsp;
                 <button (click)="endSecondStep()" class="btn btn-primary">Next</button>

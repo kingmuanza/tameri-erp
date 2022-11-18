@@ -1,8 +1,10 @@
+import { Contact } from "./contact.model";
+
 export class Owner {
     id: string = 'OWNER' + new Date().getTime();
     names = '';
     position = '';
-    tel = '';
+    contact = new Contact();
     login = '';
     password = '';
 }

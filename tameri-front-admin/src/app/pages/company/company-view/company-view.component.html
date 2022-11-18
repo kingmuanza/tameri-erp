@@ -50,24 +50,13 @@
                             </div>
                             <div class="col-lg-6">
                                 <div class="input-group mb-3">
-                                    <span class="input-group-text">Address</span>
-                                    <input [(ngModel)]="company.address" type="text" class="form-control">
-                                </div>
-                            </div>
-                            <div class="col-lg-6">
-                                <div class="input-group mb-3">
-                                    <span class="input-group-text">Contact</span>
-                                    <input [(ngModel)]="company.contact" type="text" class="form-control">
-                                </div>
-                            </div>
-                            <div class="col-lg-6">
-                                <div class="input-group mb-3">
                                     <span class="input-group-text">Geolocation</span>
                                     <input [(ngModel)]="company.geolocation" type="text" class="form-control">
-
                                 </div>
                             </div>
                         </div>
+
+                        <app-contact-display [contact]="company.contact"></app-contact-display>
                     </div>
                 </div>
             </div>
@@ -79,7 +68,7 @@
                     </p>
                     <div class=" page-contenu ">
                         <div class="row">
-                            <div class="col-lg-12">
+                            <div class="col-lg-6">
                                 <div class="input-group mb-3">
                                     <span class="input-group-text">Names</span>
                                     <input [(ngModel)]="company.owner.names" type="text" class="form-control">
@@ -91,13 +80,8 @@
                                     <input [(ngModel)]="company.owner.position" type="text" class="form-control">
                                 </div>
                             </div>
-                            <div class="col-lg-6">
-                                <div class="input-group mb-3">
-                                    <span class="input-group-text">Phones</span>
-                                    <input [(ngModel)]="company.owner.tel" type="text" class="form-control">
-                                </div>
-                            </div>
                         </div>
+                        <app-contact-display [contact]="company.owner.contact"></app-contact-display>
                     </div>
                 </div>
             </div>

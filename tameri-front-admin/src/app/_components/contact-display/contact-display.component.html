@@ -1,0 +1,34 @@
+<div class="row">
+    <div class="col-lg-6">
+        <div class="input-group mb-3">
+            <span class="input-group-text">Address</span>
+            <input [(ngModel)]="contact.address" type="text" class="form-control">
+        </div>
+    </div>
+    <div class="col-lg-6">
+        <div class="input-group mb-3">
+            <span class="input-group-text">Tel</span>
+            <input [(ngModel)]="contact.tel" type="text" class="form-control">
+            <button (click)="addTel()" class="btn btn-primary" *ngIf="updradable">
+                +
+            </button>
+        </div>
+    </div>
+    <div class="col-lg-6 mb-3" *ngFor="let othersTel of contact.othersTels; let i = index; trackBy: trackByFn">
+        <div class="input-group">
+            <span class="input-group-text">Tel {{i + 2}}</span>
+            <input [ngModel]="othersTel" (ngModelChange)="confirmAdd($event, i)" type="tel" class="form-control" [ngClass]="{'is-invalid': othersTel.length < 9}">
+        </div>
+        <div *ngIf="othersTel.length < 9">
+            <small style="color: red;">
+                The number will not be saved
+            </small>
+        </div>
+    </div>
+    <div class="col-lg-6">
+        <div class="input-group mb-3">
+            <span class="input-group-text">Email</span>
+            <input [(ngModel)]="contact.email" type="text" class="form-control">
+        </div>
+    </div>
+</div>

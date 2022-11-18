@@ -25,6 +25,7 @@ import { CommunitytypeListComponent } from './pages/communitytype/communitytype-
 import { CommunitytypeEditComponent } from './pages/communitytype/communitytype-edit/communitytype-edit.component';
 import { CompanytypeEditComponent } from './pages/companytype/companytype-edit/companytype-edit.component';
 import { CompanytypeListComponent } from './pages/companytype/companytype-list/companytype-list.component';
+import { ContactDisplayComponent } from './_components/contact-display/contact-display.component';
 
 @NgModule({
   declarations: [
@@ -43,7 +44,8 @@ import { CompanytypeListComponent } from './pages/companytype/companytype-list/c
     CommunitytypeListComponent,
     CommunitytypeEditComponent,
     CompanytypeEditComponent,
-    CompanytypeListComponent
+    CompanytypeListComponent,
+    ContactDisplayComponent
   ],
   imports: [
     BrowserModule,
