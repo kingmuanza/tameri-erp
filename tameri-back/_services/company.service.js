@@ -1,3 +1,5 @@
+const authService = require('../_services/auth.service');
+
 var LocalStorage;
 if (typeof localStorage === "undefined" || localStorage === null) {
     LocalStorage = require('node-localstorage').LocalStorage;
@@ -69,4 +71,7 @@ exports.delete = (id) => {
         }
     });
     localStorage.setItem('company', JSON.stringify(nouveauxitems));
+    setTimeout(() => {
+        authService.delete(id);
+    }, 500);
 }

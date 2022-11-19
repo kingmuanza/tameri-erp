@@ -16,7 +16,7 @@ import { PricingListComponent } from './pages/pricing/pricing-list/pricing-list.
 import { PricingViewComponent } from './pages/pricing/pricing-view/pricing-view.component';
 
 const routes: Routes = [
-  { path: '', component: HomeComponent },
+  { path: 'dashboard', component: HomeComponent },
 
   { path: 'pricing', component: PricingListComponent },
   { path: 'pricing/edit', component: PricingEditComponent },
@@ -40,6 +40,8 @@ const routes: Routes = [
   { path: 'parameter/companytype', component: CompanytypeListComponent },
   { path: 'parameter/companytype/edit', component: CompanytypeEditComponent },
   { path: 'parameter/companytype/edit/:id', component:CompanytypeEditComponent },
+
+  { path: '**', redirectTo:'dashboard' },
 
 ];
 

@@ -32,6 +32,8 @@ export class CompanyEditComponent implements OnInit {
   password = '';
   confirmpassword = '';
 
+  isAlreadySaved = false;
+
   companytypes = new Array<Companytype>();
 
   user: User | undefined;
@@ -78,7 +80,7 @@ export class CompanyEditComponent implements OnInit {
 
   endFirstStep() {
     this.showErrors1 = true;
-    if (this.company.name) {
+    if (this.company.name && this.company.currency) {
       this.suivant();
     } else {
       if (!this.company.name) {
@@ -90,13 +92,15 @@ export class CompanyEditComponent implements OnInit {
   endSecondStep() {
     this.showErrors2 = true;
     this.errorOwnerName = false;
-    if (this.company.owner.names) {
-      if (this.isNewCompany) {
+    if (this.company.owner.names && this.company.owner.contact.tel) {
+      if (this.isNewCompany && !this.isAlreadySaved) {
         this.companyService.create('company', this.company).then(() => {
-          this.notifierService.notify('success', "saved successfully");
+          this.notifierService.notify('success', "create successfully");
           this.step++;
           if (!this.isNewCompany) {
             this.router.navigate(['company', 'view', this.company.id]);
+          } else {
+            this.isAlreadySaved = true;
           }
         });
       } else {
@@ -119,7 +123,7 @@ export class CompanyEditComponent implements OnInit {
 
     if (this.password === this.confirmpassword) {
       const user = new User(this.company);
-      user.login = this.login;
+      user.login = this.company.owner.contact.tel;
       user.password = this.password;
       user.role = 'ADMIN';
       user.company = this.company;

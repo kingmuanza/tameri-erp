@@ -10,6 +10,8 @@ export class ContactDisplayComponent implements OnInit {
 
   @Input() contact = new Contact();
   @Input() updradable = false;
+  @Input() isTelRequired = false;
+  @Input() showErrors = false;
 
   constructor() { }
 

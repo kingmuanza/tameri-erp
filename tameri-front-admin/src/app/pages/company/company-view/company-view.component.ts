@@ -63,6 +63,9 @@ export class CompanyViewComponent implements OnInit {
             this.authService.getUser(this.company.id).then((user) => {
               if (user) {
                 this.user = user;
+              } else {
+                this.user = new User(this.company);
+                this.user.login = this.company.owner.contact.tel;
               }
             }); 
   

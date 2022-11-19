@@ -1,3 +1,106 @@
 <div class="container-fluid" style="margin-top: 16px;">
-    <h1>Tableau de bord</h1>
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a>Home</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Dashboard</li>
+        </ol>
+    </nav>
+    <h1>Dashboard</h1>
+    <p>
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam maximus aliquam velit, sed malesuada ligula blandit vel.
+    </p>
+
+    <div class="stats mb-4">
+        <div class="row">
+            <div class="col-lg-3">
+                <div class="text-bg-primary text-center p-3">
+                    <h1>
+                        {{companies.length}}
+                    </h1>
+                    <div>
+                        Companies
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3">
+                <div class="text-bg-primary text-center p-3">
+                    <h1>
+                        {{price | number}}
+                    </h1>
+                    <div>
+                        Expected Earnings XAF
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3">
+                <div class="text-bg-primary text-center p-3">
+                    <h1>
+                        {{pricings.length}}
+                    </h1>
+                    <div>
+                        Pricing
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3">
+                <div class="text-bg-primary text-center p-3">
+                    <h1>
+                        {{pricings.length}}
+                    </h1>
+                    <div>
+                        Communities
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class=" page-contenu">
+        <div class="row">
+            <div class="col-lg-4">
+                <div class="list-group">
+                    <div *ngFor="let key of listElement; let i=index" class="list-group-item d-flex justify-content-between align-items-start">
+                        <div class="ms-2 me-auto">
+                            <div class="" style="text-transform: capitalize;">{{getLibelleOption(key)}}</div>
+                        </div>
+                        <span class="badge bg-primary rounded-pill" *ngIf="optionPrices[key]">{{optionPrices[key]}}</span>
+                        <span class="badge " style="color: #aaa;" *ngIf="!optionPrices[key]">0</span>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-8">
+                <div class="card shadow-sm">
+                    <div class="card-body">
+                        <table datatable [dtOptions]="dtOptions " [dtTrigger]="dtTrigger " class="row-border hover ">
+                            <thead>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Type</th>
+                                    <th>Owner</th>
+                                    <th>Community</th>
+                                    <th style="text-align: right;">Price</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let company of companies">
+                                    <td>
+                                        <a [routerLink]=" '/company/view/' + company.id">
+                                            {{company.name}}
+                                        </a>
+                                    </td>
+                                    <td>{{company.type}}</td>
+                                    <td>{{company.owner.names}}</td>
+                                    <td>
+                                        <a *ngIf="company.community" [routerLink]=" '/community/view/' + company.community.id">
+                                            {{company.community.name}}
+                                        </a>
+                                    </td>
+                                    <td style="text-align: right;">{{getPrice(company) | number}}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>

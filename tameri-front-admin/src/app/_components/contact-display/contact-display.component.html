@@ -7,8 +7,13 @@
     </div>
     <div class="col-lg-6">
         <div class="input-group mb-3">
-            <span class="input-group-text">Tel</span>
-            <input [(ngModel)]="contact.tel" type="text" class="form-control">
+            <span class="input-group-text">
+                Tel
+                <app-required *ngIf="isTelRequired">
+                    
+                </app-required>
+            </span>
+            <input required [(ngModel)]="contact.tel" type="text" class="form-control" [ngClass]="{'is-invalid': contact.tel.length < 9 && isTelRequired && showErrors}">
             <button (click)="addTel()" class="btn btn-primary" *ngIf="updradable">
                 +
             </button>

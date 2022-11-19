@@ -21,15 +21,22 @@
         </p>
         <div class=" page-contenu ">
             <div class="row">
-                <div class="col-lg-6">
+                <div class="col-lg-8">
                     <div class="input-group mb-3">
-                        <span class="input-group-text">Name</span>
+                        <span class="input-group-text">
+                            Name <app-required></app-required>
+                        </span>
                         <input [(ngModel)]="company.name" type="text" class="form-control" [ngClass]="{'is-invalid': showErrors1 && (errorCompanyName)}">
                     </div>
-                    <div class="errors" style="margin-bottom: 20px; color: red; margin-top: -5px; font-size: 0.9em;">
-                        <div *ngIf="errorCompanyName">
-                            Required field
-                        </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="input-group mb-3">
+                        <span class="input-group-text">Currency</span>
+                        <select [(ngModel)]="company.currency" type="text" class="form-control" [ngClass]="{'is-invalid': showErrors1 && !(company.currency)}">
+                            <option value="XAF">Franc CFA</option>
+                            <option value="USD">Dollar</option>
+                            <option value="EUR">Euro</option>
+                        </select>
                     </div>
                 </div>
                 <div class="col-lg-6">
@@ -42,23 +49,13 @@
                 </div>
                 <div class="col-lg-6">
                     <div class="input-group mb-3">
-                        <span class="input-group-text">Currency</span>
-                        <select [(ngModel)]="company.currency" type="text" class="form-control">
-                            <option value="XAF">Franc CFA</option>
-                            <option value="USD">Dollar</option>
-                            <option value="EUR">Euro</option>
-                        </select>
-                    </div>
-                </div>
-                <div class="col-lg-6">
-                    <div class="input-group mb-3">
                         <span class="input-group-text">Geolocation</span>
                         <input [(ngModel)]="company.geolocation" type="text" class="form-control">
                         <button class="btn btn-outline-secondary" type="button" id="button-addon2">Get current location</button>
                     </div>
                 </div>
             </div>
-            <app-contact-display [contact]="company.contact" [updradable]="true"></app-contact-display>
+            <app-contact-display [contact]="company.contact"></app-contact-display>
             <div>
                 <button (click)="endFirstStep()" class="btn btn-primary">Next</button>
             </div>
@@ -89,7 +86,7 @@
                     </div>
                 </div>
             </div>
-            <app-contact-display [contact]="company.owner.contact" [updradable]="true"></app-contact-display>
+            <app-contact-display [contact]="company.owner.contact" [updradable]="true" [isTelRequired]="true" [showErrors]="showErrors2"></app-contact-display>
             <div>
                 <button (click)="previous()" class="btn btn-outline-primary mr-5">Previous</button>&nbsp;
                 <button (click)="endSecondStep()" class="btn btn-primary">Next</button>
@@ -102,23 +99,20 @@
             Authentication infos
         </p>
         <div class=" page-contenu ">
+            <div class="mb-3">
+                Votre login : {{company.owner.contact.tel}}
+            </div>
             <div class="row">
                 <div class="col-lg-6">
                     <div class="input-group mb-3">
-                        <span class="input-group-text">Login</span>
-                        <input [(ngModel)]="login" type="text" class="form-control">
-                    </div>
-                </div>
-                <div class="col-lg-6">
-                    <div class="input-group mb-3">
                         <span class="input-group-text">Password</span>
-                        <input [(ngModel)]="password" type="text" class="form-control" [ngClass]="{'is-invalid': showErrors3 && (errorNotSame)}">
+                        <input [(ngModel)]="password" type="password" class="form-control" [ngClass]="{'is-invalid': showErrors3 && (errorNotSame)}">
                     </div>
                 </div>
                 <div class="col-lg-6">
                     <div class="input-group mb-3">
                         <span class="input-group-text">Confirm Password</span>
-                        <input [(ngModel)]="confirmpassword" type="text" class="form-control" [ngClass]="{'is-invalid': showErrors3 && (errorNotSame)}">
+                        <input [(ngModel)]="confirmpassword" type="password" class="form-control" [ngClass]="{'is-invalid': showErrors3 && (errorNotSame)}">
                     </div>
                 </div>
             </div>
