@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { EmployeeEditComponent } from './pages/employee/employee-edit/employee-edit.component';
 import { EmployeeListComponent } from './pages/employee/employee-list/employee-list.component';
 import { EmployeeViewComponent } from './pages/employee/employee-view/employee-view.component';
+import { HomeComponent } from './pages/home/home.component';
 import { ProductEditComponent } from './pages/product/product-edit/product-edit.component';
 import { ProductListComponent } from './pages/product/product-list/product-list.component';
 import { ProductViewComponent } from './pages/product/product-view/product-view.component';
@@ -27,12 +28,16 @@ import { ResourcepackListComponent } from './pages/resourcepack/resourcepack-lis
 import { ResourcepackViewComponent } from './pages/resourcepack/resourcepack-view/resourcepack-view.component';
 import { ResourcetypeEditComponent } from './pages/resourcetype/resourcetype-edit/resourcetype-edit.component';
 import { ResourcetypeListComponent } from './pages/resourcetype/resourcetype-list/resourcetype-list.component';
+import { SigninComponent } from './pages/signin/signin.component';
 import { SupplierEditComponent } from './pages/supplier/supplier-edit/supplier-edit.component';
 import { SupplierListComponent } from './pages/supplier/supplier-list/supplier-list.component';
 import { SupplierViewComponent } from './pages/supplier/supplier-view/supplier-view.component';
 
 const routes: Routes = [
   
+  { path: 'signin', component: SigninComponent },
+  { path: 'home', component: HomeComponent },
+
   { path: 'employee', component: EmployeeListComponent },
   { path: 'employee/edit', component: EmployeeEditComponent },
   { path: 'employee/edit/:id', component: EmployeeEditComponent },
@@ -84,6 +89,8 @@ const routes: Routes = [
   { path: 'supplier/edit', component: SupplierEditComponent },
   { path: 'supplier/edit/:id', component: SupplierEditComponent },
   { path: 'supplier/view/:id', component: SupplierViewComponent },
+
+  { path: '**', redirectTo: 'signin' },
 
 ];
 

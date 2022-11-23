@@ -1,4 +1,5 @@
 import { Component, EventEmitter, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
+import { NotifierService } from 'angular-notifier';
 import { AuthenticationService } from 'src/app/_services/authentication.service';
 
 @Component({
@@ -15,8 +16,11 @@ export class ConnexionComponent implements OnInit, OnChanges {
   login = 'sauce';
   password = '123456';
 
+  error = false;
+
   constructor(
     private authService: AuthenticationService,
+    private notifierService: NotifierService,
   ) { }
 
   ngOnChanges(changes: SimpleChanges): void {
@@ -41,11 +45,16 @@ export class ConnexionComponent implements OnInit, OnChanges {
   }
 
   signin() {
+    this.error = false;
     this.authService.conexion(this.login, this.password).then((user) => {
       console.log('user');
       console.log(user);
       this.user = user;
+      this.error = false;
       this.onConnexion.emit(this.user);
+    }).catch(() => {
+      this.error = true;
+      this.notifierService.notify('error', "Incorrect login or password");
     });
   }
 

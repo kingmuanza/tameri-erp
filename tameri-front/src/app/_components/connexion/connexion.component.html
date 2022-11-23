@@ -8,11 +8,11 @@
         <div class="connexion-form">
             <div class="input-group mb-3">
                 <span class="input-group-text">Login</span>
-                <input [(ngModel)]="login" type="text" class="form-control">
+                <input [(ngModel)]="login" type="text" class="form-control" [ngClass]="{'is-invalid': error}">
             </div>
             <div class="input-group mb-3">
                 <span class="input-group-text">Password</span>
-                <input [(ngModel)]="password" type="password" class="form-control">
+                <input [(ngModel)]="password" type="password" class="form-control" [ngClass]="{'is-invalid': error}">
             </div>
             <div style="margin-top: 10px;">
                 <button (click)="signin()" class="btn btn-primary" style="width: 100%;">Sign In</button>

@@ -2,6 +2,7 @@ import { Company } from "./company.model";
 
 export class User {
     id = '';
+    name: string = '';
     login: string = '';
     password: string = '';
     role = '';
@@ -9,6 +10,6 @@ export class User {
 
     constructor(company: Company) {
         this.id = company.id;
-        this.company = this.company;
+        this.company = company;
     }
 } 

@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs';
 import { Company } from '../_models/company.model';
+import { User } from '../_models/user.model';
 import { CrudService } from './crud.service';
 
 @Injectable({
@@ -26,17 +27,23 @@ export class AuthenticationService {
       this.http.post(this.URL + 'auth/connexion', { login: login, password: passe }).subscribe({
         next: (data) => {
           const result = data;
-          localStorage.setItem('TameriUser', JSON.stringify(data));
-          this.user = data;
-          this.getCompany(this.user.company).then((company) => {
-            this.user.company = company;
-            this.company = company;
-            this.userSubject.next(this.user);
+          console.log('data from connexion');
+          console.log(data);
+          if (data) {
+            localStorage.setItem('TameriUser', JSON.stringify(data));
+            this.user = data;
+            this.getCompany(this.user.company).then((company) => {
+              this.user.company = company;
+              this.company = company;
+              this.userSubject.next(this.user);
 
-            console.log('this.company AuthenticationService');
-            console.log(this.company);
-            resolve(result);
-          });
+              console.log('this.company AuthenticationService');
+              console.log(this.company);
+              resolve(result);
+            });
+          } else {
+            reject('No user')
+          }
         },
         error: (e) => {
           reject(e);
@@ -73,5 +80,48 @@ export class AuthenticationService {
     localStorage.removeItem('TameriUser');
   }
 
+  createUser(user: User) {
+    console.log('createUser');
+    console.log(user);
+    return new Promise((resolve, reject) => {
+      this.isLoginAvaible(user.login).then((avaible) => {
+        if (avaible) {
+          this.http.post(this.URL + 'auth/create', user).subscribe({
+            next: (data) => {
+              resolve(data);
+            }
+          });
+        } else {
+          reject('UNAVAIBLE');
+        }
+      });
+    });
+  }
+
+  updateUser(user: User) {
+    console.log('updateUser');
+    console.log(user);
+    return new Promise((resolve, reject) => {
+      this.http.put(this.URL + 'auth/' + user.id, user).subscribe({
+        next: (data) => {
+          resolve(data);
+        }
+      });
+    });
+  }
+
+  isLoginAvaible(login: string): Promise<boolean> {
+    console.log('isLoginAvaible');
+    return new Promise((resolve, reject) => {
+      this.http.get(this.URL + 'auth/verifylogin/' + login).subscribe((data) => {
+        console.log('isLoginAvaible data ' + JSON.stringify(data));
+        if (JSON.parse(JSON.stringify(data)).length > 0) {
+          resolve(false);
+        } else {
+          resolve(true);
+        }
+      });
+    });
+  }
 
 }

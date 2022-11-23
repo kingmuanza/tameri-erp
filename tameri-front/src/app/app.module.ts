@@ -39,6 +39,8 @@ import { PurchaseEditComponent } from './pages/purchase/purchase-edit/purchase-e
 import { ProductitemListComponent } from './pages/productitem/productitem-list/productitem-list.component';
 import { ProductitemEditComponent } from './pages/productitem/productitem-edit/productitem-edit.component';
 import { ProductitemViewComponent } from './pages/productitem/productitem-view/productitem-view.component';
+import { SigninComponent } from './pages/signin/signin.component';
+import { HomeComponent } from './pages/home/home.component';
 
 @NgModule({
   declarations: [
@@ -75,6 +77,8 @@ import { ProductitemViewComponent } from './pages/productitem/productitem-view/p
     ProductitemListComponent,
     ProductitemEditComponent,
     ProductitemViewComponent,
+    SigninComponent,
+    HomeComponent,
   ],
   imports: [
     BrowserModule,

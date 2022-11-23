@@ -10,7 +10,9 @@
         </ol>
     </nav>
     <h1 *ngIf="!isNewEmployee" class="titre">
-        Modify employee {{employee.id}}
+        <button style="float: right;" (click)="delete()" class="btn btn-danger btn-error">
+            Delete
+        </button> Modify employee {{employee.id}}
     </h1>
     <h1 *ngIf="isNewEmployee" class="titre">Add a employee</h1>
     <div style="margin-top: -10px; margin-bottom: 20px;">
@@ -26,7 +28,7 @@
                 <div class="col-lg-8">
                     <div class="input-group mb-3">
                         <span class="input-group-text">Names</span>
-                        <input [(ngModel)]="employee.names" type="text" class="form-control">
+                        <input [(ngModel)]="employee.names" type="text" class="form-control" [ngClass]="{'is-invalid': showError && !employee.names}">
                     </div>
                 </div>
                 <div class="col-lg-4">
@@ -38,7 +40,7 @@
                 <div class="col-lg-6">
                     <div class="input-group mb-3">
                         <span class="input-group-text">Tel</span>
-                        <input [(ngModel)]="employee.tel" type="text" class="form-control">
+                        <input [readOnly]="!isNewEmployee" [(ngModel)]="employee.tel" type="text" class="form-control" [ngClass]="{'is-invalid': showError && (!employee.tel || telAlreadyUse)}">
                     </div>
                 </div>
                 <div class="col-lg-6">
@@ -63,27 +65,30 @@
                     <div class="input-group mb-3">
                         <span class="input-group-text">ACL</span>
                         <select [(ngModel)]="employee.acl" type="text" class="form-control">
-                            <option [value]="item" *ngFor="let item of allpos; let i=index">
-                                {{item}}
-                            </option>
+                            <ng-container *ngFor="let item of allpos; let i=index">
+                                <option *ngIf="isACLValide(item)" [value]="item">
+                                    {{item}}
+                                </option>
+                            </ng-container>
                         </select>
                     </div>
                 </div>
-                <div class="col-lg-6">
-                    <div class="input-group mb-3">
-                        <span class="input-group-text">Login</span>
-                        <input [(ngModel)]="employee.login" type="text" class="form-control">
-                    </div>
-                </div>
-                <div class="col-lg-6">
+                <div class="col-lg-6" [hidden]="!isNewEmployee">
                     <div class="input-group mb-3">
                         <span class="input-group-text">Password</span>
-                        <input [(ngModel)]="employee.password" type="password" class="form-control">
+                        <input [(ngModel)]="employee.password" type="password" class="form-control" [ngClass]="{'is-invalid': showError && !employee.password}">
+                    </div>
+                </div>
+                <div class="col-lg-6" [hidden]="!isNewEmployee">
+                    <div class="input-group mb-3">
+                        <span class="input-group-text">Comfirm Password</span>
+                        <input [(ngModel)]="password" type="password" class="form-control" [ngClass]="{'is-invalid': showError && password!==employee.password}">
                     </div>
                 </div>
             </div>
             <div>
-                <button (click)="save()" class="btn btn-primary">Save</button>
+                <button *ngIf="isNewEmployee" (click)="save()" class="btn btn-primary">Save</button>
+                <button *ngIf="!isNewEmployee" (click)="modify()" class="btn btn-primary">Modify</button>
             </div>
         </div>
     </div>

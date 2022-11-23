@@ -1,4 +1,5 @@
 import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
+import { Router } from '@angular/router';
 import { AuthenticationService } from 'src/app/_services/authentication.service';
 
 @Component({
@@ -13,6 +14,7 @@ export class AppbarComponent implements OnInit, OnChanges {
 
   constructor(
     private authService: AuthenticationService,
+    private router: Router,
   ) {
     this.company = this.user?.company;
     console.log('this.company AppbarComponent');
@@ -31,6 +33,7 @@ export class AppbarComponent implements OnInit, OnChanges {
 
   signOut() {
     this.authService.deconnexion();
+    this.router.navigate(['signin']);
     window.location.reload();
   }
 
