@@ -41,6 +41,7 @@ import { ProductitemEditComponent } from './pages/productitem/productitem-edit/p
 import { ProductitemViewComponent } from './pages/productitem/productitem-view/productitem-view.component';
 import { SigninComponent } from './pages/signin/signin.component';
 import { HomeComponent } from './pages/home/home.component';
+import { PosComponent } from './pages/pos/pos.component';
 
 @NgModule({
   declarations: [
@@ -79,6 +80,7 @@ import { HomeComponent } from './pages/home/home.component';
     ProductitemViewComponent,
     SigninComponent,
     HomeComponent,
+    PosComponent,
   ],
   imports: [
     BrowserModule,

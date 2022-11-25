@@ -4,6 +4,7 @@ import { EmployeeEditComponent } from './pages/employee/employee-edit/employee-e
 import { EmployeeListComponent } from './pages/employee/employee-list/employee-list.component';
 import { EmployeeViewComponent } from './pages/employee/employee-view/employee-view.component';
 import { HomeComponent } from './pages/home/home.component';
+import { PosComponent } from './pages/pos/pos.component';
 import { ProductEditComponent } from './pages/product/product-edit/product-edit.component';
 import { ProductListComponent } from './pages/product/product-list/product-list.component';
 import { ProductViewComponent } from './pages/product/product-view/product-view.component';
@@ -37,6 +38,7 @@ const routes: Routes = [
   
   { path: 'signin', component: SigninComponent },
   { path: 'home', component: HomeComponent },
+  { path: 'pos', component: PosComponent },
 
   { path: 'employee', component: EmployeeListComponent },
   { path: 'employee/edit', component: EmployeeEditComponent },

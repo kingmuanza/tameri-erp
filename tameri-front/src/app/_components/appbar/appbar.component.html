@@ -18,61 +18,96 @@
                 <li class="nav-item">
                     <a class="nav-link " aria-current="page" [routerLink]="'home'" routerLinkActive="active">Dashboard</a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link " aria-current="page" [routerLink]="'employee'" routerLinkActive="active">Employees</a>
-                </li>
-                <li class="nav-item" *ngIf="company?.option.productResource">
-                    <a class="nav-link " aria-current="page" [routerLink]="'supplier'" routerLinkActive="active">Suppliers</a>
-                </li>
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                        Products
-                    </a>
-                    <ul class="dropdown-menu">
-                        <li>
-                            <a class="dropdown-item" aria-current="page" [routerLink]="'product'" routerLinkActive="active">Products</a>
-                        </li>
-                        <li *ngIf="company?.option.productPack">
-                            <a class="dropdown-item" aria-current="page" [routerLink]="'productpack'" routerLinkActive="active">Product Packs</a>
-                        </li>
-                        <li>
-                            <a class="dropdown-item" aria-current="page" [routerLink]="'productitem'" routerLinkActive="active">Product Items</a>
-                        </li>
-                    </ul>
-                </li>
-                <li class="nav-item dropdown" *ngIf="company?.option.productResource">
-                    <a class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                        Resources
-                    </a>
-                    <ul class="dropdown-menu">
-                        <li *ngIf="company?.option.productResource">
-                            <a class="dropdown-item" aria-current="page" [routerLink]="'resource'" routerLinkActive="active">Resources</a>
-                        </li>
-                        <li *ngIf="company?.option.productResource">
-                            <a class="dropdown-item" aria-current="page" [routerLink]="'resourcepack'" routerLinkActive="active">Resource Packs</a>
-                        </li>
-                        <li *ngIf="company?.option.productResource">
-                            <a class="dropdown-item" aria-current="page" [routerLink]="'purchase'" routerLinkActive="active">Resource items</a>
-                        </li>
-                    </ul>
-                </li>
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                        Parameters
-                    </a>
-                    <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" [routerLink]="'parameter/producttype'">Product Types</a></li>
-                        <li><a class="dropdown-item" [routerLink]="'parameter/productcategory'">Product Categories</a>
-                        </li>
-                        <li *ngIf="company?.option.productResource">
-                            <a class="dropdown-item" [routerLink]="'parameter/resourcecategory'">Resource Categories</a>
-                        </li>
-                    </ul>
-                </li>
+                <ng-container *ngIf="access.pos">
+                    <li class="nav-item">
+                        <a class="nav-link " aria-current="page" [routerLink]="'pos'" routerLinkActive="active">Point of sale</a>
+                    </li>
+                </ng-container>
+                <ng-container *ngIf="access.employee">
+                    <li class="nav-item">
+                        <a class="nav-link " aria-current="page" [routerLink]="'employee'" routerLinkActive="active">Employees</a>
+                    </li>
+                </ng-container>
+
+                <ng-container *ngIf="access.supplier">
+                    <li class="nav-item" *ngIf="company?.option.productResource">
+                        <a class="nav-link " aria-current="page" [routerLink]="'supplier'" routerLinkActive="active">Suppliers</a>
+                    </li>
+                </ng-container>
+
+                <ng-container *ngIf="access.product.menu">
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Products
+                        </a>
+                        <ul class="dropdown-menu">
+                            <ng-container *ngIf="access.product.it">
+                                <li>
+                                    <a class="dropdown-item" aria-current="page" [routerLink]="'product'" routerLinkActive="active">Products</a>
+                                </li>
+                            </ng-container>
+                            <ng-container *ngIf="access.product.item">
+                                <li *ngIf="company?.option.productPack">
+                                    <a class="dropdown-item" aria-current="page" [routerLink]="'productpack'" routerLinkActive="active">Product Packs</a>
+                                </li>
+                            </ng-container>
+                            <ng-container *ngIf="access.product.pack">
+                                <li>
+                                    <a class="dropdown-item" aria-current="page" [routerLink]="'productitem'" routerLinkActive="active">Product Items</a>
+                                </li>
+                            </ng-container>
+                        </ul>
+                    </li>
+                </ng-container>
+
+                <ng-container *ngIf="access.resource.menu">
+                    <li class="nav-item dropdown" *ngIf="company?.option.productResource">
+                        <a class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Resources
+                        </a>
+                        <ul class="dropdown-menu">
+                            <ng-container *ngIf="access.resource.it">
+                                <li *ngIf="company?.option.productResource">
+                                    <a class="dropdown-item" aria-current="page" [routerLink]="'resource'" routerLinkActive="active">Resources</a>
+                                </li>
+                            </ng-container>
+                            <ng-container *ngIf="access.resource.item">
+                                <li *ngIf="company?.option.productResource">
+                                    <a class="dropdown-item" aria-current="page" [routerLink]="'resourcepack'" routerLinkActive="active">Resource Packs</a>
+                                </li>
+                            </ng-container>
+                            <ng-container *ngIf="access.resource.pack">
+                                <li *ngIf="company?.option.productResource">
+                                    <a class="dropdown-item" aria-current="page" [routerLink]="'purchase'" routerLinkActive="active">Resource items</a>
+                                </li>
+                            </ng-container>
+
+                        </ul>
+                    </li>
+                </ng-container>
+
+                <ng-container *ngIf="access.param">
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Parameters
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" [routerLink]="'parameter/producttype'">Product Types</a></li>
+                            <li><a class="dropdown-item" [routerLink]="'parameter/productcategory'">Product
+                                    Categories</a>
+                            </li>
+                            <li *ngIf="company?.option.productResource">
+                                <a class="dropdown-item" [routerLink]="'parameter/resourcecategory'">Resource
+                                    Categories</a>
+                            </li>
+                        </ul>
+                    </li>
+                </ng-container>
+
                 <li class="nav-item dropdown" style="min-width: 160px; text-align: center; border-left: 1px solid #ccc; margin-left: 40px">
                     <a class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                         {{user ? (user.name ? user.name : user.login) : 'No Login'}},
-                        {{user ? user.role : 'Invité'}}
+                        {{user ? showLabel(user.role) : 'Invité'}}
                     </a>
                     <ul class="dropdown-menu">
                         <li><a class="dropdown-item">Compte</a></li>
