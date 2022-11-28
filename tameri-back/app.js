@@ -21,6 +21,7 @@ const productcategoryRoutes = require('./_routes/productcategory.route');
 const supplierRoutes = require('./_routes/supplier.route');
 const purchaseRoutes = require('./_routes/purchase.route');
 const productitemRoutes = require('./_routes/productitem.route');
+const countryRoutes = require('./_routes/country.route');
 
 const app = express();
 
@@ -45,6 +46,7 @@ app.use('/company', companyRoutes);
 app.use('/companytype', companytypeRoutes);
 app.use('/community', communityRoutes);
 app.use('/communitytype', communitytypeRoutes);
+app.use('/country', countryRoutes);
 app.use('/employee', employeeRoutes);
 app.use('/pricing', pricingRoutes);
 app.use('/product', productRoutes);

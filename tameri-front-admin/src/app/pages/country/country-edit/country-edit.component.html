@@ -1,0 +1,51 @@
+<div class="container-fluid" style="margin-top: 16px;">
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a>Home</a></li>
+            <li class="breadcrumb-item"><a [routerLink]="'/parameter/country'">Company Types</a></li>
+            <li class="breadcrumb-item active" *ngIf="isNewCountry">new</li>
+            <li class="breadcrumb-item active" *ngIf="!isNewCountry"><a [routerLink]="'parameter/country/edit/' + country.id">{{country.name}}</a></li>
+            <li class="breadcrumb-item active" *ngIf="!isNewCountry">Edit</li>
+        </ol>
+    </nav>
+    <h1 *ngIf="!isNewCountry" class="titre">
+        <button style="float: right;" (click)="delete()" class="btn btn-danger btn-error">
+            Delete
+        </button> Modify country {{country.id}}
+    </h1>
+    <h1 *ngIf="isNewCountry" class="titre">Add a company type</h1>
+
+    <div *ngIf="step === 1" class="first-step">
+        <p>
+            Country Infos
+        </p>
+        <div class=" page-contenu ">
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="">
+                        <div class="input-group mb-3">
+                            <span class="input-group-text">Code</span>
+                            <input [(ngModel)]="country.code" type="text" class="form-control" [ngClass]="{'is-invalid': showErrors1 && !(country.code)}">
+                        </div>
+                    </div>
+                    <div class="">
+                        <div class="input-group mb-3">
+                            <span class="input-group-text">Name</span>
+                            <input [(ngModel)]="country.name" type="text" class="form-control" [ngClass]="{'is-invalid': showErrors1 && !(country.name)}">
+                        </div>
+                    </div>
+                    <div class="">
+                        <div class="input-group mb-3">
+                            <span class="input-group-text">Dial Code</span>
+                            <input [(ngModel)]="country.dial_code" type="text" class="form-control" [ngClass]="{'is-invalid': showErrors1 && !(country.dial_code)}">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div>
+                <button (click)="endFirstStep()" class="btn btn-primary">Save</button>
+            </div>
+        </div>
+    </div>
+
+</div>

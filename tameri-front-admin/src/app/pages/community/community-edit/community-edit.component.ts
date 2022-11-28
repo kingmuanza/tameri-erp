@@ -54,4 +54,13 @@ export class CommunityEditComponent implements OnInit {
     }
   }
 
+  delete() {
+    const oui = confirm('Are you sure to delete this item?');
+    if (oui) {
+      this.communityService.delete('community', this.community.id).then(() => {
+        this.router.navigate(['community']);
+      });
+    }
+  }
+
 }

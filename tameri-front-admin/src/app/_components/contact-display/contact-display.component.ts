@@ -1,5 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Contact } from 'src/app/_models/contact.model';
+import { Country } from 'src/app/_models/country.model';
+import { CrudService } from 'src/app/_services/crud.service';
 
 @Component({
   selector: 'app-contact-display',
@@ -13,9 +15,16 @@ export class ContactDisplayComponent implements OnInit {
   @Input() isTelRequired = false;
   @Input() showErrors = false;
 
-  constructor() { }
+  countries = new Array<Country>();
+
+  constructor(
+    private countryService: CrudService<Country>,
+  ) { }
 
   ngOnInit(): void {
+    this.countryService.getAll('country').then((data) => {
+      this.countries = data;
+    });
   }
 
   addTel() {

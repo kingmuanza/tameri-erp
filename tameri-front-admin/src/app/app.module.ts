@@ -27,6 +27,10 @@ import { CompanytypeEditComponent } from './pages/companytype/companytype-edit/c
 import { CompanytypeListComponent } from './pages/companytype/companytype-list/companytype-list.component';
 import { ContactDisplayComponent } from './_components/contact-display/contact-display.component';
 import { RequiredComponent } from './_components/required/required.component';
+import { ContacttypeListComponent } from './pages/contacttype/contacttype-list/contacttype-list.component';
+import { ContacttypeEditComponent } from './pages/contacttype/contacttype-edit/contacttype-edit.component';
+import { CountryEditComponent } from './pages/country/country-edit/country-edit.component';
+import { CountryListComponent } from './pages/country/country-list/country-list.component';
 
 @NgModule({
   declarations: [
@@ -47,7 +51,11 @@ import { RequiredComponent } from './_components/required/required.component';
     CompanytypeEditComponent,
     CompanytypeListComponent,
     ContactDisplayComponent,
-    RequiredComponent
+    RequiredComponent,
+    ContacttypeListComponent,
+    ContacttypeEditComponent,
+    CountryEditComponent,
+    CountryListComponent
   ],
   imports: [
     BrowserModule,

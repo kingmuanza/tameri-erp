@@ -5,7 +5,19 @@
             <input [(ngModel)]="contact.address" type="text" class="form-control">
         </div>
     </div>
-    <div class="col-lg-6">
+    <div class="col-lg-2">
+        <div class="input-group mb-3">
+            <span class="input-group-text">
+                Pays <app-required></app-required>
+            </span>
+            <select required [(ngModel)]="contact.country" type="text" class="form-control" [ngClass]="{'is-invalid': !contact.country.dial_code && showErrors}">
+                <option [ngValue]="c" *ngFor="let c of countries" >
+                    ({{ c.dial_code }}) {{c.name}}
+                </option>
+            </select>
+        </div>
+    </div>
+    <div class="col-lg-4">
         <div class="input-group mb-3">
             <span class="input-group-text">
                 Tel

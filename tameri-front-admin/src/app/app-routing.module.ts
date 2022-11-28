@@ -10,6 +10,8 @@ import { CompanyListComponent } from './pages/company/company-list/company-list.
 import { CompanyViewComponent } from './pages/company/company-view/company-view.component';
 import { CompanytypeEditComponent } from './pages/companytype/companytype-edit/companytype-edit.component';
 import { CompanytypeListComponent } from './pages/companytype/companytype-list/companytype-list.component';
+import { CountryEditComponent } from './pages/country/country-edit/country-edit.component';
+import { CountryListComponent } from './pages/country/country-list/country-list.component';
 import { HomeComponent } from './pages/home/home.component';
 import { PricingEditComponent } from './pages/pricing/pricing-edit/pricing-edit.component';
 import { PricingListComponent } from './pages/pricing/pricing-list/pricing-list.component';
@@ -40,6 +42,10 @@ const routes: Routes = [
   { path: 'parameter/companytype', component: CompanytypeListComponent },
   { path: 'parameter/companytype/edit', component: CompanytypeEditComponent },
   { path: 'parameter/companytype/edit/:id', component:CompanytypeEditComponent },
+
+  { path: 'parameter/country', component: CountryListComponent },
+  { path: 'parameter/country/edit', component: CountryEditComponent },
+  { path: 'parameter/country/edit/:id', component:CountryEditComponent },
 
   { path: '**', redirectTo:'dashboard' },
 

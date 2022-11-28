@@ -9,8 +9,11 @@
             <li class="breadcrumb-item active" *ngIf="!isNewCommunity">Edit</li>
         </ol>
     </nav>
+
     <h1 *ngIf="!isNewCommunity" class="titre">
-        Modify community {{community.id}}
+        <button style="float: right;" (click)="delete()" class="btn btn-danger btn-error">
+            Delete
+        </button> Modify community {{community.id}}
     </h1>
     <h1 *ngIf="isNewCommunity" class="titre">Add a community</h1>
 
