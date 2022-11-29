@@ -42,6 +42,8 @@ import { ProductitemViewComponent } from './pages/productitem/productitem-view/p
 import { SigninComponent } from './pages/signin/signin.component';
 import { HomeComponent } from './pages/home/home.component';
 import { PosComponent } from './pages/pos/pos.component';
+import { ContactDisplayComponent } from './_components/contact-display/contact-display.component';
+import { RequiredComponent } from './_components/required/required.component';
 
 @NgModule({
   declarations: [
@@ -81,6 +83,8 @@ import { PosComponent } from './pages/pos/pos.component';
     SigninComponent,
     HomeComponent,
     PosComponent,
+    ContactDisplayComponent,
+    RequiredComponent,
   ],
   imports: [
     BrowserModule,
