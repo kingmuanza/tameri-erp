@@ -6,9 +6,27 @@
             </h1>
         </div>
         <div class="connexion-form">
-            <div class="input-group mb-3">
-                <span class="input-group-text">Login</span>
-                <input [(ngModel)]="login" type="text" class="form-control" [ngClass]="{'is-invalid': error}">
+
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="input-group mb-3">
+                        <span class="input-group-text">
+                            Pays
+                        </span>
+                        <select [(ngModel)]="country" class="form-control" [ngClass]="{'is-invalid': (!country) && errorCountry}">
+                            <option [value]="null"></option>
+                            <option [ngValue]="c" *ngFor="let c of countries">
+                                ({{ c.dial_code }}) {{c.name}}
+                            </option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="input-group mb-3">
+                        <span class="input-group-text">Tel</span>
+                        <input [(ngModel)]="tel" type="text" class="form-control" [ngClass]="{'is-invalid': error}">
+                    </div>
+                </div>
             </div>
             <div class="input-group mb-3">
                 <span class="input-group-text">Password</span>

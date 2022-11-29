@@ -1,4 +1,4 @@
-<div class="container-fluid" style="margin-top: 16px;">
+<div *ngIf="!isNewCompany" class="container-fluid" style="margin-top: 16px;">
     <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
             <li class="breadcrumb-item"><a>Home</a></li>
@@ -46,16 +46,6 @@
                                 <div class="input-group mb-3">
                                     <span class="input-group-text">Type</span>
                                     <input readonly [(ngModel)]="company.type" type="text" class="form-control">
-                                </div>
-                            </div>
-                            <div class="col-lg-6">
-                                <div class="input-group mb-3">
-                                    <span class="input-group-text">Currency</span>
-                                    <select [(ngModel)]="company.currency" type="text" class="form-control">
-                                        <option value="XAF">Franc CFA</option>
-                                        <option value="USD">Dollar</option>
-                                        <option value="EUR">Euro</option>
-                                    </select>
                                 </div>
                             </div>
                             <div class="col-lg-6">
@@ -344,7 +334,9 @@
     </div>
 
 </div>
-
+<div *ngIf="isNewCompany">
+    <app-nodata></app-nodata>
+</div>
 <div style="height: 25vh;">
 
 </div>

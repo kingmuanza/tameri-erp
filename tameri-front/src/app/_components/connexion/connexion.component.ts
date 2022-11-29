@@ -1,6 +1,8 @@
 import { Component, EventEmitter, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
 import { NotifierService } from 'angular-notifier';
+import { Country } from 'src/app/_models/country.model';
 import { AuthenticationService } from 'src/app/_services/authentication.service';
+import { CrudService } from 'src/app/_services/crud.service';
 
 @Component({
   selector: 'app-connexion',
@@ -13,12 +15,17 @@ export class ConnexionComponent implements OnInit, OnChanges {
 
   user: any;
 
-  login = 'sauce';
+  tel = '';
+  login = '';
   password = '123456';
 
   error = false;
+  errorCountry = false;
+  countries = new Array<Country>();
+  country: any;
 
   constructor(
+    private countryService: CrudService<Country>,
     private authService: AuthenticationService,
     private notifierService: NotifierService,
   ) { }
@@ -32,6 +39,11 @@ export class ConnexionComponent implements OnInit, OnChanges {
   }
 
   private init() {
+
+    this.countryService.getAll('country').then((data) => {
+      this.countries = data;
+    });
+
     let user = this.authService.autoConnexion();
     console.log('user on ConnexionComponent');
     console.log(user);
@@ -45,6 +57,11 @@ export class ConnexionComponent implements OnInit, OnChanges {
   }
 
   signin() {
+    if (!this.country) {
+      this.errorCountry = true;
+      return ;
+    }
+    this.login = this.country.dial_code + this.tel;
     this.error = false;
     this.authService.conexion(this.login, this.password).then((user) => {
       console.log('user');

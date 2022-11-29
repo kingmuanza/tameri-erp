@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import { Contact } from 'src/app/_models/contact.model';
 import { Country } from 'src/app/_models/country.model';
 import { CrudService } from 'src/app/_services/crud.service';
@@ -8,7 +8,7 @@ import { CrudService } from 'src/app/_services/crud.service';
   templateUrl: './contact-display.component.html',
   styleUrls: ['./contact-display.component.scss']
 })
-export class ContactDisplayComponent implements OnInit {
+export class ContactDisplayComponent implements OnInit, OnChanges {
 
   @Input() contact = new Contact();
   @Input() updradable = false;
@@ -21,9 +21,22 @@ export class ContactDisplayComponent implements OnInit {
     private countryService: CrudService<Country>,
   ) { }
 
+  ngOnChanges(changes: SimpleChanges): void {
+    this.init();
+  }
+
   ngOnInit(): void {
+    this.init();
+  }
+
+  private init() {
     this.countryService.getAll('country').then((data) => {
       this.countries = data;
+      data.forEach((d) => {
+        if (this.contact.country && d.dial_code === this.contact.country.dial_code) {
+          this.contact.country = d;
+        }
+      });
     });
   }
 

@@ -11,7 +11,7 @@ export class Company {
     
     contact = new Contact();
     geolocation: string = '';
-    currency: string = '';
+    currency: string = 'XAF';
     owner = new Owner();
     
     community = new Community();

@@ -26,12 +26,12 @@
                         <span class="input-group-text">
                             Name <app-required></app-required>
                         </span>
-                        <input [(ngModel)]="company.name" type="text" class="form-control" [ngClass]="{'is-invalid': showErrors1 && (errorCompanyName)}">
+                        <input [(ngModel)]="company.name" type="text" class="form-control" [ngClass]="{'is-invalid': showErrors1 && !(company.name)}">
                     </div>
                 </div>
                 <div class="col-lg-4">
                     <div class="input-group mb-3">
-                        <span class="input-group-text">Currency</span>
+                        <span class="input-group-text">Currency <app-required></app-required></span>
                         <select [(ngModel)]="company.currency" type="text" class="form-control" [ngClass]="{'is-invalid': showErrors1 && !(company.currency)}">
                             <option value="XAF">Franc CFA</option>
                             <option value="USD">Dollar</option>
@@ -100,7 +100,7 @@
         </p>
         <div class=" page-contenu ">
             <div class="mb-3">
-                Votre login : {{company.owner.contact.tel}}
+                Votre login : {{login}}
             </div>
             <div class="row">
                 <div class="col-lg-6">

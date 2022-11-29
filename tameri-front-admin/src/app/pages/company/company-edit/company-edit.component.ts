@@ -107,6 +107,9 @@ export class CompanyEditComponent implements OnInit {
         this.companyService.modify('company', this.company.id, this.company).then(() => {
           this.notifierService.notify('success', "saved successfully");
           this.step++;
+          const tel = this.company.owner.contact.tel;
+          const country = this.company.owner.contact.country;
+          this.login = country.dial_code + tel.split('').join('').split('-').join('');
           if (!this.isNewCompany) {
             this.router.navigate(['company', 'view', this.company.id]);
           }
@@ -123,7 +126,10 @@ export class CompanyEditComponent implements OnInit {
 
     if (this.password === this.confirmpassword) {
       const user = new User(this.company);
-      user.login = this.company.owner.contact.tel;
+      const tel = this.company.owner.contact.tel;
+      const country = this.company.owner.contact.country;
+      user.login = country.dial_code + tel.split('').join('').split('-').join('');
+      this.login = user.login;
       user.password = this.password;
       user.role = 'ADMIN';
       user.company = this.company;

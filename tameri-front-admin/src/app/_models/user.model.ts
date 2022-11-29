@@ -11,5 +11,10 @@ export class User {
     constructor(company: Company) {
         this.id = company.id;
         this.company = company;
+        if (company.contact) {
+            if (company.contact.country) {
+                
+            }
+        }
     }
 } 

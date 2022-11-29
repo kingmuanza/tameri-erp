@@ -31,6 +31,7 @@ import { ContacttypeListComponent } from './pages/contacttype/contacttype-list/c
 import { ContacttypeEditComponent } from './pages/contacttype/contacttype-edit/contacttype-edit.component';
 import { CountryEditComponent } from './pages/country/country-edit/country-edit.component';
 import { CountryListComponent } from './pages/country/country-list/country-list.component';
+import { NodataComponent } from './_components/nodata/nodata.component';
 
 @NgModule({
   declarations: [
@@ -55,7 +56,8 @@ import { CountryListComponent } from './pages/country/country-list/country-list.
     ContacttypeListComponent,
     ContacttypeEditComponent,
     CountryEditComponent,
-    CountryListComponent
+    CountryListComponent,
+    NodataComponent
   ],
   imports: [
     BrowserModule,
