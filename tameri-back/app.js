@@ -22,6 +22,7 @@ const supplierRoutes = require('./_routes/supplier.route');
 const purchaseRoutes = require('./_routes/purchase.route');
 const productitemRoutes = require('./_routes/productitem.route');
 const countryRoutes = require('./_routes/country.route');
+const positionRoutes = require('./_routes/position.route');
 
 const app = express();
 
@@ -48,6 +49,7 @@ app.use('/community', communityRoutes);
 app.use('/communitytype', communitytypeRoutes);
 app.use('/country', countryRoutes);
 app.use('/employee', employeeRoutes);
+app.use('/position', positionRoutes);
 app.use('/pricing', pricingRoutes);
 app.use('/product', productRoutes);
 app.use('/productcategory', productcategoryRoutes);
