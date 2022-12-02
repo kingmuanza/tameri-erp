@@ -6,6 +6,7 @@ import { NotifierService } from 'angular-notifier';
 import { User } from 'src/app/_models/user.model';
 import { AuthenticationService } from 'src/app/_services/authentication.service';
 import { Companytype } from 'src/app/_models/companytype.model';
+import { Position } from 'src/app/_models/position.model';
 
 @Component({
   selector: 'app-company-edit',
@@ -36,6 +37,8 @@ export class CompanyEditComponent implements OnInit {
 
   companytypes = new Array<Companytype>();
 
+  positions = new Array<Position>();
+
   user: User | undefined;
 
   constructor(
@@ -44,12 +47,16 @@ export class CompanyEditComponent implements OnInit {
     private authService: AuthenticationService,
     private route: ActivatedRoute,
     private companytypeService: CrudService<Companytype>,
+    private positionService: CrudService<Position>,
     private companyService: CrudService<Company>
   ) { }
 
   ngOnInit(): void {
     this.companytypeService.getAll('companytype').then((data) => {
       this.companytypes = data;
+    });
+    this.positionService.getAll('position').then((data) => {
+      this.positions = data;
     });
     this.route.paramMap.subscribe((paramMap) => {
       const id = paramMap.get('id');
@@ -63,6 +70,11 @@ export class CompanyEditComponent implements OnInit {
               this.user = user;
               this.login = user.login;
               this.password = user.password;
+            }
+          });
+          this.positions.forEach((p) => {
+            if (this.company.owner.position && p.id === this.company.owner.position.id) {
+              this.company.owner.position = p;
             }
           });
         });
@@ -131,7 +143,7 @@ export class CompanyEditComponent implements OnInit {
       user.login = country.dial_code + tel.split('').join('').split('-').join('');
       this.login = user.login;
       user.password = this.password;
-      user.role = 'ADMIN';
+      user.role = ['ADMIN'];
       user.company = this.company;
 
       this.authService.createUser(user).then(() => {
@@ -154,6 +166,31 @@ export class CompanyEditComponent implements OnInit {
         this.router.navigate(['company']);
       });
     }
+  }
+
+  getLocation() {
+    const that = this;
+    const options = {
+      enableHighAccuracy: true,
+      timeout: 5000,
+      maximumAge: 0
+    };
+    
+    function success(pos: any) {
+      const crd = pos.coords;
+      that.company.geolocation = crd.latitude + ', ' +  crd.longitude;
+    /* 
+      console.log('Your current position is:');
+      console.log(`Latitude : ${crd.latitude}`);
+      console.log(`Longitude: ${crd.longitude}`);
+      console.log(`More or less ${crd.accuracy} meters.`); */
+    }
+    
+    function error(err: any) {
+      console.warn(`ERROR(${err.code}): ${err.message}`);
+    }
+    
+    navigator.geolocation.getCurrentPosition(success, error, options);
   }
 
 }

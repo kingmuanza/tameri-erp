@@ -1,6 +1,9 @@
 import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import { Router } from '@angular/router';
+import { Company } from 'src/app/_models/company.model';
+import { User } from 'src/app/_models/user.model';
 import { AuthenticationService } from 'src/app/_services/authentication.service';
+import { CrudService } from 'src/app/_services/crud.service';
 
 @Component({
   selector: 'app-appbar',
@@ -9,7 +12,7 @@ import { AuthenticationService } from 'src/app/_services/authentication.service'
 })
 export class AppbarComponent implements OnInit, OnChanges {
 
-  @Input() user: any;
+  @Input() user: User | undefined;
   @Input() company: any;
 
   access = {
@@ -32,23 +35,36 @@ export class AppbarComponent implements OnInit, OnChanges {
   }
 
   constructor(
+    private companyService: CrudService<Company>,
     private authService: AuthenticationService,
     private router: Router,
   ) {
     this.company = this.user?.company;
     console.log('this.company AppbarComponent');
     console.log(this.company);
+    if (this.company) {
+      this.getCompany(this.company);
+    }
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    this.company = this.user?.company;
+    this.company = this.user?.company;    
+    if (this.company) {
+      this.getCompany(this.company);
+    }
     console.log('this.company AppbarComponent SimpleChanges');
     console.log(this.company);
     this.getAcess();
   }
 
+  getCompany(company: Company) {
+    this.companyService.get('company', company.id).then((data) => {
+      this.company = data;
+    });
+  }
+
   getAcess() {
-    if (this.user.role === 'ADMIN') {
+    if (this.user?.role.indexOf('ADMIN') !== -1) {
       this.access = {
         employee: true,
         pos: true,
@@ -68,7 +84,7 @@ export class AppbarComponent implements OnInit, OnChanges {
         param: true,
       }
     }
-    if (this.user.role === 'Manager') {
+    if (this.user?.role.indexOf('Manager') !== -1) {
       this.access = {
         employee: true,
         pos: true,
@@ -88,7 +104,7 @@ export class AppbarComponent implements OnInit, OnChanges {
         param: true,
       }
     }
-    if (this.user.role === 'Warehouseman') {
+    if (this.user?.role.indexOf('Warehouseman') !== -1) {
       this.access = {
         employee: false, 
         pos: false,
@@ -108,7 +124,7 @@ export class AppbarComponent implements OnInit, OnChanges {
         param: false,
       }
     }
-    if (this.user.role === 'Productionman') {
+    if (this.user?.role.indexOf('Productionman') !== -1) {
       this.access = {
         employee: false, 
         pos: false,
@@ -128,7 +144,7 @@ export class AppbarComponent implements OnInit, OnChanges {
         param: false,
       }
     }
-    if (this.user.role === 'Cashier') {
+    if (this.user?.role.indexOf('Cashier') !== -1) {
       this.access = {
         employee: false, 
         pos: true,
@@ -148,7 +164,7 @@ export class AppbarComponent implements OnInit, OnChanges {
         param: false,
       }
     }
-    if (this.user.role === 'Waitress') {
+    if (this.user?.role.indexOf('Waitress') !== -1) {
       this.access = {
         employee: false, 
         pos: true,
@@ -168,6 +184,9 @@ export class AppbarComponent implements OnInit, OnChanges {
         param: false,
       }
     }
+
+    console.log('this.access');
+    console.log(this.access);
   }
 
   ngOnInit(): void {

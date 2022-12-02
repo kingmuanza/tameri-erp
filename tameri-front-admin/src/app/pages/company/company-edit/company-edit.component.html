@@ -51,7 +51,7 @@
                     <div class="input-group mb-3">
                         <span class="input-group-text">Geolocation</span>
                         <input [(ngModel)]="company.geolocation" type="text" class="form-control">
-                        <button class="btn btn-outline-secondary" type="button" id="button-addon2">Get current location</button>
+                        <button (click)="getLocation()" class="btn btn-outline-secondary" type="button" id="button-addon2">Get current location</button>
                     </div>
                 </div>
             </div>
@@ -82,7 +82,11 @@
                 <div class="col-lg-6">
                     <div class="input-group mb-3">
                         <span class="input-group-text">Position</span>
-                        <input [(ngModel)]="company.owner.position" type="text" class="form-control">
+                        <select [(ngModel)]="company.owner.position" type="text" class="form-control">
+                            <option *ngFor="let p of positions" [ngValue]="p">
+                                {{p.name}}
+                            </option>
+                        </select>
                     </div>
                 </div>
             </div>

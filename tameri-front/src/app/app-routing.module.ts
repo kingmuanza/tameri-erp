@@ -33,6 +33,9 @@ import { SigninComponent } from './pages/signin/signin.component';
 import { SupplierEditComponent } from './pages/supplier/supplier-edit/supplier-edit.component';
 import { SupplierListComponent } from './pages/supplier/supplier-list/supplier-list.component';
 import { SupplierViewComponent } from './pages/supplier/supplier-view/supplier-view.component';
+import { WarehouseEditComponent } from './pages/warehouse/warehouse-edit/warehouse-edit.component';
+import { WarehouseListComponent } from './pages/warehouse/warehouse-list/warehouse-list.component';
+import { WarehouseViewComponent } from './pages/warehouse/warehouse-view/warehouse-view.component';
 
 const routes: Routes = [
   
@@ -91,6 +94,11 @@ const routes: Routes = [
   { path: 'supplier/edit', component: SupplierEditComponent },
   { path: 'supplier/edit/:id', component: SupplierEditComponent },
   { path: 'supplier/view/:id', component: SupplierViewComponent },
+
+  { path: 'warehouse', component: WarehouseListComponent },
+  { path: 'warehouse/edit', component: WarehouseEditComponent },
+  { path: 'warehouse/edit/:id', component: WarehouseEditComponent },
+  { path: 'warehouse/view/:id', component: WarehouseViewComponent },
 
   { path: '**', redirectTo: 'signin' },
 

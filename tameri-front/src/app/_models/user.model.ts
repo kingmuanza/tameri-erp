@@ -8,7 +8,7 @@ export class User {
     acl: string = '';
     login: string = '';
     password: string = '';
-    role = '';
+    role = new Array<string>();
     company = new Company();
     locked = true
 

@@ -34,7 +34,11 @@
                 <div class="col-lg-4">
                     <div class="input-group mb-3">
                         <span class="input-group-text">Position</span>
-                        <input [(ngModel)]="employee.position" type="text" class="form-control">
+                        <select [(ngModel)]="employee.position" type="text" class="form-control">
+                            <option *ngFor="let p of positions" [ngValue]="p">
+                                {{p.name}}
+                            </option>
+                        </select>
                     </div>
                 </div>
                 <div class="col-lg-6">
@@ -52,7 +56,7 @@
                 <div class="col-lg-6">
                     <div class="input-group mb-3">
                         <span class="input-group-text">Role</span>
-                        <select [(ngModel)]="employee.role" type="text" class="form-control">
+                        <select [(ngModel)]="employee.role" type="text" class="form-control" multiple>
                             <option value="Manager">Manager</option>
                             <option value="Warehouseman">Warehouseman</option>
                             <option value="Productionman">Production Man</option>

@@ -1,4 +1,5 @@
 import { Company } from "./company.model";
+import { Position } from "./position.model";
 
 export class Employee {
     
@@ -6,8 +7,8 @@ export class Employee {
     names = '';
     tel = '';
     email = '';
-    position = '';
-    role = '';
+    position = new Position();
+    role = [''];
     acl = '';
     login = '';
     password = '';

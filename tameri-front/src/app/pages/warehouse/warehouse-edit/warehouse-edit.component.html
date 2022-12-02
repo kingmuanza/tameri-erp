@@ -2,39 +2,39 @@
     <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
             <li class="breadcrumb-item"><a>Home</a></li>
-            <li class="breadcrumb-item"><a [routerLink]="'/parameter/companytype'">Company Types</a></li>
-            <li class="breadcrumb-item active" *ngIf="isNewCompanytype">new</li>
-            <li class="breadcrumb-item active" *ngIf="!isNewCompanytype"><a [routerLink]="'parameter/companytype/edit/' + companytype.id">{{companytype.name}}</a></li>
-            <li class="breadcrumb-item active" *ngIf="!isNewCompanytype">Edit</li>
+            <li class="breadcrumb-item"><a [routerLink]="'/warehouse'">Warehouses</a></li>
+            <li class="breadcrumb-item active" *ngIf="isNewWarehouse">new</li>
+            <li class="breadcrumb-item active" *ngIf="!isNewWarehouse"><a [routerLink]="'parameter/warehouse/edit/' + warehouse.id">{{warehouse.name}}</a></li>
+            <li class="breadcrumb-item active" *ngIf="!isNewWarehouse">Edit</li>
         </ol>
     </nav>
-    <h1 *ngIf="!isNewCompanytype" class="titre">
+    <h1 *ngIf="!isNewWarehouse" class="titre">
         <button style="float: right;" (click)="delete()" class="btn btn-danger btn-error">
             Delete
-        </button> Modify companytype {{companytype.id}}
+        </button> Modify warehouse {{warehouse.id}}
     </h1>
-    <h1 *ngIf="isNewCompanytype" class="titre">Add a company type</h1>
+    <h1 *ngIf="isNewWarehouse" class="titre">Add a warehouse</h1>
 
     <div *ngIf="step === 1" class="first-step">
         <p>
-            Company type Infos
+            Warehouse Infos
         </p>
         <div class=" page-contenu ">
             <div class="row">
                 <div class="col-lg-6">
                     <div class="input-group mb-3">
                         <span class="input-group-text">Name</span>
-                        <input [(ngModel)]="companytype.name" type="text" class="form-control" [ngClass]="{'is-invalid': showErrors1 && (errorCompanytypeName)}">
+                        <input [(ngModel)]="warehouse.name" type="text" class="form-control" [ngClass]="{'is-invalid': showErrors1 && (errorWarehouseName)}">
                     </div>
                     <div class="errors" style="margin-bottom: 20px; color: red; margin-top: -5px; font-size: 0.9em;">
-                        <div *ngIf="errorCompanytypeName">
+                        <div *ngIf="errorWarehouseName">
                             Required field
                         </div>
                     </div>
 
                     <div class="input-group mb-3">
                         <span class="input-group-text">Description</span>
-                        <textarea [(ngModel)]="companytype.description" type="text" class="form-control"></textarea>
+                        <textarea [(ngModel)]="warehouse.description" type="text" class="form-control"></textarea>
                     </div>
                 </div>
             </div>

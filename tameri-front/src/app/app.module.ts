@@ -44,6 +44,9 @@ import { HomeComponent } from './pages/home/home.component';
 import { PosComponent } from './pages/pos/pos.component';
 import { ContactDisplayComponent } from './_components/contact-display/contact-display.component';
 import { RequiredComponent } from './_components/required/required.component';
+import { WarehouseListComponent } from './pages/warehouse/warehouse-list/warehouse-list.component';
+import { WarehouseEditComponent } from './pages/warehouse/warehouse-edit/warehouse-edit.component';
+import { WarehouseViewComponent } from './pages/warehouse/warehouse-view/warehouse-view.component';
 
 @NgModule({
   declarations: [
@@ -85,6 +88,9 @@ import { RequiredComponent } from './_components/required/required.component';
     PosComponent,
     ContactDisplayComponent,
     RequiredComponent,
+    WarehouseListComponent,
+    WarehouseEditComponent,
+    WarehouseViewComponent,
   ],
   imports: [
     BrowserModule,

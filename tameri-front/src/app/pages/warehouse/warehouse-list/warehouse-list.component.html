@@ -2,10 +2,10 @@
     <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
             <li class="breadcrumb-item"><a>Home</a></li>
-            <li class="breadcrumb-item active" aria-current="page">Employees</li>
+            <li class="breadcrumb-item active" aria-current="page">Warehouses</li>
         </ol>
     </nav>
-    <h1>Employees</h1>
+    <h1>Warehouses</h1>
     <p>
         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam maximus aliquam velit, sed malesuada ligula blandit vel.
     </p>
@@ -18,18 +18,14 @@
                         <tr>
                             <th>ID</th>
                             <th>Name</th>
-                            <th>Login</th>
-                            <th>Position</th>
-                            <th>Role</th>
+                            <th>Description</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr *ngFor="let employee of employees" (click)="edit(employee)">
-                            <td>{{employee.id}}</td>
-                            <td>{{employee.names}}</td>
-                            <td>{{employee.login}}</td>
-                            <td>{{employee.position.name}}</td>
-                            <td>{{employee.role}}</td>
+                        <tr *ngFor="let warehouse of warehouses" (click)="edit(warehouse)">
+                            <td>{{warehouse.id}}</td>
+                            <td>{{warehouse.name}}</td>
+                            <td>{{warehouse.description}}</td>
                         </tr>
                     </tbody>
                 </table>

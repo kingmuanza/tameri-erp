@@ -5,7 +5,7 @@ export class User {
     name: string = '';
     login: string = '';
     password: string = '';
-    role = '';
+    role = [''];
     company = new Company();
 
     constructor(company: Company) {

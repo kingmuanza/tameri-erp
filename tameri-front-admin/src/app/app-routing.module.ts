@@ -13,6 +13,8 @@ import { CompanytypeListComponent } from './pages/companytype/companytype-list/c
 import { CountryEditComponent } from './pages/country/country-edit/country-edit.component';
 import { CountryListComponent } from './pages/country/country-list/country-list.component';
 import { HomeComponent } from './pages/home/home.component';
+import { PositionEditComponent } from './pages/position/position-edit/position-edit.component';
+import { PositionListComponent } from './pages/position/position-list/position-list.component';
 import { PricingEditComponent } from './pages/pricing/pricing-edit/pricing-edit.component';
 import { PricingListComponent } from './pages/pricing/pricing-list/pricing-list.component';
 import { PricingViewComponent } from './pages/pricing/pricing-view/pricing-view.component';
@@ -46,6 +48,10 @@ const routes: Routes = [
   { path: 'parameter/country', component: CountryListComponent },
   { path: 'parameter/country/edit', component: CountryEditComponent },
   { path: 'parameter/country/edit/:id', component:CountryEditComponent },
+
+  { path: 'parameter/position', component: PositionListComponent },
+  { path: 'parameter/position/edit', component: PositionEditComponent },
+  { path: 'parameter/position/edit/:id', component:PositionEditComponent },
 
   { path: '**', redirectTo:'dashboard' },
 

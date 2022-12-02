@@ -3,6 +3,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { NotifierService } from 'angular-notifier';
 import { Company } from 'src/app/_models/company.model';
 import { Employee } from 'src/app/_models/employee.model';
+import { Position } from 'src/app/_models/position.model';
 import { User } from 'src/app/_models/user.model';
 import { AuthenticationService } from 'src/app/_services/authentication.service';
 import { CrudService } from 'src/app/_services/crud.service';
@@ -21,6 +22,7 @@ export class EmployeeEditComponent implements OnInit {
   showError = false;
   password = '';
   telAlreadyUse = false;
+  positions = new Array<Position>();
 
   constructor(
     private router: Router,
@@ -28,6 +30,7 @@ export class EmployeeEditComponent implements OnInit {
     private notifierService: NotifierService,
     private authService: AuthenticationService,
     private route: ActivatedRoute,
+    private positionService: CrudService<Position>,
     private employeeService: CrudService<Employee>
   ) {
     this.company = this.authService.user.company;
@@ -35,6 +38,9 @@ export class EmployeeEditComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.positionService.getAll('position').then((data) => {
+      this.positions = data;
+    });
     this.getCompany(this.company);
     this.company = this.authService.user.company;
     this.route.paramMap.subscribe((paramMap) => {
@@ -44,6 +50,12 @@ export class EmployeeEditComponent implements OnInit {
           this.employee = data;
           this.isNewEmployee = false;
           this.password = this.employee.password;
+          
+          this.positions.forEach((p) => {
+            if (this.employee.position && p.id === this.employee.position.id) {
+              this.employee.position = p;
+            }
+          });
         });
       }
     });

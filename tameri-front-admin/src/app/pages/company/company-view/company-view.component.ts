@@ -132,7 +132,7 @@ export class CompanyViewComponent implements OnInit {
     const user = new User(this.company);
     user.login = this.login;
     user.password = this.password;
-    user.role = 'ADMIN';
+    user.role = ['ADMIN'];
 
     this.authService.createUser(user).then(() => {
       this.notifierService.notify('success', "User create successfully");
@@ -146,7 +146,7 @@ export class CompanyViewComponent implements OnInit {
     const user = new User(this.company);
     user.login = this.user?  this.user.login: 'admin';
     user.password = this.password;
-    user.role = 'ADMIN';
+    user.role = ['ADMIN'];
     user.company = this.company;
 
     this.authService.updateUser(user).then(() => {
