@@ -1,12 +1,12 @@
 <ul class="nav nav-tabs">
     <li class="nav-item">
-        <a class="nav-link active" aria-current="page">Restau</a>
+        <a class="nav-link active" aria-current="page">Shop</a>
     </li>
     <li class="nav-item">
         <a class="nav-link disabled">Bar</a>
     </li>
     <li class="nav-item">
-        <a class="nav-link disabled">Shop</a>
+        <a class="nav-link disabled">Restau</a>
     </li>
     <li class="nav-item">
         <a class="nav-link disabled">Service</a>
@@ -19,23 +19,27 @@
     <div class="row">
         <div class="col-lg-2">
             <div class="hauteur">
-                <div>
-                    Liste des factures
+                <div class="mb-3">
+                    <button (click)="newBill()" class="btn btn-primary" style="width: 100%;">
+                        New bill
+                    </button>
                 </div>
-                <div *ngFor="let bill of bills">
-                    BILL {{bill.code}}
-                </div>
+                <ul class="list-group list-group-flush">
+                    <li (click)="viewBill(bill)" *ngFor="let bill of bills" class="list-group-item">
+                        BILL {{bill.code}}
+                    </li>
+                </ul>
             </div>
         </div>
         <div class="col-lg-10">
             <div class="card shadow-lg p-2">
                 <div class="card-body">
-                    <div class="mb-2">
+                    <div class="mb-3">
                         <div>
                             BILL {{code}}
                         </div>
                     </div>
-                    <div class="row">
+                    <div *ngIf="!isView" class="row">
                         <div class="col-lg-6">
                             <div class="input-group mb-3">
                                 <span class="input-group-text">Product</span>
@@ -60,14 +64,14 @@
                     </div>
                     <div>
                         <div>
-                            <table class="row-border cell-border hover table">
+                            <table class="row-border cell-border hover table table-bordered">
                                 <thead>
                                     <tr>
                                         <th>Product</th>
                                         <th style="text-align: right;">Price</th>
                                         <th style="text-align: right;">Quantity</th>
                                         <th style="text-align: right;">Total</th>
-                                        <th style="text-align: right;">Actions</th>
+                                        <th *ngIf="!isView" style="text-align: right;">Actions</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -76,7 +80,7 @@
                                         <td style="text-align: right;">{{s.productpack.price | currency:'':''}}</td>
                                         <td style="text-align: right;">{{s.quantity | number}}</td>
                                         <td style="text-align: right;">{{getTotal(s) | currency:'':''}}</td>
-                                        <td style="text-align: right;">
+                                        <td *ngIf="!isView" style="text-align: right;">
                                             <button (click)="delete(s)" class="btn btn-danger btn-sm">Delete</button>
                                         </td>
                                     </tr>
@@ -91,9 +95,11 @@
                                                 {{TOTAL | currency:'':''}}
                                             </b>
                                         </td>
-                                        <td style="text-align: right;">
-                                            <ng-container *ngIf="salelines.length > 0">
-                                                <button (click)="deleteAll()" class="btn btn-danger btn-sm">Delete all</button>
+                                        <td *ngIf="!isView" style="text-align: right;">
+                                            <ng-container>
+                                                <ng-container *ngIf="salelines.length > 0">
+                                                    <button (click)="deleteAll()" class="btn btn-danger btn-sm">Delete all</button>
+                                                </ng-container>
                                             </ng-container>
                                         </td>
                                     </tr>
@@ -101,11 +107,13 @@
                             </table>
 
                         </div>
-                        <div *ngIf="salelines.length > 0" class="mt-4">
-                            <div class="mb-3">
-                                <button (click)="save()" class="btn btn-primary">Save</button>
+                        <ng-container *ngIf="!isView">
+                            <div *ngIf="salelines.length > 0" class="mt-4">
+                                <div class="mb-3">
+                                    <button (click)="save()" class="btn btn-primary">Save</button>
+                                </div>
                             </div>
-                        </div>
+                        </ng-container>
                     </div>
                 </div>
             </div>

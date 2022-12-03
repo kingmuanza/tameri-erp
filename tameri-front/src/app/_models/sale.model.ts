@@ -7,4 +7,5 @@ export class Sale {
     code = '';
     salelines = new Array<Saleline>();
     company = new Company();
+    good = false;
 }

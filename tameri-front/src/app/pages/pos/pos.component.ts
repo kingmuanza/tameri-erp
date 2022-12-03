@@ -25,6 +25,8 @@ export class PosComponent implements OnInit {
 
   code = '';
 
+  isView = false;
+
   constructor(
     private billService: CrudService<Sale>,
     private productService: CrudService<Product>,
@@ -60,6 +62,7 @@ export class PosComponent implements OnInit {
       this.bills = data.filter((d) => {
         return d.company && d.company.id === this.company.id;
       });
+      this.bills = this.bills.reverse();
       this.newBill();
     }).catch((e) => {
     });
@@ -67,6 +70,8 @@ export class PosComponent implements OnInit {
 
   newBill() {
     this.code = this.generateCode();
+    this.salelines = new Array<Saleline>();
+    this.isView = false;
   }
 
   getTotal(saleline: Saleline): number {
@@ -90,6 +95,7 @@ export class PosComponent implements OnInit {
     const sale = new Sale();
     sale.salelines = this.salelines;
     sale.company = this.company;
+    sale.good = true;
     console.log('sale');
     console.log(sale);
     sale.code = this.generateCode();
@@ -126,6 +132,12 @@ export class PosComponent implements OnInit {
     }
 
     return nombre;
+  }
+
+  viewBill(bill: Sale) {
+    this.code = bill.code;
+    this.salelines = bill.salelines;
+    this.isView = true;
   }
 
 }
