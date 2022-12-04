@@ -44,7 +44,7 @@
                         <div class="col-lg-6">
                             <div class="input-group mb-3">
                                 <span class="input-group-text">Product</span>
-                                <select [(ngModel)]="saleline.productpack" type="text" class="form-control">
+                                <select (ngModelChange)="verifyProductDispo($event)" [(ngModel)]="saleline.productpack" type="text" class="form-control">
                                     <option [ngValue]="p" *ngFor="let p of productpacks">
                                         {{p.name}}
                                     </option>
@@ -55,11 +55,14 @@
                             <div class="input-group mb-3">
                                 <span class="input-group-text">Quantity</span>
                                 <input [(ngModel)]="saleline.quantity" type="number" class="form-control">
+                                <button class="btn btn-primary">
+                                    {{quantityCurrent}}
+                                </button>
                             </div>
                         </div>
                         <div class="col-lg-2">
                             <div class="input-group mb-3">
-                                <button (click)="add(saleline)" style="width: 100%;" class="btn btn-primary">Add</button>
+                                <button [disabled]="quantityCurrent < saleline.quantity" (click)="add(saleline)" style="width: 100%;" class="btn btn-primary">Add</button>
                             </div>
                         </div>
                     </div>

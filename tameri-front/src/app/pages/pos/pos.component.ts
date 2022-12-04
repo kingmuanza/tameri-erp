@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Client } from 'src/app/_models/client.model';
 import { Company } from 'src/app/_models/company.model';
 import { Product } from 'src/app/_models/product.model';
+import { Productitem } from 'src/app/_models/productitem.model';
 import { Productpack } from 'src/app/_models/productpack.model';
 import { Sale } from 'src/app/_models/sale.model';
 import { Saleline } from 'src/app/_models/saleline.model';
@@ -35,12 +36,16 @@ export class PosComponent implements OnInit {
 
   client = new Client();
 
+  quantityCurrent = 0;
+
   constructor(
     private billService: CrudService<Sale>,
     private productService: CrudService<Product>,
     private productpackService: CrudService<Productpack>,
     private authService: AuthenticationService,
     private clientService: CrudService<Client>,
+    private salelineService: CrudService<Saleline>,
+    private productitemService: CrudService<Productitem>,
   ) {
     this.company = this.authService.user.company;
   }
@@ -109,7 +114,7 @@ export class PosComponent implements OnInit {
   save(paid?: boolean) {
     const sale = new Sale(this.company);
     sale.salelines = this.salelines;
-    sale.good = paid ? paid: false;
+    sale.good = paid ? paid : false;
     sale.client = this.client;
     console.log('sale');
     console.log(sale);
@@ -120,9 +125,9 @@ export class PosComponent implements OnInit {
     });
   }
 
-  modify(bill: Sale, paid?: boolean ) {
+  modify(bill: Sale, paid?: boolean) {
     bill.salelines = this.salelines;
-    bill.good = paid ? paid: false;
+    bill.good = paid ? paid : false;
     this.billService.modify('bill', bill.id, bill).then((data) => {
       window.location.reload();
     }).catch((e) => {
@@ -189,7 +194,59 @@ export class PosComponent implements OnInit {
         }
       }
     });
+  }
 
+  verifyProductDispo(ev: any) {
+    console.log('ev');
+    console.log(ev);
+    this.getSalelines(ev);
+  }
+
+  getSalelines(productpack: Productpack) {
+    let product = productpack.product;
+    console.log('getSalelines');
+    console.log('product.id');
+    console.log(product.id);
+    this.salelineService.getAll('saleline').then((salelines) => {
+      console.log(salelines.length);
+      salelines = salelines.filter((d) => {
+        return d.productpack.product.id === product.id;
+      });
+      const totalSales = this.calculTotalSales(salelines);
+      console.log('totalSales : ' + totalSales);
+      this.getProductItems(product, totalSales, productpack.quantity);
+    });
+  }
+
+  getProductItems(product: Product, totalSales: number, quantity: number) {
+    console.log('getProductItems');
+    this.productitemService.getAll('productitem').then((data) => {
+      let productitems = data.filter((d) => {
+        const isCompany = d.company && d.company.id === this.company.id;
+        const isProduit = d.product && d.product.id === product.id;
+        return isCompany && isProduit;
+      });
+      const totalItems = this.calculTotalItems(productitems);
+      this.quantityCurrent = Math.floor((totalItems - totalSales)/quantity);
+
+    }).catch((e) => {
+    });
+  }
+
+  calculTotalSales(salelines: Array<Saleline>) {
+    let total = 0;
+    salelines.forEach((s) => {
+      total += s.quantity;
+    });
+    return total;
+  }
+
+  calculTotalItems(productitems = new Array<Productitem>()) {
+    let total = 0;
+    productitems.forEach((s) => {
+      total += s.quantity;
+    });
+    return total;
   }
 
 }
