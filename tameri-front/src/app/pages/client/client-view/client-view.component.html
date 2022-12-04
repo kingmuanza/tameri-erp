@@ -1,0 +1,41 @@
+<div class="container-fluid" style="margin-top: 16px;">
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a>Home</a></li>
+            <li class="breadcrumb-item"><a [routerLink]="'/client'">Clients</a></li>
+            <li class="breadcrumb-item active" *ngIf="!isNewClient">{{client.name}}</li>
+        </ol>
+    </nav>
+    <a [routerLink]="'/client/edit/' + client.id" style="float: right;">Edit</a>
+    <h1 *ngIf="!isNewClient" class="titre">
+        {{client.firstname}} {{client.name}}
+    </h1>
+    <p>
+        Liste des achats affectués
+    </p>
+    <div class=" page-contenu ">
+        <div class="card shadow-lg">
+            <div class="card-body">
+                <table datatable [dtOptions]="dtOptions " [dtTrigger]="dtTrigger " class="row-border hover ">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Name</th>
+                            <th>Type</th>
+                            <th>Owner</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let sale of companies" (click)="viewSale(sale)">
+                            <td>{{sale.id}}</td>
+                            <td>{{sale.name}}</td>
+                            <td>{{sale.type}}</td>
+                            <td>{{sale.owner.names}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+            </div>
+        </div>
+    </div>
+</div>

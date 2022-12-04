@@ -1,5 +1,8 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { ClientEditComponent } from './pages/client/client-edit/client-edit.component';
+import { ClientListComponent } from './pages/client/client-list/client-list.component';
+import { ClientViewComponent } from './pages/client/client-view/client-view.component';
 import { EmployeeEditComponent } from './pages/employee/employee-edit/employee-edit.component';
 import { EmployeeListComponent } from './pages/employee/employee-list/employee-list.component';
 import { EmployeeViewComponent } from './pages/employee/employee-view/employee-view.component';
@@ -43,6 +46,11 @@ const routes: Routes = [
   { path: 'home', component: HomeComponent },
   { path: 'pos', component: PosComponent },
 
+  { path: 'client', component: ClientListComponent },
+  { path: 'client/edit', component: ClientEditComponent },
+  { path: 'client/edit/:id', component: ClientEditComponent },
+  { path: 'client/view/:id', component: ClientViewComponent },
+  
   { path: 'employee', component: EmployeeListComponent },
   { path: 'employee/edit', component: EmployeeEditComponent },
   { path: 'employee/edit/:id', component: EmployeeEditComponent },

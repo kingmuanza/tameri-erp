@@ -9,6 +9,8 @@ export class Product {
     content = '';
     type = '';
     price = 0;
+    warning = 0;
+    now = 0;
     resources = new Array<{
         resource: Resource,
         quantity: number

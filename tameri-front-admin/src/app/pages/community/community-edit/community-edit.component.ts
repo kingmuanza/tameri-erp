@@ -16,7 +16,6 @@ export class CommunityEditComponent implements OnInit {
   isNewCommunity = true;
   communitytypes = new Array<Communitytype>();
 
-
   constructor(
     private router: Router,
     private notifierService: NotifierService,

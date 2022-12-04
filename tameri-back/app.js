@@ -25,6 +25,8 @@ const countryRoutes = require('./_routes/country.route');
 const positionRoutes = require('./_routes/position.route');
 const warehouseRoutes = require('./_routes/warehouse.route');
 const billRoutes = require('./_routes/bill.route');
+const clientRoutes = require('./_routes/client.route');
+const salelineRoutes = require('./_routes/saleline.route');
 
 const app = express();
 
@@ -46,6 +48,7 @@ app.use('/images', express.static(path.join(__dirname, 'images')));
 app.use('/test', testRoutes);
 app.use('/auth', authRoutes);
 app.use('/bill', billRoutes);
+app.use('/client', clientRoutes);
 app.use('/company', companyRoutes);
 app.use('/companytype', companytypeRoutes);
 app.use('/community', communityRoutes);
@@ -65,5 +68,6 @@ app.use('/resourcetype', resourcetypeRoutes);
 app.use('/supplier', supplierRoutes);
 app.use('/purchase', purchaseRoutes);
 app.use('/warehouse', warehouseRoutes);
+app.use('/saleline', salelineRoutes);
 
 module.exports = app;

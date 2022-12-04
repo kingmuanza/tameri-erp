@@ -4,7 +4,9 @@ import { NotifierService } from 'angular-notifier';
 import { Community } from 'src/app/_models/community.model';
 import { Company } from 'src/app/_models/company.model';
 import { Product } from 'src/app/_models/product.model';
+import { Productitem } from 'src/app/_models/productitem.model';
 import { Resource } from 'src/app/_models/resource.model';
+import { Saleline } from 'src/app/_models/saleline.model';
 import { AuthenticationService } from 'src/app/_services/authentication.service';
 import { CrudService } from 'src/app/_services/crud.service';
 
@@ -20,7 +22,9 @@ export class ProductViewComponent implements OnInit {
   product = new Product();
   isNewProduct = true;
 
+  salelines = new Array<Saleline>();
   resources = new Array<Resource>();
+  productitems = new Array<Productitem>();
   resource = new Resource();
   quantity = 1;
 
@@ -34,10 +38,13 @@ export class ProductViewComponent implements OnInit {
   errorSame = false;
   errorSize = false;
   showFormUser = false;
-  
+
   company = new Company();
-  
+
   login = '';
+
+  totalSales = 0;
+  totalItems = 0;
 
   constructor(
     private router: Router,
@@ -46,6 +53,8 @@ export class ProductViewComponent implements OnInit {
     private route: ActivatedRoute,
     private resourceService: CrudService<Resource>,
     private companyService: CrudService<Company>,
+    private salelineService: CrudService<Saleline>,
+    private productitemService: CrudService<Productitem>,
     private productService: CrudService<Product>
   ) {
     this.company = this.authService.user.company;
@@ -60,13 +69,39 @@ export class ProductViewComponent implements OnInit {
         this.productService.get('product', id).then((data) => {
           this.product = data;
           this.isNewProduct = false;
+          this.getSalelines();
           this.resourceService.getAll('resource').then((resources) => {
             this.resources = resources.filter((d) => {
               return d.company && d.company.id === this.company.id;
             });
-          })
+          });
         });
       }
+    });
+  }
+
+  getSalelines() {
+    this.salelineService.getAll('saleline').then((salelines) => {
+      this.salelines = salelines.filter((d) => {
+        return d.productpack.product.id === this.product.id;
+      });      
+      this.totalSales = this.calculTotalSales(this.salelines);
+      this.getProductItems();
+    });
+  }
+
+  getProductItems() {
+    this.productitemService.getAll('productitem').then((data) => {
+      this.productitems = data.filter((d) => {
+        const isCompany = d.company && d.company.id === this.company.id;
+        const isProduit = d.product && d.product.id === this.product.id;
+        return isCompany && isProduit;
+      });
+      this.totalItems = this.calculTotalItems(this.productitems);
+      this.product.now = this.totalItems - this.totalSales;
+      this.saveSilent();
+
+    }).catch((e)=> {
     });
   }
 
@@ -92,6 +127,12 @@ export class ProductViewComponent implements OnInit {
     this.productService.modify('product', this.product.id, this.product).then(() => {
       this.notifierService.notify('success', "saved successfully");
       // this.router.navigate(['product', 'view', this.product.id]);
+    });
+  }
+
+  saveSilent() {
+    this.productService.modify('product', this.product.id, this.product).then(() => {
+      
     });
   }
 
@@ -134,6 +175,22 @@ export class ProductViewComponent implements OnInit {
       this.product.resources = newResources;
       this.save();
     }
+  }
+
+  calculTotalSales(salelines: Array<Saleline>) {
+    let total = 0;
+    salelines.forEach((s) => {
+      total += s.quantity;
+    });
+    return total;
+  }
+
+  calculTotalItems(productitems = new Array<Productitem>()) {
+    let total = 0;
+    productitems.forEach((s) => {
+      total += s.quantity;
+    });
+    return total;
   }
 
 }

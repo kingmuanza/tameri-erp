@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Client } from 'src/app/_models/client.model';
 import { Company } from 'src/app/_models/company.model';
 import { Product } from 'src/app/_models/product.model';
 import { Productpack } from 'src/app/_models/productpack.model';
@@ -15,6 +16,8 @@ import { CrudService } from 'src/app/_services/crud.service';
 export class PosComponent implements OnInit {
 
   salelines = new Array<Saleline>();
+  clients = new Array<Client>();
+
   bills = new Array<Sale>();
   productpacks = new Array<Productpack>();
   company = new Company();
@@ -26,17 +29,27 @@ export class PosComponent implements OnInit {
   code = '';
 
   isView = false;
+  isClient = false;
+
+  billUse = new Sale(new Company());
+
+  client = new Client();
 
   constructor(
     private billService: CrudService<Sale>,
     private productService: CrudService<Product>,
     private productpackService: CrudService<Productpack>,
     private authService: AuthenticationService,
+    private clientService: CrudService<Client>,
   ) {
     this.company = this.authService.user.company;
   }
 
   ngOnInit(): void {
+
+    this.clientService.getAll('client').then((data) => {
+      this.clients = data;
+    });
     this.productService.getAll('product').then((data) => {
       const products = data.filter((d) => {
         return d.company && d.company.id === this.company.id;
@@ -72,6 +85,8 @@ export class PosComponent implements OnInit {
     this.code = this.generateCode();
     this.salelines = new Array<Saleline>();
     this.isView = false;
+    this.updateTotal();
+
   }
 
   getTotal(saleline: Saleline): number {
@@ -91,15 +106,32 @@ export class PosComponent implements OnInit {
     });
   }
 
-  save() {
-    const sale = new Sale();
+  save(paid?: boolean) {
+    const sale = new Sale(this.company);
     sale.salelines = this.salelines;
-    sale.company = this.company;
-    sale.good = true;
+    sale.good = paid ? paid: false;
+    sale.client = this.client;
     console.log('sale');
     console.log(sale);
     sale.code = this.generateCode();
     this.billService.create('bill', sale).then((data) => {
+      window.location.reload();
+    }).catch((e) => {
+    });
+  }
+
+  modify(bill: Sale, paid?: boolean ) {
+    bill.salelines = this.salelines;
+    bill.good = paid ? paid: false;
+    this.billService.modify('bill', bill.id, bill).then((data) => {
+      window.location.reload();
+    }).catch((e) => {
+    });
+  }
+
+  setPaid(bill: Sale) {
+    bill.good = true;
+    this.billService.modify('bill', bill.id, bill).then((data) => {
       window.location.reload();
     }).catch((e) => {
     });
@@ -135,9 +167,29 @@ export class PosComponent implements OnInit {
   }
 
   viewBill(bill: Sale) {
+    this.billUse = bill;
+    this.isClient = false;
     this.code = bill.code;
     this.salelines = bill.salelines;
     this.isView = true;
+
+    console.log('bill.client');
+    console.log(bill.client);
+
+    this.updateTotal();
+
+    this.clients.forEach((c) => {
+      if (bill.client) {
+        if (c.id === bill.client.id) {
+          this.client = bill.client;
+
+          console.log('trouvé');
+          console.log(this.client);
+          this.isClient = true;
+        }
+      }
+    });
+
   }
 
 }

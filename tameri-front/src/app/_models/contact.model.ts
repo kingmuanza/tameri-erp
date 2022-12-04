@@ -5,6 +5,8 @@ export class Contact {
     tel = '';
     address = '';
     email = '';
+    city = '';
+    street = '';
     othersTels = new Array<string>();
     othersEmail = new Array<string>();
     country = new Country();

@@ -5,5 +5,7 @@ export class Saleline {
     id: string = 'SALELINE' + new Date().getTime();
     productpack = new Productpack();
     quantity = 1;
+    saved = false;
+    idsale = '';
 
 }

@@ -47,6 +47,9 @@ import { RequiredComponent } from './_components/required/required.component';
 import { WarehouseListComponent } from './pages/warehouse/warehouse-list/warehouse-list.component';
 import { WarehouseEditComponent } from './pages/warehouse/warehouse-edit/warehouse-edit.component';
 import { WarehouseViewComponent } from './pages/warehouse/warehouse-view/warehouse-view.component';
+import { ClientListComponent } from './pages/client/client-list/client-list.component';
+import { ClientEditComponent } from './pages/client/client-edit/client-edit.component';
+import { ClientViewComponent } from './pages/client/client-view/client-view.component';
 
 @NgModule({
   declarations: [
@@ -91,6 +94,9 @@ import { WarehouseViewComponent } from './pages/warehouse/warehouse-view/warehou
     WarehouseListComponent,
     WarehouseEditComponent,
     WarehouseViewComponent,
+    ClientListComponent,
+    ClientEditComponent,
+    ClientViewComponent,
   ],
   imports: [
     BrowserModule,
