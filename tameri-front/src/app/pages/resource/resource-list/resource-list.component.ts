@@ -4,6 +4,8 @@ import { DataTableDirective } from 'angular-datatables';
 import { Subject } from 'rxjs';
 import { DatatablesOptions } from 'src/app/_data/datatable.option';
 import { Company } from 'src/app/_models/company.model';
+import { Productitem } from 'src/app/_models/productitem.model';
+import { Purchase } from 'src/app/_models/purchase.model';
 import { Resource } from 'src/app/_models/resource.model';
 import { AuthenticationService } from 'src/app/_services/authentication.service';
 import { CrudService } from 'src/app/_services/crud.service';
@@ -24,10 +26,15 @@ export class ResourceListComponent implements OnInit {
   resources = new Array<Resource>();
   company = new Company();
 
+  purchases = new Array<Purchase>();
+  productitems = new Array<Productitem>();
+
   constructor(
     private router: Router,
     private resourceService: CrudService<Resource>,
     private authService: AuthenticationService,
+    private productitemService: CrudService<Productitem>,
+    private purchaseService: CrudService<Purchase>,
   ) {
     this.company = this.authService.user.company;
   }
@@ -47,7 +54,7 @@ export class ResourceListComponent implements OnInit {
     return dtOptions;
   }
 
-  edit(resource?:Resource) {
+  edit(resource?: Resource) {
     if (resource) {
       this.router.navigate(['resource', 'view', resource.id]);
     } else {
@@ -56,19 +63,64 @@ export class ResourceListComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.dtOptions = this.initNouveau();
-    this.resourceService.getAll('resource').then((data) => {
-      this.resources = data.filter((d) => {
+
+
+    this.productitemService.getAll('productitem').then((data) => {
+      this.productitems = data.filter((d) => {
         return d.company && d.company.id === this.company.id;
       });
-      this.dtTrigger.next('');
-    }).catch((e)=> {
-      this.dtTrigger.next('');
+      this.purchaseService.getAll('purchase').then((purchases) => {
+        this.purchases = purchases.filter((d) => {
+          return d.company && d.company.id === this.company.id;
+        });
+
+        this.dtOptions = this.initNouveau();
+        this.resourceService.getAll('resource').then((data) => {
+          this.resources = data.filter((d) => {
+            return d.company && d.company.id === this.company.id;
+          });
+          this.dtTrigger.next('');
+        }).catch((e) => {
+          this.dtTrigger.next('');
+        });
+      });
     });
   }
+
+  getResourceItems(resource: Resource) {
+    const purchases = this.purchases.filter((d) => {
+      return d.resource?.id === resource.id;
+    });
+    const totalPurchases = this.calculTotalPurchases(purchases);
+    return totalPurchases
+  }
+
+  getProductItems(resource: Resource) {
+    let totalItems = 0;    
+    this.productitems.forEach((d) => {
+      const product = d.product;
+      if (product) {
+        product.resources.forEach((r) => {
+          if (r.resource.id === resource.id) {
+            totalItems += r.quantity;
+          }
+        });
+      }
+    });
+    return totalItems;
+  }
+
+  calculTotalPurchases(purchases: Array<Purchase>) {
+    let total = 0;
+    purchases.forEach((s) => {
+      total += s.quantity;
+    });
+    return total;
+  }
+
 
   ngOnDestroy(): void {
     this.dtTrigger.unsubscribe();
   }
-  
+
 }

@@ -3,6 +3,8 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { NotifierService } from 'angular-notifier';
 import { Community } from 'src/app/_models/community.model';
 import { Company } from 'src/app/_models/company.model';
+import { Productitem } from 'src/app/_models/productitem.model';
+import { Purchase } from 'src/app/_models/purchase.model';
 import { Resource } from 'src/app/_models/resource.model';
 import { AuthenticationService } from 'src/app/_services/authentication.service';
 import { CrudService } from 'src/app/_services/crud.service';
@@ -34,11 +36,20 @@ export class ResourceViewComponent implements OnInit {
   company = new Company();
   login = '';
 
+  
+  totalPurchases = 0;
+  totalItems = 0;
+
+  purchases = new Array<Purchase>();
+  productitems = new Array<Productitem>();
+
   constructor(
     private router: Router,
     private notifierService: NotifierService,
     private authService: AuthenticationService,
     private route: ActivatedRoute,
+    private productitemService: CrudService<Productitem>,
+    private purchaseService: CrudService<Purchase>,
     private companyService: CrudService<Company>,
     private communityService: CrudService<Community>,
     private resourceService: CrudService<Resource>
@@ -55,11 +66,51 @@ export class ResourceViewComponent implements OnInit {
         this.resourceService.get('resource', id).then((data) => {
           this.resource = data;
           this.isNewResource = false;
-          
+          this.getResourceItems();
+          this.getProductItems();
         });
       }
     });
   }
+
+  getResourceItems() {
+    this.purchaseService.getAll('purchase').then((purchases) => {
+      this.purchases = purchases.filter((d) => {
+        return d.resource?.id === this.resource.id;
+      });      
+      this.totalPurchases = this.calculTotalPurchases(this.purchases);
+      // this.getProductItems();
+    });
+  }
+
+  getProductItems() {
+    this.totalItems = 0;
+    this.productitemService.getAll('productitem').then((data) => {
+      this.productitems = data.filter((d) => {        
+        return d.company && d.company.id === this.company.id;
+      });
+      this.productitems.forEach((d) => {
+        const product = d.product;
+        if (product) {
+          product.resources.forEach((resource) => {
+            if (resource.resource.id === this.resource.id) {
+              this.totalItems += resource.quantity;
+            }
+          });
+        }
+      });
+    }).catch((e)=> {
+    });
+  }
+
+  calculTotalPurchases(purchases: Array<Purchase>) {
+    let total = 0;
+    purchases.forEach((s) => {
+      total += s.quantity;
+    });
+    return total;
+  }
+
 
   getCompany(company: Company) {
     this.companyService.get('company', company.id).then((data) => {

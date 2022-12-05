@@ -14,6 +14,40 @@
         Company : {{resource.company.name}}
         <br>
     </p>
+    <div class="stats mb-4">
+        <div class="row">
+            <div class="col-lg-4">
+                <div class="text-bg-primary text-center p-3">
+                    <h1>
+                        {{totalPurchases - totalItems}} {{resource.unit }}
+                    </h1>
+                    <div>
+                        Now
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <div class="text-bg-primary text-center p-3">
+                    <h1>
+                        {{totalPurchases}} {{resource.unit }}
+                    </h1>
+                    <div>
+                        Resource items
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <div class="text-bg-primary text-center p-3">
+                    <h1>
+                        {{totalItems}} {{resource.unit }}
+                    </h1>
+                    <div>
+                        Used
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
     <div class="row">
         <div class="col-lg-8">
             <div class="first-step card shadow-sm">

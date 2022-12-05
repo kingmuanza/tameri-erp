@@ -21,6 +21,9 @@
                             <th>Category</th>
                             <th>Unit</th>
                             <th style="text-align: right;">Price</th>
+                            <th style="text-align: right;">Prod.</th>
+                            <th style="text-align: right;">Used</th>
+                            <th style="text-align: right;">Now</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -29,7 +32,14 @@
                             <td>{{resource.name}}</td>
                             <td>{{resource.category}}</td>
                             <td>{{resource.unit}}</td>
-                            <td style="text-align: right;">{{resource.price}}</td>
+                            <td style="text-align: right;">{{resource.price | currency:'':''}}</td>
+                            <td style="text-align: right;">{{getResourceItems(resource) | number}}</td>
+                            <td style="text-align: right;">{{getProductItems(resource) | number}}</td>
+                            <td style="text-align: right;">
+                                <span class="badge text-bg-primary">
+                                    {{getResourceItems(resource) - getProductItems(resource) | number}}
+                                </span>
+                            </td>
                         </tr>
                     </tbody>
                 </table>
