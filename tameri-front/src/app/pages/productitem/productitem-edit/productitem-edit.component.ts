@@ -8,6 +8,8 @@ import { Productpack } from 'src/app/_models/productpack.model';
 import { Supplier } from 'src/app/_models/supplier.model';
 import { AuthenticationService } from 'src/app/_services/authentication.service';
 import { CrudService } from 'src/app/_services/crud.service';
+import { Purchase } from 'src/app/_models/purchase.model';
+import { Resource } from 'src/app/_models/resource.model';
 
 @Component({
   selector: 'app-productitem-edit',
@@ -24,6 +26,10 @@ export class ProductitemEditComponent implements OnInit {
   suppliers = new Array<Supplier>();
   products = new Array<any>();
   productpacks = new Array<any>();
+  purchases = new Array<Purchase>();
+  purchasesProduct = new Array<Purchase>();
+
+  quantityMax = Number.MAX_VALUE;
 
   type = 'product';
 
@@ -36,6 +42,7 @@ export class ProductitemEditComponent implements OnInit {
     private companyService: CrudService<Company>,
     private supplierService: CrudService<Supplier>,
     private productService: CrudService<Product>,
+    private purchaseService: CrudService<Purchase>,
     private productitemService: CrudService<Productitem>
   ) {
     this.company = this.authService.user.company;
@@ -44,6 +51,7 @@ export class ProductitemEditComponent implements OnInit {
 
   ngOnInit(): void {
     this.getCompany(this.company);
+    this.getResourcesItems();
     this.productpackService.getAll('productpack').then((data) => {
       this.productpacks = data.filter((d) => {
         return d.company && d.company.id === this.company.id;
@@ -116,9 +124,45 @@ export class ProductitemEditComponent implements OnInit {
     }
   }
 
-  setPrix() {
+  getResourcesItems() {
+    this.purchaseService.getAll('purchase').then((data) => {
+      this.purchases = data.filter((d) => {
+        return d.company && d.company.id === this.company.id;
+      });
+    }).catch((e) => {
+    });
+  }
+
+  getResourcesItemsOfProduct(product: Product) {
+    this.quantityMax = Number.MAX_VALUE;
+    this.purchasesProduct = new Array<Purchase>();
+    product.resources.forEach((r) => {
+      this.purchases.forEach((resourceItem) => {
+        if (resourceItem.resource && resourceItem.resource.id === r.resource.id) {
+          this.purchasesProduct.push(resourceItem);
+        }
+      });
+    });
+    product.resources.forEach((r) => {
+      const q = this.getTotalResourceItemByResource(r.resource) / r.quantity;
+      this.quantityMax = this.quantityMax > q ? q : this.quantityMax;
+    });
+  }
+
+  getTotalResourceItemByResource(r: Resource) {
+    let total = 0;
+    this.purchasesProduct.forEach((resourceItem) => {
+      if (resourceItem.resource && resourceItem.resource.id === r.id) {
+        total += resourceItem.quantity;
+      }
+    });
+    return total;
+  }
+
+  setInfosOfProduct() {
     setTimeout(() => {
       if (this.productitem.product) {
+        this.getResourcesItemsOfProduct(this.productitem.product);
         this.productitem.price = this.productitem.product.price * this.productitem.quantity;
       }
       if (this.productitem.productpack) {

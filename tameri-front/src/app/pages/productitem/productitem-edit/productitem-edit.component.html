@@ -42,15 +42,27 @@
                 <div class="col-lg-6" *ngIf=" type === 'product' ">
                     <div class="input-group mb-3">
                         <span class="input-group-text">Product</span>
-                        <select (ngModelChange)="setPrix()" [(ngModel)]="productitem.product" type="text" class="form-control">
+                        <select (ngModelChange)="setInfosOfProduct()" [(ngModel)]="productitem.product" type="text" class="form-control">
                             <option *ngFor="let s of products" [ngValue]="s">{{s.name}}</option>
                         </select>
                     </div>
+
+                    <div>
+                        <ul *ngIf="productitem.product">
+                            <li *ngFor="let item of productitem.product.resources">
+                                {{item.quantity}} {{item.resource.unit}} {{item.resource.name}} /
+                                <b>
+                                    {{getTotalResourceItemByResource(item.resource)}}
+                                </b>
+                            </li>
+                        </ul>
+                    </div>
+
                 </div>
                 <div class="col-lg-6" *ngIf=" type === 'productpack' && company.option.productPack">
                     <div class="input-group mb-3">
                         <span class="input-group-text">Product Pack</span>
-                        <select (ngModelChange)="setPrix()" [(ngModel)]="productitem.productpack" type="text" class="form-control">
+                        <select (ngModelChange)="setInfosOfProduct()" [(ngModel)]="productitem.productpack" type="text" class="form-control">
                             <option *ngFor="let s of productpacks" [ngValue]="s">{{s.name}}</option>
                         </select>
                     </div>
@@ -58,7 +70,10 @@
                 <div class="col-lg-3">
                     <div class="input-group mb-3">
                         <span class="input-group-text">Quantity</span>
-                        <input (ngModelChange)="setPrix()" [(ngModel)]="productitem.quantity" type="number" class="form-control">
+                        <input (ngModelChange)="setInfosOfProduct()" [(ngModel)]="productitem.quantity" type="number" class="form-control">
+                        <button class="btn btn-primary">
+                            {{quantityMax}}
+                        </button>
                     </div>
                 </div>
                 <div class="col-lg-3">
@@ -72,7 +87,7 @@
                 </div>
             </div>
             <div>
-                <button (click)="save()" class="btn btn-primary">Save</button>
+                <button [disabled]="quantityMax < productitem.quantity" (click)="save()" class="btn btn-primary">Save</button>
             </div>
         </div>
     </div>

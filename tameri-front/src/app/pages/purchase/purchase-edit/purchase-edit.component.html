@@ -55,6 +55,12 @@
                     <div class="input-group mb-3">
                         <span class="input-group-text">Quantity</span>
                         <input (ngModelChange)="setPrix()" [(ngModel)]="purchase.quantity" type="number" class="form-control">
+                        <button class="btn btn-primary">
+                            <ng-container *ngIf="purchase.resource">
+                                {{purchase.resource.unit}}
+                            </ng-container>
+                            
+                        </button>
                     </div>
                 </div>
                 <div class="col-lg-3">
