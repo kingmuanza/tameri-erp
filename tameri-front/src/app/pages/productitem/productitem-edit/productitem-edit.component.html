@@ -47,12 +47,15 @@
                         </select>
                     </div>
 
-                    <div>
+                    <div style="display: none;">
                         <ul *ngIf="productitem.product">
                             <li *ngFor="let item of productitem.product.resources">
                                 {{item.quantity}} {{item.resource.unit}} {{item.resource.name}} /
                                 <b>
                                     {{getTotalResourceItemByResource(item.resource)}}
+                                </b> /
+                                <b>
+                                    {{getTotalResourceItemSaleByResource(item.resource)}}
                                 </b>
                             </li>
                         </ul>
@@ -86,7 +89,7 @@
                     </div>
                 </div>
             </div>
-            <div>
+            <div style="display: none;">
                 {{resourcesUsed.length}}
 
                 <ul *ngIf="resourcesUsed">

@@ -183,14 +183,25 @@ export class ProductitemEditComponent implements OnInit {
       });
     });
     product.resources.forEach((r) => {
-      const q = this.getTotalResourceItemByResource(r.resource) / r.quantity;
+      const q = (this.getTotalResourceItemByResource(r.resource) - this.getTotalResourceItemSaleByResource(r.resource)) / r.quantity;
       this.quantityMax = this.quantityMax > q ? q : this.quantityMax;
+      this.quantityMax = Math.floor(this.quantityMax);
     });
   }
 
   getTotalResourceItemByResource(r: Resource) {
     let total = 0;
     this.purchasesProduct.forEach((resourceItem) => {
+      if (resourceItem.resource && resourceItem.resource.id === r.id) {
+        total += resourceItem.quantity;
+      }
+    });
+    return total;
+  }
+
+  getTotalResourceItemSaleByResource(r: Resource) {
+    let total = 0;
+    this.resourcesUsed.forEach((resourceItem) => {
       if (resourceItem.resource && resourceItem.resource.id === r.id) {
         total += resourceItem.quantity;
       }
