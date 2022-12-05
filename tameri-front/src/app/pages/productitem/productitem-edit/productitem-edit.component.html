@@ -71,7 +71,7 @@
                     <div class="input-group mb-3">
                         <span class="input-group-text">Quantity</span>
                         <input (ngModelChange)="setInfosOfProduct()" [(ngModel)]="productitem.quantity" type="number" class="form-control">
-                        <button class="btn btn-primary">
+                        <button class="btn btn-primary" *ngIf="maximum > quantityMax">
                             {{quantityMax}}
                         </button>
                     </div>
@@ -85,6 +85,15 @@
                         </button>
                     </div>
                 </div>
+            </div>
+            <div>
+                {{resourcesUsed.length}}
+
+                <ul *ngIf="resourcesUsed">
+                    <li *ngFor="let item of resourcesUsed">
+                        {{item.idpi}} {{item.quantity}} {{item.resource.unit}} {{item.resource.name}}
+                    </li>
+                </ul>
             </div>
             <div>
                 <button [disabled]="quantityMax < productitem.quantity" (click)="save()" class="btn btn-primary">Save</button>

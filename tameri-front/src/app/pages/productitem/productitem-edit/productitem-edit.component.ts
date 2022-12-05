@@ -28,8 +28,12 @@ export class ProductitemEditComponent implements OnInit {
   productpacks = new Array<any>();
   purchases = new Array<Purchase>();
   purchasesProduct = new Array<Purchase>();
+  productitems = new Array<Productitem>();
 
   quantityMax = Number.MAX_VALUE;
+
+  maximum = Number.MAX_VALUE;
+  resourcesUsed = new Array<any>();
 
   type = 'product';
 
@@ -64,6 +68,14 @@ export class ProductitemEditComponent implements OnInit {
           this.products = data.filter((d) => {
             return d.company && d.company.id === this.company.id;
           });
+
+          this.productitemService.getAll('productitem').then((data) => {
+            this.productitems = data.filter((d) => {
+              return d.company && d.company.id === this.company.id;
+            });
+            this.getResourceUsed();
+          }).catch((e) => {
+          });
         });
         this.company = this.authService.user.company;
         this.route.paramMap.subscribe((paramMap) => {
@@ -97,6 +109,33 @@ export class ProductitemEditComponent implements OnInit {
     });
   }
 
+  getResourceUsed() {
+    this.resourcesUsed = new Array<any>();
+    this.productitems.forEach((pi) => {
+      const quantite = pi.quantity;
+      let resources = new Array<any>();
+      if (pi.product) {
+        const p = this.getStateProduct(pi.product);
+        resources = p.resources;
+        // this.resourcesUsed = this.resourcesUsed.concat(resources);
+        resources.forEach((r) => {
+          r.quantity *= quantite;
+          r['idpi'] = pi.id;
+          this.resourcesUsed.push(r);
+        });
+      }
+    });
+  }
+
+  getStateProduct(product: Product): Product {
+    this.products.forEach((p) => {
+      if (p.id === product.id) {
+        product = p;
+      }
+    });
+    return product;
+  }
+
   getCompany(company: Company) {
     this.companyService.get('company', company.id).then((data) => {
       this.company = data;
@@ -104,7 +143,7 @@ export class ProductitemEditComponent implements OnInit {
   }
 
   save() {
-    this.productitem.company = this.authService.user.company;
+    this.productitem.company.id = this.authService.user.company.id;
     if (this.type === 'product') {
       this.productitem.productpack = undefined;
     }
