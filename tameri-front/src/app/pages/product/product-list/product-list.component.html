@@ -21,6 +21,9 @@
                             <th>Category</th>
                             <th>Type</th>
                             <th style="text-align: right;">Price</th>
+                            <th style="text-align: right;">Prod.</th>
+                            <th style="text-align: right;">Sales</th>
+                            <th style="text-align: right;">Now</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -30,6 +33,13 @@
                             <td>{{product.category}}</td>
                             <td>{{product.type}}</td>
                             <td style="text-align: right;">{{product.price | currency:'':''}}</td>
+                            <td style="text-align: right;">{{getProductItems(product) | number}}</td>
+                            <td style="text-align: right;">{{getSalelines(product) | number}}</td>
+                            <td style="text-align: right;">
+                                <span class="badge text-bg-primary">
+                                    {{getProductItems(product) - getSalelines(product) | number}}
+                                </span>
+                            </td>
                         </tr>
                     </tbody>
                 </table>

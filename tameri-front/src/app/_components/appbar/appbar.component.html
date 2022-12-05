@@ -42,7 +42,7 @@
                     </li>
                 </ng-container>
 
-                <ng-container *ngIf="access.supplier">
+                <ng-container *ngIf="access.supplier && false">
                     <li class="nav-item" *ngIf="company?.option.productResource">
                         <a class="nav-link " aria-current="page" [routerLink]="'warehouse'" routerLinkActive="active">Warehouse</a>
                     </li>
