@@ -75,4 +75,13 @@ export class ProductEditComponent implements OnInit {
     }
   }
 
+  delete() {
+    const oui = confirm('Are you sure to delete this item?');
+    if (oui) {
+      this.productService.delete('product', this.product.id).then(() => {
+        this.router.navigate(['product']);
+      });
+    }
+  }
+
 }

@@ -10,7 +10,9 @@
         </ol>
     </nav>
     <h1 *ngIf="!isNewProduct" class="titre">
-        Modify product {{product.id}}
+        <button style="float: right;" (click)="delete()" class="btn btn-danger btn-error">
+            Delete
+        </button> Modify product {{product.id}}
     </h1>
     <h1 *ngIf="isNewProduct" class="titre">Add a product</h1>
     <div style="margin-top: -10px; margin-bottom: 20px;">

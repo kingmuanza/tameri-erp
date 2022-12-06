@@ -236,7 +236,8 @@ export class PosComponent implements OnInit {
   calculTotalSales(salelines: Array<Saleline>) {
     let total = 0;
     salelines.forEach((s) => {
-      total += s.quantity;
+      
+      total += s.quantity * s.productpack.quantity;
     });
     return total;
   }

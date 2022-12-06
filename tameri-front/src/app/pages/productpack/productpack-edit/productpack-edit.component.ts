@@ -89,4 +89,13 @@ export class ProductpackEditComponent implements OnInit {
     }
   }
 
+  delete() {
+    const oui = confirm('Are you sure to delete this item?');
+    if (oui) {
+      this.productpackService.delete('productpack', this.productpack.id).then(() => {
+        this.router.navigate(['productpack']);
+      });
+    }
+  }
+
 }
