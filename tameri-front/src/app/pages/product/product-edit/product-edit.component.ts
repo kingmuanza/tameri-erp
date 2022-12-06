@@ -38,20 +38,25 @@ export class ProductEditComponent implements OnInit {
       this.producttypes = data.filter((d) => {
         return d.company && d.company.id === this.company.id;
       });
-    });
-    this.productcategoryService.getAll('productcategory').then((data) => {
-      this.productcategorys = data.filter((d) => {
-        return d.company && d.company.id === this.company.id;
+      this.productcategoryService.getAll('productcategory').then((data) => {
+        this.productcategorys = data.filter((d) => {
+          return d.company && d.company.id === this.company.id;
+        });
+        this.route.paramMap.subscribe((paramMap) => {
+          const id = paramMap.get('id');
+          if (id) {
+            this.productService.get('product', id).then((data) => {
+              this.product = data;
+              this.isNewProduct = false;
+              this.productcategorys.forEach((pc) => {
+                if (this.product.category && pc.id === this.product.category.id) {
+                  this.product.category = pc;                  
+                }
+              });
+            }); 
+          }
+        });
       });
-    });
-    this.route.paramMap.subscribe((paramMap) => {
-      const id = paramMap.get('id');
-      if (id) {
-        this.productService.get('product', id).then((data) => {
-          this.product = data;
-          this.isNewProduct = false;
-        }); 
-      }
     });
   }
 

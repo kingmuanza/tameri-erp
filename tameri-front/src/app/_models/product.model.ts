@@ -1,13 +1,15 @@
 import { Company } from "./company.model";
+import { Productcategory } from "./productcategory.model";
 import { Resource } from "./resource.model";
 
 export class Product {
     
     id: string = 'PRODUCT' + new Date().getTime();
     name = ''; 
-    category = '';
+    category = new Productcategory();
     content = 1;
     type = '';
+    unit = '';
     price = 0;
     warning = 0;
     now = 0;

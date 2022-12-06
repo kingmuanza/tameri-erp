@@ -109,33 +109,6 @@ export class ProductitemEditComponent implements OnInit {
     });
   }
 
-  getResourceUsed() {
-    this.resourcesUsed = new Array<any>();
-    this.productitems.forEach((pi) => {
-      const quantite = pi.quantity;
-      let resources = new Array<any>();
-      if (pi.product) {
-        const p = this.getStateProduct(pi.product);
-        resources = p.resources;
-        // this.resourcesUsed = this.resourcesUsed.concat(resources);
-        resources.forEach((r) => {
-          r.quantity *= quantite;
-          r['idpi'] = pi.id;
-          this.resourcesUsed.push(r);
-        });
-      }
-    });
-  }
-
-  getStateProduct(product: Product): Product {
-    this.products.forEach((p) => {
-      if (p.id === product.id) {
-        product = p;
-      }
-    });
-    return product;
-  }
-
   getCompany(company: Company) {
     this.companyService.get('company', company.id).then((data) => {
       this.company = data;
@@ -163,6 +136,35 @@ export class ProductitemEditComponent implements OnInit {
     }
   }
 
+  getResourceUsed() {
+    // Je veux décrémenter les items
+    this.resourcesUsed = new Array<any>();
+    this.productitems.forEach((pi) => {
+      const quantite = pi.quantity;
+      let resources = new Array<any>();
+      if (pi.product) {
+        // On récupère la dernière version du produit
+        // const p = this.getStateProduct(pi.product);
+        const p = pi.product;
+        resources = p.resources;        
+        resources.forEach((r) => {
+          r.quantity *= quantite;
+          r['idpi'] = pi.id;
+          this.resourcesUsed.push(r);
+        });
+      }
+    });
+  }
+
+  getStateProduct(product: Product): Product {
+    this.products.forEach((p) => {
+      if (p.id === product.id) {
+        product = p;
+      }
+    });
+    return product;
+  }
+
   getResourcesItems() {
     this.purchaseService.getAll('purchase').then((data) => {
       this.purchases = data.filter((d) => {
@@ -183,7 +185,7 @@ export class ProductitemEditComponent implements OnInit {
       });
     });
     product.resources.forEach((r) => {
-      const q = (this.getTotalResourceItemByResource(r.resource) - this.getTotalResourceItemSaleByResource(r.resource)) / r.quantity;
+      const q = (this.getTotalResourceItemByResource(r.resource) * r.resource.content - this.getTotalResourceItemSaleByResource(r.resource)) / r.quantity;
       this.quantityMax = this.quantityMax > q ? q : this.quantityMax;
       this.quantityMax = Math.floor(this.quantityMax);
     });

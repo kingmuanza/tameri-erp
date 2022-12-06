@@ -71,10 +71,13 @@
                                     <input [(ngModel)]="product.price" type="number" class="form-control">
                                 </div>
                             </div>
-                            <div class="col-lg-12">
+                            <div class="col-lg-6">
                                 <div class="input-group mb-3">
                                     <span class="input-group-text">Content</span>
                                     <input [(ngModel)]="product.content" type="text" class="form-control">
+                                    <button class="btn btn-primary">
+                                        {{product.unit}}
+                                    </button>
                                 </div>
                             </div>
                             <div class="col-lg-6">

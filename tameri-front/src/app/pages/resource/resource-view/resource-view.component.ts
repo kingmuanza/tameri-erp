@@ -78,7 +78,7 @@ export class ResourceViewComponent implements OnInit {
       this.purchases = purchases.filter((d) => {
         return d.resource?.id === this.resource.id;
       });      
-      this.totalPurchases = this.calculTotalPurchases(this.purchases);
+      this.totalPurchases = this.calculTotalPurchases(this.purchases) * this.resource.content;
       // this.getProductItems();
     });
   }

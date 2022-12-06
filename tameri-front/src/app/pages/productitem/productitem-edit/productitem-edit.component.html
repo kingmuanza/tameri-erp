@@ -47,15 +47,15 @@
                         </select>
                     </div>
 
-                    <div style="display: none;">
+                    <div style="display: block;">
                         <ul *ngIf="productitem.product">
                             <li *ngFor="let item of productitem.product.resources">
                                 {{item.quantity}} {{item.resource.unit}} {{item.resource.name}} /
                                 <b>
-                                    {{getTotalResourceItemByResource(item.resource)}}
+                                    {{getTotalResourceItemByResource(item.resource)*item.resource.content}} {{item.resource.unit}}
                                 </b> /
                                 <b>
-                                    {{getTotalResourceItemSaleByResource(item.resource)}}
+                                    {{getTotalResourceItemSaleByResource(item.resource)}} {{item.resource.unit}}
                                 </b>
                             </li>
                         </ul>
@@ -89,7 +89,7 @@
                     </div>
                 </div>
             </div>
-            <div style="display: none;">
+            <div style="display: block;">
                 {{resourcesUsed.length}}
 
                 <ul *ngIf="resourcesUsed">
