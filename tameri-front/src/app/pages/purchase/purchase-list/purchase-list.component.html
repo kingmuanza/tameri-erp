@@ -20,6 +20,8 @@
                             <th>Date</th>
                             <th>Resource/Pack</th>
                             <th style="text-align: right;">Quantity</th>
+                            <th style="text-align: right;">Quantity Category</th>
+                            <th>Category</th>
                             <th style="text-align: right;">Price</th>
                         </tr>
                     </thead>
@@ -29,13 +31,25 @@
                             <td>{{purchase.date | date: 'yyyy-MM-dd'}}</td>
                             <td>
                                 <ng-container *ngIf="purchase.resource">
-                                    {{purchase.resource.name}}
+                                    <span style="float: right;">
+                                        {{purchase.resource.content}} {{purchase.resource.unit}}
+                                    </span> {{purchase.resource.name}}
                                 </ng-container>
                                 <ng-container *ngIf="purchase.resourcepack">
                                     {{purchase.resourcepack.name}}
                                 </ng-container>
                             </td>
                             <td style="text-align: right;">{{purchase.quantity}}</td>
+                            <td style="text-align: right;">
+                                <ng-container *ngIf="purchase.resource">
+                                    {{purchase.quantity * purchase.resource.content}} {{purchase.resource.unit}}
+                                </ng-container>
+                            </td>
+                            <td>
+                                <ng-container *ngIf="purchase.resource">
+                                    {{purchase.resource.category.name }}
+                                </ng-container>
+                            </td>
                             <td style="text-align: right;">{{purchase.price | currency:'':''}}</td>
                         </tr>
                     </tbody>

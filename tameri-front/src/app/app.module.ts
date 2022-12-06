@@ -50,6 +50,7 @@ import { WarehouseViewComponent } from './pages/warehouse/warehouse-view/warehou
 import { ClientListComponent } from './pages/client/client-list/client-list.component';
 import { ClientEditComponent } from './pages/client/client-edit/client-edit.component';
 import { ClientViewComponent } from './pages/client/client-view/client-view.component';
+import { ResourcetypeViewComponent } from './pages/resourcetype/resourcetype-view/resourcetype-view.component';
 
 @NgModule({
   declarations: [
@@ -97,6 +98,7 @@ import { ClientViewComponent } from './pages/client/client-view/client-view.comp
     ClientListComponent,
     ClientEditComponent,
     ClientViewComponent,
+    ResourcetypeViewComponent,
   ],
   imports: [
     BrowserModule,

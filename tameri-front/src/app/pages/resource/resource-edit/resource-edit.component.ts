@@ -23,6 +23,8 @@ export class ResourceEditComponent implements OnInit {
   suppliers = new Array<Supplier>();
   resourcetypes = new Array<any>();
 
+  showErrors = false;
+
   constructor(
     private router: Router,
     private notifierService: NotifierService,
@@ -38,6 +40,7 @@ export class ResourceEditComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.company = this.authService.user.company;
     this.supplierService.getAll('supplier').then((data) => {
       this.suppliers = data.filter((d) => {
         return d.company && d.company.id === this.company.id;
@@ -46,21 +49,26 @@ export class ResourceEditComponent implements OnInit {
         this.resourcetypes = data.filter((d) => {
           return d.company && d.company.id === this.company.id;
         });
-      });
-      this.company = this.authService.user.company;
-      this.route.paramMap.subscribe((paramMap) => {
-        const id = paramMap.get('id');
-        if (id) {
-          this.resourceService.get('resource', id).then((data) => {
-            this.resource = data;
-            this.isNewResource = false;
-            this.suppliers.forEach((supplier) => {
-              if (this.resource.supplier && supplier.id === this.resource.supplier.id) {
-                this.resource.supplier = supplier;
-              }
-            });
-          }); 
-        }
+        this.route.paramMap.subscribe((paramMap) => {
+          const id = paramMap.get('id');
+          if (id) {
+            this.resourceService.get('resource', id).then((data) => {
+              this.resource = data;
+              this.isNewResource = false;
+              this.suppliers.forEach((supplier) => {
+                if (this.resource.supplier && supplier.id === this.resource.supplier.id) {
+                  this.resource.supplier = supplier;
+                }
+              });
+              this.resourcetypes.forEach((resourcetype) => {
+                if (this.resource.category && resourcetype.id === this.resource.category.id) {
+                  this.resource.category = resourcetype;
+                  this.resource.unit = resourcetype.unit;
+                }
+              });
+            }); 
+          }
+        });
       });
     });
   }
@@ -72,7 +80,12 @@ export class ResourceEditComponent implements OnInit {
   }
 
   save() {
+    if (!this.resource.name || !this.resource.content || !this.resource.category.name) {
+      this.showErrors = true;
+      return ;
+    }
     this.resource.company = this.authService.user.company;
+    this.resource.unit = this.resource.category.unit;
     if (this.isNewResource) {
       this.resourceService.create('resource', this.resource).then(() => {
         this.notifierService.notify('success', "saved successfully");
@@ -82,6 +95,15 @@ export class ResourceEditComponent implements OnInit {
       this.resourceService.modify('resource', this.resource.id, this.resource).then(() => {
         this.notifierService.notify('success', "saved successfully");
         this.router.navigate(['resource', 'view', this.resource.id]);
+      });
+    }
+  }
+
+  delete() {
+    const oui = confirm('Are you sure to delete this item?');
+    if (oui) {
+      this.resourceService.delete('resource', this.resource.id).then(() => {
+        this.router.navigate(['resource']);
       });
     }
   }

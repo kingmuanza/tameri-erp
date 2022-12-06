@@ -19,6 +19,7 @@
                             <th>ID</th>
                             <th>Name</th>
                             <th>Category</th>
+                            <th style="text-align: right;">Content</th>
                             <th>Unit</th>
                             <th style="text-align: right;">Price</th>
                             <th style="text-align: right;">Prod.</th>
@@ -30,7 +31,8 @@
                         <tr *ngFor="let resource of resources" (click)="edit(resource)">
                             <td>{{resource.id}}</td>
                             <td>{{resource.name}}</td>
-                            <td>{{resource.category}}</td>
+                            <td>{{resource.category.name}}</td>
+                            <td style="text-align: right;">{{resource.content | number}}</td>
                             <td>{{resource.unit}}</td>
                             <td style="text-align: right;">{{resource.price | currency:'':''}}</td>
                             <td style="text-align: right;">{{getResourceItems(resource) | number}}</td>

@@ -10,7 +10,9 @@
         </ol>
     </nav>
     <h1 *ngIf="!isNewPurchase" class="titre">
-        Modify Resource item {{purchase.id}}
+        <button style="float: right;" (click)="delete()" class="btn btn-danger btn-error">
+            Delete
+        </button> Modify Resource item {{purchase.id}}
     </h1>
     <h1 *ngIf="isNewPurchase" class="titre">Add a Resource item</h1>
     <div style="margin-top: -10px; margin-bottom: 20px;">
@@ -38,15 +40,20 @@
                 <div class="col-lg-6" *ngIf=" type === 'resource' ">
                     <div class="input-group mb-3">
                         <span class="input-group-text">Resource</span>
-                        <select (ngModelChange)="setPrix()" [(ngModel)]="purchase.resource" type="text" class="form-control">
+                        <select (ngModelChange)="setPrix()" [(ngModel)]="purchase.resource" type="text" class="form-control" [ngClass]="{'is-invalid': showErrors && !purchase.resource}">
                             <option *ngFor="let s of resources" [ngValue]="s">{{s.name}}</option>
                         </select>
+                        <button *ngIf="purchase.resource" class="btn btn-primary">
+                            <ng-container>
+                                {{purchase.resource.content}}{{purchase.resource.unit}}
+                            </ng-container>                            
+                        </button>
                     </div>
                 </div>
                 <div class="col-lg-6" *ngIf=" type === 'resourcepack' ">
                     <div class="input-group mb-3">
                         <span class="input-group-text">Resource Pack</span>
-                        <select (ngModelChange)="setPrix()" [(ngModel)]="purchase.resourcepack" type="text" class="form-control">
+                        <select (ngModelChange)="setPrix()" [(ngModel)]="purchase.resourcepack" type="text" class="form-control" [ngClass]="{'is-invalid': showErrors && !purchase.resourcepack}">
                             <option *ngFor="let s of resourcepacks" [ngValue]="s">{{s.name}}</option>
                         </select>
                     </div>
@@ -54,13 +61,8 @@
                 <div class="col-lg-3">
                     <div class="input-group mb-3">
                         <span class="input-group-text">Quantity</span>
-                        <input (ngModelChange)="setPrix()" [(ngModel)]="purchase.quantity" type="number" class="form-control">
-                        <button class="btn btn-primary">
-                            <ng-container *ngIf="purchase.resource">
-                                {{purchase.resource.unit}}
-                            </ng-container>
-                            
-                        </button>
+                        <input (ngModelChange)="setPrix()" [(ngModel)]="purchase.quantity" type="number" class="form-control" [ngClass]="{'is-invalid': showErrors && !purchase.quantity}">
+
                     </div>
                 </div>
                 <div class="col-lg-3">

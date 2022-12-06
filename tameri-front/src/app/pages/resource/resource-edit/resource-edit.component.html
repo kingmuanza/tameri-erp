@@ -10,7 +10,9 @@
         </ol>
     </nav>
     <h1 *ngIf="!isNewResource" class="titre">
-        Modify resource {{resource.id}}
+        <button style="float: right;" (click)="delete()" class="btn btn-danger btn-error">
+            Delete
+        </button> Modify resource {{resource.id}}
     </h1>
     <h1 *ngIf="isNewResource" class="titre">Add a resource</h1>
     <div style="margin-top: -10px; margin-bottom: 20px;">
@@ -23,10 +25,27 @@
         </p>
         <div class=" page-contenu ">
             <div class="row">
+                <div class="col-lg-4">
+                    <div class="input-group mb-3">
+                        <span class="input-group-text">Category</span>
+                        <select [(ngModel)]="resource.category" class="form-control" [ngClass]="{'is-invalid': showErrors && !resource.category.name}">
+                            <option *ngFor="let rt of resourcetypes" [ngValue]="rt">{{rt.name}}</option>
+                        </select>
+                    </div>
+                </div>
                 <div class="col-lg-8">
                     <div class="input-group mb-3">
                         <span class="input-group-text">Name</span>
-                        <input [(ngModel)]="resource.name" type="text" class="form-control">
+                        <input [(ngModel)]="resource.name" type="text" class="form-control" [ngClass]="{'is-invalid': showErrors && !resource.name}">
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="input-group mb-3">
+                        <span class="input-group-text">Content</span>
+                        <input [(ngModel)]="resource.content" type="number" class="form-control" [ngClass]="{'is-invalid': showErrors && (!resource.content || resource.content <= 0) }">
+                        <button class="btn btn-primary" *ngIf="resource.category">
+                            {{resource.category.unit}}
+                        </button>
                     </div>
                 </div>
                 <div class="col-lg-4">
@@ -38,33 +57,7 @@
                         </button>
                     </div>
                 </div>
-                <div class="col-lg-8">
-                    <div class="input-group mb-3">
-                        <span class="input-group-text">Content</span>
-                        <input [(ngModel)]="resource.content" type="text" class="form-control">
-                    </div>
-                </div>
                 <div class="col-lg-4">
-                    <div class="input-group mb-3">
-                        <span class="input-group-text">Unit</span>
-                        <select [(ngModel)]="resource.unit" type="text" class="form-control">
-                            <option value="no">No unit</option>
-                            <option value="Kg">Kg</option>
-                            <option value="g">g</option>
-                            <option value="m">m</option>
-                            <option value="L">L</option>
-                        </select>
-                    </div>
-                </div>
-                <div class="col-lg-6">
-                    <div class="input-group mb-3">
-                        <span class="input-group-text">Category</span>
-                        <select [(ngModel)]="resource.category" class="form-control">
-                            <option *ngFor="let rt of resourcetypes" [value]="rt.name">{{rt.name}}</option>
-                        </select>
-                    </div>
-                </div>
-                <div class="col-lg-6">
                     <div class="input-group mb-3">
                         <span class="input-group-text">Supplier</span>
                         <select [(ngModel)]="resource.supplier" type="text" class="form-control">

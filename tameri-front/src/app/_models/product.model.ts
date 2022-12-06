@@ -6,7 +6,7 @@ export class Product {
     id: string = 'PRODUCT' + new Date().getTime();
     name = ''; 
     category = '';
-    content = '';
+    content = 1;
     type = '';
     price = 0;
     warning = 0;

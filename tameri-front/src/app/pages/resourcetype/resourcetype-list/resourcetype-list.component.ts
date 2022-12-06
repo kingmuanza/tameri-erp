@@ -4,6 +4,7 @@ import { DataTableDirective } from 'angular-datatables/src/angular-datatables.di
 import { Subject } from 'rxjs';
 import { DatatablesOptions } from 'src/app/_data/datatable.option';
 import { Company } from 'src/app/_models/company.model';
+import { Resource } from 'src/app/_models/resource.model';
 import { Resourcetype } from 'src/app/_models/resourcetype.model';
 import { AuthenticationService } from 'src/app/_services/authentication.service';
 import { CrudService } from 'src/app/_services/crud.service';
@@ -22,12 +23,14 @@ export class ResourcetypeListComponent implements OnInit {
   dtInstance!: Promise<DataTables.Api>;
 
   resourcetypes = new Array<any>();
+  resources = new Array<Resource>();
   company = new Company();
 
   constructor(
     private router: Router,
     private resourcetypeService: CrudService<Resourcetype>,
     private authService: AuthenticationService,
+    private resourceService: CrudService<Resource>,
   ) {
     this.company = this.authService.user.company;
   }
@@ -49,7 +52,7 @@ export class ResourcetypeListComponent implements OnInit {
 
   edit(resourcetype?:Resourcetype) {
     if (resourcetype) {
-      this.router.navigate(['parameter/resourcecategory', 'edit', resourcetype.id]);
+      this.router.navigate(['parameter/resourcecategory', 'view', resourcetype.id]);
     } else {
       this.router.navigate(['parameter/resourcecategory', 'edit']);
     }
@@ -61,6 +64,17 @@ export class ResourcetypeListComponent implements OnInit {
       this.resourcetypes = data.filter((d) => {
         return d.company && d.company.id === this.company.id;
       });
+      this.dtTrigger.next('');
+    });
+  }
+
+  getResources() {
+    this.resourceService.getAll('resource').then((data) => {
+      this.resources = data.filter((d) => {
+        return d.company && d.company.id === this.company.id;
+      });
+      this.dtTrigger.next('');
+    }).catch((e) => {
       this.dtTrigger.next('');
     });
   }

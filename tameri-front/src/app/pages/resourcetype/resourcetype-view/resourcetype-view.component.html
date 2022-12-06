@@ -1,0 +1,79 @@
+<div class="container-fluid" style="margin-top: 16px;">
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a>Home</a></li>
+            <li class="breadcrumb-item"><a [routerLink]="'/parameter/resourcecategory'">Resource Categories</a></li>
+            <li class="breadcrumb-item active" *ngIf="isNewResourcetype">new</li>
+            <li class="breadcrumb-item active" *ngIf="!isNewResourcetype"><a [routerLink]="'parameter/resourcecategory/edit/' + resourcetype.id">{{resourcetype.name}}</a></li>
+            <li class="breadcrumb-item active" *ngIf="!isNewResourcetype">Edit</li>
+        </ol>
+    </nav>
+    <a [routerLink]="'/parameter/resourcecategory/edit/' + resourcetype.id" style="float: right;">Edit</a>
+    <h1 *ngIf="!isNewResourcetype" class="titre">
+        Resource category : {{resourcetype.name}}
+    </h1>
+    <div class="row mt-4">
+        <div class="col-lg-6">
+            <div class="card shadow-sm">
+                <div class="card-body">
+                    <div *ngIf="step === 1" class="first-step">
+                        <p>
+                            Resource category Infos
+                        </p>
+                        <div class=" page-contenu ">
+                            <div class="">
+                                <div class="">
+                                    <div class="input-group mb-3">
+                                        <span class="input-group-text">Name</span>
+                                        <input [(ngModel)]="resourcetype.name" type="text" class="form-control" [ngClass]="{'is-invalid': showErrors1 && (errorResourcetypeName)}">
+                                    </div>
+                                    <div class="">
+                                        <div class="input-group mb-3">
+                                            <span class="input-group-text">Unit</span>
+                                            <select [(ngModel)]="resourcetype.unit" type="text" class="form-control">
+                                                <option value="no">No unit</option>
+                                                <option value="Kg">Kg</option>
+                                                <option value="g">g</option>
+                                                <option value="m">m</option>
+                                                <option value="L">L</option>
+                                            </select>
+                                        </div>
+                                    </div>
+
+                                    <div class="input-group mb-3">
+                                        <span class="input-group-text">Description</span>
+                                        <textarea [(ngModel)]="resourcetype.description" type="text" class="form-control"></textarea>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-6">
+            <div class="card shadow-sm">
+                <div class="card-body">
+                    <table class="table table-border row-border hover ">
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Category</th>
+                                <th>Unit</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let resource of resources">
+                                <td>{{resource.name}}</td>
+                                <td>{{resource.content}}</td>
+                                <td>{{resource.unit}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>

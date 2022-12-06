@@ -1,16 +1,18 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { NotifierService } from 'angular-notifier';
+import { Company } from 'src/app/_models/company.model';
+import { Resource } from 'src/app/_models/resource.model';
 import { Resourcetype } from 'src/app/_models/resourcetype.model';
 import { AuthenticationService } from 'src/app/_services/authentication.service';
 import { CrudService } from 'src/app/_services/crud.service';
 
 @Component({
-  selector: 'app-resourcetype-edit',
-  templateUrl: './resourcetype-edit.component.html',
-  styleUrls: ['./resourcetype-edit.component.scss']
+  selector: 'app-resourcetype-view',
+  templateUrl: './resourcetype-view.component.html',
+  styleUrls: ['./resourcetype-view.component.scss']
 })
-export class ResourcetypeEditComponent implements OnInit {
+export class ResourcetypeViewComponent implements OnInit {
 
   step = 1;
 
@@ -29,20 +31,30 @@ export class ResourcetypeEditComponent implements OnInit {
   login = '';
   password = '';
   confirmpassword = '';
+  resources = new Array<Resource>();
+  company = new Company();
 
   constructor(
     private router: Router,
+    private resourceService: CrudService<Resource>,
     private notifierService: NotifierService,
     private authService: AuthenticationService,
     private route: ActivatedRoute,
     private resourcetypeService: CrudService<Resourcetype>
-  ) { }
+  ) {    
+    this.company = this.authService.user.company;
+  }
 
   ngOnInit(): void {
+    this.resourceService.getAll('resource').then((data) => {
+      this.resources = data.filter((d) => {
+        return d.company && d.company.id === this.company.id;
+      });
+    }).catch((e) => {
+    });
     this.route.paramMap.subscribe((paramMap) => {
       const id = paramMap.get('id');
       if (id) {
-
         this.resourcetypeService.get('resourcetype', id).then((data) => {
           this.resourcetype = data;
           this.isNewResourcetype = false;

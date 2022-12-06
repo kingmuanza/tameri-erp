@@ -1,1 +1,303 @@
-[{"id":"EMPLOYEE1669860164524","name":"Muanza Kangudie","acl":"","login":"677889900","password":"123456","role":"Manager","company":{"id":"COMPANY1669702955809","name":"Ma première entreprise","type":"Entreprise de service","contact":{"id":"","tel":"","address":"Yaoundé, Cameroun","email":"muanza.kangudie@gmail.com","othersTels":[],"othersEmail":[],"country":{"id":"COUNTRY1669702955809","code":"","dial_code":"","name":"","description":""}},"geolocation":"","currency":"XAF","owner":{"id":"OWNER1669702955809","names":"Muanza Kangudie","position":"CEO","contact":{"id":"","tel":"696543495","address":"Yaoundé, Cameroun","email":"muanza.kangudie@gmail.com","othersTels":[],"othersEmail":[],"country":{"id":"COUNTRY1669625793386","code":"CMR","dial_code":"+237","name":"Cameroon","description":""}},"login":"","password":""},"community":{"id":"COMMUNITY1669702955810","name":"","type":"","description":""},"option":{"productResource":false,"productPack":false,"restau":false,"bar":false,"shop":false,"prestationservice":false,"personnalized":false,"service":false,"client":false,"pack":false,"printing":false,"scm":false,"crm":false},"pricing":{"id":"PRICING1669702955729","name":"","productResource":5000,"productPack":5000,"restau":5000,"bar":5000,"shop":5000,"prestationservice":5000,"personnalized":5000,"service":5000,"client":5000,"pack":5000,"printing":5000,"scm":5000,"crm":5000}},"locked":true},{"id":"EMPLOYEE1669860656338","name":"Pierre Emmanuel","acl":"","login":"611223344","password":"123456","role":"Manager","company":null,"locked":true},{"id":"COMPANY1669861078228","name":"","login":"+237696543495","password":"123456","role":["ADMIN"],"company":{"id":"COMPANY1669861078228","name":"La vraie Compagnie","type":"Entreprise de service","contact":{"id":"","tel":"696543495","address":"","email":"muanza.kangudie@gmail.com","city":"Yaoundé","street":"Yaoundé, Cameroun","othersTels":[],"othersEmail":[],"country":{"id":"COUNTRY1669625793386","code":"CMR","dial_code":"+237","name":"Cameroon","description":""}},"geolocation":"3.8567936, 11.5146752","currency":"XAF","owner":{"id":"OWNER1669861078228","names":"Muanza Kangudie","position":{"id":"POSITION1669859382203","name":"CEO","description":""},"contact":{"id":"","tel":"696543495","address":"","email":"muanza.kangudie@gmail.com","city":"Yaoundé","street":"Yaoundé, Cameroun","othersTels":[],"othersEmail":[],"country":{"id":"COUNTRY1669625793386","code":"CMR","dial_code":"+237","name":"Cameroon","description":""}},"login":"","password":""},"community":{"id":"COMMUNITY1669861078228","name":"","type":"","description":""},"option":{"productResource":false,"productPack":false,"restau":false,"bar":false,"shop":false,"prestationservice":false,"personnalized":false,"service":false,"client":false,"pack":false,"printing":false,"scm":false,"crm":false},"pricing":{"id":"PRICING1669861049319","name":"","productResource":5000,"productPack":5000,"restau":5000,"bar":5000,"shop":5000,"prestationservice":5000,"personnalized":5000,"service":5000,"client":5000,"pack":5000,"printing":5000,"scm":5000,"crm":5000}}}]
+[{
+        "id": "EMPLOYEE1669860164524",
+        "name": "Muanza Kangudie",
+        "acl": "",
+        "login": "677889900",
+        "password": "123456",
+        "role": "Manager",
+        "company": {
+            "id": "COMPANY1669702955809",
+            "name": "Ma première entreprise",
+            "type": "Entreprise de service",
+            "contact": {
+                "id": "",
+                "tel": "",
+                "address": "Yaoundé, Cameroun",
+                "email": "muanza.kangudie@gmail.com",
+                "othersTels": [],
+                "othersEmail": [],
+                "country": {
+                    "id": "COUNTRY1669702955809",
+                    "code": "",
+                    "dial_code": "",
+                    "name": "",
+                    "description": ""
+                }
+            },
+            "geolocation": "",
+            "currency": "XAF",
+            "owner": {
+                "id": "OWNER1669702955809",
+                "names": "Muanza Kangudie",
+                "position": "CEO",
+                "contact": {
+                    "id": "",
+                    "tel": "696543495",
+                    "address": "Yaoundé, Cameroun",
+                    "email": "muanza.kangudie@gmail.com",
+                    "othersTels": [],
+                    "othersEmail": [],
+                    "country": {
+                        "id": "COUNTRY1669625793386",
+                        "code": "CMR",
+                        "dial_code": "+237",
+                        "name": "Cameroon",
+                        "description": ""
+                    }
+                },
+                "login": "",
+                "password": ""
+            },
+            "community": {
+                "id": "COMMUNITY1669702955810",
+                "name": "",
+                "type": "",
+                "description": ""
+            },
+            "option": {
+                "productResource": false,
+                "productPack": false,
+                "restau": false,
+                "bar": false,
+                "shop": false,
+                "prestationservice": false,
+                "personnalized": false,
+                "service": false,
+                "client": false,
+                "pack": false,
+                "printing": false,
+                "scm": false,
+                "crm": false
+            },
+            "pricing": {
+                "id": "PRICING1669702955729",
+                "name": "",
+                "productResource": 5000,
+                "productPack": 5000,
+                "restau": 5000,
+                "bar": 5000,
+                "shop": 5000,
+                "prestationservice": 5000,
+                "personnalized": 5000,
+                "service": 5000,
+                "client": 5000,
+                "pack": 5000,
+                "printing": 5000,
+                "scm": 5000,
+                "crm": 5000
+            }
+        },
+        "locked": true
+    },
+    {
+        "id": "EMPLOYEE1669860656338",
+        "name": "Pierre Emmanuel",
+        "acl": "",
+        "login": "611223344",
+        "password": "123456",
+        "role": "Manager",
+        "company": null,
+        "locked": true
+    },
+    {
+        "id": "COMPANY1669861078228",
+        "name": "",
+        "login": "+237696543495",
+        "password": "123456",
+        "role": [
+            "ADMIN"
+        ],
+        "company": {
+            "id": "COMPANY1669861078228",
+            "name": "La vraie Compagnie",
+            "type": "Entreprise de service",
+            "contact": {
+                "id": "",
+                "tel": "696543495",
+                "address": "",
+                "email": "muanza.kangudie@gmail.com",
+                "city": "Yaoundé",
+                "street": "Yaoundé, Cameroun",
+                "othersTels": [],
+                "othersEmail": [],
+                "country": {
+                    "id": "COUNTRY1669625793386",
+                    "code": "CMR",
+                    "dial_code": "+237",
+                    "name": "Cameroon",
+                    "description": ""
+                }
+            },
+            "geolocation": "3.8567936, 11.5146752",
+            "currency": "XAF",
+            "owner": {
+                "id": "OWNER1669861078228",
+                "names": "Muanza Kangudie",
+                "position": {
+                    "id": "POSITION1669859382203",
+                    "name": "CEO",
+                    "description": ""
+                },
+                "contact": {
+                    "id": "",
+                    "tel": "696543495",
+                    "address": "",
+                    "email": "muanza.kangudie@gmail.com",
+                    "city": "Yaoundé",
+                    "street": "Yaoundé, Cameroun",
+                    "othersTels": [],
+                    "othersEmail": [],
+                    "country": {
+                        "id": "COUNTRY1669625793386",
+                        "code": "CMR",
+                        "dial_code": "+237",
+                        "name": "Cameroon",
+                        "description": ""
+                    }
+                },
+                "login": "",
+                "password": ""
+            },
+            "community": {
+                "id": "COMMUNITY1669861078228",
+                "name": "",
+                "type": "",
+                "description": ""
+            },
+            "option": {
+                "productResource": false,
+                "productPack": false,
+                "restau": false,
+                "bar": false,
+                "shop": false,
+                "prestationservice": false,
+                "personnalized": false,
+                "service": false,
+                "client": false,
+                "pack": false,
+                "printing": false,
+                "scm": false,
+                "crm": false
+            },
+            "pricing": {
+                "id": "PRICING1669861049319",
+                "name": "",
+                "productResource": 5000,
+                "productPack": 5000,
+                "restau": 5000,
+                "bar": 5000,
+                "shop": 5000,
+                "prestationservice": 5000,
+                "personnalized": 5000,
+                "service": 5000,
+                "client": 5000,
+                "pack": 5000,
+                "printing": 5000,
+                "scm": 5000,
+                "crm": 5000
+            }
+        }
+    },
+    {
+        "id": "EMPLOYEE1670281222796",
+        "name": "Mignon garcon est là",
+        "acl": "",
+        "login": "674750721",
+        "password": "123456",
+        "role": [
+            "Warehouseman",
+            "Productionman"
+        ],
+        "company": {
+            "id": "COMPANY1669861078228",
+            "name": "La vraie Compagnie",
+            "type": "Entreprise de service",
+            "contact": {
+                "id": "",
+                "tel": "696543495",
+                "address": "",
+                "email": "muanza.kangudie@gmail.com",
+                "city": "Yaoundé",
+                "street": "Yaoundé, Cameroun",
+                "othersTels": [],
+                "othersEmail": [],
+                "country": {
+                    "id": "COUNTRY1669625793386",
+                    "code": "CMR",
+                    "dial_code": "+237",
+                    "name": "Cameroon",
+                    "description": ""
+                }
+            },
+            "geolocation": "3.8567936, 11.5146752",
+            "currency": "XAF",
+            "owner": {
+                "id": "OWNER1669861078228",
+                "names": "Muanza Kangudie",
+                "position": {
+                    "id": "POSITION1669859382203",
+                    "name": "CEO",
+                    "description": ""
+                },
+                "contact": {
+                    "id": "",
+                    "tel": "696543495",
+                    "address": "",
+                    "email": "muanza.kangudie@gmail.com",
+                    "city": "Yaoundé",
+                    "street": "Yaoundé, Cameroun",
+                    "othersTels": [],
+                    "othersEmail": [],
+                    "country": {
+                        "id": "COUNTRY1669625793386",
+                        "code": "CMR",
+                        "dial_code": "+237",
+                        "name": "Cameroon",
+                        "description": ""
+                    }
+                },
+                "login": "",
+                "password": ""
+            },
+            "community": {
+                "id": "COMMUNITY1666101278803",
+                "name": "Ma seconde communauté",
+                "type": "Les agriculteurs",
+                "description": "Ma seconde communauté"
+            },
+            "option": {
+                "productResource": true,
+                "productPack": true,
+                "restau": true,
+                "bar": true,
+                "shop": true,
+                "prestationservice": true,
+                "personnalized": true,
+                "service": true,
+                "client": true,
+                "pack": true,
+                "printing": true,
+                "scm": true,
+                "crm": true
+            },
+            "pricing": {
+                "id": "PRICING1666972540932",
+                "name": "Pricing for small business",
+                "productResource": 10000,
+                "productPack": 10000,
+                "restau": 5000,
+                "bar": 5000,
+                "shop": 5000,
+                "prestationservice": 5000,
+                "personnalized": 5000,
+                "service": 5000,
+                "client": 5000,
+                "pack": 5000,
+                "printing": 5000,
+                "scm": 5000,
+                "crm": 5000
+            }
+        },
+        "locked": true
+    }
+]

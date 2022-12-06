@@ -26,6 +26,7 @@ export class PurchaseEditComponent implements OnInit {
   resourcepacks = new Array<any>();
 
   type = 'resource';
+  showErrors = false;
 
   constructor(
     private router: Router,
@@ -97,6 +98,11 @@ export class PurchaseEditComponent implements OnInit {
 
   save() {
     this.purchase.company = this.authService.user.company;
+
+    if (!this.purchase.quantity || !(this.purchase.resource || this.purchase.resourcepack) ) {
+      this.showErrors = true;
+      return ;
+    }
     if (this.type === 'resource') {
       this.purchase.resourcepack = undefined;
     }
@@ -125,6 +131,15 @@ export class PurchaseEditComponent implements OnInit {
         this.purchase.price = this.purchase.resourcepack.price * this.purchase.quantity;
       }
     }, 500);
+  }
+
+  delete() {
+    const oui = confirm('Are you sure to delete this item?');
+    if (oui) {
+      this.purchaseService.delete('purchase', this.purchase.id).then(() => {
+        this.router.navigate(['purchases']);
+      });
+    }
   }
 
 }

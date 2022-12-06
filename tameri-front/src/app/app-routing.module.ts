@@ -32,6 +32,7 @@ import { ResourcepackListComponent } from './pages/resourcepack/resourcepack-lis
 import { ResourcepackViewComponent } from './pages/resourcepack/resourcepack-view/resourcepack-view.component';
 import { ResourcetypeEditComponent } from './pages/resourcetype/resourcetype-edit/resourcetype-edit.component';
 import { ResourcetypeListComponent } from './pages/resourcetype/resourcetype-list/resourcetype-list.component';
+import { ResourcetypeViewComponent } from './pages/resourcetype/resourcetype-view/resourcetype-view.component';
 import { SigninComponent } from './pages/signin/signin.component';
 import { SupplierEditComponent } from './pages/supplier/supplier-edit/supplier-edit.component';
 import { SupplierListComponent } from './pages/supplier/supplier-list/supplier-list.component';
@@ -82,6 +83,7 @@ const routes: Routes = [
   { path: 'parameter/resourcecategory', component: ResourcetypeListComponent },
   { path: 'parameter/resourcecategory/edit', component: ResourcetypeEditComponent },
   { path: 'parameter/resourcecategory/edit/:id', component: ResourcetypeEditComponent },
+  { path: 'parameter/resourcecategory/view/:id', component: ResourcetypeViewComponent },
 
   { path: 'resource', component: ResourceListComponent },
   { path: 'resource/edit', component: ResourceEditComponent },
