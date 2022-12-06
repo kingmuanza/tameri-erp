@@ -16,7 +16,7 @@
     </h1>
     <h1 *ngIf="isNewEmployee" class="titre">Add a employee</h1>
     <div style="margin-top: -10px; margin-bottom: 20px;">
-        Company : {{company.name}}
+        Company : {{company.name}}; Dial code : {{company.contact.country | json}};
     </div>
 
     <div class="first-step">

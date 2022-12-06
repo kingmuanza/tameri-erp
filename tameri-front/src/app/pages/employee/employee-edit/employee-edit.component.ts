@@ -153,6 +153,8 @@ export class EmployeeEditComponent implements OnInit {
     return new Promise((resolve, reject) => {
       const user = new User(this.company, employee);
       user.password = this.password;
+      console.log(('user'));
+      console.log(user);
       this.authService.createUser(user).then(() => {
         this.notifierService.notify('success', "User create successfully");
         resolve(user);

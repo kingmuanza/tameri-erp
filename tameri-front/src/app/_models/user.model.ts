@@ -14,7 +14,7 @@ export class User {
 
     constructor(company: Company, employee: Employee) {
         this.id = employee.id;
-        this.login = employee.login;
+        this.login = company.contact.country.dial_code + employee.login;
         this.password = employee.password;
         this.company = company;
         this.role = employee.role;

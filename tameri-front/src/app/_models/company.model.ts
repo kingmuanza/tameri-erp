@@ -1,4 +1,5 @@
 import { Community } from "./community.model";
+import { Contact } from "./contact.model";
 import { OptionPriceData } from "./option.price.data.model";
 import { OptionPrice } from "./option.price.model";
 import { Owner } from "./owner.model";
@@ -8,7 +9,7 @@ export class Company {
     name: string = '';
     type: string = '';
     address: string = '';
-    contact: string = '';
+    contact = new Contact();
     geolocation: string = '';
     currency: string = '';
     owner = new Owner();
