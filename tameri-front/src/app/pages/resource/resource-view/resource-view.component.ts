@@ -76,7 +76,9 @@ export class ResourceViewComponent implements OnInit {
   getResourceItems() {
     this.purchaseService.getAll('purchase').then((purchases) => {
       this.purchases = purchases.filter((d) => {
-        return d.resource?.id === this.resource.id;
+        const isRessource = d.resource?.id === this.resource.id;
+        const isRessourcepack = d.resourcepack?.resource.id === this.resource.id;
+        return isRessource || isRessourcepack;
       });      
       this.totalPurchases = this.calculTotalPurchases(this.purchases) * this.resource.content;
       // this.getProductItems();
@@ -106,7 +108,12 @@ export class ResourceViewComponent implements OnInit {
   calculTotalPurchases(purchases: Array<Purchase>) {
     let total = 0;
     purchases.forEach((s) => {
-      total += s.quantity;
+      if (s.resource) {
+        total += s.quantity;
+      }
+      if (s.resourcepack) {
+        total += s.quantity * s.resourcepack.quantity;
+      }
     });
     return total;
   }

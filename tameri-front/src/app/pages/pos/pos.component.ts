@@ -224,7 +224,8 @@ export class PosComponent implements OnInit {
       let productitems = data.filter((d) => {
         const isCompany = d.company && d.company.id === this.company.id;
         const isProduit = d.product && d.product.id === product.id;
-        return isCompany && isProduit;
+        const isProduitPack = d.productpack && d.productpack.product.id === product.id;
+        return isCompany && (isProduit || isProduitPack);
       });
       const totalItems = this.calculTotalItems(productitems);
       this.quantityCurrent = Math.floor((totalItems - totalSales)/quantity);
@@ -245,7 +246,12 @@ export class PosComponent implements OnInit {
   calculTotalItems(productitems = new Array<Productitem>()) {
     let total = 0;
     productitems.forEach((s) => {
-      total += s.quantity;
+      if (s.product) {
+        total += s.quantity;
+      }
+      if (s.productpack) {
+        total += s.quantity * s.productpack.quantity;
+      }
     });
     return total;
   }

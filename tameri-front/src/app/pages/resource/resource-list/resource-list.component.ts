@@ -89,14 +89,16 @@ export class ResourceListComponent implements OnInit {
 
   getResourceItems(resource: Resource) {
     const purchases = this.purchases.filter((d) => {
-      return d.resource?.id === resource.id;
+      const isRessource = d.resource?.id === resource.id;
+      const isRessourcepack = d.resourcepack?.resource.id === resource.id;
+      return isRessource || isRessourcepack;
     });
-    const totalPurchases = this.calculTotalPurchases(purchases);
+    const totalPurchases = this.calculTotalPurchases(purchases) * resource.content;
     return totalPurchases
   }
 
   getProductItems(resource: Resource) {
-    let totalItems = 0;    
+    let totalItems = 0;
     this.productitems.forEach((d) => {
       const product = d.product;
       if (product) {
@@ -113,7 +115,12 @@ export class ResourceListComponent implements OnInit {
   calculTotalPurchases(purchases: Array<Purchase>) {
     let total = 0;
     purchases.forEach((s) => {
-      total += s.quantity;
+      if (s.resource) {
+        total += s.quantity;
+      }
+      if (s.resourcepack) {
+        total += s.quantity * s.resourcepack.quantity;
+      }
     });
     return total;
   }

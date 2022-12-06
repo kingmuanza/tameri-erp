@@ -50,11 +50,15 @@ export class ProductitemEditComponent implements OnInit {
     private productitemService: CrudService<Productitem>
   ) {
     this.company = this.authService.user.company;
-    this.getCompany(this.company);
+    if (this.company) {
+      this.getCompany(this.company);
+    }
   }
 
   ngOnInit(): void {
-    this.getCompany(this.company);
+    if (this.company) {
+      this.getCompany(this.company);
+    }
     this.getResourcesItems();
     this.productpackService.getAll('productpack').then((data) => {
       this.productpacks = data.filter((d) => {
@@ -189,6 +193,9 @@ export class ProductitemEditComponent implements OnInit {
       this.quantityMax = this.quantityMax > q ? q : this.quantityMax;
       this.quantityMax = Math.floor(this.quantityMax);
     });
+    if (this.productitem.productpack) {
+      this.quantityMax = Math.floor(this.quantityMax / this.productitem.productpack.quantity);
+    }
   }
 
   getTotalResourceItemByResource(r: Resource) {
@@ -218,9 +225,18 @@ export class ProductitemEditComponent implements OnInit {
         this.productitem.price = this.productitem.product.price * this.productitem.quantity;
       }
       if (this.productitem.productpack) {
+        this.getResourcesItemsOfProduct(this.productitem.productpack.product);
         this.productitem.price = this.productitem.productpack.price * this.productitem.quantity;
       }
     }, 500);
+  }
+
+  resetProduct() {
+    this.productitem.product = undefined;
+  }
+
+  resetProductPack() {
+    this.productitem.productpack = undefined;
   }
 
 }

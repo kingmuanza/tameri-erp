@@ -32,27 +32,25 @@
                 <div class="col-lg-12">
                     <div class="mb-2 mt-2">
                         <input type="radio" [(ngModel)]="type" value="product" name="type"> Product &nbsp;&nbsp;&nbsp;
-
-                        <ng-container *ngIf="company.option.productPack">
-                            <input type="radio" [(ngModel)]="type" value="productpack" name="type"> Product Pack&nbsp;&nbsp;&nbsp;
-                        </ng-container>
+                        <input type="radio" [(ngModel)]="type" value="productpack" name="type"> Product Pack
 
                     </div>
                 </div>
                 <div class="col-lg-6" *ngIf=" type === 'product' ">
                     <div class="input-group mb-3">
                         <span class="input-group-text">Product</span>
-                        <select (ngModelChange)="setInfosOfProduct()" [(ngModel)]="productitem.product" type="text" class="form-control">
+                        <select (ngModelChange)="setInfosOfProduct(); resetProductPack()" [(ngModel)]="productitem.product" type="text" class="form-control">
                             <option *ngFor="let s of products" [ngValue]="s">{{s.name}}</option>
                         </select>
                     </div>
 
-                    <div style="display: block;">
+                    <div style="display: none;">
                         <ul *ngIf="productitem.product">
                             <li *ngFor="let item of productitem.product.resources">
                                 {{item.quantity}} {{item.resource.unit}} {{item.resource.name}} /
                                 <b>
-                                    {{getTotalResourceItemByResource(item.resource)*item.resource.content}} {{item.resource.unit}}
+                                    {{getTotalResourceItemByResource(item.resource)*item.resource.content}}
+                                    {{item.resource.unit}}
                                 </b> /
                                 <b>
                                     {{getTotalResourceItemSaleByResource(item.resource)}} {{item.resource.unit}}
@@ -62,12 +60,26 @@
                     </div>
 
                 </div>
-                <div class="col-lg-6" *ngIf=" type === 'productpack' && company.option.productPack">
+                <div class="col-lg-6" *ngIf=" type === 'productpack' ">
                     <div class="input-group mb-3">
                         <span class="input-group-text">Product Pack</span>
-                        <select (ngModelChange)="setInfosOfProduct()" [(ngModel)]="productitem.productpack" type="text" class="form-control">
+                        <select (ngModelChange)="setInfosOfProduct(); resetProduct();" [(ngModel)]="productitem.productpack" type="text" class="form-control">
                             <option *ngFor="let s of productpacks" [ngValue]="s">{{s.name}}</option>
                         </select>
+                    </div>
+                    <div style="display: none;">
+                        <ul *ngIf="productitem.productpack">
+                            <li *ngFor="let item of productitem.productpack.product.resources">
+                                {{productitem.productpack.quantity * item.quantity}} {{item.resource.unit}} {{item.resource.name}} /
+                                <b>
+                                    {{getTotalResourceItemByResource(item.resource)*item.resource.content}}
+                                    {{item.resource.unit}}
+                                </b> /
+                                <b>
+                                    {{getTotalResourceItemSaleByResource(item.resource)}} {{item.resource.unit}}
+                                </b>
+                            </li>
+                        </ul>
                     </div>
                 </div>
                 <div class="col-lg-3">
@@ -89,7 +101,7 @@
                     </div>
                 </div>
             </div>
-            <div style="display: block;">
+            <div style="display: none;">
                 {{resourcesUsed.length}}
 
                 <ul *ngIf="resourcesUsed">
