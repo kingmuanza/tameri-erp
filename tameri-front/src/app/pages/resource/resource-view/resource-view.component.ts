@@ -36,7 +36,7 @@ export class ResourceViewComponent implements OnInit {
   company = new Company();
   login = '';
 
-  
+
   totalPurchases = 0;
   totalItems = 0;
 
@@ -54,7 +54,7 @@ export class ResourceViewComponent implements OnInit {
     private communityService: CrudService<Community>,
     private resourceService: CrudService<Resource>
   ) {
-    
+
     this.company = this.authService.user.company;
     this.getCompany(this.company);
   }
@@ -79,7 +79,7 @@ export class ResourceViewComponent implements OnInit {
         const isRessource = d.resource?.id === this.resource.id;
         const isRessourcepack = d.resourcepack?.resource.id === this.resource.id;
         return isRessource || isRessourcepack;
-      });      
+      });
       this.totalPurchases = this.calculTotalPurchases(this.purchases) * this.resource.content;
       // this.getProductItems();
     });
@@ -88,20 +88,28 @@ export class ResourceViewComponent implements OnInit {
   getProductItems() {
     this.totalItems = 0;
     this.productitemService.getAll('productitem').then((data) => {
-      this.productitems = data.filter((d) => {        
+      this.productitems = data.filter((d) => {
         return d.company && d.company.id === this.company.id;
       });
       this.productitems.forEach((d) => {
         const product = d.product;
+        const productpack = d.productpack;
         if (product) {
-          product.resources.forEach((resource) => {
-            if (resource.resource.id === this.resource.id) {
-              this.totalItems += resource.quantity;
+          product.resources.forEach((r) => {
+            if (r.resource.id === this.resource.id) {
+              this.totalItems += d.quantity * r.quantity;
+            }
+          });
+        }
+        if (productpack) {
+          productpack.product.resources.forEach((r) => {
+            if (r.resource.id === this.resource.id) {
+              this.totalItems += d.quantity * r.quantity * productpack.quantity;
             }
           });
         }
       });
-    }).catch((e)=> {
+    }).catch((e) => {
     });
   }
 

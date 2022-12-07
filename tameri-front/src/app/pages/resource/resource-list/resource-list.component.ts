@@ -100,11 +100,20 @@ export class ResourceListComponent implements OnInit {
   getProductItems(resource: Resource) {
     let totalItems = 0;
     this.productitems.forEach((d) => {
+      
       const product = d.product;
+      const productpack = d.productpack;
       if (product) {
         product.resources.forEach((r) => {
           if (r.resource.id === resource.id) {
-            totalItems += r.quantity;
+            totalItems += d.quantity * r.quantity;
+          }
+        });
+      }
+      if (productpack) {
+        productpack.product.resources.forEach((r) => {
+          if (r.resource.id === resource.id) {
+            totalItems += d.quantity * r.quantity * productpack.quantity;
           }
         });
       }
