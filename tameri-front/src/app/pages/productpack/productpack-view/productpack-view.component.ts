@@ -96,9 +96,9 @@ export class ProductpackViewComponent implements OnInit {
   }
 
   save() {
-    this.productpackService.modify('productpack', this.productpack.id, this.productpack).then(() => {
+    this.productpackService.modify('productpack', this.productpack._id, this.productpack).then(() => {
       this.notifierService.notify('success', "saved successfully");
-      this.router.navigate(['productpack', 'view', this.productpack.id]);
+      this.router.navigate(['productpack', 'view', this.productpack._id]);
     });
   }
 

@@ -9,6 +9,7 @@ export class Productpack {
     quantity = 0;
     price = 0;
     company = new Company();
+  _id: any;
 
     constructor() {
         

@@ -6,7 +6,7 @@
             <li class="breadcrumb-item active" *ngIf="!isNewProductpack">{{productpack.name}}</li>
         </ol>
     </nav>
-    <a [routerLink]="'/productpack/edit/' + productpack.id" style="float: right;">Edit</a>
+    <a [routerLink]="'/productpack/edit/' + productpack._id" style="float: right;">Edit</a>
     <h1 *ngIf="!isNewProductpack" class="titre">
         {{productpack.name}}
     </h1>

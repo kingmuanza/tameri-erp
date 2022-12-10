@@ -1,7 +1,7 @@
 const productService = require('../_services/product.service');
 
 exports.create = (req, res, next) => {
-    productService.create(req.body).then(() => {
+    productService.create(req.body).then((data) => {
         res.status(201).json(data);
     });
 };

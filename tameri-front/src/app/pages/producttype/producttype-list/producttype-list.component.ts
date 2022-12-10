@@ -49,7 +49,7 @@ export class ProducttypeListComponent implements OnInit {
 
   edit(producttype?:Producttype) {
     if (producttype) {
-      this.router.navigate(['parameter/producttype', 'edit', producttype.id]);
+      this.router.navigate(['parameter/producttype', 'edit', producttype._id]);
     } else {
       this.router.navigate(['parameter/producttype', 'edit']);
     }

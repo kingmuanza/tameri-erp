@@ -1,34 +1,41 @@
 const productpackService = require('../_services/productpack.service');
 
 exports.create = (req, res, next) => {
-    productpackService.create(req.body);
-    res.status(201).json({
-        message: 'create !',
-        body: req.body
+    productpackService.create(req.body).then((data) => {
+        res.status(201).json(data);
     });
 };
 
 exports.modify = (req, res, next) => {
-    productpackService.modify(req.body);
-    res.status(201).json({
-        message: 'modify !',
-        body: req.body
+    console.log('req.body');
+    console.log(req.body);
+    productpackService.modify(req.body).then(() => {
+        res.status(201).json({
+            message: 'modify !',
+            body: req.body
+        });
+
     });
 };
 
 exports.get = (req, res, next) => {
-    var productpack = productpackService.get(req.params.id);
-    res.status(201).json(productpack);
+    productpackService.get(req.params.id).then((productpack) => {
+        console.log('productpack');
+        console.log(productpack);
+        res.status(201).json(productpack);
+    });
 };
 
 exports.getAll = (req, res, next) => {
-    var companies = productpackService.getAll();
-    res.status(201).json(companies);
+    productpackService.getAll().then((companies) => {
+        res.status(201).json(companies);
+    });
 };
 
 exports.delete = (req, res, next) => {
-    productpackService.delete(req.params.id);
-    res.status(201).json({
-        message: 'delete !'
+    productpackService.delete(req.params.id).then(() => {
+        res.status(201).json({
+            message: 'delete !'
+        });
     });
 };

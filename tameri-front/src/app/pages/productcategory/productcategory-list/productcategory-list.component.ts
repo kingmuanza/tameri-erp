@@ -49,7 +49,7 @@ export class ProductcategoryListComponent implements OnInit {
 
   edit(productcategory?:Productcategory) {
     if (productcategory) {
-      this.router.navigate(['parameter/productcategory', 'edit', productcategory.id]);
+      this.router.navigate(['parameter/productcategory', 'edit', productcategory._id]);
     } else {
       this.router.navigate(['parameter/productcategory', 'edit']);
     }

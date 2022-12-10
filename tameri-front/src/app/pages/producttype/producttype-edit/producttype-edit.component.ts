@@ -79,7 +79,7 @@ export class ProducttypeEditComponent implements OnInit {
         this.router.navigate(['parameter/producttype']);
       });
     } else {
-      this.producttypeService.modify('producttype', this.producttype.id, this.producttype).then(() => {
+      this.producttypeService.modify('producttype', this.producttype._id, this.producttype).then(() => {
         this.notifierService.notify('success', "saved successfully");
         this.step++;
         this.router.navigate(['parameter/producttype']);
@@ -90,7 +90,7 @@ export class ProducttypeEditComponent implements OnInit {
   delete() {
     const oui = confirm('Are you sure to delete this item?');
     if (oui) {
-      this.producttypeService.delete('producttype', this.producttype.id).then(() => {
+      this.producttypeService.delete('producttype', this.producttype._id).then(() => {
         this.router.navigate(['parameter/producttype']);
       });
     }

@@ -6,5 +6,6 @@ export class Producttype {
     name: string = '';
     description: string = '';
     company = new Company();
+  _id: any;
     
 }

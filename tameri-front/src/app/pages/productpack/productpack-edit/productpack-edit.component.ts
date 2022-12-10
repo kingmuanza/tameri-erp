@@ -79,12 +79,12 @@ export class ProductpackEditComponent implements OnInit {
     if (this.isNewProductpack) {
       this.productpackService.create('productpack', this.productpack).then(() => {
         this.notifierService.notify('success', "saved successfully");
-        this.router.navigate(['productpack', 'view', this.productpack.id]);
+        this.router.navigate(['productpack', 'view', this.productpack._id]);
       });
     } else {
-      this.productpackService.modify('productpack', this.productpack.id, this.productpack).then(() => {
+      this.productpackService.modify('productpack', this.productpack._id, this.productpack).then(() => {
         this.notifierService.notify('success', "saved successfully");
-        this.router.navigate(['productpack', 'view', this.productpack.id]);
+        this.router.navigate(['productpack', 'view', this.productpack._id]);
       });
     }
   }
@@ -92,7 +92,7 @@ export class ProductpackEditComponent implements OnInit {
   delete() {
     const oui = confirm('Are you sure to delete this item?');
     if (oui) {
-      this.productpackService.delete('productpack', this.productpack.id).then(() => {
+      this.productpackService.delete('productpack', this.productpack._id).then(() => {
         this.router.navigate(['productpack']);
       });
     }

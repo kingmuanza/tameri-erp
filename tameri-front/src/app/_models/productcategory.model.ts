@@ -6,5 +6,6 @@ export class Productcategory {
     name: string = '';
     description: string = '';
     company = new Company();
+  _id: any;
     
 }

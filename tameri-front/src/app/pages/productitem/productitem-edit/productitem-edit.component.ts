@@ -133,7 +133,7 @@ export class ProductitemEditComponent implements OnInit {
         this.router.navigate(['productitem', 'view', _id]);
       });
     } else {
-      this.productitemService.modify('productitem', this.productitem.id, this.productitem).then(() => {
+      this.productitemService.modify('productitem', this.productitem._id, this.productitem).then(() => {
         this.notifierService.notify('success', "saved successfully");
         this.router.navigate(['productitem', 'view', this.productitem._id]);
       });

@@ -49,7 +49,7 @@ export class ProductpackListComponent implements OnInit {
 
   edit(productpack?:Productpack) {
     if (productpack) {
-      this.router.navigate(['productpack', 'view', productpack.id]);
+      this.router.navigate(['productpack', 'view', productpack._id]);
     } else {
       this.router.navigate(['productpack', 'edit']);
     }
