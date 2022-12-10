@@ -69,9 +69,9 @@ export class ProductEditComponent implements OnInit {
     console.log(this.product);
     this.product.company.id = this.authService.user.company.id;
     if (this.isNewProduct) {
-      this.productService.create('product', this.product).then(() => {
+      this.productService.create('product', this.product).then((_id) => {
         this.notifierService.notify('success', "saved successfully");
-        this.router.navigate(['product', 'view', this.product._id]);
+        this.router.navigate(['product', 'view', _id]);
       });
     } else {
       this.productService.modify('product', this.product._id, this.product).then(() => {
