@@ -6,7 +6,7 @@
             <li class="breadcrumb-item active" *ngIf="!isNewResource">{{resource.name}}</li>
         </ol>
     </nav>
-    <a [routerLink]="'/resource/edit/' + resource.id" style="float: right;">Edit</a>
+    <a [routerLink]="'/resource/edit/' + resource._id" style="float: right;">Edit</a>
     <h1 *ngIf="!isNewResource" class="titre">
         {{resource.name}}
     </h1>

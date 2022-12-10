@@ -42,7 +42,6 @@ export class ProducttypeEditComponent implements OnInit {
     this.route.paramMap.subscribe((paramMap) => {
       const id = paramMap.get('id');
       if (id) {
-
         this.producttypeService.get('producttype', id).then((data) => {
           this.producttype = data;
           this.isNewProducttype = false;

@@ -12,4 +12,5 @@ export class Resource {
     price = 0;
     company = new Company();
     supplier: Supplier | undefined;
+  _id: any;
 }

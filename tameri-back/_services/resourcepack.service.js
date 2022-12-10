@@ -4,69 +4,64 @@ if (typeof localStorage === "undefined" || localStorage === null) {
     localStorage = new LocalStorage('./localbd');
 }
 
+const Resourcepack = require('../_models/resourcepack.model.js');
 
 exports.create = (item) => {
-    var items = [];
-    var itemsString = localStorage.getItem('resourcepack');
-    if (itemsString) {
-        items = JSON.parse(itemsString);
-    }
-    items.push(item);
-    localStorage.setItem('resourcepack', JSON.stringify(items));
+    return new Promise((resolve, reject) => {
+
+        const resourcepack = new Resourcepack(item);
+        resourcepack.save().then((err, data) => {
+            resolve(resourcepack._id)
+        }).catch(() => {
+
+        });
+    });
 }
 
 exports.modify = (item) => {
-    var items = [];
-    var nouveauxitems = [];
-    var itemsString = localStorage.getItem('resourcepack');
-    if (itemsString) {
-        items = JSON.parse(itemsString);
-    }
-    items.forEach((element) => {
-        if (element.id === item.id) {
-            nouveauxitems.push(item);
-        } else {
-            nouveauxitems.push(element);
-        }
+    return new Promise((resolve, reject) => {
+        Resourcepack.updateOne({
+            _id: item._id
+        }, {
+            $set: item
+        }).then(() => {
+            resolve(item);
+        }).catch(() => {
+
+        });
     });
-    localStorage.setItem('resourcepack', JSON.stringify(nouveauxitems));
 }
 
 exports.get = (id) => {
-    var items = [];
-    var itemsString = localStorage.getItem('resourcepack');
-    if (itemsString) {
-        items = JSON.parse(itemsString);
-    }
-    var item;
-    items.forEach((element) => {
-        if (element.id === id) {
-            item = element;
-        }
+    return new Promise((resolve, reject) => {
+        Resourcepack.findOne({
+            _id: id
+        }).then((item) => {
+            resolve(item);
+        }).catch(() => {
+
+        });
     });
-    return item;
 }
 
 exports.getAll = () => {
-    var items = [];
-    var itemsString = localStorage.getItem('resourcepack');
-    if (itemsString) {
-        items = JSON.parse(itemsString);
-    }
-    return items;
+    return new Promise((resolve, reject) => {
+        Resourcepack.find().then((items) => {
+            resolve(items);
+        }).catch((error) => {
+            reject(error)
+        });
+    });
 }
 
 exports.delete = (id) => {
-    var items = [];
-    var nouveauxitems = [];
-    var itemsString = localStorage.getItem('resourcepack');
-    if (itemsString) {
-        items = JSON.parse(itemsString);
-    }
-    items.forEach((element) => {
-        if (element.id === id) {} else {
-            nouveauxitems.push(element);
-        }
+    return new Promise((resolve, reject) => {
+        Resourcepack.deleteOne({
+            id: id
+        }).then(() => {
+            resolve(id);
+        }).catch(() => {
+
+        });
     });
-    localStorage.setItem('resourcepack', JSON.stringify(nouveauxitems));
 }

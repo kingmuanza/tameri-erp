@@ -6,7 +6,7 @@
             <li class="breadcrumb-item active" *ngIf="!isNewResourcepack">{{resourcepack.name}}</li>
         </ol>
     </nav>
-    <a [routerLink]="'/resourcepack/edit/' + resourcepack.id" style="float: right;">Edit</a>
+    <a [routerLink]="'/resourcepack/edit/' + resourcepack._id" style="float: right;">Edit</a>
     <h1 *ngIf="!isNewResourcepack" class="titre">
         {{resourcepack.name}}
     </h1>

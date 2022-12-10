@@ -87,14 +87,14 @@ export class ResourceEditComponent implements OnInit {
     this.resource.company = this.authService.user.company;
     this.resource.unit = this.resource.category.unit;
     if (this.isNewResource) {
-      this.resourceService.create('resource', this.resource).then(() => {
+      this.resourceService.create('resource', this.resource).then((_id) => {
         this.notifierService.notify('success', "saved successfully");
-        this.router.navigate(['resource', 'view', this.resource.id]);
+        this.router.navigate(['resource', 'view', _id]);
       });
     } else {
-      this.resourceService.modify('resource', this.resource.id, this.resource).then(() => {
+      this.resourceService.modify('resource', this.resource._id, this.resource).then(() => {
         this.notifierService.notify('success', "saved successfully");
-        this.router.navigate(['resource', 'view', this.resource.id]);
+        this.router.navigate(['resource', 'view', this.resource._id]);
       });
     }
   }
@@ -102,7 +102,7 @@ export class ResourceEditComponent implements OnInit {
   delete() {
     const oui = confirm('Are you sure to delete this item?');
     if (oui) {
-      this.resourceService.delete('resource', this.resource.id).then(() => {
+      this.resourceService.delete('resource', this.resource._id).then(() => {
         this.router.navigate(['resource']);
       });
     }

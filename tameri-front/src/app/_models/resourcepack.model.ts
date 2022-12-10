@@ -11,6 +11,7 @@ export class Resourcepack {
     price = 0;
     company = new Company();
     supplier: Supplier | undefined;
+  _id: any;
 
     constructor() {
         

@@ -28,6 +28,7 @@ const warehouseRoutes = require('./_routes/warehouse.route');
 const billRoutes = require('./_routes/bill.route');
 const clientRoutes = require('./_routes/client.route');
 const salelineRoutes = require('./_routes/saleline.route');
+const resourceitemRoutes = require('./_routes/resourceitem.route');
 
 mongoose.connect('mongodb+srv://tameri:tameri@cluster0.hotc5.mongodb.net/test?retryWrites=true&w=majority', {
         useNewUrlParser: true,
@@ -73,6 +74,7 @@ app.use('/producttype', producttypeRoutes);
 app.use('/resource', resourceRoutes);
 app.use('/resourcepack', resourcepackRoutes);
 app.use('/resourcetype', resourcetypeRoutes);
+app.use('/resourceitem', resourceitemRoutes);
 app.use('/supplier', supplierRoutes);
 app.use('/purchase', purchaseRoutes);
 app.use('/warehouse', warehouseRoutes);

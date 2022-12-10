@@ -56,7 +56,7 @@ export class ResourceListComponent implements OnInit {
 
   edit(resource?: Resource) {
     if (resource) {
-      this.router.navigate(['resource', 'view', resource.id]);
+      this.router.navigate(['resource', 'view', resource._id]);
     } else {
       this.router.navigate(['resource', 'edit']);
     }

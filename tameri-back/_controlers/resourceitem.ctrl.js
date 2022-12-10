@@ -1,7 +1,7 @@
-const producttypeService = require('../_services/producttype.service');
+const resourceitemService = require('../_services/resourceitem.service');
 
 exports.create = (req, res, next) => {
-    producttypeService.create(req.body).then((data) => {
+    resourceitemService.create(req.body).then((data) => {
         res.status(201).json(data);
     });
 };
@@ -9,7 +9,7 @@ exports.create = (req, res, next) => {
 exports.modify = (req, res, next) => {
     console.log('req.body');
     console.log(req.body);
-    producttypeService.modify(req.body).then((data) => {
+    resourceitemService.modify(req.body).then(() => {
         res.status(201).json({
             message: 'modify !',
             body: req.body
@@ -19,21 +19,21 @@ exports.modify = (req, res, next) => {
 };
 
 exports.get = (req, res, next) => {
-    producttypeService.get(req.params.id).then((producttype) => {
-        console.log('producttype');
-        console.log(producttype);
-        res.status(201).json(producttype);
+    resourceitemService.get(req.params.id).then((resourceitem) => {
+        console.log('resourceitem');
+        console.log(resourceitem);
+        res.status(201).json(resourceitem);
     });
 };
 
 exports.getAll = (req, res, next) => {
-    producttypeService.getAll().then((companies) => {
+    resourceitemService.getAll().then((companies) => {
         res.status(201).json(companies);
     });
 };
 
 exports.delete = (req, res, next) => {
-    producttypeService.delete(req.params.id).then(() => {
+    resourceitemService.delete(req.params.id).then(() => {
         res.status(201).json({
             message: 'delete !'
         });

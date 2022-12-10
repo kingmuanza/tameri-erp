@@ -92,14 +92,14 @@ export class ResourcepackEditComponent implements OnInit {
   save() {
     this.resourcepack.company = this.authService.user.company;
     if (this.isNewResourcepack) {
-      this.resourcepackService.create('resourcepack', this.resourcepack).then(() => {
+      this.resourcepackService.create('resourcepack', this.resourcepack).then((_id) => {
         this.notifierService.notify('success', "saved successfully");
-        this.router.navigate(['resourcepack', 'view', this.resourcepack.id]);
+        this.router.navigate(['resourcepack', 'view', _id]);
       });
     } else {
       this.resourcepackService.modify('resourcepack', this.resourcepack.id, this.resourcepack).then(() => {
         this.notifierService.notify('success', "saved successfully");
-        this.router.navigate(['resourcepack', 'view', this.resourcepack.id]);
+        this.router.navigate(['resourcepack', 'view', this.resourcepack._id]);
       });
     }
   }

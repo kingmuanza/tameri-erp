@@ -4,14 +4,14 @@ if (typeof localStorage === "undefined" || localStorage === null) {
     localStorage = new LocalStorage('./localbd');
 }
 
-const Resource = require('../_models/resource.model.js');
+const Resourceitem = require('../_models/resourceitem.model.js');
 
 exports.create = (item) => {
     return new Promise((resolve, reject) => {
 
-        const resource = new Resource(item);
-        resource.save().then((err, data) => {
-            resolve(resource._id)
+        const resourceitem = new Resourceitem(item);
+        resourceitem.save().then((err, data) => {
+            resolve(resourceitem._id)
         }).catch(() => {
 
         });
@@ -20,7 +20,7 @@ exports.create = (item) => {
 
 exports.modify = (item) => {
     return new Promise((resolve, reject) => {
-        Resource.updateOne({
+        Resourceitem.updateOne({
             _id: item._id
         }, {
             $set: item
@@ -34,7 +34,7 @@ exports.modify = (item) => {
 
 exports.get = (id) => {
     return new Promise((resolve, reject) => {
-        Resource.findOne({
+        Resourceitem.findOne({
             _id: id
         }).then((item) => {
             resolve(item);
@@ -46,7 +46,7 @@ exports.get = (id) => {
 
 exports.getAll = () => {
     return new Promise((resolve, reject) => {
-        Resource.find().then((items) => {
+        Resourceitem.find().then((items) => {
             resolve(items);
         }).catch((error) => {
             reject(error)
@@ -56,7 +56,7 @@ exports.getAll = () => {
 
 exports.delete = (id) => {
     return new Promise((resolve, reject) => {
-        Resource.deleteOne({
+        Resourceitem.deleteOne({
             id: id
         }).then(() => {
             resolve(id);

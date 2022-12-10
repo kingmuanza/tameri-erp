@@ -49,7 +49,7 @@ export class ResourcepackListComponent implements OnInit {
 
   edit(resourcepack?:Resourcepack) {
     if (resourcepack) {
-      this.router.navigate(['resourcepack', 'view', resourcepack.id]);
+      this.router.navigate(['resourcepack', 'view', resourcepack._id]);
     } else {
       this.router.navigate(['resourcepack', 'edit']);
     }
