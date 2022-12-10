@@ -1,34 +1,41 @@
 const productService = require('../_services/product.service');
 
 exports.create = (req, res, next) => {
-    productService.create(req.body);
-    res.status(201).json({
-        message: 'create !',
-        body: req.body
+    productService.create(req.body).then(() => {
+        res.status(201).json(data);
     });
 };
 
 exports.modify = (req, res, next) => {
-    productService.modify(req.body);
-    res.status(201).json({
-        message: 'modify !',
-        body: req.body
+    console.log('req.body');
+    console.log(req.body);
+    productService.modify(req.body).then(() => {
+        res.status(201).json({
+            message: 'modify !',
+            body: req.body
+        });
+
     });
 };
 
 exports.get = (req, res, next) => {
-    var product = productService.get(req.params.id);
-    res.status(201).json(product);
+    productService.get(req.params.id).then((product) => {
+        console.log('product');
+        console.log(product);
+        res.status(201).json(product);
+    });
 };
 
 exports.getAll = (req, res, next) => {
-    var companies = productService.getAll();
-    res.status(201).json(companies);
+    productService.getAll().then((companies) => {
+        res.status(201).json(companies);
+    });
 };
 
 exports.delete = (req, res, next) => {
-    productService.delete(req.params.id);
-    res.status(201).json({
-        message: 'delete !'
+    productService.delete(req.params.id).then(() => {
+        res.status(201).json({
+            message: 'delete !'
+        });
     });
 };

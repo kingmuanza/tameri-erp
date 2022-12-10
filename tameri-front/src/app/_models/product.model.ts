@@ -3,9 +3,9 @@ import { Productcategory } from "./productcategory.model";
 import { Resource } from "./resource.model";
 
 export class Product {
-    
+
     id: string = 'PRODUCT' + new Date().getTime();
-    name = ''; 
+    name = '';
     category = new Productcategory();
     content = 1;
     type = '';
@@ -18,4 +18,5 @@ export class Product {
         quantity: number
     }>();
     company = new Company();
+    _id: any;
 }

@@ -1,6 +1,7 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const path = require('path');
+const mongoose = require('mongoose');
 
 // Routes
 const testRoutes = require('./_routes/test.route');
@@ -27,6 +28,13 @@ const warehouseRoutes = require('./_routes/warehouse.route');
 const billRoutes = require('./_routes/bill.route');
 const clientRoutes = require('./_routes/client.route');
 const salelineRoutes = require('./_routes/saleline.route');
+
+mongoose.connect('mongodb+srv://tameri:tameri@cluster0.hotc5.mongodb.net/test?retryWrites=true&w=majority', {
+        useNewUrlParser: true,
+        useUnifiedTopology: true
+    })
+    .then(() => console.log('Connexion à MongoDB réussie !'))
+    .catch(() => console.log('Connexion à MongoDB échouée !'));
 
 const app = express();
 

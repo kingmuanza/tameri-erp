@@ -44,9 +44,13 @@ export class ProductEditComponent implements OnInit {
         });
         this.route.paramMap.subscribe((paramMap) => {
           const id = paramMap.get('id');
+          console.log('id');
+          console.log(id);
           if (id) {
             this.productService.get('product', id).then((data) => {
               this.product = data;
+              console.log('this.product');
+              console.log(data);
               this.isNewProduct = false;
               this.productcategorys.forEach((pc) => {
                 if (this.product.category && pc.id === this.product.category.id) {
@@ -61,16 +65,18 @@ export class ProductEditComponent implements OnInit {
   }
 
   save() {
+    console.log('save this.product');
+    console.log(this.product);
     this.product.company.id = this.authService.user.company.id;
     if (this.isNewProduct) {
       this.productService.create('product', this.product).then(() => {
         this.notifierService.notify('success', "saved successfully");
-        this.router.navigate(['product', 'view', this.product.id]);
+        this.router.navigate(['product', 'view', this.product._id]);
       });
     } else {
-      this.productService.modify('product', this.product.id, this.product).then(() => {
+      this.productService.modify('product', this.product._id, this.product).then(() => {
         this.notifierService.notify('success', "saved successfully");
-        this.router.navigate(['product', 'view', this.product.id]);
+        this.router.navigate(['product', 'view', this.product._id]);
       });
     }
   }

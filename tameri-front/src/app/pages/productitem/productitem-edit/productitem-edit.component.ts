@@ -128,14 +128,14 @@ export class ProductitemEditComponent implements OnInit {
       this.productitem.product = undefined;
     }
     if (this.isNewProductitem) {
-      this.productitemService.create('productitem', this.productitem).then(() => {
+      this.productitemService.create('productitem', this.productitem).then((_id) => {
         this.notifierService.notify('success', "saved successfully");
-        this.router.navigate(['productitem', 'view', this.productitem.id]);
+        this.router.navigate(['productitem', 'view', _id]);
       });
     } else {
       this.productitemService.modify('productitem', this.productitem.id, this.productitem).then(() => {
         this.notifierService.notify('success', "saved successfully");
-        this.router.navigate(['productitem', 'view', this.productitem.id]);
+        this.router.navigate(['productitem', 'view', this.productitem._id]);
       });
     }
   }

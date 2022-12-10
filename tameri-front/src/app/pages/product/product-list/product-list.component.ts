@@ -56,7 +56,7 @@ export class ProductListComponent implements OnInit {
 
   edit(product?: Product) {
     if (product) {
-      this.router.navigate(['product', 'view', product.id]);
+      this.router.navigate(['product', 'view', product._id]);
     } else {
       this.router.navigate(['product', 'edit']);
     }
@@ -81,6 +81,8 @@ export class ProductListComponent implements OnInit {
         this.products = data.filter((d) => {
           return d.company && d.company.id === this.company.id;
         });
+        console.log('this.products');
+        console.log(this.products);
         this.dtTrigger.next('');
       }).catch((e) => {
         this.dtTrigger.next('');

@@ -6,7 +6,7 @@
             <li class="breadcrumb-item active" *ngIf="!isNewProductitem">{{productitem.id}}</li>
         </ol>
     </nav>
-    <a [routerLink]="'/productitem/edit/' + productitem.id" style="float: right;">Edit</a>
+    <a [routerLink]="'/productitem/edit/' + productitem._id" style="float: right;">Edit</a>
     <h1 *ngIf="!isNewProductitem" class="titre">
         {{productitem.id}}
     </h1>

@@ -13,5 +13,6 @@ export class Productitem {
     product:Product | undefined;
     productpack :Productpack | undefined;
     supplier: Supplier | undefined;
+  _id: any;
 
 }

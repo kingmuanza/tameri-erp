@@ -67,7 +67,11 @@ export class ProductViewComponent implements OnInit {
       const id = paramMap.get('id');
       if (id) {
         this.productService.get('product', id).then((data) => {
+          console.log('product');
+          console.log(data);
           this.product = data;
+          console.log('this.product');
+          console.log(this.product);
           this.isNewProduct = false;
           this.getSalelines();
           this.resourceService.getAll('resource').then((resources) => {
