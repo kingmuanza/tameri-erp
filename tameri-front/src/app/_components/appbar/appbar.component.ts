@@ -31,7 +31,8 @@ export class AppbarComponent implements OnInit, OnChanges {
       pack: true,
       item: true,
     },
-    param: false
+    param: false,
+    client: false,
   }
 
   constructor(
@@ -82,6 +83,7 @@ export class AppbarComponent implements OnInit, OnChanges {
           item: true,
         },
         param: true,
+        client: true,
       }
     }
     if (this.user?.role.indexOf('Manager') !== -1) {
@@ -102,6 +104,7 @@ export class AppbarComponent implements OnInit, OnChanges {
           item: true,
         },
         param: true,
+        client: true,
       }
     }
     if (this.user?.role.indexOf('Warehouseman') !== -1) {
@@ -110,18 +113,19 @@ export class AppbarComponent implements OnInit, OnChanges {
         pos: false,
         supplier: false,
         product: {
-          menu: true,
+          menu: false,
           it: false,
           pack: false,
-          item: true,
+          item: false,
         },
         resource: {
           menu: true,
-          it: false,
-          pack: false,
+          it: true,
+          pack: true,
           item: true,
         },
         param: false,
+        client: false,
       }
     }
     if (this.user?.role.indexOf('Productionman') !== -1) {
@@ -142,6 +146,7 @@ export class AppbarComponent implements OnInit, OnChanges {
           item: false,
         },
         param: false,
+        client: true,
       }
     }
     if (this.user?.role.indexOf('Cashier') !== -1) {
@@ -162,6 +167,7 @@ export class AppbarComponent implements OnInit, OnChanges {
           item: false,
         },
         param: false,
+        client: false,
       }
     }
     if (this.user?.role.indexOf('Waitress') !== -1) {
@@ -182,6 +188,7 @@ export class AppbarComponent implements OnInit, OnChanges {
           item: false,
         },
         param: false,
+        client: false,
       }
     }
 

@@ -36,7 +36,7 @@
                     </li>
                 </ng-container>
 
-                <ng-container>
+                <ng-container *ngIf="access.client">
                     <li class="nav-item">
                         <a class="nav-link " aria-current="page" [routerLink]="'client'" routerLinkActive="active">Clients</a>
                     </li>
