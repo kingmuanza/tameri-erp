@@ -132,7 +132,7 @@ export class ProductViewComponent implements OnInit {
   }
 
   save() {
-    this.productService.modify('product', this.product.id, this.product).then(() => {
+    this.productService.modify('product', this.product._id, this.product).then(() => {
       this.notifierService.notify('success', "saved successfully");
       // this.router.navigate(['product', 'view', this.product.id]);
     });
@@ -213,6 +213,34 @@ export class ProductViewComponent implements OnInit {
       resultat = true;
     }
     return resultat;
+  }
+
+  convertir(ev: any) {
+    console.log('ev');
+    console.log(ev);
+    console.log('this.product.unit');
+    console.log(this.product.unit);
+
+    if (ev === 'mL' && this.product.unit=== 'L') {
+      this.product.content*=1000;
+    }
+    if (ev === 'L' && this.product.unit=== 'mL') {
+      this.product.content*=0.001;
+    }
+
+    if (ev === 'm' && this.product.unit=== 'Km') {
+      this.product.content*=1000;
+    }
+    if (ev === 'Km' && this.product.unit=== 'm') {
+      this.product.content*=0.001;
+    }
+    
+    if (ev === 'g' && this.product.unit=== 'Kg') {
+      this.product.content*=1000;
+    }
+    if (ev === 'Kg' && this.product.unit=== 'g') {
+      this.product.content*=0.001;
+    }
   }
 
 }
