@@ -47,6 +47,7 @@ export class BillEditComponent implements OnInit {
     private authService: AuthenticationService,
     private clientService: CrudService<Client>,
     private salelineService: CrudService<Saleline>,
+    private saleService: CrudService<Sale>,
     private productitemService: CrudService<Productitem>,
     private route: ActivatedRoute,
   ) {
@@ -62,6 +63,13 @@ export class BillEditComponent implements OnInit {
           this.sale = data;
         });
       }
+    });
+  }
+
+  setDelivered(sale: Sale) {
+    sale.delivery = true;
+    this.saleService.modify('bill', sale._id, sale).then((data) => {
+      
     });
   }
 

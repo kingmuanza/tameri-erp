@@ -54,6 +54,12 @@ import { ResourcetypeViewComponent } from './pages/resourcetype/resourcetype-vie
 import { BillListComponent } from './pages/bill/bill-list/bill-list.component';
 import { BillEditComponent } from './pages/bill/bill-edit/bill-edit.component';
 import { BillViewComponent } from './pages/bill/bill-view/bill-view.component';
+import { InvoiceViewComponent } from './pages/invoice/invoice-view/invoice-view.component';
+import { InvoiceListComponent } from './pages/invoice/invoice-list/invoice-list.component';
+import { InvoiceEditComponent } from './pages/invoice/invoice-edit/invoice-edit.component';
+import { InventoryListComponent } from './pages/inventory/inventory-list/inventory-list.component';
+import { InventoryEditComponent } from './pages/inventory/inventory-edit/inventory-edit.component';
+import { InventoryViewComponent } from './pages/inventory/inventory-view/inventory-view.component';
 
 @NgModule({
   declarations: [
@@ -105,6 +111,12 @@ import { BillViewComponent } from './pages/bill/bill-view/bill-view.component';
     BillListComponent,
     BillEditComponent,
     BillViewComponent,
+    InvoiceViewComponent,
+    InvoiceListComponent,
+    InvoiceEditComponent,
+    InventoryListComponent,
+    InventoryEditComponent,
+    InventoryViewComponent,
   ],
   imports: [
     BrowserModule,

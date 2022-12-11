@@ -9,11 +9,11 @@ import { AuthenticationService } from 'src/app/_services/authentication.service'
 import { CrudService } from 'src/app/_services/crud.service';
 
 @Component({
-  selector: 'app-bill-list',
-  templateUrl: './bill-list.component.html',
-  styleUrls: ['./bill-list.component.scss']
+  selector: 'app-invoice-list',
+  templateUrl: './invoice-list.component.html',
+  styleUrls: ['./invoice-list.component.scss']
 })
-export class BillListComponent implements OnInit {
+export class InvoiceListComponent implements OnInit {
 
   // Datatables
   dtOptions: any = DatatablesOptions;
@@ -54,7 +54,7 @@ export class BillListComponent implements OnInit {
     this.dtOptions = this.initNouveau();
     this.saleService.getAll('bill').then((data) => {
       this.sales = data.filter((d) => {
-        return d.company && d.company.id === this.company.id && !d.delivery;
+        return d.company && d.company.id === this.company.id && d.delivery;
       });
       this.dtTrigger.next('');
     });
@@ -68,8 +68,8 @@ export class BillListComponent implements OnInit {
     return total;
   }
 
-  setDelivered(sale: Sale) {
-    sale.delivery = true;
+  setUndelivered(sale: Sale) {
+    sale.delivery = false;
     this.saleService.modify('bill', sale._id, sale).then((data) => {
       
     });

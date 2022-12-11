@@ -23,13 +23,22 @@
 
                 <ng-container *ngIf="access.pos">
                     <li class="nav-item">
-                        <a class="nav-link " aria-current="page" [routerLink]="'pos'" routerLinkActive="active">Point of
-                            sale</a>
+                        <a class="nav-link " aria-current="page" [routerLink]="'pos'" routerLinkActive="active">Point of sale</a>
                     </li>
                 </ng-container>
                 <ng-container *ngIf="access.order">
                     <li class="nav-item">
                         <a class="nav-link " aria-current="page" [routerLink]="'bill'" routerLinkActive="active">Orders</a>
+                    </li>
+                </ng-container>
+                <ng-container *ngIf="access.order">
+                    <li class="nav-item">
+                        <a class="nav-link " aria-current="page" [routerLink]="'invoice'" routerLinkActive="active">Invoices</a>
+                    </li>
+                </ng-container>
+                <ng-container *ngIf="access.inventory">
+                    <li class="nav-item">
+                        <a class="nav-link " aria-current="page" [routerLink]="'inventory'" routerLinkActive="active">Inventories</a>
                     </li>
                 </ng-container>
                 <ng-container *ngIf="access.employee">

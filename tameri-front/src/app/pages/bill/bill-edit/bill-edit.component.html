@@ -51,7 +51,7 @@
             <div class="mt-4">
                 <div class="input-group mb-3">
                     <span class="input-group-text">Client</span>
-                    <input [value]="client.firstname + ' ' + client.name" class="form-control">
+                    <input [value]="sale.client.firstname + ' ' + sale.client.name" class="form-control">
                 </div>
             </div>
         </div>
@@ -71,5 +71,10 @@
                 </div>
             </div>
         </ng-container>
+        <div>
+            <button *ngIf="!sale.delivery" class="btn btn-primary" (click)="setDelivered(sale)">
+                Set as delivered
+            </button>
+        </div>
     </div>
 </div>

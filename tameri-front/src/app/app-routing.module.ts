@@ -10,6 +10,12 @@ import { EmployeeEditComponent } from './pages/employee/employee-edit/employee-e
 import { EmployeeListComponent } from './pages/employee/employee-list/employee-list.component';
 import { EmployeeViewComponent } from './pages/employee/employee-view/employee-view.component';
 import { HomeComponent } from './pages/home/home.component';
+import { InventoryEditComponent } from './pages/inventory/inventory-edit/inventory-edit.component';
+import { InventoryListComponent } from './pages/inventory/inventory-list/inventory-list.component';
+import { InventoryViewComponent } from './pages/inventory/inventory-view/inventory-view.component';
+import { InvoiceEditComponent } from './pages/invoice/invoice-edit/invoice-edit.component';
+import { InvoiceListComponent } from './pages/invoice/invoice-list/invoice-list.component';
+import { InvoiceViewComponent } from './pages/invoice/invoice-view/invoice-view.component';
 import { PosComponent } from './pages/pos/pos.component';
 import { ProductEditComponent } from './pages/product/product-edit/product-edit.component';
 import { ProductListComponent } from './pages/product/product-list/product-list.component';
@@ -54,6 +60,16 @@ const routes: Routes = [
   { path: 'bill/edit', component: BillEditComponent },
   { path: 'bill/edit/:id', component: BillEditComponent },
   { path: 'bill/view/:id', component: BillViewComponent },
+  
+  { path: 'invoice', component: InvoiceListComponent },
+  { path: 'invoice/edit', component: InvoiceEditComponent },
+  { path: 'invoice/edit/:id', component: InvoiceEditComponent },
+  { path: 'invoice/view/:id', component: InvoiceViewComponent },
+  
+  { path: 'inventory', component: InventoryListComponent },
+  { path: 'inventory/edit', component: InventoryEditComponent },
+  { path: 'inventory/edit/:id', component: InventoryEditComponent },
+  { path: 'inventory/view/:id', component: InventoryViewComponent },
   
   { path: 'client', component: ClientListComponent },
   { path: 'client/edit', component: ClientEditComponent },
