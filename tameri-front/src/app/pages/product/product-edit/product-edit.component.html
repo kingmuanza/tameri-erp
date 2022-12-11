@@ -5,7 +5,7 @@
             <li class="breadcrumb-item"><a [routerLink]="'/product'">Products</a></li>
             <li class="breadcrumb-item active" *ngIf="isNewProduct">new</li>
 
-            <li class="breadcrumb-item active" *ngIf="!isNewProduct"><a [routerLink]="'/product/view/' + product.id">{{product.name}}</a></li>
+            <li class="breadcrumb-item active" *ngIf="!isNewProduct"><a [routerLink]="'/product/view/' + product._id">{{product.name}}</a></li>
             <li class="breadcrumb-item active" *ngIf="!isNewProduct">Edit</li>
         </ol>
     </nav>
@@ -50,11 +50,9 @@
                     <div class="input-group mb-3">
                         <span class="input-group-text">Unit</span>
                         <select [(ngModel)]="product.unit" type="text" class="form-control">
-                            <option value="no">No unit</option>
-                            <option value="Kg">Kg</option>
-                            <option value="g">g</option>
-                            <option value="m">m</option>
-                            <option value="L">L</option>
+                            <ng-container *ngFor="let unit of units">
+                                <option [value]="unit.symbole">{{unit}}</option>
+                            </ng-container>                            
                         </select>
                     </div>
                 </div>

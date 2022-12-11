@@ -29,7 +29,12 @@
                     <tbody>
                         <tr *ngFor="let product of products" (click)="edit(product)">
                             <td>{{product.id}}</td>
-                            <td>{{product.name}}</td>
+                            <td>
+                                <span style="float: right;">
+                                    {{product.content}}
+                                    {{product.unit}}
+                                </span> {{product.name}}
+                            </td>
                             <td>{{product.category}}</td>
                             <td>{{product.type}}</td>
                             <td style="text-align: right;">{{product.price | currency:'':''}}</td>

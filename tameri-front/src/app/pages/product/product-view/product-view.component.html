@@ -75,8 +75,14 @@
                                 <div class="input-group mb-3">
                                     <span class="input-group-text">Content</span>
                                     <input [(ngModel)]="product.content" type="text" class="form-control">
+
+                                    <select [(ngModel)]="product.unit" type="text" class="form-control">
+                                        <ng-container *ngFor="let unit of units">
+                                            <option *ngIf="isSametype(unit, product.unit)" [value]="unit.symbole">{{unit.label}}</option>
+                                        </ng-container>
+                                    </select>
                                     <button class="btn btn-primary">
-                                        {{product.unit}}
+                                        Save
                                     </button>
                                 </div>
                             </div>

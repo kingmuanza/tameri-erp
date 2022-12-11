@@ -7,8 +7,10 @@ import { Product } from 'src/app/_models/product.model';
 import { Productitem } from 'src/app/_models/productitem.model';
 import { Resource } from 'src/app/_models/resource.model';
 import { Saleline } from 'src/app/_models/saleline.model';
+import { Unit } from 'src/app/_models/unit.model';
 import { AuthenticationService } from 'src/app/_services/authentication.service';
 import { CrudService } from 'src/app/_services/crud.service';
+import { DataService } from 'src/app/_services/data.service';
 
 @Component({
   selector: 'app-product-view',
@@ -45,6 +47,8 @@ export class ProductViewComponent implements OnInit {
 
   totalSales = 0;
   totalItems = 0;
+
+  units = DataService.units;
 
   constructor(
     private router: Router,
@@ -195,6 +199,20 @@ export class ProductViewComponent implements OnInit {
       total += s.quantity;
     });
     return total;
+  }
+
+  changeUnits(ev: any) {
+    console.log('changeUnits');
+    console.log(ev);
+  }
+
+  isSametype(unit: Unit, symbole: string): boolean {
+    let resultat = false;
+    const u = DataService.getUnit(symbole);
+    if (u.type === unit.type) {
+      resultat = true;
+    }
+    return resultat;
   }
 
 }

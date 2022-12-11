@@ -7,6 +7,7 @@ import { Productcategory } from 'src/app/_models/productcategory.model';
 import { Producttype } from 'src/app/_models/producttype.model';
 import { AuthenticationService } from 'src/app/_services/authentication.service';
 import { CrudService } from 'src/app/_services/crud.service';
+import { DataService } from 'src/app/_services/data.service';
 
 @Component({
   selector: 'app-product-edit',
@@ -21,6 +22,8 @@ export class ProductEditComponent implements OnInit {
   company = new Company();
   producttypes = new Array<any>();
   productcategorys = new Array<any>();
+
+  units = DataService.units;
 
   constructor(
     private router: Router,
