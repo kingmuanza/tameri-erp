@@ -51,6 +51,9 @@ import { ClientListComponent } from './pages/client/client-list/client-list.comp
 import { ClientEditComponent } from './pages/client/client-edit/client-edit.component';
 import { ClientViewComponent } from './pages/client/client-view/client-view.component';
 import { ResourcetypeViewComponent } from './pages/resourcetype/resourcetype-view/resourcetype-view.component';
+import { BillListComponent } from './pages/bill/bill-list/bill-list.component';
+import { BillEditComponent } from './pages/bill/bill-edit/bill-edit.component';
+import { BillViewComponent } from './pages/bill/bill-view/bill-view.component';
 
 @NgModule({
   declarations: [
@@ -99,6 +102,9 @@ import { ResourcetypeViewComponent } from './pages/resourcetype/resourcetype-vie
     ClientEditComponent,
     ClientViewComponent,
     ResourcetypeViewComponent,
+    BillListComponent,
+    BillEditComponent,
+    BillViewComponent,
   ],
   imports: [
     BrowserModule,

@@ -10,6 +10,7 @@ export class Sale {
     company = new Company();
     good = false;
     client = new Client();
+  _id: any;
 
     constructor(company: Company) {
         this.company.id = company.id;

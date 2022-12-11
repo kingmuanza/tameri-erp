@@ -1,0 +1,75 @@
+<div class="container-fluid" style="margin-top: 16px;">
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a>Home</a></li>
+            <li class="breadcrumb-item"><a [routerLink]="'/bill'">Orders</a></li>
+            <li class="breadcrumb-item active"><a>{{sale.code}}</a></li>
+        </ol>
+    </nav>
+    <h1>
+        <div>BILL {{sale.code}}</div>
+    </h1>
+    <p>
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam maximus aliquam velit, sed malesuada ligula blandit vel.
+    </p>
+    <div>
+        <div>
+            <table class="row-border cell-border hover table table-bordered">
+                <thead>
+                    <tr>
+                        <th>Product</th>
+                        <th style="text-align: right;">Price</th>
+                        <th style="text-align: right;">Quantity</th>
+                        <th style="text-align: right;">Total</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let s of sale.salelines">
+                        <td>{{s.productpack.name}}</td>
+                        <td style="text-align: right;">{{s.productpack.price | currency:'':''}}</td>
+                        <td style="text-align: right;">{{s.quantity | number}}</td>
+                        <td style="text-align: right;">{{getTotal(s) | currency:'':''}}</td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <b>TOTAL</b>
+                        </td>
+                        <td></td>
+                        <td></td>
+                        <td style="text-align: right;">
+                            <b>
+                                {{TOTAL | currency:'':''}}
+                            </b>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+
+        </div>
+
+        <div>
+            <div class="mt-4">
+                <div class="input-group mb-3">
+                    <span class="input-group-text">Client</span>
+                    <input [value]="client.firstname + ' ' + client.name" class="form-control">
+                </div>
+            </div>
+        </div>
+        <ng-container *ngIf="!isView">
+            <div *ngIf="salelines.length > 0" class="mt-4">
+                <div class="mb-3">
+                    <button (click)="save()" class="btn btn-primary">Save</button>&nbsp;&nbsp;
+                    <button (click)="save(true)" class="btn btn-primary">Save as paid</button>
+                </div>
+            </div>
+        </ng-container>
+        <ng-container *ngIf="isView && !billUse.good">
+            <div *ngIf="salelines.length > 0" class="mt-4">
+                <div class="mb-3">
+                    <button (click)="modify(billUse)" class="btn btn-primary">Save</button>&nbsp;&nbsp;
+                    <button (click)="setPaid(billUse)" class="btn btn-primary">Set as paid</button>
+                </div>
+            </div>
+        </ng-container>
+    </div>
+</div>

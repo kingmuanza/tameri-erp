@@ -1,5 +1,8 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { BillEditComponent } from './pages/bill/bill-edit/bill-edit.component';
+import { BillListComponent } from './pages/bill/bill-list/bill-list.component';
+import { BillViewComponent } from './pages/bill/bill-view/bill-view.component';
 import { ClientEditComponent } from './pages/client/client-edit/client-edit.component';
 import { ClientListComponent } from './pages/client/client-list/client-list.component';
 import { ClientViewComponent } from './pages/client/client-view/client-view.component';
@@ -47,6 +50,11 @@ const routes: Routes = [
   { path: 'home', component: HomeComponent },
   { path: 'pos', component: PosComponent },
 
+  { path: 'bill', component: BillListComponent },
+  { path: 'bill/edit', component: BillEditComponent },
+  { path: 'bill/edit/:id', component: BillEditComponent },
+  { path: 'bill/view/:id', component: BillViewComponent },
+  
   { path: 'client', component: ClientListComponent },
   { path: 'client/edit', component: ClientEditComponent },
   { path: 'client/edit/:id', component: ClientEditComponent },
