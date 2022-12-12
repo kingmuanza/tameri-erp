@@ -41,14 +41,14 @@ export class CommunityEditComponent implements OnInit {
 
   save() {
     if (this.isNewCommunity) {
-      this.communityService.create('community', this.community).then(() => {
+      this.communityService.create('community', this.community).then((_id) => {
         this.notifierService.notify('success', "saved successfully");
-        this.router.navigate(['community', 'view', this.community.id]);
+        this.router.navigate(['community', 'view', _id]);
       });
     } else {
-      this.communityService.modify('community', this.community.id, this.community).then(() => {
+      this.communityService.modify('community', this.community._id, this.community).then(() => {
         this.notifierService.notify('success', "saved successfully");
-        this.router.navigate(['community', 'view', this.community.id]);
+        this.router.navigate(['community', 'view', this.community._id]);
       });
     }
   }
@@ -56,7 +56,7 @@ export class CommunityEditComponent implements OnInit {
   delete() {
     const oui = confirm('Are you sure to delete this item?');
     if (oui) {
-      this.communityService.delete('community', this.community.id).then(() => {
+      this.communityService.delete('community', this.community._id).then(() => {
         this.router.navigate(['community']);
       });
     }

@@ -4,5 +4,6 @@ export class Community {
     name: string = '';
     type: string = '';
     description: string = '';
+  _id: any;
     
 }

@@ -6,7 +6,7 @@
             <li class="breadcrumb-item active" *ngIf="!isNewCommunity">{{community.name}}</li>
         </ol>
     </nav>
-    <a [routerLink]="'/community/edit/' + community.id" style="float: right;">Edit</a>
+    <a [routerLink]="'/community/edit/' + community._id" style="float: right;">Edit</a>
     <h1 *ngIf="!isNewCommunity" class="titre">
         {{community.name}}
     </h1>

@@ -44,7 +44,7 @@ export class CommunityListComponent implements OnInit {
 
   edit(community?:Community) {
     if (community) {
-      this.router.navigate(['community', 'view', community.id]);
+      this.router.navigate(['community', 'view', community._id]);
     } else {
       this.router.navigate(['community', 'edit']);
     }

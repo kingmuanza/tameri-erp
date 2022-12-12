@@ -56,12 +56,12 @@ export class CommunityViewComponent implements OnInit {
     if (this.isNewCommunity) {
       this.communityService.create('community', this.community).then(() => {
         this.notifierService.notify('success', "saved successfully");
-        this.router.navigate(['community', 'view', this.community.id]);
+        this.router.navigate(['community', 'view', this.community._id]);
       });
     } else {
       this.communityService.modify('community', this.community.id, this.community).then(() => {
         this.notifierService.notify('success', "saved successfully");
-        this.router.navigate(['community', 'view', this.community.id]);
+        this.router.navigate(['community', 'view', this.community._id]);
       });
     }
   }

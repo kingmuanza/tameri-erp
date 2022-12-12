@@ -1,34 +1,41 @@
 const communityService = require('../_services/community.service');
 
 exports.create = (req, res, next) => {
-    communityService.create(req.body);
-    res.status(201).json({
-        message: 'create !',
-        body: req.body
+    communityService.create(req.body).then((data) => {
+        res.status(201).json(data);
     });
 };
 
 exports.modify = (req, res, next) => {
-    communityService.modify(req.body);
-    res.status(201).json({
-        message: 'modify !',
-        body: req.body
+    console.log('req.body');
+    console.log(req.body);
+    communityService.modify(req.body).then(() => {
+        res.status(201).json({
+            message: 'modify !',
+            body: req.body
+        });
+
     });
 };
 
 exports.get = (req, res, next) => {
-    var community = communityService.get(req.params.id);
-    res.status(201).json(community);
+    communityService.get(req.params.id).then((community) => {
+        console.log('community');
+        console.log(community);
+        res.status(201).json(community);
+    });
 };
 
 exports.getAll = (req, res, next) => {
-    var companies = communityService.getAll();
-    res.status(201).json(companies);
+    communityService.getAll().then((companies) => {
+        res.status(201).json(companies);
+    });
 };
 
 exports.delete = (req, res, next) => {
-    communityService.delete(req.params.id);
-    res.status(201).json({
-        message: 'delete !'
+    communityService.delete(req.params.id).then(() => {
+        res.status(201).json({
+            message: 'delete !'
+        });
     });
 };

@@ -5,7 +5,7 @@
             <li class="breadcrumb-item"><a [routerLink]="'/community'">Communities</a></li>
             <li class="breadcrumb-item active" *ngIf="isNewCommunity">new</li>
 
-            <li class="breadcrumb-item active" *ngIf="!isNewCommunity"><a [routerLink]="'/community/view/' + community.id">{{community.name}}</a></li>
+            <li class="breadcrumb-item active" *ngIf="!isNewCommunity"><a [routerLink]="'/community/view/' + community._id">{{community.name}}</a></li>
             <li class="breadcrumb-item active" *ngIf="!isNewCommunity">Edit</li>
         </ol>
     </nav>
