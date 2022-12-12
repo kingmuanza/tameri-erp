@@ -65,13 +65,13 @@ export class CompanyEditComponent implements OnInit {
         this.companyService.get('company', id).then((data) => {
           this.company = data;
           this.isNewCompany = false;
-          this.authService.getUser(this.company.id).then((user) => {
+          /* this.authService.getUser(this.company.id).then((user) => {
             if (user) {
               this.user = user;
               this.login = user.login;
               this.password = user.password;
             }
-          });
+          }); */
           this.positions.forEach((p) => {
             if (this.company.owner.position && p.id === this.company.owner.position.id) {
               this.company.owner.position = p;
@@ -102,28 +102,34 @@ export class CompanyEditComponent implements OnInit {
   }
 
   endSecondStep() {
+    const user = new User(this.company);
+    const tel = this.company.owner.contact.tel;
+    const country = this.company.owner.contact.country;
+    user.login = country.dial_code + tel.split('').join('').split('-').join('');
+    this.login = user.login;
     this.showErrors2 = true;
     this.errorOwnerName = false;
     if (this.company.owner.names && this.company.owner.contact.tel) {
       if (this.isNewCompany && !this.isAlreadySaved) {
-        this.companyService.create('company', this.company).then(() => {
-          this.notifierService.notify('success', "create successfully");
+        this.companyService.create('company', this.company).then((_id) => {
+          this.company._id = _id;
+          this.notifierService.notify('success', "Company created successfully");
           this.step++;
           if (!this.isNewCompany) {
-            this.router.navigate(['company', 'view', this.company.id]);
+            this.router.navigate(['company', 'view', this.company._id]);
           } else {
             this.isAlreadySaved = true;
           }
         });
       } else {
-        this.companyService.modify('company', this.company.id, this.company).then(() => {
+        this.companyService.modify('company', this.company._id, this.company).then(() => {
           this.notifierService.notify('success', "saved successfully");
           this.step++;
           const tel = this.company.owner.contact.tel;
           const country = this.company.owner.contact.country;
           this.login = country.dial_code + tel.split('').join('').split('-').join('');
           if (!this.isNewCompany) {
-            this.router.navigate(['company', 'view', this.company.id]);
+            this.router.navigate(['company', 'view', this.company._id]);
           }
         });
       }
@@ -148,7 +154,7 @@ export class CompanyEditComponent implements OnInit {
 
       this.authService.createUser(user).then(() => {
         this.notifierService.notify('success', "User create successfully");
-        this.router.navigate(['company', 'view', this.company.id]);
+        this.router.navigate(['company', 'view', this.company._id]);
       }).catch((e) => {
         this.notifierService.notify('error', "Login is already used");
       });
@@ -162,7 +168,7 @@ export class CompanyEditComponent implements OnInit {
   delete() {
     const oui = confirm('Are you sure to delete this item?');
     if (oui) {
-      this.companyService.delete('company', this.company.id).then(() => {
+      this.companyService.delete('company', this.company._id).then(() => {
         this.router.navigate(['company']);
       });
     }
@@ -175,21 +181,21 @@ export class CompanyEditComponent implements OnInit {
       timeout: 5000,
       maximumAge: 0
     };
-    
+
     function success(pos: any) {
       const crd = pos.coords;
-      that.company.geolocation = crd.latitude + ', ' +  crd.longitude;
-    /* 
-      console.log('Your current position is:');
-      console.log(`Latitude : ${crd.latitude}`);
-      console.log(`Longitude: ${crd.longitude}`);
-      console.log(`More or less ${crd.accuracy} meters.`); */
+      that.company.geolocation = crd.latitude + ', ' + crd.longitude;
+      /* 
+        console.log('Your current position is:');
+        console.log(`Latitude : ${crd.latitude}`);
+        console.log(`Longitude: ${crd.longitude}`);
+        console.log(`More or less ${crd.accuracy} meters.`); */
     }
-    
+
     function error(err: any) {
       console.warn(`ERROR(${err.code}): ${err.message}`);
     }
-    
+
     navigator.geolocation.getCurrentPosition(success, error, options);
   }
 

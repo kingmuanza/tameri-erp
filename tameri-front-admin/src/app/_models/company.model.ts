@@ -19,5 +19,6 @@ export class Company {
     option = new OptionPrice();
 
     pricing = OptionPriceData;
+  _id: any;
 
 }

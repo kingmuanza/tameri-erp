@@ -1,77 +1,68 @@
-const authService = require('../_services/auth.service');
-
 var LocalStorage;
 if (typeof localStorage === "undefined" || localStorage === null) {
     LocalStorage = require('node-localstorage').LocalStorage;
     localStorage = new LocalStorage('./localbd');
 }
 
+const Company = require('../_models/company.model.js');
 
 exports.create = (item) => {
-    var items = [];
-    var itemsString = localStorage.getItem('company');
-    if (itemsString) {
-        items = JSON.parse(itemsString);
-    }
-    items.push(item);
-    localStorage.setItem('company', JSON.stringify(items));
+    console.log('CREATE NEW CLIENT');
+    console.log(item);
+    return new Promise((resolve, reject) => {
+        const company = new Company(item);
+        company.save().then((err, data) => {
+            resolve(company._id)
+        }).catch(() => {
+
+        });
+    });
 }
 
 exports.modify = (item) => {
-    var items = [];
-    var nouveauxitems = [];
-    var itemsString = localStorage.getItem('company');
-    if (itemsString) {
-        items = JSON.parse(itemsString);
-    }
-    items.forEach((element) => {
-        if (element.id === item.id) {
-            nouveauxitems.push(item);
-        } else {
-            nouveauxitems.push(element);
-        }
+    return new Promise((resolve, reject) => {
+        Company.updateOne({
+            _id: item._id
+        }, {
+            $set: item
+        }).then(() => {
+            resolve(item);
+        }).catch(() => {
+
+        });
     });
-    localStorage.setItem('company', JSON.stringify(nouveauxitems));
 }
 
 exports.get = (id) => {
-    var items = [];
-    var itemsString = localStorage.getItem('company');
-    if (itemsString) {
-        items = JSON.parse(itemsString);
-    }
-    var item;
-    items.forEach((element) => {
-        if (element.id === id) {
-            item = element;
-        }
+    return new Promise((resolve, reject) => {
+        Company.findOne({
+            _id: id
+        }).then((item) => {
+            resolve(item);
+        }).catch(() => {
+
+        });
     });
-    return item;
 }
 
 exports.getAll = () => {
-    var items = [];
-    var itemsString = localStorage.getItem('company');
-    if (itemsString) {
-        items = JSON.parse(itemsString);
-    }
-    return items;
+    return new Promise((resolve, reject) => {
+        Company.find().then((items) => {
+            resolve(items);
+        }).catch((error) => {
+            reject(error)
+        });
+    });
 }
 
 exports.delete = (id) => {
-    var items = [];
-    var nouveauxitems = [];
-    var itemsString = localStorage.getItem('company');
-    if (itemsString) {
-        items = JSON.parse(itemsString);
-    }
-    items.forEach((element) => {
-        if (element.id === id) {} else {
-            nouveauxitems.push(element);
-        }
+    return new Promise((resolve, reject) => {
+        Company.deleteOne({
+            _id: id
+        }).then(() => {
+            resolve(id);
+        }).catch(() => {
+
+        });
     });
-    localStorage.setItem('company', JSON.stringify(nouveauxitems));
-    setTimeout(() => {
-        authService.delete(id);
-    }, 500);
 }
