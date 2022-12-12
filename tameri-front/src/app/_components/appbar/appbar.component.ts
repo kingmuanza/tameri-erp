@@ -52,6 +52,15 @@ export class AppbarComponent implements OnInit, OnChanges {
     }
   }
 
+  ngOnInit(): void {
+    this.company = this.user?.company;
+    console.log('this.company AppbarComponent');
+    console.log(this.company);
+    if (this.company) {
+      this.getCompany(this.company);
+    }
+  }
+
   ngOnChanges(changes: SimpleChanges): void {
     this.company = this.user?.company;    
     if (this.company) {
@@ -63,8 +72,11 @@ export class AppbarComponent implements OnInit, OnChanges {
   }
 
   getCompany(company: Company) {
-    this.companyService.get('company', company.id).then((data) => {
+    console.log('appbar get company...');
+    this.companyService.get('company', company._id).then((data) => {
       this.company = data;
+      console.log('appbar company');
+      console.log(this.company);
     });
   }
 
@@ -222,10 +234,6 @@ export class AppbarComponent implements OnInit, OnChanges {
 
     console.log('this.access');
     console.log(this.access);
-  }
-
-  ngOnInit(): void {
-
   }
 
   signOut() {
