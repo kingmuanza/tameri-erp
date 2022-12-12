@@ -44,17 +44,13 @@ export class BillListComponent implements OnInit {
     if (sale._id) {
       this.router.navigate(['bill', 'edit', sale._id]);
     }
-    if (sale.id) {
-      this.router.navigate(['bill', 'edit', sale.id]);
-    }
-
   }
 
   ngOnInit(): void {
     this.dtOptions = this.initNouveau();
     this.saleService.getAll('bill').then((data) => {
       this.sales = data.filter((d) => {
-        return d.company && d.company.id === this.company.id && !d.delivery;
+        return d.company && d.company.id === this.company.id;
       });
       this.dtTrigger.next('');
     });

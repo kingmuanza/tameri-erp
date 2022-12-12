@@ -42,12 +42,8 @@ export class InvoiceListComponent implements OnInit {
   edit(sale: Sale) {
     console.log('nnsqbkj');
     if (sale._id) {
-      this.router.navigate(['bill', 'edit', sale._id]);
+      this.router.navigate(['invoice', 'edit', sale._id]);
     }
-    if (sale.id) {
-      this.router.navigate(['bill', 'edit', sale.id]);
-    }
-
   }
 
   ngOnInit(): void {

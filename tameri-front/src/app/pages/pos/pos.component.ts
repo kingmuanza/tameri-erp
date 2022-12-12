@@ -128,7 +128,7 @@ export class PosComponent implements OnInit {
   modify(bill: Sale, paid?: boolean) {
     bill.salelines = this.salelines;
     bill.good = paid ? paid : false;
-    this.billService.modify('bill', bill.id, bill).then((data) => {
+    this.billService.modify('bill', bill._id, bill).then((data) => {
       window.location.reload();
     }).catch((e) => {
     });
@@ -136,7 +136,7 @@ export class PosComponent implements OnInit {
 
   setPaid(bill: Sale) {
     bill.good = true;
-    this.billService.modify('bill', bill.id, bill).then((data) => {
+    this.billService.modify('bill', bill._id, bill).then((data) => {
       window.location.reload();
     }).catch((e) => {
     });

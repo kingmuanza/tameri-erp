@@ -20,6 +20,8 @@
                             <th>Code</th>
                             <th>Client</th>
                             <th style="text-align: right;">Total</th>
+                            <th style="">PAID</th>
+                            <th style="">DELIVERED</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -28,6 +30,8 @@
                             <td>{{s.code}}</td>
                             <td>{{s.client.firstname}} {{s.client.name}}</td>
                             <td style="text-align: right;">{{getTotal(s) | currency:'':''}}</td>
+                            <td style="font-weight: bold;">{{s.good ? 'PAID': ''}}</td>
+                            <td style="font-weight: bold;">{{s.delivery ? 'DELIVERED': ''}}</td>
                         </tr>
                     </tbody>
                 </table>

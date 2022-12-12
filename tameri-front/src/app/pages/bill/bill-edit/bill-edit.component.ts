@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { NotifierService } from 'angular-notifier';
 import { Client } from 'src/app/_models/client.model';
 import { Company } from 'src/app/_models/company.model';
 import { Product } from 'src/app/_models/product.model';
@@ -43,6 +44,7 @@ export class BillEditComponent implements OnInit {
   constructor(
     private billService: CrudService<Sale>,
     private productService: CrudService<Product>,
+    private notifierService: NotifierService,
     private productpackService: CrudService<Productpack>,
     private authService: AuthenticationService,
     private clientService: CrudService<Client>,
@@ -58,7 +60,6 @@ export class BillEditComponent implements OnInit {
     this.route.paramMap.subscribe((paramMap) => {
       const id = paramMap.get('id');
       if (id) {
-
         this.billService.get('bill', id).then((data) => {
           this.sale = data;
         });
@@ -69,26 +70,12 @@ export class BillEditComponent implements OnInit {
   setDelivered(sale: Sale) {
     sale.delivery = true;
     this.saleService.modify('bill', sale._id, sale).then((data) => {
-      
+      this.notifierService.notify('success', "saved successfully");
     });
-  }
-
-  newBill() {
-    this.code = this.generateCode();
-    this.salelines = new Array<Saleline>();
-    this.isView = false;
-    this.updateTotal();
-
   }
 
   getTotal(saleline: Saleline): number {
     return saleline.productpack.price * saleline.quantity;
-  }
-
-  add(saleline: Saleline) {
-    this.salelines.unshift(saleline);
-    this.saleline = new Saleline();
-    this.updateTotal();
   }
 
   updateTotal() {
@@ -98,125 +85,27 @@ export class BillEditComponent implements OnInit {
     });
   }
 
-  save(paid?: boolean) {
-    const sale = new Sale(this.company);
-    sale.salelines = this.salelines;
-    sale.good = paid ? paid : false;
-    sale.client = this.client;
-    console.log('sale');
-    console.log(sale);
-    sale.code = this.generateCode();
-    this.billService.create('bill', sale).then((data) => {
-      window.location.reload();
-    }).catch((e) => {
-    });
-  }
-
   modify(bill: Sale, paid?: boolean) {
     bill.salelines = this.salelines;
     bill.good = paid ? paid : false;
-    this.billService.modify('bill', bill.id, bill).then((data) => {
-      window.location.reload();
+    this.billService.modify('bill', bill._id, bill).then((data) => {
+      this.notifierService.notify('success', "saved successfully");
     }).catch((e) => {
     });
   }
 
   setPaid(bill: Sale) {
     bill.good = true;
-    this.billService.modify('bill', bill.id, bill).then((data) => {
-      window.location.reload();
+    this.billService.modify('bill', bill._id, bill).then((data) => {
+      this.notifierService.notify('success', "saved successfully");
     }).catch((e) => {
     });
   }
 
-  delete(saleline: Saleline) {
-    const yes = confirm('Are you sure ?');
-    if (yes) {
-      this.salelines = this.salelines.filter((s) => {
-        return s.id !== saleline.id;
-      });
-      this.updateTotal();
-    }
-  }
-
-  deleteAll() {
-    const yes = confirm('Are you sure ?');
-    if (yes) {
-      this.salelines = new Array<Saleline>();
-      this.updateTotal();
-    }
-  }
-
-  generateCode() {
-    let n = this.bills.length + 1;
-    let nombre = n + '';
-
-    while (nombre.length < 8) {
-      nombre = '0' + nombre;
-    }
-
-    return nombre;
-  }
-
-  viewBill(bill: Sale) {
-    this.billUse = bill;
-    this.isClient = false;
-    this.code = bill.code;
-    this.salelines = bill.salelines;
-    this.isView = true;
-
-    console.log('bill.client');
-    console.log(bill.client);
-
-    this.updateTotal();
-
-    this.clients.forEach((c) => {
-      if (bill.client) {
-        if (c.id === bill.client.id) {
-          this.client = bill.client;
-
-          console.log('trouvé');
-          console.log(this.client);
-          this.isClient = true;
-        }
-      }
-    });
-  }
-
-  verifyProductDispo(ev: any) {
-    console.log('ev');
-    console.log(ev);
-    this.getSalelines(ev);
-  }
-
-  getSalelines(productpack: Productpack) {
-    let product = productpack.product;
-    console.log('getSalelines');
-    console.log('product.id');
-    console.log(product.id);
-    this.salelineService.getAll('saleline').then((salelines) => {
-      console.log(salelines.length);
-      salelines = salelines.filter((d) => {
-        return d.productpack.product.id === product.id;
-      });
-      const totalSales = this.calculTotalSales(salelines);
-      console.log('totalSales : ' + totalSales);
-      this.getProductItems(product, totalSales, productpack.quantity);
-    });
-  }
-
-  getProductItems(product: Product, totalSales: number, quantity: number) {
-    console.log('getProductItems');
-    this.productitemService.getAll('productitem').then((data) => {
-      let productitems = data.filter((d) => {
-        const isCompany = d.company && d.company.id === this.company.id;
-        const isProduit = d.product && d.product.id === product.id;
-        const isProduitPack = d.productpack && d.productpack.product.id === product.id;
-        return isCompany && (isProduit || isProduitPack);
-      });
-      const totalItems = this.calculTotalItems(productitems);
-      this.quantityCurrent = Math.floor((totalItems - totalSales)/quantity);
-
+  setNotPaid(bill: Sale) {
+    bill.good = false;
+    this.billService.modify('bill', bill._id, bill).then((data) => {
+      this.notifierService.notify('success', "saved successfully");
     }).catch((e) => {
     });
   }

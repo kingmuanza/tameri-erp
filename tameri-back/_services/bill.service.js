@@ -1,11 +1,4 @@
-const authService = require('../_services/auth.service');
 const salelineService = require('../_services/saleline.service');
-
-var LocalStorage;
-if (typeof localStorage === "undefined" || localStorage === null) {
-    LocalStorage = require('node-localstorage').LocalStorage;
-    localStorage = new LocalStorage('./localbd');
-}
 
 exports.saveLines = (bill) => {
     bill.salelines.forEach((saleline) => {
@@ -18,73 +11,64 @@ exports.saveLines = (bill) => {
     return bill.salelines;
 }
 
+const Bill = require('../_models/bill.model.js');
+
 exports.create = (item) => {
-    var items = [];
-    var itemsString = localStorage.getItem('bill');
-    if (itemsString) {
-        items = JSON.parse(itemsString);
-    }
-    item.salelines = this.saveLines(item);
-    items.push(item);
-    localStorage.setItem('bill', JSON.stringify(items));
+    return new Promise((resolve, reject) => {
+
+        const bill = new Bill(item);
+        bill.save().then((err, data) => {
+            resolve(bill._id)
+        }).catch(() => {
+
+        });
+    });
 }
 
 exports.modify = (item) => {
-    var items = [];
-    var nouveauxitems = [];
-    var itemsString = localStorage.getItem('bill');
-    if (itemsString) {
-        items = JSON.parse(itemsString);
-    }
-    item.salelines = this.saveLines(item);
-    items.forEach((element) => {
-        if (element.id === item.id) {
-            nouveauxitems.push(item);
-        } else {
-            nouveauxitems.push(element);
-        }
+    return new Promise((resolve, reject) => {
+        Bill.updateOne({
+            _id: item._id
+        }, {
+            $set: item
+        }).then(() => {
+            resolve(item);
+        }).catch(() => {
+
+        });
     });
-    localStorage.setItem('bill', JSON.stringify(nouveauxitems));
 }
 
 exports.get = (id) => {
-    var items = [];
-    var itemsString = localStorage.getItem('bill');
-    if (itemsString) {
-        items = JSON.parse(itemsString);
-    }
-    var item;
-    items.forEach((element) => {
-        if (element.id === id) {
-            item = element;
-        }
+    return new Promise((resolve, reject) => {
+        Bill.findOne({
+            _id: id
+        }).then((item) => {
+            resolve(item);
+        }).catch(() => {
+
+        });
     });
-    return item;
 }
 
 exports.getAll = () => {
-    var items = [];
-    var itemsString = localStorage.getItem('bill');
-    if (itemsString) {
-        items = JSON.parse(itemsString);
-    }
-    return items;
+    return new Promise((resolve, reject) => {
+        Bill.find().then((items) => {
+            resolve(items);
+        }).catch((error) => {
+            reject(error)
+        });
+    });
 }
 
 exports.delete = (id) => {
-    var items = [];
-    var nouveauxitems = [];
-    var itemsString = localStorage.getItem('bill');
-    if (itemsString) {
-        items = JSON.parse(itemsString);
-    }
-    items.forEach((element) => {
-        if (element.id === id) {} else {
-            nouveauxitems.push(element);
-        }
+    return new Promise((resolve, reject) => {
+        Bill.deleteOne({
+            id: id
+        }).then(() => {
+            resolve(id);
+        }).catch(() => {
+
+        });
     });
-    localStorage.setItem('bill', JSON.stringify(nouveauxitems));
-    setTimeout(() => {
-        authService.delete(id);
-    }, 500);
 }

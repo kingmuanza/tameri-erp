@@ -10,7 +10,8 @@
         <div>BILL {{sale.code}}</div>
     </h1>
     <p>
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam maximus aliquam velit, sed malesuada ligula blandit vel.
+        <button *ngIf="sale.good" type="button" class="btn btn-outline-primary btn-sm" style="margin-right: 10px;">PAID</button>
+        <button *ngIf="sale.delivery" type="button" class="btn btn-outline-primary btn-sm">DELIVERED</button>
     </p>
     <div>
         <div>
@@ -55,26 +56,15 @@
                 </div>
             </div>
         </div>
-        <ng-container *ngIf="!isView">
-            <div *ngIf="salelines.length > 0" class="mt-4">
-                <div class="mb-3">
-                    <button (click)="save()" class="btn btn-primary">Save</button>&nbsp;&nbsp;
-                    <button (click)="save(true)" class="btn btn-primary">Save as paid</button>
-                </div>
-            </div>
-        </ng-container>
-        <ng-container *ngIf="isView && !billUse.good">
-            <div *ngIf="salelines.length > 0" class="mt-4">
-                <div class="mb-3">
-                    <button (click)="modify(billUse)" class="btn btn-primary">Save</button>&nbsp;&nbsp;
-                    <button (click)="setPaid(billUse)" class="btn btn-primary">Set as paid</button>
-                </div>
-            </div>
-        </ng-container>
         <div>
-            <button *ngIf="!sale.delivery" class="btn btn-primary" (click)="setDelivered(sale)">
-                Set as delivered
-            </button>
+            <ng-container *ngIf="!sale.delivery">
+                <button class="btn btn-primary" (click)="setDelivered(sale)">
+                    Set as delivered
+                </button> &nbsp; &nbsp;
+            </ng-container>
+
+            <button *ngIf="!sale.good" (click)="setPaid(sale)" class="btn btn-primary">Set as paid</button>
+            <button *ngIf="sale.good" (click)="setNotPaid(sale)" class="btn btn-primary">Set as NOT paid</button>
         </div>
     </div>
 </div>
