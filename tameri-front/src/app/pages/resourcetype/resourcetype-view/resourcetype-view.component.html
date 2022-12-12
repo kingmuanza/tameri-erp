@@ -4,11 +4,11 @@
             <li class="breadcrumb-item"><a>Home</a></li>
             <li class="breadcrumb-item"><a [routerLink]="'/parameter/resourcecategory'">Resource Categories</a></li>
             <li class="breadcrumb-item active" *ngIf="isNewResourcetype">new</li>
-            <li class="breadcrumb-item active" *ngIf="!isNewResourcetype"><a [routerLink]="'parameter/resourcecategory/edit/' + resourcetype.id">{{resourcetype.name}}</a></li>
+            <li class="breadcrumb-item active" *ngIf="!isNewResourcetype"><a [routerLink]="'/parameter/resourcecategory/edit/' + resourcetype._id">{{resourcetype.name}}</a></li>
             <li class="breadcrumb-item active" *ngIf="!isNewResourcetype">Edit</li>
         </ol>
     </nav>
-    <a [routerLink]="'/parameter/resourcecategory/edit/' + resourcetype.id" style="float: right;">Edit</a>
+    <a [routerLink]="'/parameter/resourcecategory/edit/' + resourcetype._id" style="float: right;">Edit</a>
     <h1 *ngIf="!isNewResourcetype" class="titre">
         Resource category : {{resourcetype.name}}
     </h1>

@@ -51,9 +51,10 @@ export class PosComponent implements OnInit {
   }
 
   ngOnInit(): void {
-
     this.clientService.getAll('client').then((data) => {
-      this.clients = data;
+      this.clients = data.filter((d) => {
+        return d.company && d.company.id === this.company.id;
+      });
     });
     this.productService.getAll('product').then((data) => {
       const products = data.filter((d) => {

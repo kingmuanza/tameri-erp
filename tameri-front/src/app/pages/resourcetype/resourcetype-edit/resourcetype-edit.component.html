@@ -30,11 +30,9 @@
                         <div class="input-group mb-3">
                             <span class="input-group-text">Unit</span>
                             <select [(ngModel)]="resourcetype.unit" type="text" class="form-control">
-                                <option value="no">No unit</option>
-                                <option value="Kg">Kg</option>
-                                <option value="g">g</option>
-                                <option value="m">m</option>
-                                <option value="L">L</option>
+                                <ng-container *ngFor="let unit of units">
+                                    <option [value]="unit.symbole">{{unit.label}}</option>
+                                </ng-container>
                             </select>
                         </div>
                     </div>

@@ -52,7 +52,7 @@ export class ResourcetypeListComponent implements OnInit {
 
   edit(resourcetype?:Resourcetype) {
     if (resourcetype) {
-      this.router.navigate(['parameter/resourcecategory', 'view', resourcetype.id]);
+      this.router.navigate(['parameter/resourcecategory', 'view', resourcetype._id]);
     } else {
       this.router.navigate(['parameter/resourcecategory', 'edit']);
     }

@@ -7,5 +7,6 @@ export class Resourcetype {
     description: string = '';
     unit: string = '';
     company = new Company();
+  _id: any;
     
 }

@@ -51,7 +51,7 @@
                         <span class="input-group-text">Unit</span>
                         <select [(ngModel)]="product.unit" type="text" class="form-control">
                             <ng-container *ngFor="let unit of units">
-                                <option [value]="unit.symbole">{{unit}}</option>
+                                <option [value]="unit.symbole">{{unit.label}}</option>
                             </ng-container>                            
                         </select>
                     </div>

@@ -4,6 +4,7 @@ import { NotifierService } from 'angular-notifier';
 import { Resourcetype } from 'src/app/_models/resourcetype.model';
 import { AuthenticationService } from 'src/app/_services/authentication.service';
 import { CrudService } from 'src/app/_services/crud.service';
+import { DataService } from 'src/app/_services/data.service';
 
 @Component({
   selector: 'app-resourcetype-edit',
@@ -20,15 +21,7 @@ export class ResourcetypeEditComponent implements OnInit {
   showErrors1 = false;
   errorResourcetypeName = false;
 
-  showErrors2 = false;
-  errorOwnerName = false;
-
-  showErrors3 = false;
-  errorNotSame = false;
-
-  login = '';
-  password = '';
-  confirmpassword = '';
+  units = DataService.units;
 
   constructor(
     private router: Router,
@@ -42,7 +35,6 @@ export class ResourcetypeEditComponent implements OnInit {
     this.route.paramMap.subscribe((paramMap) => {
       const id = paramMap.get('id');
       if (id) {
-
         this.resourcetypeService.get('resourcetype', id).then((data) => {
           this.resourcetype = data;
           this.isNewResourcetype = false;
@@ -90,7 +82,7 @@ export class ResourcetypeEditComponent implements OnInit {
   delete() {
     const oui = confirm('Are you sure to delete this item?');
     if (oui) {
-      this.resourcetypeService.delete('resourcetype', this.resourcetype.id).then(() => {
+      this.resourcetypeService.delete('resourcetype', this.resourcetype._id).then(() => {
         this.router.navigate(['parameter/resourcecategory']);
       });
     }
