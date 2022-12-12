@@ -1,34 +1,41 @@
 const communitytypeService = require('../_services/communitytype.service');
 
 exports.create = (req, res, next) => {
-    communitytypeService.create(req.body);
-    res.status(201).json({
-        message: 'create !',
-        body: req.body
+    communitytypeService.create(req.body).then((data) => {
+        res.status(201).json(data);
     });
 };
 
 exports.modify = (req, res, next) => {
-    communitytypeService.modify(req.body);
-    res.status(201).json({
-        message: 'modify !',
-        body: req.body
+    console.log('req.body');
+    console.log(req.body);
+    communitytypeService.modify(req.body).then(() => {
+        res.status(201).json({
+            message: 'modify !',
+            body: req.body
+        });
+
     });
 };
 
 exports.get = (req, res, next) => {
-    var communitytype = communitytypeService.get(req.params.id);
-    res.status(201).json(communitytype);
+    communitytypeService.get(req.params.id).then((communitytype) => {
+        console.log('communitytype');
+        console.log(communitytype);
+        res.status(201).json(communitytype);
+    });
 };
 
 exports.getAll = (req, res, next) => {
-    var companies = communitytypeService.getAll();
-    res.status(201).json(companies);
+    communitytypeService.getAll().then((companies) => {
+        res.status(201).json(companies);
+    });
 };
 
 exports.delete = (req, res, next) => {
-    communitytypeService.delete(req.params.id);
-    res.status(201).json({
-        message: 'delete !'
+    communitytypeService.delete(req.params.id).then(() => {
+        res.status(201).json({
+            message: 'delete !'
+        });
     });
 };

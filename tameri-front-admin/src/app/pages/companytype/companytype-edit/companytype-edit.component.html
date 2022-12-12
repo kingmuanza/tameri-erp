@@ -4,7 +4,7 @@
             <li class="breadcrumb-item"><a>Home</a></li>
             <li class="breadcrumb-item"><a [routerLink]="'/parameter/companytype'">Company Types</a></li>
             <li class="breadcrumb-item active" *ngIf="isNewCompanytype">new</li>
-            <li class="breadcrumb-item active" *ngIf="!isNewCompanytype"><a [routerLink]="'parameter/companytype/edit/' + companytype.id">{{companytype.name}}</a></li>
+            <li class="breadcrumb-item active" *ngIf="!isNewCompanytype"><a [routerLink]="'/parameter/companytype/edit/' + companytype._id">{{companytype.name}}</a></li>
             <li class="breadcrumb-item active" *ngIf="!isNewCompanytype">Edit</li>
         </ol>
     </nav>

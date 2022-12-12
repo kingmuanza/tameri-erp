@@ -44,7 +44,7 @@ export class CountryListComponent implements OnInit {
 
   edit(country?:Country) {
     if (country) {
-      this.router.navigate(['parameter/country', 'edit', country.id]);
+      this.router.navigate(['parameter/country', 'edit', country._id]);
     } else {
       this.router.navigate(['parameter/country', 'edit']);
     }

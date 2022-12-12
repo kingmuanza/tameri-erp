@@ -5,7 +5,7 @@
             <li class="breadcrumb-item"><a [routerLink]="'/employee'">Employees</a></li>
             <li class="breadcrumb-item active" *ngIf="isNewEmployee">new</li>
 
-            <li class="breadcrumb-item active" *ngIf="!isNewEmployee"><a [routerLink]="'/employee/view/' + employee.id">{{employee.names}}</a></li>
+            <li class="breadcrumb-item active" *ngIf="!isNewEmployee"><a [routerLink]="'/employee/view/' + employee._id">{{employee.names}}</a></li>
             <li class="breadcrumb-item active" *ngIf="!isNewEmployee">Edit</li>
         </ol>
     </nav>

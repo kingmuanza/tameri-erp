@@ -1,34 +1,41 @@
 const employeeService = require('../_services/employee.service');
 
 exports.create = (req, res, next) => {
-    employeeService.create(req.body);
-    res.status(201).json({
-        message: 'create !',
-        body: req.body
+    employeeService.create(req.body).then((data) => {
+        res.status(201).json(data);
     });
 };
 
 exports.modify = (req, res, next) => {
-    employeeService.modify(req.body);
-    res.status(201).json({
-        message: 'modify !',
-        body: req.body
+    console.log('req.body');
+    console.log(req.body);
+    employeeService.modify(req.body).then(() => {
+        res.status(201).json({
+            message: 'modify !',
+            body: req.body
+        });
+
     });
 };
 
 exports.get = (req, res, next) => {
-    var employee = employeeService.get(req.params.id);
-    res.status(201).json(employee);
+    employeeService.get(req.params.id).then((employee) => {
+        console.log('employee');
+        console.log(employee);
+        res.status(201).json(employee);
+    });
 };
 
 exports.getAll = (req, res, next) => {
-    var companies = employeeService.getAll();
-    res.status(201).json(companies);
+    employeeService.getAll().then((companies) => {
+        res.status(201).json(companies);
+    });
 };
 
 exports.delete = (req, res, next) => {
-    employeeService.delete(req.params.id);
-    res.status(201).json({
-        message: 'delete !'
+    employeeService.delete(req.params.id).then(() => {
+        res.status(201).json({
+            message: 'delete !'
+        });
     });
 };

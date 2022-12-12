@@ -5,5 +5,6 @@ export class Country {
     dial_code: string = '';
     name: string = '';
     description: string = '';
+  _id: any;
     
 }

@@ -44,7 +44,7 @@ export class CommunitytypeListComponent implements OnInit {
 
   edit(communitytype?:Communitytype) {
     if (communitytype) {
-      this.router.navigate(['parameter/communitytype', 'edit', communitytype.id]);
+      this.router.navigate(['parameter/communitytype', 'edit', communitytype._id]);
     } else {
       this.router.navigate(['parameter/communitytype', 'edit']);
     }

@@ -102,7 +102,7 @@ export class AuthenticationService {
     console.log('updateUser');
     console.log(user);
     return new Promise((resolve, reject) => {
-      this.http.put(this.URL + 'auth/' + user.id, user).subscribe({
+      this.http.put(this.URL + 'auth/' + user._id, user).subscribe({
         next: (data) => {
           resolve(data);
         }

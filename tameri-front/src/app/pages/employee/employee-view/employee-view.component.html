@@ -6,7 +6,7 @@
             <li class="breadcrumb-item active" *ngIf="!isNewEmployee">{{employee.names}}</li>
         </ol>
     </nav>
-    <a [routerLink]="'/employee/edit/' + employee.id" style="float: right;">Edit</a>
+    <a [routerLink]="'/employee/edit/' + employee._id" style="float: right;">Edit</a>
     <h1 *ngIf="!isNewEmployee" class="titre">
         {{employee.names}}
     </h1>
@@ -47,13 +47,13 @@
                                     <input [(ngModel)]="employee.email" type="text" class="form-control">
                                 </div>
                             </div>
-                            <div class="col-lg-6">
+                            <div class="col-lg-12">
                                 <div class="input-group mb-3">
                                     <span class="input-group-text">Role</span>
-                                    <select [(ngModel)]="employee.role" type="text" class="form-control">
-                                        <option value="ADMIN">Admin</option>
+                                    <select [(ngModel)]="employee.role" type="text" class="form-control" multiple>
                                         <option value="Manager">Manager</option>
                                         <option value="Warehouseman">Warehouseman</option>
+                                        <option value="Productionman">Production Man</option>
                                         <option value="Cashier">Cashier</option>
                                         <option value="Waitress">Waitress</option>
                                     </select>

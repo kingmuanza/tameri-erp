@@ -2,9 +2,9 @@
     <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
             <li class="breadcrumb-item"><a>Home</a></li>
-            <li class="breadcrumb-item"><a [routerLink]="'/parameter/country'">Company Types</a></li>
+            <li class="breadcrumb-item"><a [routerLink]="'/parameter/country'">Countries</a></li>
             <li class="breadcrumb-item active" *ngIf="isNewCountry">new</li>
-            <li class="breadcrumb-item active" *ngIf="!isNewCountry"><a [routerLink]="'parameter/country/edit/' + country.id">{{country.name}}</a></li>
+            <li class="breadcrumb-item active" *ngIf="!isNewCountry"><a [routerLink]="'/parameter/country/edit/' + country._id">{{country.name}}</a></li>
             <li class="breadcrumb-item active" *ngIf="!isNewCountry">Edit</li>
         </ol>
     </nav>
@@ -13,7 +13,7 @@
             Delete
         </button> Modify country {{country.id}}
     </h1>
-    <h1 *ngIf="isNewCountry" class="titre">Add a company type</h1>
+    <h1 *ngIf="isNewCountry" class="titre">Add a country</h1>
 
     <div *ngIf="step === 1" class="first-step">
         <p>

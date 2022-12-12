@@ -88,7 +88,7 @@ export class CommunitytypeEditComponent implements OnInit {
         this.router.navigate(['parameter/communitytype']);
       });
     } else {
-      this.communitytypeService.modify('communitytype', this.communitytype.id, this.communitytype).then(() => {
+      this.communitytypeService.modify('communitytype', this.communitytype._id, this.communitytype).then(() => {
         this.notifierService.notify('success', "saved successfully");
         this.step++;
         this.router.navigate(['parameter/communitytype']);
@@ -99,7 +99,7 @@ export class CommunitytypeEditComponent implements OnInit {
   delete() {
     const oui = confirm('Are you sure to delete this item?');
     if (oui) {
-      this.communitytypeService.delete('communitytype', this.communitytype.id).then(() => {
+      this.communitytypeService.delete('communitytype', this.communitytype._id).then(() => {
         this.router.navigate(['parameter/communitytype']);
       });
     }

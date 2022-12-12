@@ -51,8 +51,7 @@ export class EmployeeViewComponent implements OnInit {
       if (id) {
         this.employeeService.get('employee', id).then((data) => {
           this.employee = data;
-          this.isNewEmployee = false;
-          
+          this.isNewEmployee = false;          
         });
       }
     });
@@ -73,7 +72,7 @@ export class EmployeeViewComponent implements OnInit {
   save() {
     this.employeeService.modify('employee', this.employee.id, this.employee).then(() => {
       this.notifierService.notify('success', "saved successfully");
-      this.router.navigate(['employee', 'view', this.employee.id]);
+      this.router.navigate(['employee', 'view', this.employee._id]);
     });
   }
 

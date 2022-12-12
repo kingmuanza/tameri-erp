@@ -103,16 +103,17 @@ export class EmployeeEditComponent implements OnInit {
     this.employee.company = this.authService.user.company;
     this.employee.login = this.employee.tel;
 
-    this.createUser(this.employee).then(() => {
+    this.createUser(this.employee).then((user) => {
+      this.employee.userID = user._id;
       if (this.isNewEmployee) {
-        this.employeeService.create('employee', this.employee).then(() => {
+        this.employeeService.create('employee', this.employee).then((_id) => {
           this.notifierService.notify('success', "saved successfully");
-          this.router.navigate(['employee', 'view', this.employee.id]);
+          this.router.navigate(['employee', 'view', _id]);
         });
       } else {
         this.employeeService.modify('employee', this.employee.id, this.employee).then(() => {
           this.notifierService.notify('success', "saved successfully");
-          this.router.navigate(['employee', 'view', this.employee.id]);
+          this.router.navigate(['employee', 'view', this.employee._id]);
         });
       }
     });
@@ -137,9 +138,10 @@ export class EmployeeEditComponent implements OnInit {
     });
   }
 
-  updateUser(employee: Employee) {
+  updateUser(employee: Employee): Promise<User> {
     return new Promise((resolve, reject) => {
       const user = new User(this.company, employee);
+      user._id = employee.userID;
       user.password = this.password;
       this.authService.updateUser (user).then(() => {
         this.notifierService.notify('success', "User update successfully");
@@ -148,7 +150,7 @@ export class EmployeeEditComponent implements OnInit {
     });
   }
 
-  createUser(employee: Employee) {
+  createUser(employee: Employee): Promise<User> {
     this.telAlreadyUse = false;
     return new Promise((resolve, reject) => {
       const user = new User(this.company, employee);

@@ -49,7 +49,7 @@ export class EmployeeListComponent implements OnInit {
 
   edit(employee?:Employee) {
     if (employee) {
-      this.router.navigate(['employee', 'view', employee.id]);
+      this.router.navigate(['employee', 'view', employee._id]);
     } else {
       this.router.navigate(['employee', 'edit']);
     }

@@ -44,7 +44,7 @@ export class CompanytypeListComponent implements OnInit {
 
   edit(companytype?:Companytype) {
     if (companytype) {
-      this.router.navigate(['parameter/companytype', 'edit', companytype.id]);
+      this.router.navigate(['parameter/companytype', 'edit', companytype._id]);
     } else {
       this.router.navigate(['parameter/companytype', 'edit']);
     }

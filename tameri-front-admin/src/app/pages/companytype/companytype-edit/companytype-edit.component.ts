@@ -45,17 +45,9 @@ export class CompanytypeEditComponent implements OnInit {
     this.route.paramMap.subscribe((paramMap) => {
       const id = paramMap.get('id');
       if (id) {
-
         this.companytypeService.get('companytype', id).then((data) => {
           this.companytype = data;
-          this.isNewCompanytype = false;
-          this.authService.getUser(this.companytype.id).then((user) => {
-            if (user) {
-              this.user = user;
-              this.login = user.login;
-              this.password = user.password;
-            }
-          }); 
+          this.isNewCompanytype = false;          
         });
       }
     });
@@ -88,7 +80,7 @@ export class CompanytypeEditComponent implements OnInit {
         this.router.navigate(['parameter/companytype']);
       });
     } else {
-      this.companytypeService.modify('companytype', this.companytype.id, this.companytype).then(() => {
+      this.companytypeService.modify('companytype', this.companytype._id, this.companytype).then(() => {
         this.notifierService.notify('success', "saved successfully");
         this.step++;
         this.router.navigate(['parameter/companytype']);
@@ -99,7 +91,7 @@ export class CompanytypeEditComponent implements OnInit {
   delete() {
     const oui = confirm('Are you sure to delete this item?');
     if (oui) {
-      this.companytypeService.delete('companytype', this.companytype.id).then(() => {
+      this.companytypeService.delete('companytype', this.companytype._id).then(() => {
         this.router.navigate(['parameter/companytype']);
       });
     }
