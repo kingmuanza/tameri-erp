@@ -7,21 +7,16 @@ exports.create = (req, res, next) => {
 };
 
 exports.modify = (req, res, next) => {
-    console.log('req.body');
-    console.log(req.body);
     billService.modify(req.body).then(() => {
         res.status(201).json({
             message: 'modify !',
             body: req.body
         });
-
     });
 };
 
 exports.get = (req, res, next) => {
     billService.get(req.params.id).then((bill) => {
-        console.log('bill');
-        console.log(bill);
         res.status(201).json(bill);
     });
 };

@@ -209,9 +209,12 @@ export class PosComponent implements OnInit {
     console.log(product.id);
     this.salelineService.getAll('saleline').then((salelines) => {
       console.log(salelines.length);
-      salelines = salelines.filter((d) => {
-        return d.productpack.product.id === product.id;
-      });
+      console.log(salelines);
+      if (salelines.length > 0) {
+        salelines = salelines.filter((d) => {
+          return d.productpack.product.id === product.id;
+        });
+      }
       const totalSales = this.calculTotalSales(salelines);
       console.log('totalSales : ' + totalSales);
       this.getProductItems(product, totalSales, productpack.quantity);

@@ -65,6 +65,13 @@
 
             <button *ngIf="!sale.good" (click)="setPaid(sale)" class="btn btn-primary">Set as paid</button>
             <button *ngIf="sale.good" (click)="setNotPaid(sale)" class="btn btn-primary">Set as NOT paid</button>
+
+            <ng-container *ngIf="!sale.delivery">
+                &nbsp; &nbsp;
+                <button class="btn btn-danger" (click)="delete(sale)">
+                    Cancel the order
+                </button>
+            </ng-container>
         </div>
     </div>
 </div>

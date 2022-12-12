@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { NotifierService } from 'angular-notifier';
 import { Client } from 'src/app/_models/client.model';
 import { Company } from 'src/app/_models/company.model';
@@ -52,6 +52,7 @@ export class BillEditComponent implements OnInit {
     private saleService: CrudService<Sale>,
     private productitemService: CrudService<Productitem>,
     private route: ActivatedRoute,
+    private router: Router,
   ) {
     this.company = this.authService.user.company;
   }
@@ -132,4 +133,14 @@ export class BillEditComponent implements OnInit {
     return total;
   }
 
+  delete(bill: Sale) {
+    const yes = confirm('Are you sure to cancel this order ?');
+    if (yes) {
+      this.billService.delete('bill', bill._id).then((data) => {
+        this.notifierService.notify('success', "Delete successfully");
+        this.router.navigate(['bill']);
+      }).catch((e) => {
+      });
+    }
+  }
 }
