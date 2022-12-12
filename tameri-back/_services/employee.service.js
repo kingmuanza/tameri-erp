@@ -7,7 +7,7 @@ if (typeof localStorage === "undefined" || localStorage === null) {
 const Employee = require('../_models/employee.model.js');
 
 exports.create = (item) => {
-    console.log('CREATE NEW CLIENT');
+    console.log('CREATE NEW EMPLOYEE');
     console.log(item);
     return new Promise((resolve, reject) => {
         const employee = new Employee(item);

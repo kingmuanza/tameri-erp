@@ -82,17 +82,27 @@ export class AuthenticationService {
     localStorage.removeItem('TameriUser');
   }
 
-  createUser(user: User) {
+  createUser(user: User): Promise<any> {
     console.log('createUser');
     console.log(user);
     return new Promise((resolve, reject) => {
       this.isLoginAvaible(user.login).then((avaible) => {
+        console.log('avaible : ' + avaible);
         if (avaible) {
+          console.log('On va faire la requete post : ' + avaible);
           this.http.post(this.URL + 'auth/create', user).subscribe({
-            next: (data) => {
-              resolve(data);
+            next: (_id) => {
+              console.log('_id ');
+              console.log(_id);
+              resolve(_id);
+            },
+            error: (e) => {
+              console.log('error ');
+              console.log(e);
+              reject(e);
             }
           });
+
         } else {
           reject('UNAVAIBLE');
         }
@@ -115,12 +125,14 @@ export class AuthenticationService {
   isLoginAvaible(login: string): Promise<boolean> {
     console.log('isLoginAvaible');
     return new Promise((resolve, reject) => {
-      this.http.get(this.URL + 'auth/verifylogin/' + login).subscribe((data) => {
-        console.log('isLoginAvaible data ' + JSON.stringify(data));
-        if (JSON.parse(JSON.stringify(data)).length > 0) {
-          resolve(false);
-        } else {
-          resolve(true);
+      this.http.get(this.URL + 'auth/verifylogin/' + login).subscribe({
+        next: (data) => {
+          console.log('isLoginAvaible data ' + JSON.stringify(data));
+          if (JSON.parse(JSON.stringify(data)).length > 0) {
+            resolve(false);
+          } else {
+            resolve(true);
+          }
         }
       });
     });

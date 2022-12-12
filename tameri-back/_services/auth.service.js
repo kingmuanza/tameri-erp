@@ -7,14 +7,15 @@ if (typeof localStorage === "undefined" || localStorage === null) {
 const User = require('../_models/user.model.js');
 
 exports.create = (item) => {
-    console.log('CREATE NEW CLIENT');
+    console.log('CREATE NEW USER');
     console.log(item);
     return new Promise((resolve, reject) => {
         const user = new User(item);
         user.save().then((err, data) => {
             resolve(user._id)
-        }).catch(() => {
-
+        }).catch((e) => {
+            console.log(e);
+            reject(e)
         });
     });
 }

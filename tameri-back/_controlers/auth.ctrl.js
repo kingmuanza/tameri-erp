@@ -1,11 +1,8 @@
 const authService = require('../_services/auth.service');
 
 exports.create = (req, res, next) => {
-    authService.create(req.body).then(() => {
-        res.status(201).json({
-            message: 'create !',
-            body: req.body
-        });
+    authService.create(req.body).then((data) => {
+        res.status(201).json(data);
     });
 };
 

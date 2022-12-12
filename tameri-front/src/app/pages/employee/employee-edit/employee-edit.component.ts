@@ -62,7 +62,7 @@ export class EmployeeEditComponent implements OnInit {
   }
 
   getCompany(company: Company) {
-    this.companyService.get('company', company.id).then((data) => {
+    this.companyService.get('company', company._id).then((data) => {
       this.company = data;
     });
   }
@@ -93,6 +93,8 @@ export class EmployeeEditComponent implements OnInit {
   }
 
   save() {
+    console.log('Création dun employee');
+    console.log(this.employee);
     this.showError = false;
     const resultVerifiy = this.verifyForm();
     console.log('resultVerifiy');
@@ -127,13 +129,10 @@ export class EmployeeEditComponent implements OnInit {
     if (!resultVerifiy) {
       return
     }
-    this.employee.company = this.authService.user.company;
-    this.employee.login = this.employee.tel;
-
     this.updateUser(this.employee).then(() => {
-      this.employeeService.modify('employee', this.employee.id, this.employee).then(() => {
+      this.employeeService.modify('employee', this.employee._id, this.employee).then(() => {
         this.notifierService.notify('success', "saved successfully");
-        this.router.navigate(['employee', 'view', this.employee.id]);
+        this.router.navigate(['employee', 'view', this.employee._id]);
       });
     });
   }
@@ -141,24 +140,28 @@ export class EmployeeEditComponent implements OnInit {
   updateUser(employee: Employee): Promise<User> {
     return new Promise((resolve, reject) => {
       const user = new User(this.company, employee);
+      console.log('user to update');
+      console.log(user);
       user._id = employee.userID;
-      user.password = this.password;
-      this.authService.updateUser (user).then(() => {
-        this.notifierService.notify('success', "User update successfully");
+      console.log(user);
+      this.authService.updateUser(user).then(() => {
+        this.notifierService.notify('success', "User update successfully " + user._id);
         resolve(user);
       });
     });
   }
 
   createUser(employee: Employee): Promise<User> {
+    console.log('Création dun utilistauer');
     this.telAlreadyUse = false;
     return new Promise((resolve, reject) => {
       const user = new User(this.company, employee);
       user.password = this.password;
       console.log(('user'));
       console.log(user);
-      this.authService.createUser(user).then(() => {
+      this.authService.createUser(user).then((_id) => {
         this.notifierService.notify('success', "User create successfully");
+        user._id = _id;
         resolve(user);
       }).catch((e) => {
         this.notifierService.notify('error', "Tel is already used");

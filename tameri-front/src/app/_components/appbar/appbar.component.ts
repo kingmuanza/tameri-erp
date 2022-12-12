@@ -76,11 +76,12 @@ export class AppbarComponent implements OnInit, OnChanges {
     this.companyService.get('company', company._id).then((data) => {
       this.company = data;
       console.log('appbar company');
-      console.log(this.company);
+      console.log(this.company.option);
     });
   }
 
   getAcess() {
+    this.setAllFalse();
     if (this.user?.role.indexOf('ADMIN') !== -1) {
       this.access = {
         employee: true,
@@ -132,104 +133,24 @@ export class AppbarComponent implements OnInit, OnChanges {
       }
     }
     if (this.user?.role.indexOf('Warehouseman') !== -1) {
-      this.access = {
-        employee: false, 
-        pos: false,
-        supplier: false,
-        product: {
-          menu: false,
-          it: false,
-          pack: false,
-          item: false,
-        },
-        resource: {
-          menu: true,
-          it: false,
-          pack: false,
-          item: true,
-        },
-        param: false,
-        client: false,
-        dashboard: false,
-        order: false,
-        invoice: false,
-        inventory: true,
-      }
+      this.access.resource.menu = true;
+      this.access.resource.item = true;
+      this.access.inventory = true;
     }
     if (this.user?.role.indexOf('Productionman') !== -1) {
-      this.access = {
-        employee: false, 
-        pos: false,
-        supplier: false,
-        product: {
-          menu: true,
-          it: false,
-          pack: false,
-          item: true,
-        },
-        resource: {
-          menu: false,
-          it: false,
-          pack: false,
-          item: false,
-        },
-        param: false,
-        client: true,
-        dashboard: false,
-        order: true,
-        invoice: false,
-        inventory: false,
-      }
+      this.access.product.menu = true;
+      this.access.product.item = true;
+      this.access.order = true;
     }
     if (this.user?.role.indexOf('Cashier') !== -1) {
-      this.access = {
-        employee: false, 
-        pos: true,
-        supplier: false,
-        product: {
-          menu: true,
-          it: false,
-          pack: false,
-          item: true,
-        },
-        resource: {
-          menu: false,
-          it: false,
-          pack: false,
-          item: false,
-        },
-        param: false,
-        client: true,
-        dashboard: false,
-        order: true,
-        invoice: true,
-        inventory: false,
-      }
+      this.access.pos = true;
+      this.access.product.menu = true;
+      this.access.product.item = true;
+      this.access.order = true;
+      this.access.invoice = true;
+      this.access.client = true;
     }
     if (this.user?.role.indexOf('Waitress') !== -1) {
-      this.access = {
-        employee: false, 
-        pos: true,
-        supplier: false,
-        product: {
-          menu: true,
-          it: false,
-          pack: false,
-          item: true,
-        },
-        resource: {
-          menu: false,
-          it: false,
-          pack: false,
-          item: false,
-        },
-        param: false,
-        client: false,
-        dashboard: false,
-        order: false,
-        invoice: false,
-        inventory: false,
-      }
     }
 
     console.log('this.access');
@@ -250,6 +171,32 @@ export class AppbarComponent implements OnInit, OnChanges {
       return 'Production Man';
     }
     return role
+  }
+
+  setAllFalse() {
+    this.access = {
+      employee: false, 
+      pos: false,
+      supplier: false,
+      product: {
+        menu: false,
+        it: false,
+        pack: false,
+        item: false,
+      },
+      resource: {
+        menu: false,
+        it: false,
+        pack: false,
+        item: false,
+      },
+      param: false,
+      client: false,
+      dashboard: false,
+      order: false,
+      invoice: false,
+      inventory: false,
+    }
   }
 
 }
