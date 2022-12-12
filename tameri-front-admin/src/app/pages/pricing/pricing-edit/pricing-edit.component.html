@@ -5,7 +5,7 @@
             <li class="breadcrumb-item"><a [routerLink]="'/pricing'">All pricing</a></li>
             <li class="breadcrumb-item active" *ngIf="isNewPricing">new</li>
 
-            <li class="breadcrumb-item active" *ngIf="!isNewPricing"><a [routerLink]="'/pricing/view/' + pricing.id">{{pricing.name}}</a></li>
+            <li class="breadcrumb-item active" *ngIf="!isNewPricing"><a [routerLink]="'/pricing/view/' + pricing._id">{{pricing.name}}</a></li>
             <li class="breadcrumb-item active" *ngIf="!isNewPricing">Edit</li>
         </ol>
     </nav>

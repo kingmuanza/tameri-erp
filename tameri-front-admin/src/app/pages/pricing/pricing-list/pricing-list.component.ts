@@ -43,7 +43,7 @@ export class PricingListComponent implements OnInit {
 
   edit(pricing?:any) {
     if (pricing) {
-      this.router.navigate(['pricing', 'edit', pricing.id]);
+      this.router.navigate(['pricing', 'view', pricing._id]);
     } else {
       this.router.navigate(['pricing', 'edit']);
     }

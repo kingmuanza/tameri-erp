@@ -40,7 +40,7 @@ export class PricingEditComponent implements OnInit {
         this.router.navigate(['pricing']);
       });
     } else {
-      this.pricingService.modify('pricing', this.pricing.id, this.pricing).then(() => {
+      this.pricingService.modify('pricing', this.pricing._id, this.pricing).then(() => {
         this.notifierService.notify('success', "saved successfully");
         this.router.navigate(['pricing']);
       });

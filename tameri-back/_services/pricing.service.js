@@ -4,69 +4,66 @@ if (typeof localStorage === "undefined" || localStorage === null) {
     localStorage = new LocalStorage('./localbd');
 }
 
+const Pricing = require('../_models/pricing.model.js');
 
 exports.create = (item) => {
-    var items = [];
-    var itemsString = localStorage.getItem('pricing');
-    if (itemsString) {
-        items = JSON.parse(itemsString);
-    }
-    items.push(item);
-    localStorage.setItem('pricing', JSON.stringify(items));
+    console.log('CREATE NEW CLIENT');
+    console.log(item);
+    return new Promise((resolve, reject) => {
+        delete item._id;
+        const pricing = new Pricing(item);
+        pricing.save().then((err, data) => {
+            resolve(pricing._id)
+        }).catch(() => {
+
+        });
+    });
 }
 
 exports.modify = (item) => {
-    var items = [];
-    var nouveauxitems = [];
-    var itemsString = localStorage.getItem('pricing');
-    if (itemsString) {
-        items = JSON.parse(itemsString);
-    }
-    items.forEach((element) => {
-        if (element.id === item.id) {
-            nouveauxitems.push(item);
-        } else {
-            nouveauxitems.push(element);
-        }
+    return new Promise((resolve, reject) => {
+        Pricing.updateOne({
+            _id: item._id
+        }, {
+            $set: item
+        }).then(() => {
+            resolve(item);
+        }).catch(() => {
+
+        });
     });
-    localStorage.setItem('pricing', JSON.stringify(nouveauxitems));
 }
 
 exports.get = (id) => {
-    var items = [];
-    var itemsString = localStorage.getItem('pricing');
-    if (itemsString) {
-        items = JSON.parse(itemsString);
-    }
-    var item;
-    items.forEach((element) => {
-        if (element.id === id) {
-            item = element;
-        }
+    return new Promise((resolve, reject) => {
+        Pricing.findOne({
+            _id: id
+        }).then((item) => {
+            resolve(item);
+        }).catch(() => {
+
+        });
     });
-    return item;
 }
 
 exports.getAll = () => {
-    var items = [];
-    var itemsString = localStorage.getItem('pricing');
-    if (itemsString) {
-        items = JSON.parse(itemsString);
-    }
-    return items;
+    return new Promise((resolve, reject) => {
+        Pricing.find().then((items) => {
+            resolve(items);
+        }).catch((error) => {
+            reject(error)
+        });
+    });
 }
 
 exports.delete = (id) => {
-    var items = [];
-    var nouveauxitems = [];
-    var itemsString = localStorage.getItem('pricing');
-    if (itemsString) {
-        items = JSON.parse(itemsString);
-    }
-    items.forEach((element) => {
-        if (element.id === id) {} else {
-            nouveauxitems.push(element);
-        }
+    return new Promise((resolve, reject) => {
+        Pricing.deleteOne({
+            _id: id
+        }).then(() => {
+            resolve(id);
+        }).catch(() => {
+
+        });
     });
-    localStorage.setItem('pricing', JSON.stringify(nouveauxitems));
 }

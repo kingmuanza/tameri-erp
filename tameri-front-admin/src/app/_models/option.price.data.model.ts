@@ -1,5 +1,6 @@
 export const OptionPriceData = {
     id: 'PRICING' + new Date().getTime(),
+    _id: '',
     name: '',
     productResource : 5000,
     productPack : 5000,
