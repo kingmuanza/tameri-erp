@@ -44,14 +44,14 @@ export class SupplierEditComponent implements OnInit {
   save() {
     this.supplier.company = this.authService.user.company;
     if (this.isNewSupplier) {
-      this.supplierService.create('supplier', this.supplier).then(() => {
+      this.supplierService.create('supplier', this.supplier).then((_id) => {
         this.notifierService.notify('success', "saved successfully");
-        this.router.navigate(['supplier', 'view', this.supplier.id]);
+        this.router.navigate(['supplier', 'view', _id]);
       });
     } else {
-      this.supplierService.modify('supplier', this.supplier.id, this.supplier).then(() => {
+      this.supplierService.modify('supplier', this.supplier._id, this.supplier).then(() => {
         this.notifierService.notify('success', "saved successfully");
-        this.router.navigate(['supplier', 'view', this.supplier.id]);
+        this.router.navigate(['supplier', 'view', this.supplier._id]);
       });
     }
   }

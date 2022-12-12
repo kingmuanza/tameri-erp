@@ -49,7 +49,7 @@ export class SupplierListComponent implements OnInit {
 
   edit(supplier?:Supplier) {
     if (supplier) {
-      this.router.navigate(['supplier', 'view', supplier.id]);
+      this.router.navigate(['supplier', 'view', supplier._id]);
     } else {
       this.router.navigate(['supplier', 'edit']);
     }

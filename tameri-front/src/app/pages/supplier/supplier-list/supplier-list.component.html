@@ -26,8 +26,8 @@
                         <tr *ngFor="let supplier of suppliers" (click)="edit(supplier)">
                             <td>{{supplier.id}}</td>
                             <td>{{supplier.name}}</td>
-                            <td>{{supplier.tel}}</td>
-                            <td>{{supplier.address}}</td>
+                            <td>{{supplier.contact.tel}}</td>
+                            <td>{{supplier.contact.address}}</td>
                         </tr>
                     </tbody>
                 </table>

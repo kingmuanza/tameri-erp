@@ -6,7 +6,7 @@
             <li class="breadcrumb-item active" *ngIf="!isNewSupplier">{{supplier.name}}</li>
         </ol>
     </nav>
-    <a [routerLink]="'/supplier/edit/' + supplier.id" style="float: right;">Edit</a>
+    <a [routerLink]="'/supplier/edit/' + supplier._id" style="float: right;">Edit</a>
     <h1 *ngIf="!isNewSupplier" class="titre">
         {{supplier.name}}
     </h1>
@@ -32,51 +32,19 @@
                             <div class="col-lg-4">
                                 <div class="input-group mb-3">
                                     <span class="input-group-text">Address</span>
-                                    <input [(ngModel)]="supplier.address" type="text" class="form-control">
+                                    <input [(ngModel)]="supplier.contact.address" type="text" class="form-control">
                                 </div>
                             </div>
                             <div class="col-lg-6">
                                 <div class="input-group mb-3">
                                     <span class="input-group-text">Tel</span>
-                                    <input [(ngModel)]="supplier.tel" type="text" class="form-control">
+                                    <input [(ngModel)]="supplier.contact.tel" type="text" class="form-control">
                                 </div>
                             </div>
                             <div class="col-lg-6">
                                 <div class="input-group mb-3">
                                     <span class="input-group-text">Email</span>
-                                    <input [(ngModel)]="supplier.email" type="text" class="form-control">
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-lg-5">
-            <div class="second-step card shadow-sm">
-                <div class="card-body">
-                    <p class="card-title">
-                        Owner infos
-                    </p>
-                    <div class=" page-contenu ">
-                        <div class="row">
-
-                            <div class="col-lg-8">
-                                <div class="input-group mb-3">
-                                    <span class="input-group-text">Names</span>
-                                    <input [(ngModel)]="supplier.owner.names" type="text" class="form-control">
-                                </div>
-                            </div>
-                            <div class="col-lg-4">
-                                <div class="input-group mb-3">
-                                    <span class="input-group-text">Position</span>
-                                    <input [(ngModel)]="supplier.owner.position" type="text" class="form-control">
-                                </div>
-                            </div>
-                            <div class="col-lg-12">
-                                <div class="input-group mb-3">
-                                    <span class="input-group-text">Tel</span>
-                                    <input [(ngModel)]="supplier.owner.tel" type="text" class="form-control">
+                                    <input [(ngModel)]="supplier.contact.email" type="text" class="form-control">
                                 </div>
                             </div>
                         </div>

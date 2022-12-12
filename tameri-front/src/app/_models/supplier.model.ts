@@ -1,14 +1,12 @@
 import { Company } from "./company.model";
+import { Contact } from "./contact.model";
 import { Owner } from "./owner.model";
 
 export class Supplier {
     
     id: string = 'Supplier'.toUpperCase() + new Date().getTime();
     name = '';
-    tel = '';
-    email = '';
-    address = '';
-    geolocation = '';
-    owner = new Owner();
+    contact = new Contact();
     company = new Company();
+  _id: any;
 }
