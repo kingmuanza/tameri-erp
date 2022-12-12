@@ -4,7 +4,7 @@
             <li class="breadcrumb-item"><a>Home</a></li>
             <li class="breadcrumb-item"><a [routerLink]="'/parameter/position'">Positions</a></li>
             <li class="breadcrumb-item active" *ngIf="isNewPosition">new</li>
-            <li class="breadcrumb-item active" *ngIf="!isNewPosition"><a [routerLink]="'parameter/position/edit/' + position.id">{{position.name}}</a></li>
+            <li class="breadcrumb-item active" *ngIf="!isNewPosition"><a [routerLink]="'/parameter/position/edit/' + position._id">{{position.name}}</a></li>
             <li class="breadcrumb-item active" *ngIf="!isNewPosition">Edit</li>
         </ol>
     </nav>

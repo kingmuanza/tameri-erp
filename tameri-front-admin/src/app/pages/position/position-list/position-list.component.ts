@@ -44,7 +44,7 @@ export class PositionListComponent implements OnInit {
 
   edit(position?:Position) {
     if (position) {
-      this.router.navigate(['parameter/position', 'edit', position.id]);
+      this.router.navigate(['parameter/position', 'edit', position._id]);
     } else {
       this.router.navigate(['parameter/position', 'edit']);
     }

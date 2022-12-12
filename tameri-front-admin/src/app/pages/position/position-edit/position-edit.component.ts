@@ -88,7 +88,7 @@ export class PositionEditComponent implements OnInit {
         this.router.navigate(['parameter/position']);
       });
     } else {
-      this.positionService.modify('position', this.position.id, this.position).then(() => {
+      this.positionService.modify('position', this.position._id, this.position).then(() => {
         this.notifierService.notify('success', "saved successfully");
         this.step++;
         this.router.navigate(['parameter/position']);
@@ -99,7 +99,7 @@ export class PositionEditComponent implements OnInit {
   delete() {
     const oui = confirm('Are you sure to delete this item?');
     if (oui) {
-      this.positionService.delete('position', this.position.id).then(() => {
+      this.positionService.delete('position', this.position._id).then(() => {
         this.router.navigate(['parameter/position']);
       });
     }
