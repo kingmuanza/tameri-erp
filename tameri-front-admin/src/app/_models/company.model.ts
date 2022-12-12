@@ -5,20 +5,20 @@ import { OptionPrice } from "./option.price.model";
 import { Owner } from "./owner.model";
 
 export class Company {
-    id: string = 'COMPANY' + new Date().getTime();
-    name: string = '';
-    type: string = '';
-    
-    contact = new Contact();
-    geolocation: string = '';
-    currency: string = 'XAF';
-    owner = new Owner();
-    
-    community = new Community();
+  id: string = 'COMPANY' + new Date().getTime();
+  name: string = '';
+  type: string = '';
 
-    option = new OptionPrice();
+  contact = new Contact();
+  geolocation: string = '';
+  currency: string = 'XAF';
+  owner = new Owner();
 
-    pricing = OptionPriceData;
+  community = new Community();
+
+  option = new OptionPrice();
+
+  pricing = OptionPriceData;
   _id: any;
 
 }

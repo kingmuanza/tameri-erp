@@ -151,6 +151,7 @@ export class CompanyEditComponent implements OnInit {
       user.password = this.password;
       user.role = ['ADMIN'];
       user.company = this.company;
+      user.name = this.company.owner.names;
 
       this.authService.createUser(user).then(() => {
         this.notifierService.notify('success', "User create successfully");

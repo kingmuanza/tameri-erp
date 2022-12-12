@@ -57,7 +57,9 @@ exports.getAll = () => {
 
 exports.getAllByLogin = (l) => {
     return new Promise((resolve, reject) => {
-        User.find({ login: l }).then((items) => {
+        User.find({
+            login: l
+        }).then((items) => {
             resolve(items);
         }).catch((error) => {
             reject(error)
@@ -66,13 +68,17 @@ exports.getAllByLogin = (l) => {
 }
 
 exports.connexion = (l, passe) => {
+    console.log('Connexion');
+    console.log('Login : ' + l);
+    console.log('Passe : ' + passe);
     return new Promise((resolve, reject) => {
-        User.find({ login: l, password: passe }).then((items) => {
-            if (items.length > 0) {
-                resolve(items);
-            } else {
-                reject('No user');
-            }
+        User.findOne({
+            login: l,
+            password: passe
+        }).then((items) => {
+            console.log('items');
+            console.log(items);
+            resolve(items);
         }).catch((error) => {
             reject(error)
         });

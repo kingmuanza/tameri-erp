@@ -105,9 +105,9 @@ export class CompanyViewComponent implements OnInit {
   }
 
   save() {
-    this.companyService.modify('company', this.company.id, this.company).then(() => {
+    this.companyService.modify('company', this.company._id, this.company).then(() => {
       this.notifierService.notify('success', "saved successfully");
-      this.router.navigate(['company', 'view', this.company.id]);
+      this.router.navigate(['company', 'view', this.company._id]);
       this.price = this.calcul(this.company);
     });
   }

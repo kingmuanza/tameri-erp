@@ -32,6 +32,7 @@ export class AuthenticationService {
           if (data) {
             localStorage.setItem('TameriUser', JSON.stringify(data));
             this.user = data;
+
             this.getCompany(this.user.company).then((company) => {
               this.user.company = company;
               this.company = company;
@@ -41,6 +42,7 @@ export class AuthenticationService {
               console.log(this.company);
               resolve(result);
             });
+
           } else {
             reject('No user')
           }
@@ -54,12 +56,11 @@ export class AuthenticationService {
 
   getCompany(company: Company) {
     return new Promise((resolve, reject) => {
-      this.companyService.get('company', company.id).then((data) => {
+      this.companyService.get('company', company._id).then((data) => {
         resolve(data);
       });
     });
   }
-
 
   autoConnexion() {
     let user: any;

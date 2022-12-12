@@ -8,16 +8,17 @@ export class Company {
     id: string = 'COMPANY' + new Date().getTime();
     name: string = '';
     type: string = '';
-    address: string = '';
+  
     contact = new Contact();
     geolocation: string = '';
-    currency: string = '';
+    currency: string = 'XAF';
     owner = new Owner();
-    
+  
     community = new Community();
-
+  
     option = new OptionPrice();
-
+  
     pricing = OptionPriceData;
-
+    _id: any;
+  
 }

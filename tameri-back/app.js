@@ -30,12 +30,13 @@ const clientRoutes = require('./_routes/client.route');
 const salelineRoutes = require('./_routes/saleline.route');
 const resourceitemRoutes = require('./_routes/resourceitem.route');
 
+mongoose.set('strictQuery', true);
 mongoose.connect('mongodb+srv://tameri:tameri@cluster0.hotc5.mongodb.net/test?retryWrites=true&w=majority', {
         useNewUrlParser: true,
         useUnifiedTopology: true
     })
     .then(() => console.log('Connexion à MongoDB réussie !'))
-    .catch(() => console.log('Connexion à MongoDB échouée !'));
+    .catch(() => console.error('Connexion à MongoDB échouée !'));
 
 const app = express();
 

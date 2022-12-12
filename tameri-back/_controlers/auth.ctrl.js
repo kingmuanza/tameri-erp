@@ -1,44 +1,51 @@
 const authService = require('../_services/auth.service');
 
 exports.create = (req, res, next) => {
-    authService.create(req.body);
-    res.status(201).json({
-        message: 'create !',
-        body: req.body
+    authService.create(req.body).then(() => {
+        res.status(201).json({
+            message: 'create !',
+            body: req.body
+        });
     });
 };
 
 exports.connexion = (req, res, next) => {
-    const user = authService.connexion(req.body.login, req.body.password);
-    res.status(201).json(user);
+    authService.connexion(req.body.login, req.body.password).then((user) => {
+        res.status(201).json(user);
+    });
 };
 
 exports.modify = (req, res, next) => {
-    authService.modify(req.body);
-    res.status(201).json({
-        message: 'modify !',
-        body: req.body
+    authService.modify(req.body).then(() => {
+        res.status(201).json({
+            message: 'modify !',
+            body: req.body
+        });
     });
 };
 
 exports.get = (req, res, next) => {
-    var auth = authService.get(req.params.id);
-    res.status(201).json(auth);
+    authService.get(req.params.id).then((auth) => {
+        res.status(201).json(auth);
+    });
 };
 
 exports.getAll = (req, res, next) => {
-    var companies = authService.getAll();
-    res.status(201).json(companies);
+    authService.getAll().then((users) => {
+        res.status(201).json(users);
+    });
 };
 
 exports.getAllByLogin = (req, res, next) => {
-    var companies = authService.getAllByLogin(req.params.login);
-    res.status(201).json(companies);
+    authService.getAllByLogin(req.params.login).then((users) => {
+        res.status(201).json(users);
+    });
 };
 
 exports.delete = (req, res, next) => {
-    authService.delete(req.params.id);
-    res.status(201).json({
-        message: 'delete !'
+    authService.delete(req.params.id).then(() => {
+        res.status(201).json({
+            message: 'delete !'
+        });
     });
 };
