@@ -57,7 +57,7 @@ exports.getAll = () => {
 exports.delete = (id) => {
     return new Promise((resolve, reject) => {
         Resourceitem.deleteOne({
-            id: id
+            _id: id
         }).then(() => {
             resolve(id);
         }).catch(() => {
