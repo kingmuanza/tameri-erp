@@ -4,6 +4,8 @@ import { DataTableDirective } from 'angular-datatables';
 import { Subject } from 'rxjs';
 import { DatatablesOptions } from 'src/app/_data/datatable.option';
 import { Client } from 'src/app/_models/client.model';
+import { Company } from 'src/app/_models/company.model';
+import { AuthenticationService } from 'src/app/_services/authentication.service';
 import { CrudService } from 'src/app/_services/crud.service';
 
 @Component({
@@ -20,11 +22,14 @@ export class ClientListComponent implements OnInit {
   dtInstance!: Promise<DataTables.Api>;
 
   clients = new Array<Client>();
+  company = new Company();
 
   constructor(
     private router: Router,
     private clientService: CrudService<Client>,
-  ) {
+    private authService: AuthenticationService,
+  ) {    
+    this.company = this.authService.user.company;
   }
 
   private initNouveau() {
@@ -53,7 +58,9 @@ export class ClientListComponent implements OnInit {
   ngOnInit(): void {
     this.dtOptions = this.initNouveau();
     this.clientService.getAll('client').then((data) => {
-      this.clients = data;
+      this.clients = data.filter((d) => {
+        return d.company && d.company.id === this.company.id;
+      });
       this.dtTrigger.next('');
     });
     setTimeout(() => {

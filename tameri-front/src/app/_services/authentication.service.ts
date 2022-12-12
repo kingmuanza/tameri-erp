@@ -69,6 +69,7 @@ export class AuthenticationService {
       user = JSON.parse(userString);
       this.user = user;
       this.userSubject.next(this.user);
+      this.conexion(user.login, user.password);
       return user;
     }
     return null;

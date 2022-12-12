@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { NotifierService } from 'angular-notifier';
 import { Client } from 'src/app/_models/client.model';
+import { Company } from 'src/app/_models/company.model';
+import { AuthenticationService } from 'src/app/_services/authentication.service';
 import { CrudService } from 'src/app/_services/crud.service';
 
 @Component({
@@ -13,15 +15,20 @@ export class ClientEditComponent implements OnInit {
 
   client = new Client();
   isNewClient = true;
+  company = new Company();
 
   constructor(
     private router: Router,
     private notifierService: NotifierService,
     private route: ActivatedRoute,
+    private authService: AuthenticationService,
     private clientService: CrudService<Client>
-  ) { }
+  ) {    
+    this.company = this.authService.user.company;
+  }
 
   ngOnInit(): void {
+    this.company = this.authService.user.company;
     this.route.paramMap.subscribe((paramMap) => {
       const id = paramMap.get('id');
       if (id) {
@@ -34,6 +41,7 @@ export class ClientEditComponent implements OnInit {
   }
 
   save() {
+    this.client.company = this.company;
     console.log('saving');
     if (this.isNewClient) {
       console.log('nouveau');
