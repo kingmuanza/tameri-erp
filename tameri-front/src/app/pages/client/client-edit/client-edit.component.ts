@@ -34,15 +34,18 @@ export class ClientEditComponent implements OnInit {
   }
 
   save() {
+    console.log('saving');
     if (this.isNewClient) {
-      this.clientService.create('client', this.client).then(() => {
+      console.log('nouveau');
+      console.log(this.client);
+      this.clientService.create('client', this.client).then((_id) => {
         this.notifierService.notify('success', "saved successfully");
-        this.router.navigate(['client', 'view', this.client.id]);
+        this.router.navigate(['client', 'view', _id]);
       });
     } else {
-      this.clientService.modify('client', this.client.id, this.client).then(() => {
+      this.clientService.modify('client', this.client._id, this.client).then(() => {
         this.notifierService.notify('success', "saved successfully");
-        this.router.navigate(['client', 'view', this.client.id]);
+        this.router.navigate(['client', 'view', this.client._id]);
       });
     }
   }
@@ -50,7 +53,7 @@ export class ClientEditComponent implements OnInit {
   delete() {
     const oui = confirm('Are you sure to delete this item?');
     if (oui) {
-      this.clientService.delete('client', this.client.id).then(() => {
+      this.clientService.delete('client', this.client._id).then(() => {
         this.router.navigate(['client']);
       });
     }

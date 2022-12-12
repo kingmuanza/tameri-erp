@@ -6,12 +6,12 @@
             <li class="breadcrumb-item active" *ngIf="!isNewClient">{{client.name}}</li>
         </ol>
     </nav>
-    <a [routerLink]="'/client/edit/' + client.id" style="float: right;">Edit</a>
+    <a [routerLink]="'/client/edit/' + client._id" style="float: right;">Edit</a>
     <h1 *ngIf="!isNewClient" class="titre">
         {{client.firstname}} {{client.name}}
     </h1>
     <p>
-        Liste des achats affectués
+        All orders
     </p>
     <div class=" page-contenu ">
         <div class="card shadow-lg">

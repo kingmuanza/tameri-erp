@@ -44,7 +44,7 @@ export class ClientListComponent implements OnInit {
 
   edit(client?:Client) {
     if (client) {
-      this.router.navigate(['client', 'view', client.id]);
+      this.router.navigate(['client', 'view', client._id]);
     } else {
       this.router.navigate(['client', 'edit']);
     }
