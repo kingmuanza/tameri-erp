@@ -174,7 +174,7 @@ export class EmployeeEditComponent implements OnInit {
   delete() {
     const oui = confirm('Are you sure to delete this item?');
     if (oui) {
-      this.employeeService.delete('employee', this.employee.id).then(() => {
+      this.employeeService.delete('employee', this.employee._id).then(() => {
         this.router.navigate(['employee']);
       });
     }

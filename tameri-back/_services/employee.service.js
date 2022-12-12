@@ -1,9 +1,4 @@
-var LocalStorage;
-if (typeof localStorage === "undefined" || localStorage === null) {
-    LocalStorage = require('node-localstorage').LocalStorage;
-    localStorage = new LocalStorage('./localbd');
-}
-
+const authService = require('../_services/auth.service');
 const Employee = require('../_models/employee.model.js');
 
 exports.create = (item) => {
@@ -57,12 +52,19 @@ exports.getAll = () => {
 
 exports.delete = (id) => {
     return new Promise((resolve, reject) => {
-        Employee.deleteOne({
-            _id: id
-        }).then(() => {
-            resolve(id);
-        }).catch(() => {
+        this.get(id).then((e) => {
+            var userID = e.userID;
+            authService.delete(userID).then(() => {
+                Employee.deleteOne({
+                    _id: id
+                }).then(() => {
+                    resolve(id);
+                }).catch(() => {
 
+                });
+            });
+        }).catch((error) => {
+            reject(error);
         });
     });
 }
