@@ -159,8 +159,9 @@ export class AppbarComponent implements OnInit, OnChanges {
 
   signOut() {
     this.authService.deconnexion();
-    this.router.navigate(['signin']);
-    window.location.reload();
+    this.router.navigate(['signin']).then(() => {
+      window.location.reload();
+    });
   }
 
   showLabel(role: string) {
