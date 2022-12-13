@@ -6,6 +6,7 @@ import { Subject } from 'rxjs';
 import { DatatablesOptions } from 'src/app/_data/datatable.option';
 import { Client } from 'src/app/_models/client.model';
 import { Sale } from 'src/app/_models/sale.model';
+import { Saleline } from 'src/app/_models/saleline.model';
 import { CrudService } from 'src/app/_services/crud.service';
 
 @Component({
@@ -68,6 +69,14 @@ export class ClientViewComponent implements OnInit {
 
   viewSale(sale: Sale) {
 
+  }
+
+  calculTotalSalelines(salelines: Array<Saleline>) {
+    let total = 0;
+    salelines.forEach((s) => {      
+      total += s.quantity * s.productpack.quantity * s.productpack.price;
+    });
+    return total;
   }
 
 }

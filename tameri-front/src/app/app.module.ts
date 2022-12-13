@@ -33,9 +33,6 @@ import { ProductcategoryEditComponent } from './pages/productcategory/productcat
 import { SupplierEditComponent } from './pages/supplier/supplier-edit/supplier-edit.component';
 import { SupplierListComponent } from './pages/supplier/supplier-list/supplier-list.component';
 import { SupplierViewComponent } from './pages/supplier/supplier-view/supplier-view.component';
-import { PurchaseViewComponent } from './pages/purchase/purchase-view/purchase-view.component';
-import { PurchaseListComponent } from './pages/purchase/purchase-list/purchase-list.component';
-import { PurchaseEditComponent } from './pages/purchase/purchase-edit/purchase-edit.component';
 import { ProductitemListComponent } from './pages/productitem/productitem-list/productitem-list.component';
 import { ProductitemEditComponent } from './pages/productitem/productitem-edit/productitem-edit.component';
 import { ProductitemViewComponent } from './pages/productitem/productitem-view/productitem-view.component';
@@ -60,6 +57,9 @@ import { InvoiceEditComponent } from './pages/invoice/invoice-edit/invoice-edit.
 import { InventoryListComponent } from './pages/inventory/inventory-list/inventory-list.component';
 import { InventoryEditComponent } from './pages/inventory/inventory-edit/inventory-edit.component';
 import { InventoryViewComponent } from './pages/inventory/inventory-view/inventory-view.component';
+import { ResourceitemListComponent } from './pages/resourceitem/resourceitem-list/resourceitem-list.component';
+import { ResourceitemEditComponent } from './pages/resourceitem/resourceitem-edit/resourceitem-edit.component';
+import { ResourceitemViewComponent } from './pages/resourceitem/resourceitem-view/resourceitem-view.component';
 
 @NgModule({
   declarations: [
@@ -89,10 +89,7 @@ import { InventoryViewComponent } from './pages/inventory/inventory-view/invento
     ProductcategoryEditComponent,
     SupplierEditComponent,
     SupplierListComponent,
-    SupplierViewComponent,
-    PurchaseViewComponent,
-    PurchaseListComponent,
-    PurchaseEditComponent,
+    SupplierViewComponent,    
     ProductitemListComponent,
     ProductitemEditComponent,
     ProductitemViewComponent,
@@ -117,6 +114,9 @@ import { InventoryViewComponent } from './pages/inventory/inventory-view/invento
     InventoryListComponent,
     InventoryEditComponent,
     InventoryViewComponent,
+    ResourceitemListComponent,
+    ResourceitemEditComponent,
+    ResourceitemViewComponent,
   ],
   imports: [
     BrowserModule,

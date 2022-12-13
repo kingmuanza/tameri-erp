@@ -27,19 +27,6 @@
                                         <span class="input-group-text">Name</span>
                                         <input [(ngModel)]="resourcetype.name" type="text" class="form-control" [ngClass]="{'is-invalid': showErrors1 && (errorResourcetypeName)}">
                                     </div>
-                                    <div class="">
-                                        <div class="input-group mb-3">
-                                            <span class="input-group-text">Unit</span>
-                                            <select [(ngModel)]="resourcetype.unit" type="text" class="form-control">
-                                                <option value="no">No unit</option>
-                                                <option value="Kg">Kg</option>
-                                                <option value="g">g</option>
-                                                <option value="m">m</option>
-                                                <option value="L">L</option>
-                                            </select>
-                                        </div>
-                                    </div>
-
                                     <div class="input-group mb-3">
                                         <span class="input-group-text">Description</span>
                                         <textarea [(ngModel)]="resourcetype.description" type="text" class="form-control"></textarea>

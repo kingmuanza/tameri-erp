@@ -30,12 +30,12 @@ import { ProductpackListComponent } from './pages/productpack/productpack-list/p
 import { ProductpackViewComponent } from './pages/productpack/productpack-view/productpack-view.component';
 import { ProducttypeEditComponent } from './pages/producttype/producttype-edit/producttype-edit.component';
 import { ProducttypeListComponent } from './pages/producttype/producttype-list/producttype-list.component';
-import { PurchaseEditComponent } from './pages/purchase/purchase-edit/purchase-edit.component';
-import { PurchaseListComponent } from './pages/purchase/purchase-list/purchase-list.component';
-import { PurchaseViewComponent } from './pages/purchase/purchase-view/purchase-view.component';
 import { ResourceEditComponent } from './pages/resource/resource-edit/resource-edit.component';
 import { ResourceListComponent } from './pages/resource/resource-list/resource-list.component';
 import { ResourceViewComponent } from './pages/resource/resource-view/resource-view.component';
+import { ResourceitemEditComponent } from './pages/resourceitem/resourceitem-edit/resourceitem-edit.component';
+import { ResourceitemListComponent } from './pages/resourceitem/resourceitem-list/resourceitem-list.component';
+import { ResourceitemViewComponent } from './pages/resourceitem/resourceitem-view/resourceitem-view.component';
 import { ResourcepackEditComponent } from './pages/resourcepack/resourcepack-edit/resourcepack-edit.component';
 import { ResourcepackListComponent } from './pages/resourcepack/resourcepack-list/resourcepack-list.component';
 import { ResourcepackViewComponent } from './pages/resourcepack/resourcepack-view/resourcepack-view.component';
@@ -114,10 +114,10 @@ const routes: Routes = [
   { path: 'resource/edit/:id', component: ResourceEditComponent },
   { path: 'resource/view/:id', component: ResourceViewComponent },
 
-  { path: 'purchase', component: PurchaseListComponent },
-  { path: 'purchase/edit', component: PurchaseEditComponent },
-  { path: 'purchase/edit/:id', component: PurchaseEditComponent },
-  { path: 'purchase/view/:id', component: PurchaseViewComponent },
+  { path: 'resourceitem', component: ResourceitemListComponent },
+  { path: 'resourceitem/edit', component: ResourceitemEditComponent },
+  { path: 'resourceitem/edit/:id', component: ResourceitemEditComponent },
+  { path: 'resourceitem/view/:id', component: ResourceitemViewComponent },
 
   { path: 'resourcepack', component: ResourcepackListComponent },
   { path: 'resourcepack/edit', component: ResourcepackEditComponent },

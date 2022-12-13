@@ -43,9 +43,18 @@
                     <div class="input-group mb-3">
                         <span class="input-group-text">Content</span>
                         <input [(ngModel)]="resource.content" type="number" class="form-control" [ngClass]="{'is-invalid': showErrors && (!resource.content || resource.content <= 0) }">
-                        <button class="btn btn-primary" *ngIf="resource.category">
-                            {{resource.category.unit}}
-                        </button>
+
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="input-group mb-3">
+                        <span class="input-group-text">Unit {{resource.unit}}</span>
+
+                        <select [(ngModel)]="resource.unit" class="form-control">
+                            <ng-container *ngFor="let unit of units">
+                                <option [value]="unit.symbole">{{unit.label}}</option>
+                            </ng-container>
+                        </select>
                     </div>
                 </div>
                 <div class="col-lg-4">

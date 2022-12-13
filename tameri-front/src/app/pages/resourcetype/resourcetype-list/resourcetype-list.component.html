@@ -18,7 +18,6 @@
                         <tr>
                             <th>ID</th>
                             <th>Name</th>
-                            <th>Unit</th>
                             <th>Description</th>
                         </tr>
                     </thead>
@@ -26,7 +25,6 @@
                         <tr *ngFor="let resourcetype of resourcetypes" (click)="edit(resourcetype)">
                             <td>{{resourcetype.id}}</td>
                             <td>{{resourcetype.name}}</td>
-                            <td>{{resourcetype.unit}}</td>
                             <td>{{resourcetype.description}}</td>
                         </tr>
                     </tbody>

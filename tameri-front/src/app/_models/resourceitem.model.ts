@@ -3,9 +3,9 @@ import { Resource } from "./resource.model";
 import { Resourcepack } from "./resourcepack.model";
 import { Supplier } from "./supplier.model";
 
-export class Purchase {
+export class Resourceitem {
 
-    id: string = 'Purchase'.toUpperCase() + new Date().getTime();
+    id: string = 'Resourceitem'.toUpperCase() + new Date().getTime();
     date = new Date()
     quantity = 0;
     price = 0;
@@ -13,5 +13,6 @@ export class Purchase {
     resource:Resource | undefined;
     resourcepack :Resourcepack | undefined;
     supplier: Supplier | undefined;
+  _id: any;
 
 }

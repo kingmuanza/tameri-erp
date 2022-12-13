@@ -29,6 +29,7 @@ export class ProductViewComponent implements OnInit {
   productitems = new Array<Productitem>();
   resource = new Resource();
   quantity = 1;
+  unit = '';
 
   allpos = ['Restau', 'Bar', 'Shop', 'Service', 'Personnalized'];
 
@@ -92,7 +93,7 @@ export class ProductViewComponent implements OnInit {
     this.salelineService.getAll('saleline').then((salelines) => {
       this.salelines = salelines.filter((d) => {
         return d.productpack.product.id === this.product.id;
-      });      
+      });
       this.totalSales = this.calculTotalSales(this.salelines);
       this.getProductItems();
     });
@@ -109,12 +110,12 @@ export class ProductViewComponent implements OnInit {
       this.product.now = this.totalItems - this.totalSales;
       this.saveSilent();
 
-    }).catch((e)=> {
+    }).catch((e) => {
     });
   }
 
   getCompany(company: Company) {
-    this.companyService.get('company', company.id).then((data) => {
+    this.companyService.get('company', company._id).then((data) => {
       this.company = data;
     });
   }
@@ -140,7 +141,7 @@ export class ProductViewComponent implements OnInit {
 
   saveSilent() {
     this.productService.modify('product', this.product.id, this.product).then(() => {
-      
+
     });
   }
 
@@ -150,7 +151,7 @@ export class ProductViewComponent implements OnInit {
     if (this.resource.name && this.quantity > 0) {
       this.product.resources.forEach((item) => {
         if (item.resource.id === this.resource.id) {
-          item.quantity += this.quantity;
+          item.quantity += this.convert(this.quantity, this.unit, this.resource.unit);
           isProductAlreadyHere = true;
         }
         newResources.push(item);
@@ -158,7 +159,8 @@ export class ProductViewComponent implements OnInit {
       if (!isProductAlreadyHere) {
         newResources.push({
           resource: this.resource,
-          quantity: this.quantity
+          quantity: this.convert(this.quantity, this.unit, this.resource.unit),
+          unit: this.unit,
         });
       }
       this.product.resources = newResources;
@@ -221,26 +223,52 @@ export class ProductViewComponent implements OnInit {
     console.log('this.product.unit');
     console.log(this.product.unit);
 
-    if (ev === 'mL' && this.product.unit=== 'L') {
-      this.product.content*=1000;
+    if (ev === 'mL' && this.product.unit === 'L') {
+      this.product.content *= 1000;
     }
-    if (ev === 'L' && this.product.unit=== 'mL') {
-      this.product.content*=0.001;
+    if (ev === 'L' && this.product.unit === 'mL') {
+      this.product.content *= 0.001;
     }
 
-    if (ev === 'm' && this.product.unit=== 'Km') {
-      this.product.content*=1000;
+    if (ev === 'm' && this.product.unit === 'Km') {
+      this.product.content *= 1000;
     }
-    if (ev === 'Km' && this.product.unit=== 'm') {
-      this.product.content*=0.001;
+    if (ev === 'Km' && this.product.unit === 'm') {
+      this.product.content *= 0.001;
     }
-    
-    if (ev === 'g' && this.product.unit=== 'Kg') {
-      this.product.content*=1000;
+
+    if (ev === 'g' && this.product.unit === 'Kg') {
+      this.product.content *= 1000;
     }
-    if (ev === 'Kg' && this.product.unit=== 'g') {
-      this.product.content*=0.001;
+    if (ev === 'Kg' && this.product.unit === 'g') {
+      this.product.content *= 0.001;
     }
+  }
+
+  convert(montant: number, unitIn: string, unitOut: string) {
+
+    if (unitOut === 'mL' && unitIn === 'L') {
+      montant *= 1000;
+    }
+    if (unitOut === 'L' && unitIn === 'mL') {
+      montant *= 0.001;
+    }
+
+    if (unitOut === 'm' && unitIn === 'Km') {
+      montant *= 1000;
+    }
+    if (unitOut === 'Km' && unitIn === 'm') {
+      montant *= 0.001;
+    }
+
+    if (unitOut === 'g' && unitIn === 'Kg') {
+      montant *= 1000;
+    }
+    if (unitOut === 'Kg' && unitIn === 'g') {
+      montant *= 0.001;
+    }
+
+    return montant
   }
 
 }

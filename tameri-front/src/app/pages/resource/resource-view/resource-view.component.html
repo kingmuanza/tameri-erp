@@ -19,7 +19,7 @@
             <div class="col-lg-4">
                 <div class="text-bg-primary text-center p-3">
                     <h1>
-                        {{totalPurchases - totalItems}} {{resource.unit }}
+                        {{totalResourceitems - totalItems}} {{resource.unit }}
                     </h1>
                     <div>
                         Now
@@ -29,7 +29,7 @@
             <div class="col-lg-4">
                 <div class="text-bg-primary text-center p-3">
                     <h1>
-                        {{totalPurchases}} {{resource.unit }}
+                        {{totalResourceitems}} {{resource.unit }}
                     </h1>
                     <div>
                         Resource items
@@ -73,7 +73,7 @@
                                     </button>
                                 </div>
                             </div>
-                            <div class="col-lg-12">
+                            <div class="col-lg-6">
                                 <div class="input-group mb-3">
                                     <span class="input-group-text">Content</span>
                                     <input [(ngModel)]="resource.content" type="text" class="form-control">
@@ -81,14 +81,14 @@
                             </div>
                             <div class="col-lg-6">
                                 <div class="input-group mb-3">
-                                    <span class="input-group-text">Category</span>
-                                    <input readonly [(ngModel)]="resource.category.name" type="text" class="form-control">
+                                    <span class="input-group-text">Unit</span>
+                                    <input readonly [(ngModel)]="resource.unit" type="text" class="form-control">
                                 </div>
                             </div>
                             <div class="col-lg-6">
                                 <div class="input-group mb-3">
-                                    <span class="input-group-text">Unit</span>
-                                    <input readonly [(ngModel)]="resource.unit" type="text" class="form-control">
+                                    <span class="input-group-text">Category</span>
+                                    <input readonly [(ngModel)]="resource.category.name" type="text" class="form-control">
                                 </div>
                             </div>
                             <div class="col-lg-6">

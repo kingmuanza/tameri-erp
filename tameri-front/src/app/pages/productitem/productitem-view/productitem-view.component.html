@@ -11,7 +11,7 @@
         {{productitem.id}}
     </h1>
     <p>
-        Company : {{productitem.company.name}}
+        Company : {{company.name}}
         <br>
     </p>
     <div class="row">
@@ -62,19 +62,24 @@
             </div>
         </div>
         <div class="col-lg-5">
-            <div *ngIf="company.option.productResource" class="first-step card shadow-lg">
-                <div class="card-body">
-                    <p class="card-title">
-                        Resources
-                    </p>
-                    <div class=" page-contenu ">
-                    </div>
-                    <div>
-                        <ul *ngIf="productitem.product">
-                            <li *ngFor="let item of productitem.product.resources">
-                                {{item.quantity * productitem.quantity}} {{item.resource.unit}} {{item.resource.name}} &nbsp;
-                            </li>
-                        </ul>
+            <div *ngIf="company.option.productResource" class="">
+                <div>
+                    <div *ngIf="productitem.product">
+                        <div *ngFor="let item of productitem.product.resources">
+                            <div class="text-bg-primary text-center p-3 mb-2">
+                                <div>
+                                    {{item.resource.name}}
+                                </div>
+                                <h1>
+                                    {{item.quantity * productitem.quantity}} {{item.resource.unit}}
+                                </h1>
+                                <div>
+                                    <a style="color: white;" [routerLink]="'/resource/view/' + item.resource._id">
+                                        Voir le stock
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>

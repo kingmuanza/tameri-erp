@@ -5,7 +5,7 @@ import { Subject } from 'rxjs';
 import { DatatablesOptions } from 'src/app/_data/datatable.option';
 import { Company } from 'src/app/_models/company.model';
 import { Productitem } from 'src/app/_models/productitem.model';
-import { Purchase } from 'src/app/_models/purchase.model';
+import { Resourceitem } from 'src/app/_models/resourceitem.model';
 import { Resource } from 'src/app/_models/resource.model';
 import { AuthenticationService } from 'src/app/_services/authentication.service';
 import { CrudService } from 'src/app/_services/crud.service';
@@ -26,7 +26,7 @@ export class ResourceListComponent implements OnInit {
   resources = new Array<Resource>();
   company = new Company();
 
-  purchases = new Array<Purchase>();
+  resourceitems = new Array<Resourceitem>();
   productitems = new Array<Productitem>();
 
   constructor(
@@ -34,7 +34,7 @@ export class ResourceListComponent implements OnInit {
     private resourceService: CrudService<Resource>,
     private authService: AuthenticationService,
     private productitemService: CrudService<Productitem>,
-    private purchaseService: CrudService<Purchase>,
+    private resourceitemService: CrudService<Resourceitem>,
   ) {
     this.company = this.authService.user.company;
   }
@@ -69,8 +69,8 @@ export class ResourceListComponent implements OnInit {
       this.productitems = data.filter((d) => {
         return d.company && d.company.id === this.company.id;
       });
-      this.purchaseService.getAll('purchase').then((purchases) => {
-        this.purchases = purchases.filter((d) => {
+      this.resourceitemService.getAll('resourceitem').then((resourceitems) => {
+        this.resourceitems = resourceitems.filter((d) => {
           return d.company && d.company.id === this.company.id;
         });
 
@@ -88,13 +88,13 @@ export class ResourceListComponent implements OnInit {
   }
 
   getResourceItems(resource: Resource) {
-    const purchases = this.purchases.filter((d) => {
+    const resourceitems = this.resourceitems.filter((d) => {
       const isRessource = d.resource?.id === resource.id;
       const isRessourcepack = d.resourcepack?.resource.id === resource.id;
       return isRessource || isRessourcepack;
     });
-    const totalPurchases = this.calculTotalPurchases(purchases) * resource.content;
-    return totalPurchases
+    const totalResourceitems = this.calculTotalResourceitems(resourceitems) * resource.content;
+    return totalResourceitems
   }
 
   getProductItems(resource: Resource) {
@@ -121,9 +121,9 @@ export class ResourceListComponent implements OnInit {
     return totalItems;
   }
 
-  calculTotalPurchases(purchases: Array<Purchase>) {
+  calculTotalResourceitems(resourceitems: Array<Resourceitem>) {
     let total = 0;
-    purchases.forEach((s) => {
+    resourceitems.forEach((s) => {
       if (s.resource) {
         total += s.quantity;
       }

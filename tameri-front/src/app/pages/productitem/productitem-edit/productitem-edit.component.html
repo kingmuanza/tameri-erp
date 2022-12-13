@@ -42,19 +42,26 @@
                         <select (ngModelChange)="setInfosOfProduct(); resetProductPack()" [(ngModel)]="productitem.product" type="text" class="form-control">
                             <option *ngFor="let s of products" [ngValue]="s">{{s.name}}</option>
                         </select>
+                        <button *ngIf="productitem.product" class="btn btn-primary">
+                            {{productitem.product.content}}
+                            {{productitem.product.unit}}
+                        </button>
                     </div>
 
-                    <div style="display: none;">
-                        <ul *ngIf="productitem.product">
+                    <div *ngIf="productitem.product">
+                        <div>
+                            Resources needed to produce {{productitem.quantity}} {{productitem.product.name}}
+                        </div>
+                        <ul>
                             <li *ngFor="let item of productitem.product.resources">
-                                {{item.quantity}} {{item.resource.unit}} {{item.resource.name}} /
-                                <b>
-                                    {{getTotalResourceItemByResource(item.resource)*item.resource.content}}
-                                    {{item.resource.unit}}
-                                </b> /
-                                <b>
-                                    {{getTotalResourceItemSaleByResource(item.resource)}} {{item.resource.unit}}
-                                </b>
+                                {{item.quantity * productitem.quantity | number}} {{item.resource.unit}} {{item.resource.name}}
+                                <ng-container style="display: none;">
+                                    ( Stock
+                                    <b>
+                                        {{getTotalResourceItemByResource(item.resource)*item.resource.content - getTotalResourceItemSaleByResource(item.resource)}}
+                                        {{item.resource.unit}}
+                                    </b> )
+                                </ng-container>
                             </li>
                         </ul>
                     </div>

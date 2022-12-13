@@ -8,7 +8,7 @@ import { Productpack } from 'src/app/_models/productpack.model';
 import { Supplier } from 'src/app/_models/supplier.model';
 import { AuthenticationService } from 'src/app/_services/authentication.service';
 import { CrudService } from 'src/app/_services/crud.service';
-import { Purchase } from 'src/app/_models/purchase.model';
+import { Resourceitem } from 'src/app/_models/resourceitem.model';
 import { Resource } from 'src/app/_models/resource.model';
 
 @Component({
@@ -26,8 +26,8 @@ export class ProductitemEditComponent implements OnInit {
   suppliers = new Array<Supplier>();
   products = new Array<any>();
   productpacks = new Array<any>();
-  purchases = new Array<Purchase>();
-  purchasesProduct = new Array<Purchase>();
+  resourceitems = new Array<Resourceitem>();
+  resourceitemsProduct = new Array<Resourceitem>();
   productitems = new Array<Productitem>();
 
   quantityMax = Number.MAX_VALUE;
@@ -46,7 +46,7 @@ export class ProductitemEditComponent implements OnInit {
     private companyService: CrudService<Company>,
     private supplierService: CrudService<Supplier>,
     private productService: CrudService<Product>,
-    private purchaseService: CrudService<Purchase>,
+    private resourceitemService: CrudService<Resourceitem>,
     private productitemService: CrudService<Productitem>
   ) {
     this.company = this.authService.user.company;
@@ -170,8 +170,8 @@ export class ProductitemEditComponent implements OnInit {
   }
 
   getResourcesItems() {
-    this.purchaseService.getAll('purchase').then((data) => {
-      this.purchases = data.filter((d) => {
+    this.resourceitemService.getAll('resourceitem').then((data) => {
+      this.resourceitems = data.filter((d) => {
         return d.company && d.company.id === this.company.id;
       });
     }).catch((e) => {
@@ -180,11 +180,11 @@ export class ProductitemEditComponent implements OnInit {
 
   getResourcesItemsOfProduct(product: Product) {
     this.quantityMax = Number.MAX_VALUE;
-    this.purchasesProduct = new Array<Purchase>();
+    this.resourceitemsProduct = new Array<Resourceitem>();
     product.resources.forEach((r) => {
-      this.purchases.forEach((resourceItem) => {
+      this.resourceitems.forEach((resourceItem) => {
         if (resourceItem.resource && resourceItem.resource.id === r.resource.id) {
-          this.purchasesProduct.push(resourceItem);
+          this.resourceitemsProduct.push(resourceItem);
         }
       });
     });
@@ -200,7 +200,7 @@ export class ProductitemEditComponent implements OnInit {
 
   getTotalResourceItemByResource(r: Resource) {
     let total = 0;
-    this.purchasesProduct.forEach((resourceItem) => {
+    this.resourceitemsProduct.forEach((resourceItem) => {
       if (resourceItem.resource && resourceItem.resource.id === r.id) {
         total += resourceItem.quantity;
       }

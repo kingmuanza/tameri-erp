@@ -26,39 +26,39 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr *ngFor="let purchase of purchases" (click)="edit(purchase)">
-                            <td>{{purchase.id}}</td>
-                            <td>{{purchase.date | date: 'yyyy-MM-dd'}}</td>
+                        <tr *ngFor="let resourceitem of resourceitems" (click)="edit(resourceitem)">
+                            <td>{{resourceitem.id}}</td>
+                            <td>{{resourceitem.date | date: 'yyyy-MM-dd'}}</td>
                             <td>
-                                <ng-container *ngIf="purchase.resource">
+                                <ng-container *ngIf="resourceitem.resource">
                                     <span style="float: right;">
-                                        {{purchase.resource.content}} {{purchase.resource.unit}}
-                                    </span> {{purchase.resource.name}}
+                                        {{resourceitem.resource.content}} {{resourceitem.resource.unit}}
+                                    </span> {{resourceitem.resource.name}}
                                 </ng-container>
-                                <ng-container *ngIf="purchase.resourcepack">
+                                <ng-container *ngIf="resourceitem.resourcepack">
                                     <span style="float: right;">
-                                        {{purchase.resourcepack.resource.content * purchase.resourcepack.quantity}} {{purchase.resourcepack.resource.unit}}
-                                    </span> {{purchase.resourcepack.name}}
+                                        {{resourceitem.resourcepack.resource.content * resourceitem.resourcepack.quantity}} {{resourceitem.resourcepack.resource.unit}}
+                                    </span> {{resourceitem.resourcepack.name}}
                                 </ng-container>
                             </td>
-                            <td style="text-align: right;">{{purchase.quantity}}</td>
+                            <td style="text-align: right;">{{resourceitem.quantity}}</td>
                             <td style="text-align: right;">
-                                <ng-container *ngIf="purchase.resource">
-                                    {{purchase.quantity * purchase.resource.content}} {{purchase.resource.unit}}
+                                <ng-container *ngIf="resourceitem.resource">
+                                    {{resourceitem.quantity * resourceitem.resource.content}} {{resourceitem.resource.unit}}
                                 </ng-container>
-                                <ng-container *ngIf="purchase.resourcepack">
-                                    {{purchase.quantity * purchase.resourcepack.quantity *purchase.resourcepack.resource.content}} {{purchase.resourcepack.resource.unit}}
+                                <ng-container *ngIf="resourceitem.resourcepack">
+                                    {{resourceitem.quantity * resourceitem.resourcepack.quantity *resourceitem.resourcepack.resource.content}} {{resourceitem.resourcepack.resource.unit}}
                                 </ng-container>
                             </td>
                             <td>
-                                <ng-container *ngIf="purchase.resource">
-                                    {{purchase.resource.category.name }}
+                                <ng-container *ngIf="resourceitem.resource">
+                                    {{resourceitem.resource.category.name }}
                                 </ng-container>
-                                <ng-container *ngIf="purchase.resourcepack">
-                                    {{purchase.resourcepack.resource.category.name }}
+                                <ng-container *ngIf="resourceitem.resourcepack">
+                                    {{resourceitem.resourcepack.resource.category.name }}
                                 </ng-container>
                             </td>
-                            <td style="text-align: right;">{{purchase.price | currency:'':''}}</td>
+                            <td style="text-align: right;">{{resourceitem.price | currency:'':''}}</td>
                         </tr>
                     </tbody>
                 </table>

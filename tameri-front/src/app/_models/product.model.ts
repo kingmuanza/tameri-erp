@@ -15,7 +15,8 @@ export class Product {
     now = 0;
     resources = new Array<{
         resource: Resource,
-        quantity: number
+        quantity: number,
+        unit: string,
     }>();
     company = new Company();
     _id: any;

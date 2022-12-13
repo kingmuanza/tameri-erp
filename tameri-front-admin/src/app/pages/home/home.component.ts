@@ -65,7 +65,7 @@ export class HomeComponent implements OnInit {
 
   edit(company?: Company) {
     if (company) {
-      this.router.navigate(['company', 'view', company.id]);
+      this.router.navigate(['company', 'view', company._id]);
     } else {
       this.router.navigate(['company', 'edit']);
     }

@@ -7,6 +7,7 @@ import { Resourcetype } from 'src/app/_models/resourcetype.model';
 import { Supplier } from 'src/app/_models/supplier.model';
 import { AuthenticationService } from 'src/app/_services/authentication.service';
 import { CrudService } from 'src/app/_services/crud.service';
+import { DataService } from 'src/app/_services/data.service';
 
 @Component({
   selector: 'app-resource-edit',
@@ -24,6 +25,8 @@ export class ResourceEditComponent implements OnInit {
   resourcetypes = new Array<any>();
 
   showErrors = false;
+
+  units = DataService.units;
 
   constructor(
     private router: Router,
@@ -63,7 +66,6 @@ export class ResourceEditComponent implements OnInit {
               this.resourcetypes.forEach((resourcetype) => {
                 if (this.resource.category && resourcetype.id === this.resource.category.id) {
                   this.resource.category = resourcetype;
-                  this.resource.unit = resourcetype.unit;
                 }
               });
             }); 
@@ -80,12 +82,11 @@ export class ResourceEditComponent implements OnInit {
   }
 
   save() {
-    if (!this.resource.name || !this.resource.content || !this.resource.category.name) {
+    if (!this.resource.name || !this.resource.content ) {
       this.showErrors = true;
       return ;
     }
     this.resource.company = this.authService.user.company;
-    this.resource.unit = this.resource.category.unit;
     if (this.isNewResource) {
       this.resourceService.create('resource', this.resource).then((_id) => {
         this.notifierService.notify('success', "saved successfully");

@@ -2,22 +2,22 @@ import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { NotifierService } from 'angular-notifier';
 import { Company } from 'src/app/_models/company.model';
-import { Purchase } from 'src/app/_models/purchase.model';
+import { Resourceitem } from 'src/app/_models/resourceitem.model';
 import { Resource } from 'src/app/_models/resource.model';
 import { AuthenticationService } from 'src/app/_services/authentication.service';
 import { CrudService } from 'src/app/_services/crud.service';
 
 @Component({
-  selector: 'app-purchase-view',
-  templateUrl: './purchase-view.component.html',
-  styleUrls: ['./purchase-view.component.scss']
+  selector: 'app-resourceitem-view',
+  templateUrl: './resourceitem-view.component.html',
+  styleUrls: ['./resourceitem-view.component.scss']
 })
-export class PurchaseViewComponent implements OnInit {
+export class ResourceitemViewComponent implements OnInit {
 
   step = 1;
 
-  purchase = new Purchase();
-  isNewPurchase = true;
+  resourceitem = new Resourceitem();
+  isNewResourceitem = true;
 
   resources = new Array<Resource>();
   resource = new Resource();
@@ -45,7 +45,7 @@ export class PurchaseViewComponent implements OnInit {
     private route: ActivatedRoute,
     private companyService: CrudService<Company>,
     private resourceService: CrudService<Resource>,
-    private purchaseService: CrudService<Purchase>
+    private resourceitemService: CrudService<Resourceitem>
   ) {
     this.company = this.authService.user.company;
     this.getCompany(this.company);
@@ -55,9 +55,9 @@ export class PurchaseViewComponent implements OnInit {
     this.route.paramMap.subscribe((paramMap) => {
       const id = paramMap.get('id');
       if (id) {
-        this.purchaseService.get('purchase', id).then((data) => {
-          this.purchase = data;
-          this.isNewPurchase = false;
+        this.resourceitemService.get('resourceitem', id).then((data) => {
+          this.resourceitem = data;
+          this.isNewResourceitem = false;
           this.resourceService.getAll('resource').then((resources) => {
             this.resources = resources.filter((d) => {
               return d.company && d.company.id === this.company.id;
@@ -69,7 +69,7 @@ export class PurchaseViewComponent implements OnInit {
   }
 
   getCompany(company: Company) {
-    this.companyService.get('company', company.id).then((data) => {
+    this.companyService.get('company', company._id).then((data) => {
       this.company = data;
     });
   }
@@ -87,9 +87,9 @@ export class PurchaseViewComponent implements OnInit {
   }
 
   save() {
-    this.purchaseService.modify('purchase', this.purchase.id, this.purchase).then(() => {
+    this.resourceitemService.modify('resourceitem', this.resourceitem._id, this.resourceitem).then(() => {
       this.notifierService.notify('success', "saved successfully");
-      // this.router.navigate(['purchase', 'view', this.purchase.id]);
+      // this.router.navigate(['resourceitem', 'view', this.resourceitem.id]);
     });
   }
 

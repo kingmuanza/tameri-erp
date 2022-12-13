@@ -2,33 +2,33 @@
     <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
             <li class="breadcrumb-item"><a>Home</a></li>
-            <li class="breadcrumb-item"><a [routerLink]="'/purchase'">Resource items</a></li>
-            <li class="breadcrumb-item active" *ngIf="isNewPurchase">new</li>
+            <li class="breadcrumb-item"><a [routerLink]="'/resourceitem'">Resource items</a></li>
+            <li class="breadcrumb-item active" *ngIf="isNewResourceitem">new</li>
 
-            <li class="breadcrumb-item active" *ngIf="!isNewPurchase"><a [routerLink]="'/purchase/view/' + purchase.id">{{purchase.id}}</a></li>
-            <li class="breadcrumb-item active" *ngIf="!isNewPurchase">Edit</li>
+            <li class="breadcrumb-item active" *ngIf="!isNewResourceitem"><a [routerLink]="'/resourceitem/view/' + resourceitem._id">{{resourceitem.id}}</a></li>
+            <li class="breadcrumb-item active" *ngIf="!isNewResourceitem">Edit</li>
         </ol>
     </nav>
-    <h1 *ngIf="!isNewPurchase" class="titre">
+    <h1 *ngIf="!isNewResourceitem" class="titre">
         <button style="float: right;" (click)="delete()" class="btn btn-danger btn-error">
             Delete
-        </button> Modify Resource item {{purchase.id}}
+        </button> Modify Resource item {{resourceitem.id}}
     </h1>
-    <h1 *ngIf="isNewPurchase" class="titre">Add a Resource item</h1>
+    <h1 *ngIf="isNewResourceitem" class="titre">Add a Resource item</h1>
     <div style="margin-top: -10px; margin-bottom: 20px;">
         Company : {{company.name}}
     </div>
 
     <div class="first-step">
         <p>
-            Purchase Infos
+            Resourceitem Infos
         </p>
         <div class=" page-contenu ">
             <div class="row">
                 <div class="col-lg-4">
                     <div class="input-group mb-3">
                         <span class="input-group-text">Date</span>
-                        <input [ngModel]="purchase.date | date: 'yyyy-MM-dd'" (ngModelChange)="purchase.date = $event" type="date" class="form-control">
+                        <input [ngModel]="resourceitem.date | date: 'yyyy-MM-dd'" (ngModelChange)="resourceitem.date = $event" type="date" class="form-control">
                     </div>
                 </div>
                 <div class="col-lg-12">
@@ -40,12 +40,12 @@
                 <div class="col-lg-6" *ngIf=" type === 'resource' ">
                     <div class="input-group mb-3">
                         <span class="input-group-text">Resource</span>
-                        <select (ngModelChange)="setPrix()" [(ngModel)]="purchase.resource" type="text" class="form-control" [ngClass]="{'is-invalid': showErrors && !purchase.resource}">
+                        <select (ngModelChange)="setPrix()" [(ngModel)]="resourceitem.resource" type="text" class="form-control" [ngClass]="{'is-invalid': showErrors && !resourceitem.resource}">
                             <option *ngFor="let s of resources" [ngValue]="s">{{s.name}}</option>
                         </select>
-                        <button *ngIf="purchase.resource" class="btn btn-primary">
+                        <button *ngIf="resourceitem.resource" class="btn btn-primary">
                             <ng-container>
-                                {{purchase.resource.content}}{{purchase.resource.unit}}
+                                {{resourceitem.resource.content}}{{resourceitem.resource.unit}}
                             </ng-container>                            
                         </button>
                     </div>
@@ -53,7 +53,7 @@
                 <div class="col-lg-6" *ngIf=" type === 'resourcepack' ">
                     <div class="input-group mb-3">
                         <span class="input-group-text">Resource Pack</span>
-                        <select (ngModelChange)="setPrix()" [(ngModel)]="purchase.resourcepack" type="text" class="form-control" [ngClass]="{'is-invalid': showErrors && !purchase.resourcepack}">
+                        <select (ngModelChange)="setPrix()" [(ngModel)]="resourceitem.resourcepack" type="text" class="form-control" [ngClass]="{'is-invalid': showErrors && !resourceitem.resourcepack}">
                             <option *ngFor="let s of resourcepacks" [ngValue]="s">{{s.name}}</option>
                         </select>
                     </div>
@@ -61,22 +61,26 @@
                 <div class="col-lg-3">
                     <div class="input-group mb-3">
                         <span class="input-group-text">Quantity</span>
-                        <input (ngModelChange)="setPrix()" [(ngModel)]="purchase.quantity" type="number" class="form-control" [ngClass]="{'is-invalid': showErrors && !purchase.quantity}">
+                        <input (ngModelChange)="setPrix()" [(ngModel)]="resourceitem.quantity" type="number" class="form-control" [ngClass]="{'is-invalid': showErrors && !resourceitem.quantity}">
 
                     </div>
                 </div>
                 <div class="col-lg-3">
                     <div class="input-group mb-3">
                         <span class="input-group-text">Price</span>
-                        <input [(ngModel)]="purchase.price" type="number" class="form-control">
+                        <input [(ngModel)]="resourceitem.price" type="number" class="form-control">
                         <button class="btn btn-primary">
                             {{company.currency}}
                         </button>
                     </div>
                 </div>
             </div>
+            <div class="mt-1 mb-3" *ngIf="resourceitem.resource">
+                You are going to add {{resourceitem.quantity * resourceitem.resource.content}} {{resourceitem.resource.unit}} to the stock of {{resourceitem.resource.name}}
+
+            </div>
             <div>
-                <button (click)="save()" class="btn btn-primary">Save</button>
+                <button [disabled]="resourceitem.quantity <= 0" (click)="save()" class="btn btn-primary">Save</button>
             </div>
         </div>
     </div>

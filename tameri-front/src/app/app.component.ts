@@ -10,13 +10,13 @@ import { CrudService } from './_services/crud.service';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
+
   title = 'tameri-front';
   user: any;
   userSubscription: Subscription;
   company: any;
   pricings = new Array<any>();
   price = 0;
-
 
   constructor(
     private authService: AuthenticationService,

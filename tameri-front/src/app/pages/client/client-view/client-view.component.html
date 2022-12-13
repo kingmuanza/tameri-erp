@@ -3,7 +3,7 @@
         <ol class="breadcrumb">
             <li class="breadcrumb-item"><a>Home</a></li>
             <li class="breadcrumb-item"><a [routerLink]="'/client'">Clients</a></li>
-            <li class="breadcrumb-item active" *ngIf="!isNewClient">{{client.name}}</li>
+            <li class="breadcrumb-item active" *ngIf="!isNewClient">{{client.firstname}} {{client.name}}</li>
         </ol>
     </nav>
     <a [routerLink]="'/client/edit/' + client._id" style="float: right;">Edit</a>
@@ -21,16 +21,16 @@
                         <tr>
                             <th>ID</th>
                             <th>Name</th>
-                            <th>Type</th>
-                            <th>Owner</th>
+                            <th>Montant</th>
+                            <th>Reduction</th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr *ngFor="let sale of companies" (click)="viewSale(sale)">
                             <td>{{sale.id}}</td>
-                            <td>{{sale.name}}</td>
-                            <td>{{sale.type}}</td>
-                            <td>{{sale.owner.names}}</td>
+                            <td>{{sale.client.firstname}} {{sale.client.name}}</td>
+                            <td>{{calculTotalSalelines(sale.salelines) | currency:'':''}}</td>
+                            <td>0</td>
                         </tr>
                     </tbody>
                 </table>

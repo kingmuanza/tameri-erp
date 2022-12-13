@@ -4,7 +4,7 @@ import { NotifierService } from 'angular-notifier';
 import { Community } from 'src/app/_models/community.model';
 import { Company } from 'src/app/_models/company.model';
 import { Productitem } from 'src/app/_models/productitem.model';
-import { Purchase } from 'src/app/_models/purchase.model';
+import { Resourceitem } from 'src/app/_models/resourceitem.model';
 import { Resource } from 'src/app/_models/resource.model';
 import { AuthenticationService } from 'src/app/_services/authentication.service';
 import { CrudService } from 'src/app/_services/crud.service';
@@ -37,10 +37,10 @@ export class ResourceViewComponent implements OnInit {
   login = '';
 
 
-  totalPurchases = 0;
+  totalResourceitems = 0;
   totalItems = 0;
 
-  purchases = new Array<Purchase>();
+  resourceitems = new Array<Resourceitem>();
   productitems = new Array<Productitem>();
 
   constructor(
@@ -49,7 +49,7 @@ export class ResourceViewComponent implements OnInit {
     private authService: AuthenticationService,
     private route: ActivatedRoute,
     private productitemService: CrudService<Productitem>,
-    private purchaseService: CrudService<Purchase>,
+    private resourceitemService: CrudService<Resourceitem>,
     private companyService: CrudService<Company>,
     private communityService: CrudService<Community>,
     private resourceService: CrudService<Resource>
@@ -74,13 +74,13 @@ export class ResourceViewComponent implements OnInit {
   }
 
   getResourceItems() {
-    this.purchaseService.getAll('purchase').then((purchases) => {
-      this.purchases = purchases.filter((d) => {
+    this.resourceitemService.getAll('resourceitem').then((resourceitems) => {
+      this.resourceitems = resourceitems.filter((d) => {
         const isRessource = d.resource?.id === this.resource.id;
         const isRessourcepack = d.resourcepack?.resource.id === this.resource.id;
         return isRessource || isRessourcepack;
       });
-      this.totalPurchases = this.calculTotalPurchases(this.purchases) * this.resource.content;
+      this.totalResourceitems = this.calculTotalResourceitems(this.resourceitems) * this.resource.content;
       // this.getProductItems();
     });
   }
@@ -113,9 +113,9 @@ export class ResourceViewComponent implements OnInit {
     });
   }
 
-  calculTotalPurchases(purchases: Array<Purchase>) {
+  calculTotalResourceitems(resourceitems: Array<Resourceitem>) {
     let total = 0;
-    purchases.forEach((s) => {
+    resourceitems.forEach((s) => {
       if (s.resource) {
         total += s.quantity;
       }

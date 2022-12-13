@@ -4,16 +4,16 @@ import { DataTableDirective } from 'angular-datatables';
 import { Subject } from 'rxjs';
 import { DatatablesOptions } from 'src/app/_data/datatable.option';
 import { Company } from 'src/app/_models/company.model';
-import { Purchase } from 'src/app/_models/purchase.model';
+import { Resourceitem } from 'src/app/_models/resourceitem.model';
 import { AuthenticationService } from 'src/app/_services/authentication.service';
 import { CrudService } from 'src/app/_services/crud.service';
 
 @Component({
-  selector: 'app-purchase-list',
-  templateUrl: './purchase-list.component.html',
-  styleUrls: ['./purchase-list.component.scss']
+  selector: 'app-resourceitem-list',
+  templateUrl: './resourceitem-list.component.html',
+  styleUrls: ['./resourceitem-list.component.scss']
 })
-export class PurchaseListComponent implements OnInit {
+export class ResourceitemListComponent implements OnInit {
 
   // Datatables
   dtOptions: any = DatatablesOptions;
@@ -21,12 +21,12 @@ export class PurchaseListComponent implements OnInit {
   @ViewChild(DataTableDirective) dtElement!: DataTableDirective;
   dtInstance!: Promise<DataTables.Api>;
 
-  purchases = new Array<Purchase>();
+  resourceitems = new Array<Resourceitem>();
   company = new Company();
 
   constructor(
     private router: Router,
-    private purchaseService: CrudService<Purchase>,
+    private resourceitemService: CrudService<Resourceitem>,
     private authService: AuthenticationService,
   ) {
     this.company = this.authService.user.company;
@@ -47,18 +47,18 @@ export class PurchaseListComponent implements OnInit {
     return dtOptions;
   }
 
-  edit(purchase?:Purchase) {
-    if (purchase) {
-      this.router.navigate(['purchase', 'view', purchase.id]);
+  edit(resourceitem?:Resourceitem) {
+    if (resourceitem) {
+      this.router.navigate(['resourceitem', 'view', resourceitem._id]);
     } else {
-      this.router.navigate(['purchase', 'edit']);
+      this.router.navigate(['resourceitem', 'edit']);
     }
   }
 
   ngOnInit(): void {
     this.dtOptions = this.initNouveau();
-    this.purchaseService.getAll('purchase').then((data) => {
-      this.purchases = data.filter((d) => {
+    this.resourceitemService.getAll('resourceitem').then((data) => {
+      this.resourceitems = data.filter((d) => {
         return d.company && d.company.id === this.company.id;
       });
       this.dtTrigger.next('');

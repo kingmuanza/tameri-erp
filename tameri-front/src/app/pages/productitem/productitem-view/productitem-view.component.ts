@@ -69,7 +69,7 @@ export class ProductitemViewComponent implements OnInit {
   }
 
   getCompany(company: Company) {
-    this.companyService.get('company', company.id).then((data) => {
+    this.companyService.get('company', company._id).then((data) => {
       this.company = data;
     });
   }

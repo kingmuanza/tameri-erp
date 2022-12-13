@@ -83,14 +83,14 @@
                             <tbody>
                                 <tr *ngFor="let company of companies">
                                     <td>
-                                        <a [routerLink]=" '/company/view/' + company.id">
+                                        <a [routerLink]=" '/company/view/' + company._id">
                                             {{company.name}}
                                         </a>
                                     </td>
                                     <td>{{company.type}}</td>
                                     <td>{{company.owner.names}}</td>
                                     <td>
-                                        <a *ngIf="company.community" [routerLink]=" '/community/view/' + company.community.id">
+                                        <a *ngIf="company.community" [routerLink]=" '/community/view/' + company.community._id">
                                             {{company.community.name}}
                                         </a>
                                     </td>

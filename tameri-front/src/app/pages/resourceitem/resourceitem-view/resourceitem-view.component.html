@@ -2,16 +2,16 @@
     <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
             <li class="breadcrumb-item"><a>Home</a></li>
-            <li class="breadcrumb-item"><a [routerLink]="'/purchase'">Resource items</a></li>
-            <li class="breadcrumb-item active" *ngIf="!isNewPurchase">{{purchase.id}}</li>
+            <li class="breadcrumb-item"><a [routerLink]="'/resourceitem'">Resource items</a></li>
+            <li class="breadcrumb-item active" *ngIf="!isNewResourceitem">{{resourceitem.id}}</li>
         </ol>
     </nav>
-    <a [routerLink]="'/purchase/edit/' + purchase.id" style="float: right;">Edit</a>
-    <h1 *ngIf="!isNewPurchase" class="titre">
-        {{purchase.id}}
+    <a [routerLink]="'/resourceitem/edit/' + resourceitem._id" style="float: right;">Edit</a>
+    <h1 *ngIf="!isNewResourceitem" class="titre">
+        {{resourceitem.id}}
     </h1>
     <p>
-        Company : {{purchase.company.name}}
+        Company : {{resourceitem.company.name}}
         <br>
     </p>
     <div class="row">
@@ -26,31 +26,31 @@
                             <div class="col-lg-6">
                                 <div class="input-group mb-3">
                                     <span class="input-group-text">Date</span>
-                                    <input [ngModel]="purchase.date | date: 'yyyy-MM-dd'" (ngModelChange)="purchase.date = $event" type="date" class="form-control">
+                                    <input [ngModel]="resourceitem.date | date: 'yyyy-MM-dd'" (ngModelChange)="resourceitem.date = $event" type="date" class="form-control">
                                 </div>
                             </div>
-                            <div class="col-lg-6" *ngIf="purchase.resource">
+                            <div class="col-lg-6" *ngIf="resourceitem.resource">
                                 <div class="input-group mb-3">
                                     <span class="input-group-text">Resource</span>
-                                    <input readonly [value]="purchase.resource.name" type="text" class="form-control">
+                                    <input readonly [value]="resourceitem.resource.name" type="text" class="form-control">
                                 </div>
                             </div>
-                            <div class="col-lg-6" *ngIf="purchase.resourcepack">
+                            <div class="col-lg-6" *ngIf="resourceitem.resourcepack">
                                 <div class="input-group mb-3">
                                     <span class="input-group-text">Resource Pack</span>
-                                    <input readonly [value]="purchase.resourcepack.name" type="text" class="form-control">
+                                    <input readonly [value]="resourceitem.resourcepack.name" type="text" class="form-control">
                                 </div>
                             </div>
                             <div class="col-lg-6">
                                 <div class="input-group mb-3">
                                     <span class="input-group-text">Quantity</span>
-                                    <input [(ngModel)]="purchase.quantity" type="number" class="form-control">
+                                    <input [(ngModel)]="resourceitem.quantity" type="number" class="form-control">
                                 </div>
                             </div>
                             <div class="col-lg-6">
                                 <div class="input-group mb-3">
                                     <span class="input-group-text">Price</span>
-                                    <input [(ngModel)]="purchase.price" type="number" class="form-control">
+                                    <input [(ngModel)]="resourceitem.price" type="number" class="form-control">
                                     <button class="btn btn-primary">
                                         {{company.currency}}
                                     </button>
@@ -61,7 +61,16 @@
                 </div>
             </div>
         </div>
-        <div class="col-lg-6">
+
+        <div class="col-lg-5">
+            <div *ngIf="resourceitem.resource" class="text-bg-primary text-center p-3">
+                <h1>
+                    {{resourceitem.resource.content * resourceitem.quantity}} {{resourceitem.resource.unit }}
+                </h1>
+                <div>
+                    {{resourceitem.resource.name }}
+                </div>
+            </div>
         </div>
     </div>
 
