@@ -10,6 +10,7 @@ const ResourceitemSchema = mongoose.Schema({
     resource: Object,
     resourcepack: Object,
     supplier: Object,
+    status: Number,
 });
 
 module.exports = mongoose.model('Resourceitem', ResourceitemSchema);
