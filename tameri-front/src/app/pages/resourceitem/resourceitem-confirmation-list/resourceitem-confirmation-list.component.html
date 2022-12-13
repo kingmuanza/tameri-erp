@@ -5,7 +5,7 @@
             <li class="breadcrumb-item active" aria-current="page">Resource items</li>
         </ol>
     </nav>
-    <h1>Resource items</h1>
+    <h1>Resource items confirmation</h1>
     <p>
         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam maximus aliquam velit, sed malesuada ligula blandit vel.
     </p>
@@ -22,13 +22,11 @@
                             <th style="text-align: right;">Quantity</th>
                             <th style="text-align: right;">Quantity Category</th>
                             <th>Category</th>
-                            <th style="text-align: right;">Price</th>
-                            <th style="text-align: center;">Status</th>
-
+                            <th style="text-align: center;">Actions</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr *ngFor="let resourceitem of resourceitems" (click)="edit(resourceitem)">
+                        <tr *ngFor="let resourceitem of resourceitems">
                             <td>{{resourceitem.id}}</td>
                             <td>{{resourceitem.date | date: 'yyyy-MM-dd'}}</td>
                             <td>
@@ -39,8 +37,7 @@
                                 </ng-container>
                                 <ng-container *ngIf="resourceitem.resourcepack">
                                     <span style="float: right;">
-                                        {{resourceitem.resourcepack.resource.content *
-                                        resourceitem.resourcepack.quantity}} {{resourceitem.resourcepack.resource.unit}}
+                                        {{resourceitem.resourcepack.resource.content * resourceitem.resourcepack.quantity}} {{resourceitem.resourcepack.resource.unit}}
                                     </span> {{resourceitem.resourcepack.name}}
                                 </ng-container>
                             </td>
@@ -61,14 +58,13 @@
                                     {{resourceitem.resourcepack.resource.category.name }}
                                 </ng-container>
                             </td>
-                            <td style="text-align: right;">{{resourceitem.price | currency:'':''}}</td>
                             <td style="text-align: center;">
-                                <ng-container *ngIf="resourceitem.status && resourceitem.status === CONFIRMED">
-                                    <b>CONFIRMED</b>
-                                </ng-container>
-                                <ng-container *ngIf="!(resourceitem.status && resourceitem.status === CONFIRMED)">
-                                    NEW
-                                </ng-container>
+                                <button *ngIf="CONFIRMED !== resourceitem.status" class="btn btn-primary" (click)="confirmResourceItem(resourceitem)">
+                                    Confirm
+                                </button>
+                                <b *ngIf="CONFIRMED === resourceitem.status">
+                                    CONFIRMED
+                                </b>
                             </td>
                         </tr>
                     </tbody>

@@ -74,20 +74,25 @@
                             <option *ngFor="let s of productpacks" [ngValue]="s">{{s.name}}</option>
                         </select>
                     </div>
-                    <div style="display: none;">
-                        <ul *ngIf="productitem.productpack">
+
+                    <div *ngIf="productitem.productpack">
+                        <div>
+                            Resources needed to produce {{productitem.quantity}} {{productitem.productpack.name}}
+                        </div>
+                        <ul>
                             <li *ngFor="let item of productitem.productpack.product.resources">
-                                {{productitem.productpack.quantity * item.quantity}} {{item.resource.unit}} {{item.resource.name}} /
-                                <b>
-                                    {{getTotalResourceItemByResource(item.resource)*item.resource.content}}
-                                    {{item.resource.unit}}
-                                </b> /
-                                <b>
-                                    {{getTotalResourceItemSaleByResource(item.resource)}} {{item.resource.unit}}
-                                </b>
+                                {{item.quantity * productitem.quantity * productitem.productpack.quantity| number}} {{item.resource.unit}} {{item.resource.name}}
+                                <ng-container style="display: none;">
+                                    ( Stock
+                                    <b>
+                                        {{getTotalResourceItemByResource(item.resource)*item.resource.content - getTotalResourceItemSaleByResource(item.resource)}}
+                                        {{item.resource.unit}}
+                                    </b> )
+                                </ng-container>
                             </li>
                         </ul>
                     </div>
+
                 </div>
                 <div class="col-lg-3">
                     <div class="input-group mb-3">

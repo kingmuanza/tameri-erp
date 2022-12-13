@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { DataTableDirective } from 'angular-datatables';
+import { NotifierService } from 'angular-notifier';
 import { Subject } from 'rxjs';
 import { DatatablesOptions } from 'src/app/_data/datatable.option';
 import { Company } from 'src/app/_models/company.model';
@@ -9,11 +10,11 @@ import { AuthenticationService } from 'src/app/_services/authentication.service'
 import { CrudService } from 'src/app/_services/crud.service';
 
 @Component({
-  selector: 'app-resourceitem-list',
-  templateUrl: './resourceitem-list.component.html',
-  styleUrls: ['./resourceitem-list.component.scss']
+  selector: 'app-resourceitem-confirmation-list',
+  templateUrl: './resourceitem-confirmation-list.component.html',
+  styleUrls: ['./resourceitem-confirmation-list.component.scss']
 })
-export class ResourceitemListComponent implements OnInit {
+export class ResourceitemConfirmationListComponent implements OnInit {
 
   // Datatables
   dtOptions: any = DatatablesOptions;
@@ -28,6 +29,7 @@ export class ResourceitemListComponent implements OnInit {
 
   constructor(
     private router: Router,
+    private notifierService: NotifierService,
     private resourceitemService: CrudService<Resourceitem>,
     private authService: AuthenticationService,
   ) {
@@ -66,6 +68,20 @@ export class ResourceitemListComponent implements OnInit {
       this.dtTrigger.next('');
     }).catch((e)=> {
       this.dtTrigger.next('');
+    });
+  }
+
+  confirmResourceItem(resourceitem: Resourceitem) {
+    const yes = confirm('Are you sure to confirm this resource item ?');
+    if (yes) {
+      resourceitem.status = Resourceitem.CONFIRMED;
+      this.save(resourceitem);
+    }
+  }
+
+  save(resourceitem: Resourceitem) {
+    this.resourceitemService.modify('resourceitem', resourceitem._id, resourceitem).then(() => {
+      this.notifierService.notify('success', "saved successfully");      
     });
   }
 

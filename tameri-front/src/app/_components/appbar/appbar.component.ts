@@ -30,6 +30,7 @@ export class AppbarComponent implements OnInit, OnChanges {
       it: true,
       pack: true,
       item: true,
+      confirmation: true,
     },
     param: false,
     client: false,
@@ -82,7 +83,7 @@ export class AppbarComponent implements OnInit, OnChanges {
 
   getAcess() {
     this.setAllFalse();
-    if (this.user?.role.indexOf('ADMIN') !== -1) {
+    if (this.user?.role.indexOf('ADMIN') !== -1 || this.user?.role.indexOf('Manager') !== -1) {
       this.access = {
         employee: true,
         pos: true,
@@ -98,31 +99,7 @@ export class AppbarComponent implements OnInit, OnChanges {
           it: true,
           pack: true,
           item: true,
-        },
-        param: true,
-        client: true,
-        dashboard: true,
-        order: true,
-        invoice: true,
-        inventory: true,
-      }
-    }
-    if (this.user?.role.indexOf('Manager') !== -1) {
-      this.access = {
-        employee: true,
-        pos: true,
-        supplier: true,
-        product: {
-          menu: true,
-          it: true,
-          pack: true,
-          item: true,
-        },
-        resource: {
-          menu: true,
-          it: true,
-          pack: true,
-          item: true,
+          confirmation: true,
         },
         param: true,
         client: true,
@@ -136,6 +113,7 @@ export class AppbarComponent implements OnInit, OnChanges {
       this.access.resource.menu = true;
       this.access.resource.item = true;
       this.access.inventory = true;
+      this.access.resource.confirmation = true;
     }
     if (this.user?.role.indexOf('Productionman') !== -1) {
       this.access.product.menu = true;
@@ -190,6 +168,7 @@ export class AppbarComponent implements OnInit, OnChanges {
         it: false,
         pack: false,
         item: false,
+        confirmation: false,
       },
       param: false,
       client: false,

@@ -77,9 +77,9 @@ export class ProductpackEditComponent implements OnInit {
   save() {
     this.productpack.company = this.authService.user.company;
     if (this.isNewProductpack) {
-      this.productpackService.create('productpack', this.productpack).then(() => {
+      this.productpackService.create('productpack', this.productpack).then((_id) => {
         this.notifierService.notify('success', "saved successfully");
-        this.router.navigate(['productpack', 'view', this.productpack._id]);
+        this.router.navigate(['productpack', 'view', _id]);
       });
     } else {
       this.productpackService.modify('productpack', this.productpack._id, this.productpack).then(() => {

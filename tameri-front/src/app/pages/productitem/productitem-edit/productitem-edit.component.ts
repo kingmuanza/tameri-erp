@@ -172,7 +172,7 @@ export class ProductitemEditComponent implements OnInit {
   getResourcesItems() {
     this.resourceitemService.getAll('resourceitem').then((data) => {
       this.resourceitems = data.filter((d) => {
-        return d.company && d.company.id === this.company.id;
+        return d.company && d.company.id === this.company.id && d.status && d.status === Resourceitem.CONFIRMED;
       });
     }).catch((e) => {
     });

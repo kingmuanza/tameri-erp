@@ -78,7 +78,7 @@ export class ResourceViewComponent implements OnInit {
       this.resourceitems = resourceitems.filter((d) => {
         const isRessource = d.resource?.id === this.resource.id;
         const isRessourcepack = d.resourcepack?.resource.id === this.resource.id;
-        return isRessource || isRessourcepack;
+        return( isRessource || isRessourcepack) && d.status && d.status === Resourceitem.CONFIRMED;
       });
       this.totalResourceitems = this.calculTotalResourceitems(this.resourceitems) * this.resource.content;
       // this.getProductItems();

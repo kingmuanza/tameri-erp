@@ -60,6 +60,7 @@ import { InventoryViewComponent } from './pages/inventory/inventory-view/invento
 import { ResourceitemListComponent } from './pages/resourceitem/resourceitem-list/resourceitem-list.component';
 import { ResourceitemEditComponent } from './pages/resourceitem/resourceitem-edit/resourceitem-edit.component';
 import { ResourceitemViewComponent } from './pages/resourceitem/resourceitem-view/resourceitem-view.component';
+import { ResourceitemConfirmationListComponent } from './pages/resourceitem/resourceitem-confirmation-list/resourceitem-confirmation-list.component';
 
 @NgModule({
   declarations: [
@@ -117,6 +118,7 @@ import { ResourceitemViewComponent } from './pages/resourceitem/resourceitem-vie
     ResourceitemListComponent,
     ResourceitemEditComponent,
     ResourceitemViewComponent,
+    ResourceitemConfirmationListComponent,
   ],
   imports: [
     BrowserModule,

@@ -5,14 +5,18 @@ import { Supplier } from "./supplier.model";
 
 export class Resourceitem {
 
-    id: string = 'Resourceitem'.toUpperCase() + new Date().getTime();
-    date = new Date()
-    quantity = 0;
-    price = 0;
-    company = new Company();
-    resource:Resource | undefined;
-    resourcepack :Resourcepack | undefined;
-    supplier: Supplier | undefined;
+  static CONFIRMED = 1;
+  static NEW = 0;
+
+  id: string = 'Resourceitem'.toUpperCase() + new Date().getTime();
+  date = new Date()
+  quantity = 0;
+  price = 0;
+  company = new Company();
+  resource: Resource | undefined;
+  resourcepack: Resourcepack | undefined;
+  supplier: Supplier | undefined;
   _id: any;
+  status = 0;
 
 }
