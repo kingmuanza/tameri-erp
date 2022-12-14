@@ -29,6 +29,7 @@ const billRoutes = require('./_routes/bill.route');
 const clientRoutes = require('./_routes/client.route');
 const salelineRoutes = require('./_routes/saleline.route');
 const resourceitemRoutes = require('./_routes/resourceitem.route');
+const inventoryRoutes = require('./_routes/inventory.route');
 
 mongoose.set('strictQuery', true);
 mongoose.connect('mongodb+srv://tameri:tameri@cluster0.hotc5.mongodb.net/test?retryWrites=true&w=majority', {
@@ -65,6 +66,7 @@ app.use('/community', communityRoutes);
 app.use('/communitytype', communitytypeRoutes);
 app.use('/country', countryRoutes);
 app.use('/employee', employeeRoutes);
+app.use('/inventory', inventoryRoutes);
 app.use('/position', positionRoutes);
 app.use('/pricing', pricingRoutes);
 app.use('/product', productRoutes);

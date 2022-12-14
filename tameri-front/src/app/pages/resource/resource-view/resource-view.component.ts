@@ -8,6 +8,7 @@ import { Resourceitem } from 'src/app/_models/resourceitem.model';
 import { Resource } from 'src/app/_models/resource.model';
 import { AuthenticationService } from 'src/app/_services/authentication.service';
 import { CrudService } from 'src/app/_services/crud.service';
+import { RecurrentService } from 'src/app/_services/recurrent.service';
 
 @Component({
   selector: 'app-resource-view',
@@ -48,10 +49,8 @@ export class ResourceViewComponent implements OnInit {
     private notifierService: NotifierService,
     private authService: AuthenticationService,
     private route: ActivatedRoute,
-    private productitemService: CrudService<Productitem>,
-    private resourceitemService: CrudService<Resourceitem>,
     private companyService: CrudService<Company>,
-    private communityService: CrudService<Community>,
+    private recurrentService: RecurrentService,
     private resourceService: CrudService<Resource>
   ) {
 
@@ -74,75 +73,25 @@ export class ResourceViewComponent implements OnInit {
   }
 
   getResourceItems() {
-    this.resourceitemService.getAll('resourceitem').then((resourceitems) => {
-      this.resourceitems = resourceitems.filter((d) => {
-        const isRessource = d.resource?.id === this.resource.id;
-        const isRessourcepack = d.resourcepack?.resource.id === this.resource.id;
-        return( isRessource || isRessourcepack) && d.status && d.status === Resourceitem.CONFIRMED;
-      });
-      this.totalResourceitems = this.calculTotalResourceitems(this.resourceitems) * this.resource.content;
-      // this.getProductItems();
-    });
+    return this.recurrentService.getResourceItems(this.resource);
   }
 
   getProductItems() {
-    this.totalItems = 0;
-    this.productitemService.getAll('productitem').then((data) => {
-      this.productitems = data.filter((d) => {
-        return d.company && d.company.id === this.company.id;
-      });
-      this.productitems.forEach((d) => {
-        const product = d.product;
-        const productpack = d.productpack;
-        if (product) {
-          product.resources.forEach((r) => {
-            if (r.resource.id === this.resource.id) {
-              this.totalItems += d.quantity * r.quantity;
-            }
-          });
-        }
-        if (productpack) {
-          productpack.product.resources.forEach((r) => {
-            if (r.resource.id === this.resource.id) {
-              this.totalItems += d.quantity * r.quantity * productpack.quantity;
-            }
-          });
-        }
-      });
-    }).catch((e) => {
-    });
+    return this.recurrentService.getProductItems(this.resource);
   }
 
-  calculTotalResourceitems(resourceitems: Array<Resourceitem>) {
-    let total = 0;
-    resourceitems.forEach((s) => {
-      if (s.resource) {
-        total += s.quantity;
-      }
-      if (s.resourcepack) {
-        total += s.quantity * s.resourcepack.quantity;
-      }
-    });
-    return total;
+  getNow() {
+    return this.recurrentService.getNow(this.resource);
   }
 
+  getLastInventory() {
+    return this.recurrentService.getLastInventory(this.resource);
+  }
 
   getCompany(company: Company) {
     this.companyService.get('company', company.id).then((data) => {
       this.company = data;
     });
-  }
-
-  previous() {
-    this.step--;
-  }
-
-  suivant() {
-    this.step++;
-  }
-
-  endFirstStep() {
-    this.suivant();
   }
 
   save() {

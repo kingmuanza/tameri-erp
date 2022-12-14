@@ -16,30 +16,40 @@
     </p>
     <div class="stats mb-4">
         <div class="row">
-            <div class="col-lg-4">
+            <div class="col-lg-3">
                 <div class="text-bg-primary text-center p-3">
                     <h1>
-                        {{totalResourceitems - totalItems}} {{resource.unit }}
+                        {{getNow()}} {{resource.unit }}
                     </h1>
                     <div>
                         Now
                     </div>
                 </div>
             </div>
-            <div class="col-lg-4">
+            <div class="col-lg-3">
                 <div class="text-bg-primary text-center p-3">
                     <h1>
-                        {{totalResourceitems}} {{resource.unit }}
+                        {{getLastInventory().quantity | number }} {{resource.unit }}
+                    </h1>
+                    <div>
+                        Last inventory : {{getLastInventory().date | date: 'yyyy-MM-dd HH:mm' }}
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3">
+                <div class="text-bg-primary text-center p-3">
+                    <h1>
+                        {{getResourceItems()}} {{resource.unit }}
                     </h1>
                     <div>
                         Resource items
                     </div>
                 </div>
             </div>
-            <div class="col-lg-4">
+            <div class="col-lg-3">
                 <div class="text-bg-primary text-center p-3">
                     <h1>
-                        {{totalItems}} {{resource.unit }}
+                        {{getProductItems()}} {{resource.unit }}
                     </h1>
                     <div>
                         Used

@@ -2,7 +2,7 @@
     <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
             <li class="breadcrumb-item"><a>Home</a></li>
-            <li class="breadcrumb-item active" aria-current="page">Inventories</li>
+            <li class="breadcrumb-item active" aria-current="page">Resources</li>
         </ol>
     </nav>
     <h1>Inventories</h1>
@@ -13,6 +13,47 @@
     <div class=" page-contenu ">
         <div class="">
             <div class="">
+                <table datatable [dtOptions]="dtOptions " [dtTrigger]="dtTrigger " class="row-border hover ">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Name</th>
+                            <th>Category</th>
+                            <th style="text-align: right;">Content</th>
+                            <th>Unit</th>
+                            <th class="back-doux">Last inventory</th>
+                            <th class="back-doux">Quantity</th>
+                            <th style="text-align: right;">Buy.</th>
+                            <th style="text-align: right;">Used</th>
+                            <th style="text-align: right;">Now</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let resource of resources">
+                            <td>{{resource.id}}</td>
+                            <td>
+                                <a [routerLink]="'/inventory/view/' + resource._id">
+                                    {{resource.name}}
+                                </a>
+                            </td>
+                            <td>{{resource.category.name}}</td>
+                            <td style="text-align: right;">{{resource.content | number}}</td>
+                            <td>{{resource.unit}}</td>
+                            <td class="back-doux">{{getLastInventory(resource).date | date: 'yyyy-MM-dd HH:mm'}}</td>
+                            <td class="back-doux" style="text-align: right; font-weight: bold;">{{getLastInventory(resource).quantity | number}}</td>
+                            <td style="text-align: right;">{{getResourceItems(resource) | number}} {{resource.unit}}</td>
+                            <td style="text-align: right;">{{getProductItems(resource) | number}} {{resource.unit}}</td>
+                            <td style="text-align: right;">
+                                <div class="input-group input-group-sm">
+                                    <input #elem [attr.id]="resource.id" style="text-align: right;" type="number" class="form-control" [value]="getNow(resource)">
+                                    <button (click)="saveInventory(resource, elem)" class="btn btn-primary">
+                                        save
+                                    </button>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
 
             </div>
         </div>

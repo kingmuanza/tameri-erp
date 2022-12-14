@@ -22,6 +22,7 @@
                             <th style="text-align: right;">Content</th>
                             <th>Unit</th>
                             <th style="text-align: right;">Price</th>
+                            <th>Last Inv.</th>
                             <th style="text-align: right;">Prod.</th>
                             <th style="text-align: right;">Used</th>
                             <th style="text-align: right;">Now</th>
@@ -35,11 +36,16 @@
                             <td style="text-align: right;">{{resource.content | number}}</td>
                             <td>{{resource.unit}}</td>
                             <td style="text-align: right;">{{resource.price | currency:'':''}}</td>
+                            <td>
+                                <span class="badge text-bg-primary" style="float: right;">
+                                    {{getLastInventory(resource).quantity | number}}
+                                </span> {{getLastInventory(resource).date | date: 'yyyy-MM-dd HH:mm'}}
+                            </td>
                             <td style="text-align: right;">{{getResourceItems(resource) | number}}</td>
                             <td style="text-align: right;">{{getProductItems(resource) | number}}</td>
                             <td style="text-align: right;">
                                 <span class="badge text-bg-primary">
-                                    {{getResourceItems(resource) - getProductItems(resource) | number}}
+                                    {{getNow(resource) | number}}
                                 </span>
                             </td>
                         </tr>

@@ -30,7 +30,7 @@
                     <tbody>
                         <tr *ngFor="let resourceitem of resourceitems" (click)="edit(resourceitem)">
                             <td>{{resourceitem.id}}</td>
-                            <td>{{resourceitem.date | date: 'yyyy-MM-dd'}}</td>
+                            <td>{{resourceitem.date | date: 'yyyy-MM-dd HH:mm'}}</td>
                             <td>
                                 <ng-container *ngIf="resourceitem.resource">
                                     <span style="float: right;">
