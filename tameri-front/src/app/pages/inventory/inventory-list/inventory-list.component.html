@@ -43,13 +43,8 @@
                             <td class="back-doux" style="text-align: right; font-weight: bold;">{{getLastInventory(resource).quantity | number}}</td>
                             <td style="text-align: right;">{{getResourceItems(resource) | number}} {{resource.unit}}</td>
                             <td style="text-align: right;">{{getProductItems(resource) | number}} {{resource.unit}}</td>
-                            <td style="text-align: right;">
-                                <div class="input-group input-group-sm">
-                                    <input #elem [attr.id]="resource.id" style="text-align: right;" type="number" class="form-control" [value]="getNow(resource)">
-                                    <button (click)="saveInventory(resource, elem)" class="btn btn-primary">
-                                        save
-                                    </button>
-                                </div>
+                            <td style="text-align: right; font-weight: bold;">
+                                {{getNow(resource)}}
                             </td>
                         </tr>
                     </tbody>

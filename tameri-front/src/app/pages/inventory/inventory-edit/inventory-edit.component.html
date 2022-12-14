@@ -1,1 +1,52 @@
-<p>inventory-edit works!</p>
+<div class="container-fluid" style="margin-top: 16px;">
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a>Home</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Fill Inventory</li>
+        </ol>
+    </nav>
+    <h1>Fill Inventory</h1>
+    <p>
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam maximus aliquam velit, sed malesuada ligula blandit vel.
+    </p>
+
+    <div class=" page-contenu ">
+        <div class="">
+            <div class="">
+                <table datatable [dtOptions]="dtOptions " [dtTrigger]="dtTrigger " class="row-border hover ">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Name</th>
+                            <th>Category</th>
+                            <th style="text-align: right;">Content</th>
+                            <th>Unit</th>
+                            <th style="text-align: right;">Now</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let resource of resources">
+                            <td>{{resource.id}}</td>
+                            <td>
+                                {{resource.name}}
+                            </td>
+                            <td>{{resource.category.name}}</td>
+                            <td style="text-align: right;">{{resource.content | number}}</td>
+                            <td>{{resource.unit}}</td>
+                            <td style="text-align: right;">
+                                <div class="input-group input-group-sm">
+                                    <input #elem [attr.id]="resource.id" style="text-align: right;" type="number" class="form-control" [value]="getNow(resource)">
+                                    <span class="input-group-text">{{resource.unit}}</span>
+                                    <button (click)="saveInventory(resource, elem)" class="btn btn-primary">
+                                        save
+                                    </button>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+
+            </div>
+        </div>
+    </div>
+</div>

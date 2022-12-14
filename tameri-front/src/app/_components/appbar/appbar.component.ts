@@ -37,7 +37,11 @@ export class AppbarComponent implements OnInit, OnChanges {
     dashboard: false,
     order: false,
     invoice: false,
-    inventory: false,
+    inventory: {      
+      menu: true,
+      fill: true,
+      analysis: true,
+    },
   }
 
   constructor(
@@ -106,19 +110,32 @@ export class AppbarComponent implements OnInit, OnChanges {
         dashboard: true,
         order: true,
         invoice: true,
-        inventory: true,
+        inventory: {      
+          menu: true,
+          fill: true,
+          analysis: true,
+        },
       }
+    }
+    if (this.user?.role.indexOf('Manager') !== -1) {      
+      this.access.inventory.fill = false;
     }
     if (this.user?.role.indexOf('Warehouseman') !== -1) {
       this.access.resource.menu = true;
       this.access.resource.item = true;
-      this.access.resource.confirmation = true;
+      this.access.resource.confirmation = true;        
+      this.access.inventory.menu = true;
+      this.access.inventory.fill = true;
     }
     if (this.user?.role.indexOf('Productionman') !== -1) {
       this.access.product.menu = true;
       this.access.product.item = true;
       this.access.order = true;
-      this.access.inventory = true;
+      this.access.inventory = {      
+        menu: true,
+        fill: false,
+        analysis: true,
+      };
     }
     if (this.user?.role.indexOf('Cashier') !== -1) {
       this.access.pos = true;
@@ -144,7 +161,7 @@ export class AppbarComponent implements OnInit, OnChanges {
 
   showLabel(role: string) {
     if (role === 'ADMIN') {
-      return 'Manager';
+      return 'ADMIN';
     }
     if (role === 'Productionman') {
       return 'Production Man';
@@ -175,7 +192,11 @@ export class AppbarComponent implements OnInit, OnChanges {
       dashboard: false,
       order: false,
       invoice: false,
-      inventory: false,
+      inventory: {      
+        menu: false,
+        fill: false,
+        analysis: false,
+      }
     }
   }
 

@@ -68,7 +68,7 @@ const routes: Routes = [
   { path: 'invoice/view/:id', component: InvoiceViewComponent },
   
   { path: 'inventory', component: InventoryListComponent },
-  { path: 'inventory/edit', component: InventoryEditComponent },
+  { path: 'inventory-edit', component: InventoryEditComponent },
   { path: 'inventory/edit/:id', component: InventoryEditComponent },
   { path: 'inventory/view/:id', component: InventoryViewComponent },
   
