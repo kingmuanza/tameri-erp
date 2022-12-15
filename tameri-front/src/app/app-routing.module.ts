@@ -50,6 +50,9 @@ import { SupplierViewComponent } from './pages/supplier/supplier-view/supplier-v
 import { WarehouseEditComponent } from './pages/warehouse/warehouse-edit/warehouse-edit.component';
 import { WarehouseListComponent } from './pages/warehouse/warehouse-list/warehouse-list.component';
 import { WarehouseViewComponent } from './pages/warehouse/warehouse-view/warehouse-view.component';
+import { InventorygroupEditComponent } from './pages/inventorygroup/inventorygroup-edit/inventorygroup-edit.component';
+import { InventorygroupListComponent } from './pages/inventorygroup/inventorygroup-list/inventorygroup-list.component';
+import { InventorygroupViewComponent } from './pages/inventorygroup/inventorygroup-view/inventorygroup-view.component';
 
 const routes: Routes = [
   
@@ -71,6 +74,11 @@ const routes: Routes = [
   { path: 'inventory-edit', component: InventoryEditComponent },
   { path: 'inventory/edit/:id', component: InventoryEditComponent },
   { path: 'inventory/view/:id', component: InventoryViewComponent },
+  
+  { path: 'inventorygroup', component: InventorygroupListComponent },
+  { path: 'inventorygroup/edit', component: InventorygroupEditComponent },
+  { path: 'inventorygroup/edit/:id', component: InventorygroupEditComponent },
+  { path: 'inventorygroup/view/:id', component: InventorygroupViewComponent },
   
   { path: 'client', component: ClientListComponent },
   { path: 'client/edit', component: ClientEditComponent },

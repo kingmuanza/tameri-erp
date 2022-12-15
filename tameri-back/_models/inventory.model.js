@@ -5,6 +5,7 @@ const InventorySchema = mongoose.Schema({
     date: Date,
     resource: Object,
     company: Object,
+    inventorygroup: Object,
     quantity: Number,
 });
 

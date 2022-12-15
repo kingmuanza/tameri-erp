@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { DataTableDirective } from 'angular-datatables';
 import { NotifierService } from 'angular-notifier';
 import { Subject } from 'rxjs';
@@ -14,11 +14,11 @@ import { CrudService } from 'src/app/_services/crud.service';
 import { RecurrentService } from 'src/app/_services/recurrent.service';
 
 @Component({
-  selector: 'app-inventory-edit',
-  templateUrl: './inventory-edit.component.html',
-  styleUrls: ['./inventory-edit.component.scss']
+  selector: 'app-inventorygroup-view',
+  templateUrl: './inventorygroup-view.component.html',
+  styleUrls: ['./inventorygroup-view.component.scss']
 })
-export class InventoryEditComponent implements OnInit {
+export class InventorygroupViewComponent implements OnInit {
 
   // Datatables
   dtOptions: any = DatatablesOptions;
@@ -28,12 +28,13 @@ export class InventoryEditComponent implements OnInit {
 
   resources = new Array<Resource>();
   inventories = new Array<Inventory>();
+  resource = new Resource();
   company = new Company();
-
-  showWaitingMessage = false;
+  inventorygroup = new Inventorygroup();
 
   constructor(
     private router: Router,
+    private route: ActivatedRoute,
     private resourceService: CrudService<Resource>,
     private inventoryService: CrudService<Inventory>,
     private inventorygroupService: CrudService<Inventorygroup>,
@@ -53,15 +54,23 @@ export class InventoryEditComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.resourceService.getAll('resource').then((data) => {
-      this.resources = data.filter((d) => {
-        return d.company && d.company.id === this.company.id;
-      });
-      this.createInventories().then(() => {
-        this.dtTrigger.next('');
-      });
-    }).catch((e) => {
-      this.dtTrigger.next('');
+    this.route.paramMap.subscribe((paramMap) => {
+      const id = paramMap.get('id');
+      console.log('id');
+      console.log(id);
+      if (id) {
+        this.inventorygroupService.get('inventorygroup', id).then((data) => {
+          this.inventorygroup = data;
+          this.inventoryService.getAll('inventory').then((data) => {
+            this.inventories = data.filter((d) => {
+              return d.company && d.company.id === this.company.id && d.inventorygroup && d.inventorygroup.id === this.inventorygroup.id;
+            });
+            this.dtTrigger.next('');
+          }).catch((e) => {
+            this.dtTrigger.next('');
+          });
+        }); 
+      }
     });
   }
 
@@ -80,14 +89,6 @@ export class InventoryEditComponent implements OnInit {
   saveInventory(resource: Resource, elem: any) {
     const yes = confirm('Are you sure to update this value ?');
     if (yes) {
-      this.saveOne(resource, elem).then(() => {
-        window.location.reload();
-      });
-    }
-  }
-
-  saveOne(resource: Resource, elem: any) {
-    return new Promise((resolve, reject) => {
       const inventory = new Inventory();
       inventory.resource = resource;
       console.log(elem.value);
@@ -97,57 +98,9 @@ export class InventoryEditComponent implements OnInit {
       console.log(inventory);
       this.inventoryService.create('inventory', inventory).then((_id) => {
         this.notifierService.notify('success', "saved successfully");
-        resolve(inventory);
-      });
-    });
-  }
-
-  createInventory(resource: Resource) {
-    const inventory = new Inventory();
-    inventory.resource = resource;
-    inventory.quantity = 0;
-    inventory.company = this.company;
-    inventory.date = new Date()
-    console.log(inventory);
-    return inventory;
-  }
-
-  async createInventories() {
-    for (let index = 0; index < this.resources.length; index++) {
-      const resource = this.resources[index];
-      await new Promise((r) => setTimeout(r, 100));
-      const inventory = this.createInventory(resource);
-      this.inventories.push(inventory);
-    }
-  }
-
-  saveAll() {
-    const yes = confirm('Are you sure to update those values ?');
-    if (yes) {
-      this.showWaitingMessage = true;
-      this.saveGlobalInventory().then(() => {
-        this.showWaitingMessage = false;
-        this.notifierService.notify('success', "saved successfully");
         window.location.reload();
       });
     }
-  }
-
-  async saveGlobalInventory() {
-    console.log(this.inventories);
-    const inventorygroup = new Inventorygroup();
-    inventorygroup.date = new Date();
-    inventorygroup.company = this.company;
-    const _id = await this.inventorygroupService.create('inventorygroup', inventorygroup);
-    inventorygroup._id = _id;
-    
-    for (let index = 0; index < this.inventories.length; index++) {
-      const inventory = this.inventories[index];
-      inventory.inventorygroup = inventorygroup;
-      await this.inventoryService.create('inventory', inventory)
-    }
-    
-    console.log(_id);
   }
 
   getLastInventory(resource: Resource): Inventory {
@@ -156,6 +109,11 @@ export class InventoryEditComponent implements OnInit {
 
   getNow(resource: Resource) {
     return this.recurrentService.getNow(resource);
+  }
+
+  viewInventoryResource(inventory: Inventory) {
+    this.router.navigate(['inventory','view', inventory.resource._id]);
+
   }
 
   ngOnDestroy(): void {

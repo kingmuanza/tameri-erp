@@ -1,0 +1,37 @@
+<div class="container-fluid" style="margin-top: 16px;">
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a>Home</a></li>
+            <li class="breadcrumb-item active" aria-current="page"><a [routerLink]="'/inventorygroup'">Inventories</a></li>
+            <li class="breadcrumb-item active" aria-current="page">{{inventorygroup.date | date: 'yyyy-MM-dd HH:mm' }}</li>
+        </ol>
+    </nav>
+    <h1>Inventory : {{inventorygroup.date | date: 'yyyy-MM-dd HH:mm' }} </h1>
+    <p>
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam maximus aliquam velit, sed malesuada ligula blandit vel.
+    </p>
+
+    <div class=" page-contenu ">
+        <div class="">
+            <div class="">
+                <table datatable [dtOptions]="dtOptions " [dtTrigger]="dtTrigger " class="row-border hover ">
+                    <thead>
+                        <tr>
+                            <th>Date</th>
+                            <th>Resource</th>
+                            <th style="text-align: right;">Quantity</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let inventory of inventories" (click)="viewInventoryResource(inventory)">
+                            <td>{{inventory.date | date: 'yyyy-MM-dd HH:mm'}}</td>
+                            <td>{{inventory.resource.name}}</td>
+                            <td style="text-align: right;">{{inventory.quantity | number}} {{inventory.resource.unit}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+            </div>
+        </div>
+    </div>
+</div>

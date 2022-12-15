@@ -21,7 +21,7 @@
                             <th>Category</th>
                             <th style="text-align: right;">Content</th>
                             <th>Unit</th>
-                            <th>Estimate</th>
+                            <th style="text-align: right;">Estimate</th>
                             <th style="text-align: right;">Now</th>
                         </tr>
                     </thead>
@@ -34,7 +34,7 @@
                             <td>{{inventory.resource.category.name}}</td>
                             <td style="text-align: right;">{{inventory.resource.content | number}}</td>
                             <td>{{inventory.resource.unit}}</td>
-                            <td>{{getNow(inventory.resource)}}</td>
+                            <td style="text-align: right;">{{getNow(inventory.resource)}}</td>
                             <td style="text-align: right;">
                                 <div class="input-group input-group-sm">
                                     <input #elem [attr.id]="inventory.id" style="text-align: right;" type="number" class="form-control" [(ngModel)]="inventory.quantity">

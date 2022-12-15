@@ -52,6 +52,11 @@
                                     <a class="dropdown-item" aria-current="page" [routerLink]="'inventory'" routerLinkActive="active">Inventory analysis</a>
                                 </li>
                             </ng-container>
+                            <ng-container *ngIf="access.inventory.analysis">
+                                <li>
+                                    <a class="dropdown-item" aria-current="page" [routerLink]="'inventorygroup'" routerLinkActive="active">Inventory History</a>
+                                </li>
+                            </ng-container>
                         </ul>
                     </li>
                 </ng-container>
