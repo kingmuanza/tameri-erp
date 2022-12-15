@@ -6,6 +6,7 @@ import { Subject } from 'rxjs';
 import { DatatablesOptions } from 'src/app/_data/datatable.option';
 import { Company } from 'src/app/_models/company.model';
 import { Inventory } from 'src/app/_models/inventory.model';
+import { Inventorygroup } from 'src/app/_models/inventorygroup.model';
 import { Resource } from 'src/app/_models/resource.model';
 import { Resourceitem } from 'src/app/_models/resourceitem.model';
 import { AuthenticationService } from 'src/app/_services/authentication.service';
@@ -26,12 +27,16 @@ export class InventoryEditComponent implements OnInit {
   dtInstance!: Promise<DataTables.Api>;
 
   resources = new Array<Resource>();
+  inventories = new Array<Inventory>();
   company = new Company();
+
+  showWaitingMessage = false;
 
   constructor(
     private router: Router,
     private resourceService: CrudService<Resource>,
     private inventoryService: CrudService<Inventory>,
+    private inventorygroupService: CrudService<Inventorygroup>,
     private notifierService: NotifierService,
     private authService: AuthenticationService,
     private recurrentService: RecurrentService,
@@ -52,7 +57,9 @@ export class InventoryEditComponent implements OnInit {
       this.resources = data.filter((d) => {
         return d.company && d.company.id === this.company.id;
       });
-      this.dtTrigger.next('');
+      this.createInventories().then(() => {
+        this.dtTrigger.next('');
+      });
     }).catch((e) => {
       this.dtTrigger.next('');
     });
@@ -73,6 +80,14 @@ export class InventoryEditComponent implements OnInit {
   saveInventory(resource: Resource, elem: any) {
     const yes = confirm('Are you sure to update this value ?');
     if (yes) {
+      this.saveOne(resource, elem).then(() => {
+        window.location.reload();
+      });
+    }
+  }
+
+  saveOne(resource: Resource, elem: any) {
+    return new Promise((resolve, reject) => {
       const inventory = new Inventory();
       inventory.resource = resource;
       console.log(elem.value);
@@ -82,9 +97,54 @@ export class InventoryEditComponent implements OnInit {
       console.log(inventory);
       this.inventoryService.create('inventory', inventory).then((_id) => {
         this.notifierService.notify('success', "saved successfully");
-        window.location.reload();
+        resolve(inventory);
       });
+    });
+  }
+
+  createInventory(resource: Resource) {
+    const inventory = new Inventory();
+    inventory.resource = resource;
+    inventory.quantity = 0;
+    inventory.company = this.company;
+    inventory.date = new Date()
+    console.log(inventory);
+    return inventory;
+  }
+
+  async createInventories() {
+    for (let index = 0; index < this.resources.length; index++) {
+      const resource = this.resources[index];
+      await new Promise((r) => setTimeout(r, 100));
+      const inventory = this.createInventory(resource);
+      this.inventories.push(inventory);
     }
+  }
+
+  saveAll() {
+    this.showWaitingMessage = true;
+    this.saveGlobalInventory().then(() => {
+      this.showWaitingMessage = false;
+      this.notifierService.notify('success', "saved successfully");
+      window.location.reload();
+    });
+  }
+
+  async saveGlobalInventory() {
+    console.log(this.inventories);
+    const inventorygroup = new Inventorygroup();
+    inventorygroup.date = new Date();
+    inventorygroup.company = this.company;
+    const _id = await this.inventorygroupService.create('inventorygroup', inventorygroup);
+    inventorygroup._id = _id;
+    
+    for (let index = 0; index < this.inventories.length; index++) {
+      const inventory = this.inventories[index];
+      inventory.inventorygroup = inventorygroup;
+      await this.inventoryService.create('inventory', inventory)
+    }
+    
+    console.log(_id);
   }
 
   getLastInventory(resource: Resource): Inventory {

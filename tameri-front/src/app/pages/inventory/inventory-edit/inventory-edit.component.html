@@ -11,7 +11,7 @@
     </p>
 
     <div class=" page-contenu ">
-        <div class="">
+        <div class="mb-4">
             <div class="">
                 <table datatable [dtOptions]="dtOptions " [dtTrigger]="dtTrigger " class="row-border hover ">
                     <thead>
@@ -21,23 +21,25 @@
                             <th>Category</th>
                             <th style="text-align: right;">Content</th>
                             <th>Unit</th>
+                            <th>Estimate</th>
                             <th style="text-align: right;">Now</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr *ngFor="let resource of resources">
-                            <td>{{resource.id}}</td>
+                        <tr *ngFor="let inventory of inventories">
+                            <td>{{inventory.id}}</td>
                             <td>
-                                {{resource.name}}
+                                {{inventory.resource.name}}
                             </td>
-                            <td>{{resource.category.name}}</td>
-                            <td style="text-align: right;">{{resource.content | number}}</td>
-                            <td>{{resource.unit}}</td>
+                            <td>{{inventory.resource.category.name}}</td>
+                            <td style="text-align: right;">{{inventory.resource.content | number}}</td>
+                            <td>{{inventory.resource.unit}}</td>
+                            <td>{{getNow(inventory.resource)}}</td>
                             <td style="text-align: right;">
                                 <div class="input-group input-group-sm">
-                                    <input #elem [attr.id]="resource.id" style="text-align: right;" type="number" class="form-control" [value]="getNow(resource)">
-                                    <span class="input-group-text">{{resource.unit}}</span>
-                                    <button (click)="saveInventory(resource, elem)" class="btn btn-primary">
+                                    <input #elem [attr.id]="inventory.id" style="text-align: right;" type="number" class="form-control" [(ngModel)]="inventory.quantity">
+                                    <span class="input-group-text">{{inventory.resource.unit}}</span>
+                                    <button [hidden]="true" (click)="saveInventory(inventory.resource, elem)" class="btn btn-primary">
                                         save
                                     </button>
                                 </div>
@@ -45,8 +47,18 @@
                         </tr>
                     </tbody>
                 </table>
-
             </div>
         </div>
+        <div>
+            <button class="btn btn-primary" (click)="saveAll()">
+                Save this inventory
+            </button>
+        </div>
     </div>
+</div>
+
+<div *ngIf="showWaitingMessage" class="waiting">
+    <div class="spinner-border text-primary grand" role="status">
+    </div>
+    <div class="mt-4">Saving...</div>
 </div>

@@ -1,4 +1,5 @@
 import { Company } from "./company.model";
+import { Inventorygroup } from "./inventorygroup.model";
 import { Resource } from "./resource.model";
 
 export class Inventory {
@@ -7,5 +8,6 @@ export class Inventory {
     date = new Date('2000-01-01');
     resource = new Resource();
     quantity = 0;
-    company = new Company()
+    company = new Company();
+    inventorygroup = new Inventorygroup();
 }

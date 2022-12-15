@@ -1,0 +1,15 @@
+.waiting {
+    opacity: 0.75;
+    height: 100vh;
+    width: 100vw;
+    background-color: rgba(#fff, 0.95);
+    position: fixed;
+    top: 0;
+    left: 0;
+    text-align: center;
+    padding-top: 20vh;
+    .grand {
+        width: 200px;
+        height: 200px;
+    }
+}
