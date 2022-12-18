@@ -4,19 +4,17 @@ import { DataTableDirective } from 'angular-datatables';
 import { Subject } from 'rxjs';
 import { DatatablesOptions } from 'src/app/_data/datatable.option';
 import { Company } from 'src/app/_models/company.model';
-import { Productitem } from 'src/app/_models/productitem.model';
-import { Resourceitem } from 'src/app/_models/resourceitem.model';
-import { Resource } from 'src/app/_models/resource.model';
+import { Clientgroup } from 'src/app/_models/clientgroup.model';
 import { AuthenticationService } from 'src/app/_services/authentication.service';
 import { CrudService } from 'src/app/_services/crud.service';
 import { RecurrentService } from 'src/app/_services/recurrent.service';
 
 @Component({
-  selector: 'app-resource-list',
-  templateUrl: './resource-list.component.html',
-  styleUrls: ['./resource-list.component.scss']
+  selector: 'app-clientgroup-list',
+  templateUrl: './clientgroup-list.component.html',
+  styleUrls: ['./clientgroup-list.component.scss']
 })
-export class ResourceListComponent implements OnInit {
+export class ClientgroupListComponent implements OnInit {
 
   // Datatables
   dtOptions: any = DatatablesOptions;
@@ -24,12 +22,12 @@ export class ResourceListComponent implements OnInit {
   @ViewChild(DataTableDirective) dtElement!: DataTableDirective;
   dtInstance!: Promise<DataTables.Api>;
 
-  resources = new Array<Resource>();
+  clientgroups = new Array<Clientgroup>();
   company = new Company();
 
   constructor(
     private router: Router,
-    private resourceService: CrudService<Resource>,
+    private clientgroupService: CrudService<Clientgroup>,
     private authService: AuthenticationService,
     private recurrentService: RecurrentService,
   ) {
@@ -51,18 +49,18 @@ export class ResourceListComponent implements OnInit {
     return dtOptions;
   }
 
-  edit(resource?: Resource) {
-    if (resource) {
-      this.router.navigate(['resource', 'view', resource._id]);
+  edit(clientgroup?: Clientgroup) {
+    if (clientgroup) {
+      this.router.navigate(['clientgroup', 'view', clientgroup._id]);
     } else {
-      this.router.navigate(['resource', 'edit']);
+      this.router.navigate(['clientgroup', 'edit']);
     }
   }
 
   ngOnInit(): void {
     this.dtOptions = this.initNouveau();
-    this.resourceService.getAll('resource').then((data) => {
-      this.resources = data.filter((d) => {
+    this.clientgroupService.getAll('clientgroup').then((data) => {
+      this.clientgroups = data.filter((d) => {
         return d.company && d.company.id === this.company.id;
       });
       this.dtTrigger.next('');
@@ -70,27 +68,6 @@ export class ResourceListComponent implements OnInit {
       this.dtTrigger.next('');
     });
   }
-
-  getResourceItems(resource: Resource) {
-    return this.recurrentService.getResourceItems(resource);
-  }
-
-  getProductItems(resource: Resource) {
-    return this.recurrentService.getProductItems(resource);
-  }
-
-  calculTotalResourceitems(resourceitems: Array<Resourceitem>) {
-    return this.recurrentService.calculTotalResourceitems(resourceitems);
-  }
-
-  getNow(resource: Resource) {
-    return this.recurrentService.getNow(resource);
-  }
-
-  getLastInventory(resource: Resource) {
-    return this.recurrentService.getLastInventory(resource);
-  }
-
 
   ngOnDestroy(): void {
     this.dtTrigger.unsubscribe();

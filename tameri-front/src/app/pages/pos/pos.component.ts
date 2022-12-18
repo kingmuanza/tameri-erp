@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Client } from 'src/app/_models/client.model';
+import { Clientgroup } from 'src/app/_models/clientgroup.model';
 import { Company } from 'src/app/_models/company.model';
 import { Product } from 'src/app/_models/product.model';
 import { Productitem } from 'src/app/_models/productitem.model';
@@ -26,6 +27,8 @@ export class PosComponent implements OnInit {
   saleline = new Saleline();
 
   TOTAL = 0;
+  reduction = 0;
+  netAPayer = 0;
 
   code = '';
 
@@ -45,6 +48,7 @@ export class PosComponent implements OnInit {
     private authService: AuthenticationService,
     private clientService: CrudService<Client>,
     private salelineService: CrudService<Saleline>,
+    private clientgroupService: CrudService<Clientgroup>,
     private productitemService: CrudService<Productitem>,
   ) {
     this.company = this.authService.user.company;
@@ -117,6 +121,7 @@ export class PosComponent implements OnInit {
     sale.salelines = this.salelines;
     sale.good = paid ? paid : false;
     sale.client = this.client;
+    sale.reduction = this.reduction;
     console.log('sale');
     console.log(sale);
     sale.code = this.generateCode();
@@ -128,6 +133,7 @@ export class PosComponent implements OnInit {
 
   modify(bill: Sale, paid?: boolean) {
     bill.salelines = this.salelines;
+    this.reduction = bill.reduction; 
     bill.good = paid ? paid : false;
     this.billService.modify('bill', bill._id, bill).then((data) => {
       window.location.reload();
@@ -178,11 +184,15 @@ export class PosComponent implements OnInit {
     this.code = bill.code;
     this.salelines = bill.salelines;
     this.isView = true;
+    this.reduction = bill.reduction ? bill.reduction : 0;
+    
 
     console.log('bill.client');
     console.log(bill.client);
 
     this.updateTotal();
+
+    this.netAPayer = this.TOTAL - this.reduction;
 
     this.clients.forEach((c) => {
       if (bill.client) {
@@ -232,7 +242,7 @@ export class PosComponent implements OnInit {
         return isCompany && (isProduit || isProduitPack);
       });
       const totalItems = this.calculTotalItems(productitems);
-      this.quantityCurrent = Math.floor((totalItems - totalSales)/quantity);
+      this.quantityCurrent = Math.floor((totalItems - totalSales) / quantity);
 
     }).catch((e) => {
     });
@@ -241,7 +251,7 @@ export class PosComponent implements OnInit {
   calculTotalSales(salelines: Array<Saleline>) {
     let total = 0;
     salelines.forEach((s) => {
-      
+
       total += s.quantity * s.productpack.quantity;
     });
     return total;
@@ -258,6 +268,17 @@ export class PosComponent implements OnInit {
       }
     });
     return total;
+  }
+
+  calculReduction(client: Client) {
+    let group = client.group;
+    if (group) {
+      this.clientgroupService.get('clientgroup', group._id).then((data) => {
+        group = data;
+        this.reduction = (group.reductionglobale /100)*this.TOTAL;
+        this.netAPayer = this.TOTAL - this.reduction;
+      });
+    }
   }
 
 }

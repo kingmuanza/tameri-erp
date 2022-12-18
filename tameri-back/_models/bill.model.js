@@ -9,6 +9,7 @@ const BillSchema = mongoose.Schema({
     good: Boolean,
     delivery: Boolean,
     client: Object,
+    reduction: Number,
 });
 
 module.exports = mongoose.model('Bill', BillSchema);

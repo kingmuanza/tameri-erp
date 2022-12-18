@@ -10,6 +10,7 @@ export class Sale {
   company = new Company();
   good = false;
   delivery = false;
+  reduction = 0;
   client = new Client();
   _id: any;
 

@@ -14,27 +14,53 @@
         All orders
     </p>
     <div class=" page-contenu ">
-        <div class="card shadow-lg">
-            <div class="card-body">
-                <table datatable [dtOptions]="dtOptions " [dtTrigger]="dtTrigger " class="row-border hover ">
-                    <thead>
-                        <tr>
-                            <th>ID</th>
-                            <th>Name</th>
-                            <th>Montant</th>
-                            <th>Reduction</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr *ngFor="let sale of companies" (click)="viewSale(sale)">
-                            <td>{{sale.id}}</td>
-                            <td>{{sale.client.firstname}} {{sale.client.name}}</td>
-                            <td>{{calculTotalSalelines(sale.salelines) | currency:'':''}}</td>
-                            <td>0</td>
-                        </tr>
-                    </tbody>
-                </table>
+        <div class="row">
+            <div class="col-lg-4">
+                <div class="card shadow-lg">
+                    <div class="card-body">
+                        <div class="card-title">
+                            Client group
+                        </div>
+                        <div>
+                            <div class="input-group mb-3">
+                                <span class="input-group-text">Group</span>
+                                <select [(ngModel)]="client.group" type="text" class="form-control">
+                                    <option [ngValue]="r" *ngFor="let r of groups">
+                                        {{r.name}}
+                                    </option>
+                                </select>
+                                <button (click)="save()" class="btn btn-primary">
+                                    Save
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-8">
+                <div class="card shadow-lg">
+                    <div class="card-body">
+                        <table datatable [dtOptions]="dtOptions " [dtTrigger]="dtTrigger " class="row-border hover ">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Name</th>
+                                    <th>Montant</th>
+                                    <th>Reduction</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let sale of companies" (click)="viewSale(sale)">
+                                    <td>{{sale.id}}</td>
+                                    <td>{{sale.client.firstname}} {{sale.client.name}}</td>
+                                    <td>{{calculTotalSalelines(sale.salelines) | currency:'':''}}</td>
+                                    <td>0</td>
+                                </tr>
+                            </tbody>
+                        </table>
 
+                    </div>
+                </div>
             </div>
         </div>
     </div>

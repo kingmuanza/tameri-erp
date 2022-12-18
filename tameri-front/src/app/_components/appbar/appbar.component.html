@@ -23,7 +23,8 @@
 
                 <ng-container *ngIf="access.pos">
                     <li class="nav-item">
-                        <a class="nav-link " aria-current="page" [routerLink]="'pos'" routerLinkActive="active">Point of sale</a>
+                        <a class="nav-link " aria-current="page" [routerLink]="'pos'" routerLinkActive="active">Point of
+                            sale</a>
                     </li>
                 </ng-container>
                 <ng-container *ngIf="access.order">
@@ -74,8 +75,18 @@
                 </ng-container>
 
                 <ng-container *ngIf="access.client">
-                    <li class="nav-item">
-                        <a class="nav-link " aria-current="page" [routerLink]="'client'" routerLinkActive="active">Clients</a>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Clients
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li class="nav-item">
+                                <a class="nav-link " aria-current="page" [routerLink]="'client'" routerLinkActive="active">Clients</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link " aria-current="page" [routerLink]="'clientgroup'" routerLinkActive="active">Client Groups</a>
+                            </li>
+                        </ul>
                     </li>
                 </ng-container>
 
@@ -133,7 +144,8 @@
                             </ng-container>
                             <ng-container *ngIf="access.resource.confirmation">
                                 <li *ngIf="company?.option.productResource">
-                                    <a class="dropdown-item" aria-current="page" [routerLink]="'resourceitem-confirmation'" routerLinkActive="active">Resource items confirmation</a>
+                                    <a class="dropdown-item" aria-current="page" [routerLink]="'resourceitem-confirmation'" routerLinkActive="active">Resource
+                                        items confirmation</a>
                                 </li>
                             </ng-container>
 

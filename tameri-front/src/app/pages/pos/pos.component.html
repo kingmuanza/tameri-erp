@@ -102,7 +102,8 @@
                                         <td *ngIf="!isView" style="text-align: right;">
                                             <ng-container>
                                                 <ng-container *ngIf="salelines.length > 0">
-                                                    <button (click)="deleteAll()" class="btn btn-danger btn-sm">Delete all</button>
+                                                    <button (click)="deleteAll()" class="btn btn-danger btn-sm">Delete
+                                                        all</button>
                                                 </ng-container>
                                             </ng-container>
                                         </td>
@@ -112,16 +113,33 @@
 
                         </div>
 
-                        <div>
-                            <div class="mt-4">
-                                <div class="input-group mb-3">
-                                    <span class="input-group-text">Client</span>
-                                    <select [(ngModel)]="client" class="form-control">
-                                        <option *ngIf="isView && isClient" [ngValue]="client">{{client.firstname}} {{client.name}}</option>
-                                        <option [ngValue]="c" *ngFor="let c of clients">
-                                            {{c.firstname}} {{c.name}}
-                                        </option>
-                                    </select>
+                        <div class="mt-4">
+                            <div class="row">
+                                <div class="col-lg-4">
+                                    <div>
+                                        <div class="input-group mb-3">
+                                            <span class="input-group-text">Client</span>
+                                            <select (ngModelChange)="calculReduction($event)" [(ngModel)]="client" class="form-control">
+                                                <option *ngIf="isView && isClient" [ngValue]="client">{{client.firstname}}
+                                                    {{client.name}}</option>
+                                                <option [ngValue]="c" *ngFor="let c of clients">
+                                                    {{c.firstname}} {{c.name}}
+                                                </option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-4">
+                                    <div class="input-group mb-3">
+                                        <span class="input-group-text">Reduction</span>
+                                        <input [(ngModel)]="reduction" type="number" class="form-control">
+                                    </div>
+                                </div>
+                                <div class="col-lg-4">
+                                    <div class="input-group mb-3">
+                                        <span class="input-group-text">Net à payer</span>
+                                        <input [(ngModel)]="netAPayer" type="number" class="form-control">
+                                    </div>
                                 </div>
                             </div>
                         </div>

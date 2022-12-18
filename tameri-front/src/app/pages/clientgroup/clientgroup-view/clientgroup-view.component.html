@@ -1,0 +1,108 @@
+<div class="container-fluid" style="margin-top: 16px;">
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a>Home</a></li>
+            <li class="breadcrumb-item"><a [routerLink]="'/clientgroup'">Clientgroups</a></li>
+            <li class="breadcrumb-item active" *ngIf="!isNewClientgroup">{{clientgroup.name}}</li>
+        </ol>
+    </nav>
+    <a [routerLink]="'/clientgroup/edit/' + clientgroup._id" style="float: right;">Edit</a>
+    <h1 *ngIf="!isNewClientgroup" class="titre">
+        {{clientgroup.name}}
+    </h1>
+    <p>
+        Company : {{company.name}}
+        <br>
+    </p>
+
+    <div class="row">
+        <div class="col-lg-4">
+            <div class="first-step card shadow-sm">
+                <div class="card-body">
+                    <p class="card-title">
+                        Clientgroup Infos
+                    </p>
+                    <div class=" page-contenu ">
+
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <div class="input-group mb-3">
+                                    <span class="input-group-text">Name</span>
+                                    <input [(ngModel)]="clientgroup.name" type="text" class="form-control">
+                                </div>
+                            </div>
+                            <div class="col-lg-12">
+                                <div class="input-group mb-3">
+                                    <span class="input-group-text">Reduction</span>
+                                    <input [(ngModel)]="clientgroup.reductionglobale" type="number" class="form-control">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div *ngIf="false" class="col-lg-8">
+            <div class="first-step card shadow-lg">
+                <div class="card-body">
+                    <p class="card-title">
+                        Resources
+                    </p>
+                    <div class=" page-contenu ">
+                        <div class="row">
+                            <div class="col-lg-5">
+                                <div class="input-group mb-3">
+                                    <span class="input-group-text">Resource</span>
+                                    <select [(ngModel)]="resource" type="text" class="form-control" [ngClass]="{'is-invalid': showErrors && (!resource.name)}">
+                                        <option [ngValue]="r" *ngFor="let r of resources">
+                                            {{r.name}}
+                                        </option>
+                                    </select>
+                                    <span *ngIf="resource.unit" class="input-group-text">{{resource.unit}}</span>
+                                </div>
+                            </div>
+                            <div class="col-lg-3">
+                                <div class="input-group mb-3">
+                                    <span class="input-group-text">Quantity</span>
+                                    <input [(ngModel)]="quantity" type="number" class="form-control" [ngClass]="{'is-invalid': showErrors && (quantity <= 0)}">
+
+                                </div>
+                            </div>
+                            <div class="col-lg-3">
+                                <div class="input-group mb-3">
+                                    <span class="input-group-text">Unit</span>
+
+                                    <select [(ngModel)]="unit" type="text" class="form-control">
+                                        <ng-container *ngFor="let unit of units">
+                                            <option *ngIf="resource && isSametype(unit, resource.unit)" [value]="unit.symbole">{{unit.label}}</option>
+                                        </ng-container>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-lg-1">
+                                <div class="">
+                                    <button (click)="add()" class="btn btn-primary" style="width: 100%;">
+                                        Add
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <ul>
+                            <li *ngFor="let item of clientgroup.reductionsParProduit">
+                                {{item.product.name}} &nbsp;
+                                <a style="color: red; cursor: pointer;" (click)="deleteResource(item)">Supprimer</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<div style="height: 25vh;">
+
+</div>

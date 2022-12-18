@@ -6,6 +6,7 @@ const ClientSchema = mongoose.Schema({
     firstname: String,
     contact: Object,
     company: Object,
+    group: Object,
 });
 
 module.exports = mongoose.model('Client', ClientSchema);

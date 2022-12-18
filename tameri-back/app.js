@@ -31,6 +31,7 @@ const salelineRoutes = require('./_routes/saleline.route');
 const resourceitemRoutes = require('./_routes/resourceitem.route');
 const inventoryRoutes = require('./_routes/inventory.route');
 const inventorygroupRoutes = require('./_routes/inventorygroup.route');
+const clientgroupRoutes = require('./_routes/clientgroup.route');
 
 mongoose.set('strictQuery', true);
 mongoose.connect('mongodb+srv://tameri:tameri@cluster0.hotc5.mongodb.net/test?retryWrites=true&w=majority', {
@@ -61,6 +62,7 @@ app.use('/test', testRoutes);
 app.use('/auth', authRoutes);
 app.use('/bill', billRoutes);
 app.use('/client', clientRoutes);
+app.use('/clientgroup', clientgroupRoutes);
 app.use('/company', companyRoutes);
 app.use('/companytype', companytypeRoutes);
 app.use('/community', communityRoutes);

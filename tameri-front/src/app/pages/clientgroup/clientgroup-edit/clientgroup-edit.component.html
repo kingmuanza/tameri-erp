@@ -1,0 +1,50 @@
+<div class="container-fluid" style="margin-top: 16px;">
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a>Home</a></li>
+            <li class="breadcrumb-item"><a [routerLink]="'/clientgroup'">Clientgroups</a></li>
+            <li class="breadcrumb-item active" *ngIf="isNewClientgroup">new</li>
+
+            <li class="breadcrumb-item active" *ngIf="!isNewClientgroup"><a [routerLink]="'/clientgroup/view/' + clientgroup.id">{{clientgroup.name}}</a></li>
+            <li class="breadcrumb-item active" *ngIf="!isNewClientgroup">Edit</li>
+        </ol>
+    </nav>
+    <h1 *ngIf="!isNewClientgroup" class="titre">
+        <button style="float: right;" (click)="delete()" class="btn btn-danger btn-error">
+            Delete
+        </button> Modify clientgroup {{clientgroup.id}}
+    </h1>
+    <h1 *ngIf="isNewClientgroup" class="titre">Add a clientgroup</h1>
+    <div style="margin-top: -10px; margin-bottom: 20px;">
+        Company : {{company.name}}
+    </div>
+
+    <div class="first-step">
+        <p>
+            Clientgroup Infos
+        </p>
+        <div class=" page-contenu ">
+            <div class="row">
+                <div class="col-lg-8">
+                    <div class="input-group mb-3">
+                        <span class="input-group-text">Name</span>
+                        <input [(ngModel)]="clientgroup.name" type="text" class="form-control" [ngClass]="{'is-invalid': showErrors && !clientgroup.name}">
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="input-group mb-3">
+                        <span class="input-group-text">Reduction</span>
+                        <input [(ngModel)]="clientgroup.reductionglobale" type="number" class="form-control" [ngClass]="{'is-invalid': showErrors && (!clientgroup.reductionglobale || clientgroup.reductionglobale > 100) }">
+                        <button class="btn btn-primary">
+                            %
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div>
+                <button (click)="save()" class="btn btn-primary">Save</button>
+            </div>
+        </div>
+    </div>
+
+</div>

@@ -64,6 +64,9 @@ import { ResourceitemConfirmationListComponent } from './pages/resourceitem/reso
 import { InventorygroupListComponent } from './pages/inventorygroup/inventorygroup-list/inventorygroup-list.component';
 import { InventorygroupEditComponent } from './pages/inventorygroup/inventorygroup-edit/inventorygroup-edit.component';
 import { InventorygroupViewComponent } from './pages/inventorygroup/inventorygroup-view/inventorygroup-view.component';
+import { ClientgroupListComponent } from './pages/clientgroup/clientgroup-list/clientgroup-list.component';
+import { ClientgroupEditComponent } from './pages/clientgroup/clientgroup-edit/clientgroup-edit.component';
+import { ClientgroupViewComponent } from './pages/clientgroup/clientgroup-view/clientgroup-view.component';
 
 @NgModule({
   declarations: [
@@ -125,6 +128,9 @@ import { InventorygroupViewComponent } from './pages/inventorygroup/inventorygro
     InventorygroupListComponent,
     InventorygroupEditComponent,
     InventorygroupViewComponent,
+    ClientgroupListComponent,
+    ClientgroupEditComponent,
+    ClientgroupViewComponent,
   ],
   imports: [
     BrowserModule,
