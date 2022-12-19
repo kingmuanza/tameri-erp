@@ -5,7 +5,7 @@
             <li class="breadcrumb-item"><a [routerLink]="'/clientgroup'">Clientgroups</a></li>
             <li class="breadcrumb-item active" *ngIf="isNewClientgroup">new</li>
 
-            <li class="breadcrumb-item active" *ngIf="!isNewClientgroup"><a [routerLink]="'/clientgroup/view/' + clientgroup.id">{{clientgroup.name}}</a></li>
+            <li class="breadcrumb-item active" *ngIf="!isNewClientgroup"><a [routerLink]="'/clientgroup/view/' + clientgroup._id">{{clientgroup.name}}</a></li>
             <li class="breadcrumb-item active" *ngIf="!isNewClientgroup">Edit</li>
         </ol>
     </nav>
@@ -33,7 +33,7 @@
                 </div>
                 <div class="col-lg-4">
                     <div class="input-group mb-3">
-                        <span class="input-group-text">Reduction</span>
+                        <span class="input-group-text">Global discount</span>
                         <input [(ngModel)]="clientgroup.reductionglobale" type="number" class="form-control" [ngClass]="{'is-invalid': showErrors && (!clientgroup.reductionglobale || clientgroup.reductionglobale > 100) }">
                         <button class="btn btn-primary">
                             %

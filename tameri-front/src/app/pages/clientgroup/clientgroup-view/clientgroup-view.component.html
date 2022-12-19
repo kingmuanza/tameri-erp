@@ -2,7 +2,7 @@
     <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
             <li class="breadcrumb-item"><a>Home</a></li>
-            <li class="breadcrumb-item"><a [routerLink]="'/clientgroup'">Clientgroups</a></li>
+            <li class="breadcrumb-item"><a [routerLink]="'/clientgroup'">Client groups</a></li>
             <li class="breadcrumb-item active" *ngIf="!isNewClientgroup">{{clientgroup.name}}</li>
         </ol>
     </nav>
@@ -33,7 +33,7 @@
                             </div>
                             <div class="col-lg-12">
                                 <div class="input-group mb-3">
-                                    <span class="input-group-text">Reduction</span>
+                                    <span class="input-group-text">Global discount</span>
                                     <input [(ngModel)]="clientgroup.reductionglobale" type="number" class="form-control">
                                 </div>
                             </div>
@@ -42,44 +42,34 @@
                 </div>
             </div>
         </div>
-        <div *ngIf="false" class="col-lg-8">
+        <div *ngIf="true" class="col-lg-8">
             <div class="first-step card shadow-lg">
                 <div class="card-body">
                     <p class="card-title">
-                        Resources
+                        Discount by product
                     </p>
                     <div class=" page-contenu ">
                         <div class="row">
-                            <div class="col-lg-5">
+                            <div class="col-lg-6">
                                 <div class="input-group mb-3">
-                                    <span class="input-group-text">Resource</span>
-                                    <select [(ngModel)]="resource" type="text" class="form-control" [ngClass]="{'is-invalid': showErrors && (!resource.name)}">
-                                        <option [ngValue]="r" *ngFor="let r of resources">
+                                    <span class="input-group-text">Product</span>
+                                    <select [(ngModel)]="product" type="text" class="form-control" [ngClass]="{'is-invalid': showErrors && (!product.name)}">
+                                        <option [ngValue]="r" *ngFor="let r of products">
                                             {{r.name}}
                                         </option>
                                     </select>
-                                    <span *ngIf="resource.unit" class="input-group-text">{{resource.unit}}</span>
                                 </div>
                             </div>
-                            <div class="col-lg-3">
+                            <div class="col-lg-4">
                                 <div class="input-group mb-3">
-                                    <span class="input-group-text">Quantity</span>
-                                    <input [(ngModel)]="quantity" type="number" class="form-control" [ngClass]="{'is-invalid': showErrors && (quantity <= 0)}">
-
+                                    <span class="input-group-text">Discount</span>
+                                    <input [(ngModel)]="quantity" type="number" class="form-control" [ngClass]="{'is-invalid': showErrors && (quantity > 100)}">
+                                    <button class="btn btn-primary">
+                                        %
+                                    </button>
                                 </div>
                             </div>
-                            <div class="col-lg-3">
-                                <div class="input-group mb-3">
-                                    <span class="input-group-text">Unit</span>
-
-                                    <select [(ngModel)]="unit" type="text" class="form-control">
-                                        <ng-container *ngFor="let unit of units">
-                                            <option *ngIf="resource && isSametype(unit, resource.unit)" [value]="unit.symbole">{{unit.label}}</option>
-                                        </ng-container>
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="col-lg-1">
+                            <div class="col-lg-2">
                                 <div class="">
                                     <button (click)="add()" class="btn btn-primary" style="width: 100%;">
                                         Add
@@ -91,12 +81,42 @@
                     <div>
                         <ul>
                             <li *ngFor="let item of clientgroup.reductionsParProduit">
-                                {{item.product.name}} &nbsp;
-                                <a style="color: red; cursor: pointer;" (click)="deleteResource(item)">Supprimer</a>
+                                {{item.reduction}}% discount on {{item.product.name}} &nbsp;
+                                <a style="color: red; cursor: pointer;" (click)="deleteProduct(item)">Supprimer</a>
                             </li>
                         </ul>
                     </div>
                 </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="mt-4">
+        <div class="">
+            <div class="mb-4">
+                All clients of this group
+            </div>
+            <div class="mt-2">
+                <table datatable [dtOptions]="dtOptions " [dtTrigger]="dtTrigger " class="row-border hover ">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Name</th>
+                            <th>Tel</th>
+                            <th>Email</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let client of clients" (click)="voirClient(client)">
+                            <td>{{client.id}}</td>
+                            <td>{{client.firstname}} {{client.name}}</td>
+                            <td>{{client.contact.tel}}</td>
+                            <td>{{client.contact.email}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+
             </div>
         </div>
     </div>

@@ -133,7 +133,7 @@ export class PosComponent implements OnInit {
 
   modify(bill: Sale, paid?: boolean) {
     bill.salelines = this.salelines;
-    this.reduction = bill.reduction; 
+    this.reduction = bill.reduction;
     bill.good = paid ? paid : false;
     this.billService.modify('bill', bill._id, bill).then((data) => {
       window.location.reload();
@@ -185,7 +185,7 @@ export class PosComponent implements OnInit {
     this.salelines = bill.salelines;
     this.isView = true;
     this.reduction = bill.reduction ? bill.reduction : 0;
-    
+
 
     console.log('bill.client');
     console.log(bill.client);
@@ -270,15 +270,39 @@ export class PosComponent implements OnInit {
     return total;
   }
 
-  calculReduction(client: Client) {
+  calculReductionClient(client: Client) {
     let group = client.group;
     if (group) {
       this.clientgroupService.get('clientgroup', group._id).then((data) => {
         group = data;
-        this.reduction = (group.reductionglobale /100)*this.TOTAL;
-        this.netAPayer = this.TOTAL - this.reduction;
+        if (group.reductionglobale > 0) {
+          this.reduction = (group.reductionglobale / 100) * this.TOTAL;
+          this.netAPayer = this.TOTAL - this.reduction;
+        } else {
+          this.reduction = 0;
+          this.salelines.forEach((saleline) => {
+            this.reduction += this.calculReductionIntermediaire(group, saleline);
+          });
+          this.netAPayer = this.TOTAL - this.reduction;
+        }
       });
     }
   }
+
+
+  calculReductionIntermediaire(clientgroup: Clientgroup, saleline: Saleline): number {
+    let reductionIntermediaire = 0;
+    if (clientgroup.reductionsParProduit) {
+      if (clientgroup.reductionsParProduit.length > 0) {
+        clientgroup.reductionsParProduit.forEach((element) => {
+          if (element.product.id === saleline.productpack.product.id) {
+            reductionIntermediaire = (element.reduction/100) * saleline.productpack.quantity * saleline.productpack.product.price * saleline.quantity;
+          }
+        });
+      }
+    }
+    return reductionIntermediaire;
+  }
+
 
 }

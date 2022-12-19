@@ -14,6 +14,15 @@
         <button *ngIf="sale.delivery" type="button" class="btn btn-outline-primary btn-sm">DELIVERED</button>
     </p>
     <div>
+
+        <div>
+            <div class="mt-4 mb-2">
+                <div class="input-group mb-3">
+                    <span class="input-group-text">Client</span>
+                    <input [value]="sale.client.firstname + ' ' + sale.client.name" class="form-control">
+                </div>
+            </div>
+        </div>
         <div>
             <table class="row-border cell-border hover table table-bordered">
                 <thead>
@@ -43,19 +52,35 @@
                             </b>
                         </td>
                     </tr>
+                    <tr>
+                        <td>
+                            <b>DISCOUNT</b>
+                        </td>
+                        <td></td>
+                        <td></td>
+                        <td style="text-align: right;">
+                            <b>
+                                {{sale.reduction ? sale.reduction: 0 | currency:'':''}}
+                            </b>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <b>NET PAYBLE</b>
+                        </td>
+                        <td></td>
+                        <td></td>
+                        <td style="text-align: right;">
+                            <b>
+                                {{sale.reduction ? TOTAL - sale.reduction: TOTAL | currency:'':''}}
+                            </b>
+                        </td>
+                    </tr>
                 </tbody>
             </table>
 
         </div>
 
-        <div>
-            <div class="mt-4">
-                <div class="input-group mb-3">
-                    <span class="input-group-text">Client</span>
-                    <input [value]="sale.client.firstname + ' ' + sale.client.name" class="form-control">
-                </div>
-            </div>
-        </div>
         <div>
             <ng-container *ngIf="!sale.delivery">
                 <button class="btn btn-primary" (click)="setDelivered(sale)">

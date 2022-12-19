@@ -6,6 +6,7 @@ const ClientgroupSchema = mongoose.Schema({
     reductionglobale: Number,
     contact: Object,
     company: Object,
+    reductionsParProduit: Object,
 });
 
 module.exports = mongoose.model('Clientgroup', ClientgroupSchema);

@@ -62,7 +62,7 @@
                         </div>
                         <div class="col-lg-2">
                             <div class="input-group mb-3">
-                                <button [disabled]="quantityCurrent < saleline.quantity" (click)="add(saleline)" style="width: 100%;" class="btn btn-primary">Add</button>
+                                <button [disabled]="quantityCurrent < saleline.quantity" (click)="add(saleline); calculReductionClient(client)" style="width: 100%;" class="btn btn-primary">Add</button>
                             </div>
                         </div>
                     </div>
@@ -85,7 +85,7 @@
                                         <td style="text-align: right;">{{s.quantity | number}}</td>
                                         <td style="text-align: right;">{{getTotal(s) | currency:'':''}}</td>
                                         <td *ngIf="!billUse.good || !isView" style="text-align: right;">
-                                            <button (click)="delete(s)" class="btn btn-danger btn-sm">Delete</button>
+                                            <button (click)="delete(s); calculReductionClient(client)" class="btn btn-danger btn-sm">Delete</button>
                                         </td>
                                     </tr>
                                     <tr>
@@ -102,7 +102,7 @@
                                         <td *ngIf="!isView" style="text-align: right;">
                                             <ng-container>
                                                 <ng-container *ngIf="salelines.length > 0">
-                                                    <button (click)="deleteAll()" class="btn btn-danger btn-sm">Delete
+                                                    <button (click)="deleteAll(); calculReductionClient(client)" class="btn btn-danger btn-sm">Delete
                                                         all</button>
                                                 </ng-container>
                                             </ng-container>
@@ -119,7 +119,7 @@
                                     <div>
                                         <div class="input-group mb-3">
                                             <span class="input-group-text">Client</span>
-                                            <select (ngModelChange)="calculReduction($event)" [(ngModel)]="client" class="form-control">
+                                            <select (ngModelChange)="calculReductionClient($event)" [(ngModel)]="client" class="form-control">
                                                 <option *ngIf="isView && isClient" [ngValue]="client">{{client.firstname}}
                                                     {{client.name}}</option>
                                                 <option [ngValue]="c" *ngFor="let c of clients">
@@ -131,13 +131,13 @@
                                 </div>
                                 <div class="col-lg-4">
                                     <div class="input-group mb-3">
-                                        <span class="input-group-text">Reduction</span>
+                                        <span class="input-group-text">Discount</span>
                                         <input [(ngModel)]="reduction" type="number" class="form-control">
                                     </div>
                                 </div>
                                 <div class="col-lg-4">
                                     <div class="input-group mb-3">
-                                        <span class="input-group-text">Net à payer</span>
+                                        <span class="input-group-text">Net payable</span>
                                         <input [(ngModel)]="netAPayer" type="number" class="form-control">
                                     </div>
                                 </div>

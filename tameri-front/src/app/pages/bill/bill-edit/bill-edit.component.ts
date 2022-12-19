@@ -63,6 +63,7 @@ export class BillEditComponent implements OnInit {
       if (id) {
         this.billService.get('bill', id).then((data) => {
           this.sale = data;
+          this.TOTAL = this.getTotalBill();
         });
       }
     });
@@ -77,6 +78,14 @@ export class BillEditComponent implements OnInit {
 
   getTotal(saleline: Saleline): number {
     return saleline.productpack.price * saleline.quantity;
+  }
+
+  getTotalBill(): number {
+    let total = 0;
+    this.sale.salelines.forEach(saleline => {
+      total += saleline.productpack.price * saleline.quantity;
+    });
+    return total;
   }
 
   updateTotal() {

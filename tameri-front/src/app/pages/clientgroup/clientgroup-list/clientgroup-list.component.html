@@ -18,12 +18,14 @@
                         <tr>
                             <th>ID</th>
                             <th>Name</th>
+                            <th style="text-align: right;">Discount</th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr *ngFor="let clientgroup of clientgroups" (click)="edit(clientgroup)">
                             <td>{{clientgroup.id}}</td>
                             <td>{{clientgroup.name}}</td>
+                            <td style="text-align: right;">{{clientgroup.reductionglobale ? clientgroup.reductionglobale : 0}}%</td>
                         </tr>
                     </tbody>
                 </table>
