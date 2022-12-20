@@ -106,7 +106,7 @@ export class AppbarComponent implements OnInit, OnChanges {
           it: true,
           pack: true,
           item: true,
-          confirmation: true,
+          confirmation: false,
         },
         param: true,
         client: true,
@@ -140,7 +140,7 @@ export class AppbarComponent implements OnInit, OnChanges {
     if (this.user?.role.indexOf('Cashier') !== -1) {
       this.access.pos = true;
       this.access.product.menu = true;
-      this.access.product.item = true;
+      this.access.product.item = false;
       this.access.order = true;
       this.access.invoice = true;
       this.access.client = true;

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { NotifierService } from 'angular-notifier';
 import { Client } from 'src/app/_models/client.model';
 import { Company } from 'src/app/_models/company.model';
@@ -52,6 +52,7 @@ export class InvoiceEditComponent implements OnInit {
     private saleService: CrudService<Sale>,
     private productitemService: CrudService<Productitem>,
     private route: ActivatedRoute,
+    private router: Router,
   ) {
     this.company = this.authService.user.company;
   }
@@ -62,8 +63,16 @@ export class InvoiceEditComponent implements OnInit {
       if (id) {
         this.billService.get('bill', id).then((data) => {
           this.sale = data;
+          this.TOTAL = this.getTotalBill();
         });
       }
+    });
+  }
+
+  setDelivered(sale: Sale) {
+    sale.delivery = true;
+    this.saleService.modify('bill', sale._id, sale).then((data) => {
+      this.notifierService.notify('success', "saved successfully");
     });
   }
 
@@ -76,6 +85,14 @@ export class InvoiceEditComponent implements OnInit {
 
   getTotal(saleline: Saleline): number {
     return saleline.productpack.price * saleline.quantity;
+  }
+
+  getTotalBill(): number {
+    let total = 0;
+    this.sale.salelines.forEach(saleline => {
+      total += saleline.productpack.price * saleline.quantity;
+    });
+    return total;
   }
 
   updateTotal() {
@@ -132,4 +149,14 @@ export class InvoiceEditComponent implements OnInit {
     return total;
   }
 
+  delete(bill: Sale) {
+    const yes = confirm('Are you sure to cancel this order ?');
+    if (yes) {
+      this.billService.delete('bill', bill._id).then((data) => {
+        this.notifierService.notify('success', "Delete successfully");
+        this.router.navigate(['bill']);
+      }).catch((e) => {
+      });
+    }
+  }
 }

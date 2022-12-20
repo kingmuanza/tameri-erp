@@ -50,7 +50,7 @@ export class BillListComponent implements OnInit {
     this.dtOptions = this.initNouveau();
     this.saleService.getAll('bill').then((data) => {
       this.sales = data.filter((d) => {
-        return d.company && d.company.id === this.company.id;
+        return false;
       });
       this.dtTrigger.next('');
     });

@@ -10,9 +10,18 @@
         <div>BILL {{sale.code}}</div>
     </h1>
     <p>
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam maximus aliquam velit, sed malesuada ligula blandit vel.
+        <button *ngIf="sale.good" type="button" class="btn btn-outline-primary btn-sm" style="margin-right: 10px;">PAID</button>
+        <button *ngIf="sale.delivery" type="button" class="btn btn-outline-primary btn-sm">DELIVERED</button>
     </p>
     <div>
+        <div>
+            <div class="mt-4 mb-2">
+                <div class="input-group mb-3">
+                    <span class="input-group-text">Client</span>
+                    <input [value]="sale.client.firstname + ' ' + sale.client.name" class="form-control">
+                </div>
+            </div>
+        </div>
         <div>
             <table class="row-border cell-border hover table table-bordered">
                 <thead>
@@ -42,25 +51,57 @@
                             </b>
                         </td>
                     </tr>
+                    <tr>
+                        <td>
+                            <b>DISCOUNT</b>
+                        </td>
+                        <td></td>
+                        <td></td>
+                        <td style="text-align: right;">
+                            <b>
+                                {{sale.reduction ? sale.reduction: 0 | currency:'':''}}
+                            </b>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <b>NET PAYBLE</b>
+                        </td>
+                        <td></td>
+                        <td></td>
+                        <td style="text-align: right;">
+                            <b>
+                                {{sale.reduction ? TOTAL - sale.reduction: TOTAL | currency:'':''}}
+                            </b>
+                        </td>
+                    </tr>
                 </tbody>
             </table>
 
         </div>
 
         <div>
-            <div class="mt-4">
-                <div class="input-group mb-3">
-                    <span class="input-group-text">Client</span>
-                    <input [value]="sale.client.firstname + ' ' + sale.client.name" class="form-control">
-                </div>
-            </div>
-        </div>
-        <div>
-            <button *ngIf="sale.delivery" class="btn btn-primary" (click)="setNotDelivered(sale)">
-                Set as NOT delivered
-            </button> &nbsp; &nbsp;
+            <ng-container *ngIf="!sale.delivery">
+                <button class="btn btn-primary" (click)="setDelivered(sale)">
+                    Set as delivered
+                </button> &nbsp; &nbsp;
+            </ng-container>
+
+            <ng-container *ngIf="sale.delivery">
+                <button class="btn btn-primary" (click)="setNotDelivered(sale)">
+                    Set as NOT delivered
+                </button> &nbsp; &nbsp;
+            </ng-container>
+
             <button *ngIf="!sale.good" (click)="setPaid(sale)" class="btn btn-primary">Set as paid</button>
             <button *ngIf="sale.good" (click)="setNotPaid(sale)" class="btn btn-primary">Set as NOT paid</button>
+
+            <ng-container *ngIf="!sale.delivery && false">
+                &nbsp; &nbsp;
+                <button class="btn btn-danger" (click)="delete(sale)">
+                    Cancel the order
+                </button>
+            </ng-container>
         </div>
     </div>
 </div>
