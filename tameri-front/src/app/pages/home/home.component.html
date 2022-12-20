@@ -1,3 +1,137 @@
-<h1>
-    Dashboard
-</h1>
+<div class="container-fluid" style="margin-top: 16px;">
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a>Home</a></li>
+            <li class="breadcrumb-item"><a [routerLink]="'/product'">Dashboard</a></li>
+        </ol>
+    </nav>
+    <h1 class="titre">
+        Dashboard
+    </h1>
+    <p>
+        Company : {{company.name}}
+        <br>
+    </p>
+
+    <div class="stats mb-4">
+        <div class="row">
+            <div class="col-lg-4">
+                <div (click)="goToOrders()" style="cursor: pointer;" class="text-bg-primary text-center p-3 shadow-sm">
+                    <h1>
+                        {{getGreatTotal(sales) | currency:'':''}}
+                    </h1>
+                    <div>
+                        Orders
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <div class="text-bg-success text-center p-3 shadow-sm">
+                    <h1>
+                        {{getGreatTotal(salesPaid) | currency:'':''}}
+                    </h1>
+                    <div>
+                        Paid
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <div class="text-bg-danger text-center p-3 shadow-sm">
+                    <h1>
+                        {{getGreatTotal(sales) - getGreatTotal(salesPaid) | currency:'':''}}
+                    </h1>
+                    <div>
+                        Remaining
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-7">
+            <div class="card shadow-lg">
+                <div class="card-body">
+                    <div class="card-title">
+                        Last orders
+                    </div>
+                    <table datatable [dtOptions]="dtOptionsOrders" [dtTrigger]="dtTriggerOrders" class="row-border hover ">
+                        <thead>
+                            <tr>
+                                <th>Date</th>
+                                <th>Code</th>
+                                <th>Client</th>
+                                <th style="text-align: right;">Net Payable</th>
+                                <th style="">PAID</th>
+                                <th style="">DELIVERED</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let s of sales" style="cursor: pointer;">
+                                <td>{{s.date | date: 'yyyy-MM-dd HH:mm:ss'}}</td>
+                                <td>{{s.code}}</td>
+                                <td>{{s.client.firstname}} {{s.client.name}}</td>
+                                <td style="text-align: right;">{{s.reduction ? getTotal(s) - s.reduction: getTotal(s) | currency:'':''}}
+                                </td>
+                                <td style="font-weight: bold;">{{s.good ? 'PAID': ''}}</td>
+                                <td style="font-weight: bold;">{{s.delivery ? 'DELIVERED': ''}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-5">
+            <div class="card shadow-lg">
+                <div class="card-body">
+                    <div class="card-title">
+                        Procurement
+                    </div>
+                    <div class="">
+                        <table datatable [dtOptions]="dtOptionsResources" [dtTrigger]="dtTriggerResources" class="row-border hover ">
+                            <thead>
+                                <tr>
+                                    <th>Date</th>
+                                    <th>Resource/Pack</th>
+                                    <th style="text-align: right;">Quantity</th>
+                                    <th style="text-align: center;">Status</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let resourceitem of resourceitems">
+                                    <td>{{resourceitem.date | date: 'yyyy-MM-dd'}}</td>
+                                    <td>
+                                        <ng-container *ngIf="resourceitem.resource">
+                                            {{resourceitem.resource.name}}
+                                        </ng-container>
+                                        <ng-container *ngIf="resourceitem.resourcepack">
+                                            {{resourceitem.resourcepack.name}}
+                                        </ng-container>
+                                    </td>
+                                    <td style="text-align: right;">
+                                        <ng-container *ngIf="resourceitem.resource">
+                                            {{resourceitem.quantity * resourceitem.resource.content}} {{resourceitem.resource.unit}}
+                                        </ng-container>
+                                        <ng-container *ngIf="resourceitem.resourcepack">
+                                            {{resourceitem.quantity * resourceitem.resourcepack.quantity *resourceitem.resourcepack.resource.content}} {{resourceitem.resourcepack.resource.unit}}
+                                        </ng-container>
+                                    </td>
+                                    <td style="text-align: center;">
+                                        <b *ngIf="CONFIRMED === resourceitem.status">
+                                            CONFIRMED
+                                        </b>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<div style="height: 25vh;">
+
+</div>

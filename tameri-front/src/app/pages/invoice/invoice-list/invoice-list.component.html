@@ -22,7 +22,8 @@
                             <th style="text-align: right;">Total</th>
                             <th style="text-align: right;">Discount</th>
                             <th style="text-align: right;">Net Payable</th>
-                            <th style="text-align: right;">Status</th>
+                            <th style="">PAID</th>
+                            <th style="">DELIVERED</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -33,7 +34,8 @@
                             <td style="text-align: right;">{{getTotal(s) | currency:'':''}}</td>
                             <td style="text-align: right;">{{s.reduction ? s.reduction: 0 | currency:'':''}}</td>
                             <td style="text-align: right;">{{s.reduction ? getTotal(s) - s.reduction: getTotal(s) | currency:'':''}}</td>
-                            <td style="text-align: right; font-weight: bold;">{{s.good ? 'PAID': ''}}</td>
+                            <td style="font-weight: bold;">{{s.good ? 'PAID': ''}}</td>
+                            <td style="font-weight: bold;">{{s.delivery ? 'DELIVERED': ''}}</td>
                         </tr>
                     </tbody>
                 </table>

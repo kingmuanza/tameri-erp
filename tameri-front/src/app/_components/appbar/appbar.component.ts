@@ -44,6 +44,8 @@ export class AppbarComponent implements OnInit, OnChanges {
     },
   }
 
+  isAdmin = false;
+
   constructor(
     private companyService: CrudService<Company>,
     private authService: AuthenticationService,
@@ -88,15 +90,16 @@ export class AppbarComponent implements OnInit, OnChanges {
   getAcess() {
     this.setAllFalse();
     if (this.user?.role.indexOf('ADMIN') !== -1 || this.user?.role.indexOf('Manager') !== -1) {
+      this.isAdmin = true;
       this.access = {
         employee: true,
-        pos: true,
+        pos: false,
         supplier: true,
         product: {
           menu: true,
           it: true,
           pack: true,
-          item: true,
+          item: false,
         },
         resource: {
           menu: true,
@@ -112,7 +115,7 @@ export class AppbarComponent implements OnInit, OnChanges {
         invoice: true,
         inventory: {      
           menu: true,
-          fill: true,
+          fill: false,
           analysis: true,
         },
       }
@@ -122,20 +125,17 @@ export class AppbarComponent implements OnInit, OnChanges {
     }
     if (this.user?.role.indexOf('Warehouseman') !== -1) {
       this.access.resource.menu = true;
-      this.access.resource.item = true;
       this.access.resource.confirmation = true;        
       this.access.inventory.menu = true;
       this.access.inventory.fill = true;
+      this.access.inventory.analysis = true;
     }
     if (this.user?.role.indexOf('Productionman') !== -1) {
       this.access.product.menu = true;
       this.access.product.item = true;
+      this.access.product.it = true;
       this.access.order = true;
-      this.access.inventory = {      
-        menu: true,
-        fill: false,
-        analysis: true,
-      };
+      this.access.client = true;
     }
     if (this.user?.role.indexOf('Cashier') !== -1) {
       this.access.pos = true;
