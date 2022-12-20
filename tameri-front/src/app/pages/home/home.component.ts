@@ -73,7 +73,7 @@ export class HomeComponent implements OnInit {
       total += d.quantity * d.productpack.price;
     });
     if (sale.reduction) {
-      total -= sale.reduction;
+      total = total - sale.reduction;
     }
     return total;
   }

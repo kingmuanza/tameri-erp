@@ -52,7 +52,7 @@
             <div class="card shadow-lg">
                 <div class="card-body">
                     <div class="card-title">
-                        Last orders
+                        Last invoices
                     </div>
                     <table datatable [dtOptions]="dtOptionsOrders" [dtTrigger]="dtTriggerOrders" class="row-border hover ">
                         <thead>
@@ -70,7 +70,7 @@
                                 <td>{{s.date | date: 'yyyy-MM-dd HH:mm:ss'}}</td>
                                 <td>{{s.code}}</td>
                                 <td>{{s.client.firstname}} {{s.client.name}}</td>
-                                <td style="text-align: right;">{{s.reduction ? getTotal(s) - s.reduction: getTotal(s) | currency:'':''}}
+                                <td style="text-align: right;">{{getTotal(s) | currency:'':''}}
                                 </td>
                                 <td style="font-weight: bold;">{{s.good ? 'PAID': ''}}</td>
                                 <td style="font-weight: bold;">{{s.delivery ? 'DELIVERED': ''}}</td>
