@@ -11,6 +11,8 @@ import { Order } from 'src/app/_models/order.model';
 import { Orderline } from 'src/app/_models/orderline.model';
 import { AuthenticationService } from 'src/app/_services/authentication.service';
 import { CrudService } from 'src/app/_services/crud.service';
+import { Sale } from 'src/app/_models/sale.model';
+import { Saleline } from 'src/app/_models/saleline.model';
 
 @Component({
   selector: 'app-bill-view',
@@ -43,14 +45,14 @@ export class BillViewComponent implements OnInit {
   quantityCurrent = 0;
 
   constructor(
-    private billService: CrudService<Order>,
+    private orderService: CrudService<Order>,
     private productService: CrudService<Product>,
     private notifierService: NotifierService,
     private productpackService: CrudService<Productpack>,
     private authService: AuthenticationService,
     private clientService: CrudService<Client>,
     private orderlineService: CrudService<Orderline>,
-    private orderService: CrudService<Order>,
+    private billService: CrudService<Sale>,
     private productitemService: CrudService<Productitem>,
     private route: ActivatedRoute,
     private router: Router,
@@ -63,7 +65,7 @@ export class BillViewComponent implements OnInit {
     this.route.paramMap.subscribe((paramMap) => {
       const id = paramMap.get('id');
       if (id) {
-        this.billService.get('order', id).then((data) => {
+        this.orderService.get('order', id).then((data) => {
           this.order = data;
           this.TOTAL = this.getTotalBill();
         });
@@ -123,7 +125,7 @@ export class BillViewComponent implements OnInit {
   modify(bill: Order, paid?: boolean) {
     bill.orderlines = this.orderlines;
     bill.good = paid ? paid : false;
-    this.billService.modify('order', bill._id, bill).then((data) => {
+    this.orderService.modify('order', bill._id, bill).then((data) => {
       this.notifierService.notify('success', "saved successfully");
     }).catch((e) => {
     });
@@ -131,7 +133,7 @@ export class BillViewComponent implements OnInit {
 
   setPaid(bill: Order) {
     bill.good = true;
-    this.billService.modify('order', bill._id, bill).then((data) => {
+    this.orderService.modify('order', bill._id, bill).then((data) => {
       this.notifierService.notify('success', "saved successfully");
     }).catch((e) => {
     });
@@ -139,7 +141,7 @@ export class BillViewComponent implements OnInit {
 
   setNotPaid(bill: Order) {
     bill.good = false;
-    this.billService.modify('order', bill._id, bill).then((data) => {
+    this.orderService.modify('order', bill._id, bill).then((data) => {
       this.notifierService.notify('success', "saved successfully");
     }).catch((e) => {
     });
@@ -167,10 +169,41 @@ export class BillViewComponent implements OnInit {
     return total;
   }
 
+  generateInvoice(order: Order) {
+    const yes = confirm('Are you sure to generate invoice ?');
+    if (yes) {
+      const sale = this.orderToSale(order);
+      this.billService.create('bill', sale).then((data) => {
+        this.notifierService.notify('success', "Invoice successfully created");
+        window.location.reload();
+      }).catch((e) => {
+      });
+    }
+  }
+
+  orderToSale(order: Order): Sale {
+    const sale = new Sale(this.company);
+    sale.good = order.good;
+    sale.delivery = order.delivery;
+    sale.deliveryDate = order.deliveryDate;
+    sale.reduction = order.reduction;
+    sale.client = order.client;
+    sale.order = order;
+    sale.code = sale.id;
+    order.orderlines.forEach(orderline => {
+      const saleline = new Saleline();
+      saleline.productpack = orderline.productpack;
+      saleline.quantity = orderline.quantity;
+      sale.salelines.push(saleline);
+    });
+    return sale;
+
+  }
+
   delete(bill: Order) {
     const yes = confirm('Are you sure to cancel this order ?');
     if (yes) {
-      this.billService.delete('order', bill._id).then((data) => {
+      this.orderService.delete('order', bill._id).then((data) => {
         this.notifierService.notify('success', "Delete successfully");
         this.router.navigate(['order']);
       }).catch((e) => {

@@ -99,7 +99,7 @@ export class AppbarComponent implements OnInit, OnChanges {
           menu: true,
           it: true,
           pack: true,
-          item: false,
+          item: true,
         },
         resource: {
           menu: true,
@@ -122,6 +122,7 @@ export class AppbarComponent implements OnInit, OnChanges {
     }
     if (this.user?.role.indexOf('Manager') !== -1) {      
       this.access.inventory.fill = false;
+      this.access.product.item = false;
     }
     if (this.user?.role.indexOf('Warehouseman') !== -1) {
       this.access.resource.menu = true;

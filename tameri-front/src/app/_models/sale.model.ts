@@ -1,5 +1,6 @@
 import { Client } from "./client.model";
 import { Company } from "./company.model";
+import { Order } from "./order.model";
 import { Saleline } from "./saleline.model";
 
 export class Sale {
@@ -14,8 +15,10 @@ export class Sale {
   client = new Client();
   _id: any;
   deliveryDate = new Date();
+  order: Order;
 
   constructor(company: Company) {
     this.company.id = company.id;
+    this.order = new Order(company);
   }
 }
