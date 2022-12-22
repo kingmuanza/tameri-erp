@@ -49,7 +49,7 @@ export class ResourceitemListComponent implements OnInit {
     return dtOptions;
   }
 
-  edit(resourceitem?:Resourceitem) {
+  edit(resourceitem?: Resourceitem) {
     if (resourceitem) {
       this.router.navigate(['resourceitem', 'view', resourceitem._id]);
     } else {
@@ -64,13 +64,25 @@ export class ResourceitemListComponent implements OnInit {
         return d.company && d.company.id === this.company.id;
       });
       this.dtTrigger.next('');
-    }).catch((e)=> {
+    }).catch((e) => {
       this.dtTrigger.next('');
     });
+  }
+
+  isPrix(resourceitem: Resourceitem): boolean {
+    let resultat = true;
+    const price = resourceitem.price;
+    if (resourceitem.resource) {
+      resultat = price === resourceitem.resource.price * resourceitem.quantity;
+    }
+    if (resourceitem.resourcepack) {
+      resultat = price === resourceitem.resourcepack.price * resourceitem.quantity;
+    }
+    return resultat;
   }
 
   ngOnDestroy(): void {
     this.dtTrigger.unsubscribe();
   }
-  
+
 }

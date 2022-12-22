@@ -61,7 +61,9 @@
                                     {{resourceitem.resourcepack.resource.category.name }}
                                 </ng-container>
                             </td>
-                            <td style="text-align: right;">{{resourceitem.price | currency:'':''}}</td>
+                            <td [ngClass]="{'prix-rouge': !isPrix(resourceitem)}" class="" style="text-align: right;">
+                                {{resourceitem.price | currency:'':''}}
+                            </td>
                             <td style="text-align: center;">
                                 <ng-container *ngIf="resourceitem.status && resourceitem.status === CONFIRMED">
                                     <b>CONFIRMED</b>
