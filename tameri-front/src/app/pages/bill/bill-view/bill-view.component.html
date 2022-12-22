@@ -1,1 +1,111 @@
-<p>bill-view works!</p>
+<div class="container-fluid" style="margin-top: 16px;">
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a>Home</a></li>
+            <li class="breadcrumb-item"><a [routerLink]="'/bill'">Orders</a></li>
+            <li class="breadcrumb-item active"><a>{{order.code}}</a></li>
+        </ol>
+    </nav>
+    <h1>
+        <div>BILL {{order.code}}</div>
+    </h1>
+    <p>
+        <button *ngIf="order.good" type="button" class="btn btn-outline-primary btn-sm" style="margin-right: 10px;">PAID</button>
+        <button *ngIf="order.delivery" type="button" class="btn btn-outline-primary btn-sm">DELIVERED</button>
+    </p>
+    <div>
+        <div class="row">
+            <div class="col-lg-8">
+                <div class="mt-4 mb-2">
+                    <div class="input-group mb-3">
+                        <span class="input-group-text">Client</span>
+                        <input [value]="order.client.firstname + ' ' + order.client.name" class="form-control">
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <div class="mt-4 mb-2">
+                    <div class="input-group mb-3">
+                        <span class="input-group-text">Client</span>
+                        <input [value]="order.deliveryDate | date:'yyyy-MM-dd HH:mm' " type="datetime" class="form-control">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div>
+            <table class="row-border cell-border hover table table-bordered">
+                <thead>
+                    <tr>
+                        <th>Product</th>
+                        <th style="text-align: right;">Price</th>
+                        <th style="text-align: right;">Quantity</th>
+                        <th style="text-align: right;">Total</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let s of order.orderlines">
+                        <td>{{s.productpack.name}}</td>
+                        <td style="text-align: right;">{{s.productpack.price | currency:'':''}}</td>
+                        <td style="text-align: right;">{{s.quantity | number}}</td>
+                        <td style="text-align: right;">{{getTotal(s) | currency:'':''}}</td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <b>TOTAL</b>
+                        </td>
+                        <td></td>
+                        <td></td>
+                        <td style="text-align: right;">
+                            <b>
+                                {{TOTAL | currency:'':''}}
+                            </b>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <b>DISCOUNT</b>
+                        </td>
+                        <td></td>
+                        <td></td>
+                        <td style="text-align: right;">
+                            <b>
+                                {{order.reduction ? order.reduction: 0 | currency:'':''}}
+                            </b>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <b>NET PAYBLE</b>
+                        </td>
+                        <td></td>
+                        <td></td>
+                        <td style="text-align: right;">
+                            <b>
+                                {{order.reduction ? TOTAL - order.reduction: TOTAL | currency:'':''}}
+                            </b>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+
+        </div>
+
+        <div>
+            <ng-container *ngIf="!order.delivery">
+                <button class="btn btn-primary" (click)="setDelivered(order)">
+                    Set as delivered
+                </button> &nbsp; &nbsp;
+            </ng-container>
+
+            <button *ngIf="!order.good" (click)="setPaid(order)" class="btn btn-primary">Set as paid</button>
+            <button *ngIf="order.good" (click)="setNotPaid(order)" class="btn btn-primary">Set as NOT paid</button>
+
+            <ng-container *ngIf="!order.delivery">
+                &nbsp; &nbsp;
+                <button class="btn btn-danger" (click)="delete(order)">
+                    Cancel the order
+                </button>
+            </ng-container>
+        </div>
+    </div>
+</div>

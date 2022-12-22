@@ -2,12 +2,13 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NotifierService } from 'angular-notifier';
 import { Client } from 'src/app/_models/client.model';
+import { Clientgroup } from 'src/app/_models/clientgroup.model';
 import { Company } from 'src/app/_models/company.model';
 import { Product } from 'src/app/_models/product.model';
 import { Productitem } from 'src/app/_models/productitem.model';
 import { Productpack } from 'src/app/_models/productpack.model';
-import { Sale } from 'src/app/_models/sale.model';
-import { Saleline } from 'src/app/_models/saleline.model';
+import { Order } from 'src/app/_models/order.model';
+import { Orderline } from 'src/app/_models/orderline.model';
 import { AuthenticationService } from 'src/app/_services/authentication.service';
 import { CrudService } from 'src/app/_services/crud.service';
 
@@ -18,112 +19,244 @@ import { CrudService } from 'src/app/_services/crud.service';
 })
 export class BillEditComponent implements OnInit {
 
-  salelines = new Array<Saleline>();
+  orderlines = new Array<Orderline>();
   clients = new Array<Client>();
 
-  bills = new Array<Sale>();
+  bills = new Array<Order>();
   productpacks = new Array<Productpack>();
   company = new Company();
 
-  saleline = new Saleline();
+  orderline = new Orderline();
 
   TOTAL = 0;
+  reduction = 0;
+  netAPayer = 0;
 
   code = '';
-  sale = new Sale(new Company());
 
   isView = false;
   isClient = false;
 
-  billUse = new Sale(new Company());
+  billUse = new Order(new Company());
 
   client = new Client();
 
   quantityCurrent = 0;
 
+  deliveryDate = new Date();
+
   constructor(
-    private billService: CrudService<Sale>,
+    private billService: CrudService<Order>,
     private productService: CrudService<Product>,
-    private notifierService: NotifierService,
     private productpackService: CrudService<Productpack>,
     private authService: AuthenticationService,
     private clientService: CrudService<Client>,
-    private salelineService: CrudService<Saleline>,
-    private saleService: CrudService<Sale>,
+    private orderlineService: CrudService<Orderline>,
+    private clientgroupService: CrudService<Clientgroup>,
     private productitemService: CrudService<Productitem>,
-    private route: ActivatedRoute,
-    private router: Router,
   ) {
     this.company = this.authService.user.company;
   }
 
   ngOnInit(): void {
-    this.route.paramMap.subscribe((paramMap) => {
-      const id = paramMap.get('id');
-      if (id) {
-        this.billService.get('bill', id).then((data) => {
-          this.sale = data;
-          this.TOTAL = this.getTotalBill();
-        });
-      }
+    this.clientService.getAll('client').then((data) => {
+      this.clients = data.filter((d) => {
+        return d.company && d.company.id === this.company.id;
+      });
+    });
+    this.productService.getAll('product').then((data) => {
+      const products = data.filter((d) => {
+        return d.company && d.company.id === this.company.id;
+      });
+      products.forEach((p) => {
+        const pp = new Productpack();
+        pp.product = p;
+        pp.name = p.name;
+        pp.price = p.price;
+        pp.quantity = 1;
+        this.productpacks.push(pp);
+      });
+    }).catch((e) => {
+    });
+    this.productpackService.getAll('productpack').then((data) => {
+      let productpacks = data.filter((d) => {
+        return d.company && d.company.id === this.company.id;
+      });
+      this.productpacks = this.productpacks.concat(productpacks);
+    }).catch((e) => {
+    });
+    this.billService.getAll('bill').then((data) => {
+      this.bills = data.filter((d) => {
+        return d.company && d.company.id === this.company.id;
+      });
+      this.bills = this.bills.reverse();
+      this.newBill();
+    }).catch((e) => {
     });
   }
 
-  setDelivered(sale: Sale) {
-    sale.delivery = true;
-    this.saleService.modify('bill', sale._id, sale).then((data) => {
-      this.notifierService.notify('success', "saved successfully");
-    });
+  newBill() {
+    this.code = this.generateCode();
+    this.orderlines = new Array<Orderline>();
+    this.isView = false;
+    this.updateTotal();
+
   }
 
-  getTotal(saleline: Saleline): number {
-    return saleline.productpack.price * saleline.quantity;
+  getTotal(orderline: Orderline): number {
+    return orderline.productpack.price * orderline.quantity;
   }
 
-  getTotalBill(): number {
-    let total = 0;
-    this.sale.salelines.forEach(saleline => {
-      total += saleline.productpack.price * saleline.quantity;
-    });
-    return total;
+  add(orderline: Orderline) {
+    this.orderlines.unshift(orderline);
+    this.orderline = new Orderline();
+    this.updateTotal();
   }
 
   updateTotal() {
     this.TOTAL = 0;
-    this.salelines.forEach((saleline) => {
-      this.TOTAL += this.getTotal(saleline);
+    this.orderlines.forEach((orderline) => {
+      this.TOTAL += this.getTotal(orderline);
     });
   }
 
-  modify(bill: Sale, paid?: boolean) {
-    bill.salelines = this.salelines;
-    bill.good = paid ? paid : false;
-    this.billService.modify('bill', bill._id, bill).then((data) => {
-      this.notifierService.notify('success', "saved successfully");
+  save(paid?: boolean) {
+    const order = new Order(this.company);
+    order.orderlines = this.orderlines;
+    order.good = paid ? paid : false;
+    order.client = this.client;
+    order.reduction = this.reduction;
+    order.deliveryDate = this.deliveryDate;
+    console.log('order');
+    console.log(order);
+    order.code = this.generateCode();
+    this.billService.create('order', order).then((data) => {
+      window.location.reload();
     }).catch((e) => {
     });
   }
 
-  setPaid(bill: Sale) {
+  modify(bill: Order, paid?: boolean) {
+    bill.orderlines = this.orderlines;
+    this.reduction = bill.reduction;
+    bill.good = paid ? paid : false;
+    this.billService.modify('order', bill._id, bill).then((data) => {
+      window.location.reload();
+    }).catch((e) => {
+    });
+  }
+
+  setPaid(bill: Order) {
     bill.good = true;
     this.billService.modify('bill', bill._id, bill).then((data) => {
-      this.notifierService.notify('success', "saved successfully");
+      window.location.reload();
     }).catch((e) => {
     });
   }
 
-  setNotPaid(bill: Sale) {
-    bill.good = false;
-    this.billService.modify('bill', bill._id, bill).then((data) => {
-      this.notifierService.notify('success', "saved successfully");
+  delete(orderline: Orderline) {
+    const yes = confirm('Are you sure ?');
+    if (yes) {
+      this.orderlines = this.orderlines.filter((s) => {
+        return s.id !== orderline.id;
+      });
+      this.updateTotal();
+    }
+  }
+
+  deleteAll() {
+    const yes = confirm('Are you sure ?');
+    if (yes) {
+      this.orderlines = new Array<Orderline>();
+      this.updateTotal();
+    }
+  }
+
+  generateCode() {
+    let n = this.bills.length + 1;
+    let nombre = n + '';
+
+    while (nombre.length < 8) {
+      nombre = '0' + nombre;
+    }
+
+    return nombre;
+  }
+
+  viewBill(bill: Order) {
+    this.billUse = bill;
+    this.isClient = false;
+    this.code = bill.code;
+    this.orderlines = bill.orderlines;
+    this.isView = true;
+    this.reduction = bill.reduction ? bill.reduction : 0;
+
+
+    console.log('bill.client');
+    console.log(bill.client);
+
+    this.updateTotal();
+
+    this.netAPayer = this.TOTAL - this.reduction;
+
+    this.clients.forEach((c) => {
+      if (bill.client) {
+        if (c.id === bill.client.id) {
+          this.client = bill.client;
+
+          console.log('trouvé');
+          console.log(this.client);
+          this.isClient = true;
+        }
+      }
+    });
+  }
+
+  verifyProductDispo(ev: any) {
+    console.log('ev');
+    console.log(ev);
+    this.getOrderlines(ev);
+  }
+
+  getOrderlines(productpack: Productpack) {
+    let product = productpack.product;
+    console.log('getOrderlines');
+    console.log('product.id');
+    console.log(product.id);
+    this.orderlineService.getAll('orderline').then((orderlines) => {
+      console.log(orderlines.length);
+      console.log(orderlines);
+      if (orderlines.length > 0) {
+        orderlines = orderlines.filter((d) => {
+          return d.productpack.product.id === product.id;
+        });
+      }
+      const totalOrders = this.calculTotalOrders(orderlines);
+      console.log('totalOrders : ' + totalOrders);
+      this.getProductItems(product, totalOrders, productpack.quantity);
+    });
+  }
+
+  getProductItems(product: Product, totalOrders: number, quantity: number) {
+    console.log('getProductItems');
+    this.productitemService.getAll('productitem').then((data) => {
+      let productitems = data.filter((d) => {
+        const isCompany = d.company && d.company.id === this.company.id;
+        const isProduit = d.product && d.product.id === product.id;
+        const isProduitPack = d.productpack && d.productpack.product.id === product.id;
+        return isCompany && (isProduit || isProduitPack);
+      });
+      const totalItems = this.calculTotalItems(productitems);
+      this.quantityCurrent = Math.floor((totalItems - totalOrders) / quantity);
+
     }).catch((e) => {
     });
   }
 
-  calculTotalSales(salelines: Array<Saleline>) {
+  calculTotalOrders(orderlines: Array<Orderline>) {
     let total = 0;
-    salelines.forEach((s) => {
-      
+    orderlines.forEach((s) => {
+
       total += s.quantity * s.productpack.quantity;
     });
     return total;
@@ -142,14 +275,38 @@ export class BillEditComponent implements OnInit {
     return total;
   }
 
-  delete(bill: Sale) {
-    const yes = confirm('Are you sure to cancel this order ?');
-    if (yes) {
-      this.billService.delete('bill', bill._id).then((data) => {
-        this.notifierService.notify('success', "Delete successfully");
-        this.router.navigate(['bill']);
-      }).catch((e) => {
+  calculReductionClient(client: Client) {
+    let group = client.group;
+    if (group) {
+      this.clientgroupService.get('clientgroup', group._id).then((data) => {
+        group = data;
+        if (group.reductionglobale > 0) {
+          this.reduction = (group.reductionglobale / 100) * this.TOTAL;
+          this.netAPayer = this.TOTAL - this.reduction;
+        } else {
+          this.reduction = 0;
+          this.orderlines.forEach((orderline) => {
+            this.reduction += this.calculReductionIntermediaire(group, orderline);
+          });
+          this.netAPayer = this.TOTAL - this.reduction;
+        }
       });
     }
   }
+
+
+  calculReductionIntermediaire(clientgroup: Clientgroup, orderline: Orderline): number {
+    let reductionIntermediaire = 0;
+    if (clientgroup.reductionsParProduit) {
+      if (clientgroup.reductionsParProduit.length > 0) {
+        clientgroup.reductionsParProduit.forEach((element) => {
+          if (element.product.id === orderline.productpack.product.id) {
+            reductionIntermediaire = (element.reduction/100) * orderline.productpack.quantity * orderline.productpack.product.price * orderline.quantity;
+          }
+        });
+      }
+    }
+    return reductionIntermediaire;
+  }
+
 }

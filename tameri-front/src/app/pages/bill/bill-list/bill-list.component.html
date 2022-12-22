@@ -27,14 +27,14 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr *ngFor="let s of sales" (click)="edit(s)" style="cursor: pointer;">
+                        <tr *ngFor="let s of orders" (click)="edit(s)" style="cursor: pointer;">
                             <td>{{s.date | date: 'yyyy-MM-dd HH:mm:ss'}}</td>
                             <td>{{s.code}}</td>
                             <td>{{s.client.firstname}} {{s.client.name}}</td>
                             <td style="text-align: right;">{{getTotal(s) | currency:'':''}}</td>
                             <td style="text-align: right;">{{s.reduction ? s.reduction: 0 | currency:'':''}}</td>
                             <td style="text-align: right;">{{s.reduction ? getTotal(s) - s.reduction: getTotal(s) | currency:'':''}}</td>
-                            <td style="font-weight: bold;">{{s.good ? 'PAID': ''}}</td>
+                            <td style="font-weight: bold;">{{s.good ? 'PAID ': ''}}</td>
                             <td style="font-weight: bold;">{{s.delivery ? 'DELIVERED': ''}}</td>
                         </tr>
                     </tbody>

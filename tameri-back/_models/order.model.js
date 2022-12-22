@@ -1,10 +1,10 @@
 const mongoose = require('mongoose');
 
-const BillSchema = mongoose.Schema({
+const OrderSchema = mongoose.Schema({
     id: String,
     date: Date,
     code: String,
-    salelines: Object,
+    orderlines: Object,
     company: Object,
     good: Boolean,
     delivery: Boolean,
@@ -13,4 +13,4 @@ const BillSchema = mongoose.Schema({
     deliveryDate: Date,
 });
 
-module.exports = mongoose.model('Bill', BillSchema);
+module.exports = mongoose.model('Order', OrderSchema);

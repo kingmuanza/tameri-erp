@@ -1,12 +1,12 @@
 import { Client } from "./client.model";
 import { Company } from "./company.model";
-import { Saleline } from "./saleline.model";
+import { Orderline } from "./orderline.model";
 
-export class Sale {
+export class Order {
   id: string = 'SALE' + new Date().getTime();
   date = new Date();
   code = '';
-  salelines = new Array<Saleline>();
+  orderlines = new Array<Orderline>();
   company = new Company();
   good = false;
   delivery = false;
