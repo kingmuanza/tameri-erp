@@ -16,6 +16,7 @@ export class Sale {
   _id: any;
   deliveryDate = new Date();
   order: Order;
+  paid = 0;
 
   constructor(company: Company) {
     this.company.id = company.id;

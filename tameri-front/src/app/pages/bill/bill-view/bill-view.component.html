@@ -32,7 +32,7 @@
                 </div>
             </div>
         </div>
-        <div>
+        <div *ngIf="!sale">
             <table class="row-border cell-border hover table table-bordered">
                 <thead>
                     <tr>
@@ -87,13 +87,80 @@
                     </tr>
                 </tbody>
             </table>
-
+        </div>
+        <div *ngIf="sale">
+            <table class="row-border cell-border hover table table-bordered">
+                <thead>
+                    <tr>
+                        <th>Product</th>
+                        <th style="text-align: right;">Price</th>
+                        <th style="text-align: right;width: 420px;">Quantity</th>
+                        <th style="text-align: right;width: 420px;">Total</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let s of sale.salelines">
+                        <td>{{s.productpack.name}}</td>
+                        <td style="text-align: right;">{{s.productpack.price | currency:'':''}}</td>
+                        <td style="text-align: center;">
+                            <div class="input-group mb-3 shadow-lg" style="width: 400px;">
+                                <span class="input-group-text">Quantity</span>
+                                <input [(ngModel)]="s.quantity" type="number" class="form-control">
+                            </div>
+                        </td>
+                        <td style="text-align: right;">{{getTotalSaleline(s) | currency:'':''}}</td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <b>TOTAL</b>
+                        </td>
+                        <td></td>
+                        <td></td>
+                        <td style="text-align: right;">
+                            <b>
+                                {{TOTAL | currency:'':''}}
+                            </b>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <b>DISCOUNT</b>
+                        </td>
+                        <td></td>
+                        <td></td>
+                        <td style="text-align: right;">
+                            <b>
+                                {{sale.reduction ? sale.reduction: 0 | currency:'':''}}
+                            </b>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <b>NET PAYABLE</b>
+                        </td>
+                        <td></td>
+                        <td></td>
+                        <td style="text-align: right;">
+                            <div class="input-group mb-3 shadow-lg" style="width: 400px;">
+                                <span class="input-group-text">NET PAYABLE</span>
+                                <input [(ngModel)]="sale.paid" type="number" class="form-control">
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
         </div>
 
-        <div>
+        <div *ngIf="!sale">
             <ng-container>
                 <button class="btn btn-success" (click)="generateInvoice(order)">
                    Generate Invoice
+                </button> &nbsp; &nbsp;
+            </ng-container>
+
+            <ng-container>
+                <button class="btn btn-success" (click)="generatePartialInvoice(order)">
+                   Generate Partial Invoice
                 </button> &nbsp; &nbsp;
             </ng-container>
 

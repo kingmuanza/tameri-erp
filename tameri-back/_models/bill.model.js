@@ -12,6 +12,7 @@ const BillSchema = mongoose.Schema({
     reduction: Number,
     deliveryDate: Date,
     order: Object,
+    paid: Number,
 });
 
 module.exports = mongoose.model('Bill', BillSchema);

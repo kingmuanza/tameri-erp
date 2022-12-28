@@ -43,6 +43,7 @@ export class BillViewComponent implements OnInit {
   client = new Client();
 
   quantityCurrent = 0;
+  sale: Sale | undefined;
 
   constructor(
     private orderService: CrudService<Order>,
@@ -107,6 +108,10 @@ export class BillViewComponent implements OnInit {
     return orderline.productpack.price * orderline.quantity;
   }
 
+  getTotalSaleline(saleline: Saleline): number {
+    return saleline.productpack.price * saleline.quantity;
+  }
+
   getTotalBill(): number {
     let total = 0;
     this.order.orderlines.forEach(orderline => {
@@ -150,7 +155,7 @@ export class BillViewComponent implements OnInit {
   calculTotalOrders(orderlines: Array<Orderline>) {
     let total = 0;
     orderlines.forEach((s) => {
-      
+
       total += s.quantity * s.productpack.quantity;
     });
     return total;
@@ -181,6 +186,10 @@ export class BillViewComponent implements OnInit {
     }
   }
 
+  generatePartialInvoice(order: Order) {
+    this.sale = this.orderToSale(order);
+  }
+
   orderToSale(order: Order): Sale {
     const sale = new Sale(this.company);
     sale.good = order.good;
@@ -190,12 +199,15 @@ export class BillViewComponent implements OnInit {
     sale.client = order.client;
     sale.order = order;
     sale.code = sale.id;
+    sale.paid = 0;
     order.orderlines.forEach(orderline => {
       const saleline = new Saleline();
       saleline.productpack = orderline.productpack;
       saleline.quantity = orderline.quantity;
       sale.salelines.push(saleline);
+      sale.paid += this.getTotal(orderline)
     });
+    sale.paid -= order.reduction;
     return sale;
 
   }
