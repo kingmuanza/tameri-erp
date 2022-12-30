@@ -7,6 +7,7 @@ import { Company } from 'src/app/_models/company.model';
 import { Order } from 'src/app/_models/order.model';
 import { AuthenticationService } from 'src/app/_services/authentication.service';
 import { CrudService } from 'src/app/_services/crud.service';
+import { RecurrentService } from 'src/app/_services/recurrent.service';
 
 @Component({
   selector: 'app-order-list',
@@ -26,6 +27,7 @@ export class OrderListComponent implements OnInit {
 
   constructor(
     private router: Router,
+    private recurrentService: RecurrentService,
     private orderService: CrudService<Order>,
     private authService: AuthenticationService,
   ) {
@@ -65,7 +67,10 @@ export class OrderListComponent implements OnInit {
       this.dtTrigger.next('');
     });
   }
-
+  
+  isOrderPaid(order: Order) {
+    return this.recurrentService.isOrderPaid(order);
+  }
   getTotal(order: Order): number {
     let total = 0;
     order.orderlines.forEach((d) => {

@@ -6,6 +6,9 @@ import { Resource } from '../_models/resource.model';
 import { Resourceitem } from '../_models/resourceitem.model';
 import { AuthenticationService } from './authentication.service';
 import { CrudService } from './crud.service';
+import { Order } from '../_models/order.model';
+import { Sale } from '../_models/sale.model';
+import { Orderline } from '../_models/orderline.model';
 
 @Injectable({
   providedIn: 'root'
@@ -16,21 +19,63 @@ export class RecurrentService {
   productitems = new Array<Productitem>();
   inventories = new Array<Inventory>();
   resources = new Array<Resource>();
-  
+
+  invoices = new Array<Sale>();
+
   company = new Company();
 
-  constructor(    
+  constructor(
     private authService: AuthenticationService,
+    private orderService: CrudService<Order>,
+    private invoiceService: CrudService<Sale>,
     private resourceService: CrudService<Resource>,
     private productitemService: CrudService<Productitem>,
     private resourceitemService: CrudService<Resourceitem>,
     private inventoryService: CrudService<Inventory>,
-  ) {    
+  ) {
     this.company = this.authService.user.company;
     this.init();
   }
 
-  init() {       
+  isOrderPaid(order: Order) {
+    if (!order.reduction) {
+      order.reduction = 0;
+    }
+
+    const invoices = this.invoices.filter((d) => {
+      return d.order && d.order._id === order._id;
+    });
+    const amountReceived = this.getAmountReceived(invoices);
+
+    let TOTAL = 0;
+    TOTAL = 0;
+    order.orderlines.forEach((orderline) => {
+      TOTAL += this.getTotal(orderline);
+    });
+    const isPaid = TOTAL - order.reduction - amountReceived === 0
+    return isPaid;
+  }
+
+  getTotal(orderline: Orderline): number {
+    return orderline.productpack.price * orderline.quantity;
+  }
+
+
+  getAmountReceived(invoices: Sale[]): number {
+    let resultat = 0;
+    invoices.forEach((sale) => {
+      resultat += sale.paid;
+    });
+    return resultat;
+  }
+
+
+  init() {
+    this.invoiceService.getAll('bill').then((invoices) => {
+      this.invoices = invoices.filter((d) => {
+        return d.company && d.company.id === this.company.id;
+      });
+    });
     this.inventoryService.getAll('inventory').then((data) => {
       this.inventories = data.filter((i) => {
         return i.company && i.company.id === this.company.id;
@@ -50,7 +95,7 @@ export class RecurrentService {
           });
         });
       });
-    }); 
+    });
   }
 
   getNow(resource: Resource) {
@@ -58,12 +103,12 @@ export class RecurrentService {
   }
 
   getLastInventory(resource: Resource): Inventory {
-    let inventories = this.inventories.filter((d) => {            
+    let inventories = this.inventories.filter((d) => {
       return d.resource && d.resource.id === resource.id;
     });
     if (inventories.length > 0) {
-      inventories = inventories.sort((i1, i2)=> {
-        return new Date(i1.date).getTime() - new Date(i2.date).getTime() > 0 ? -1: 1;
+      inventories = inventories.sort((i1, i2) => {
+        return new Date(i1.date).getTime() - new Date(i2.date).getTime() > 0 ? -1 : 1;
       });
       return inventories[0];
     } else {
@@ -72,7 +117,7 @@ export class RecurrentService {
       return inventory;
     }
   }
-  
+
   getResourceItems(resource: Resource) {
     const inventory = this.getLastInventory(resource);
     const date = new Date(inventory.date);
@@ -88,7 +133,7 @@ export class RecurrentService {
   }
 
   getProductItems(resource: Resource) {
-    
+
     const inventory = this.getLastInventory(resource);
     const date = new Date(inventory.date);
 

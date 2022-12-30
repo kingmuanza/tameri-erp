@@ -10,10 +10,10 @@
         <button style="float: right;" (click)="delete(sale)" class="btn btn-danger btn-error">
             Delete
         </button>
-        <div>BILL {{sale.code}}</div>
+        <div>Invoice {{sale.code}}</div>
     </h1>
     <p *ngIf="sale.order && sale.order._id">
-        Order : <a [routerLink]="'/bill/view/'+ sale.order._id">{{sale.order.id}}</a>
+        Order : <a [routerLink]="'/order/view/'+ sale.order._id">{{sale.order.id}}</a>
     </p>
     <p>
         <button *ngIf="sale.good" type="button" class="btn btn-outline-primary btn-sm" style="margin-right: 10px;">PAID</button>

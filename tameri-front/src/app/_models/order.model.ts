@@ -3,7 +3,7 @@ import { Company } from "./company.model";
 import { Orderline } from "./orderline.model";
 
 export class Order {
-  id: string = 'SALE' + new Date().getTime();
+  id: string = 'Order'.toUpperCase() + new Date().getTime();
   date = new Date();
   code = '';
   orderlines = new Array<Orderline>();
