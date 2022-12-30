@@ -50,6 +50,7 @@ export class BillEditComponent implements OnInit {
     private productService: CrudService<Product>,
     private productpackService: CrudService<Productpack>,
     private authService: AuthenticationService,
+    private router: Router,
     private clientService: CrudService<Client>,
     private orderlineService: CrudService<Orderline>,
     private clientgroupService: CrudService<Clientgroup>,
@@ -131,7 +132,7 @@ export class BillEditComponent implements OnInit {
     console.log(order);
     order.code = this.generateCode();
     this.billService.create('order', order).then((data) => {
-      window.location.reload();
+      this.router.navigate(['bill']);
     }).catch((e) => {
     });
   }
@@ -141,7 +142,7 @@ export class BillEditComponent implements OnInit {
     this.reduction = bill.reduction;
     bill.good = paid ? paid : false;
     this.billService.modify('order', bill._id, bill).then((data) => {
-      window.location.reload();
+      this.router.navigate(['bill']);
     }).catch((e) => {
     });
   }
@@ -293,7 +294,6 @@ export class BillEditComponent implements OnInit {
       });
     }
   }
-
 
   calculReductionIntermediaire(clientgroup: Clientgroup, orderline: Orderline): number {
     let reductionIntermediaire = 0;

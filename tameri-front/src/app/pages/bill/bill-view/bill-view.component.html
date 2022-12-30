@@ -10,6 +10,9 @@
         <div>BILL {{order.code}}</div>
     </h1>
     <p>
+        {{sales.length}}
+    </p>
+    <p>
         <button *ngIf="order.good" type="button" class="btn btn-outline-primary btn-sm" style="margin-right: 10px;">PAID</button>
         <button *ngIf="order.delivery" type="button" class="btn btn-outline-primary btn-sm">DELIVERED</button>
     </p>
@@ -26,7 +29,7 @@
             <div class="col-lg-4">
                 <div class="mt-4 mb-2">
                     <div class="input-group mb-3">
-                        <span class="input-group-text">Client</span>
+                        <span class="input-group-text">Date</span>
                         <input [value]="order.deliveryDate | date:'yyyy-MM-dd HH:mm' " type="datetime" class="form-control">
                     </div>
                 </div>
@@ -38,14 +41,16 @@
                     <tr>
                         <th>Product</th>
                         <th style="text-align: right;">Price</th>
+                        <th style="text-align: right;">Quantity delivered</th>
                         <th style="text-align: right;">Quantity</th>
                         <th style="text-align: right;">Total</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr *ngFor="let s of order.orderlines">
-                        <td>{{s.productpack.name}}</td>
+                        <td>{{s.productpack.name}} </td>
                         <td style="text-align: right;">{{s.productpack.price | currency:'':''}}</td>
+                        <td style="text-align: right;">{{getQuantityDelivered(s) | number}}</td>
                         <td style="text-align: right;">{{s.quantity | number}}</td>
                         <td style="text-align: right;">{{getTotal(s) | currency:'':''}}</td>
                     </tr>
@@ -53,6 +58,7 @@
                         <td>
                             <b>TOTAL</b>
                         </td>
+                        <td></td>
                         <td></td>
                         <td></td>
                         <td style="text-align: right;">
@@ -67,6 +73,7 @@
                         </td>
                         <td></td>
                         <td></td>
+                        <td></td>
                         <td style="text-align: right;">
                             <b>
                                 {{order.reduction ? order.reduction: 0 | currency:'':''}}
@@ -75,13 +82,40 @@
                     </tr>
                     <tr>
                         <td>
-                            <b>NET PAYBLE</b>
+                            <b>NET PAYABLE</b>
                         </td>
+                        <td></td>
                         <td></td>
                         <td></td>
                         <td style="text-align: right;">
                             <b>
                                 {{order.reduction ? TOTAL - order.reduction: TOTAL | currency:'':''}}
+                            </b>
+                        </td>
+                    </tr>
+                    <tr *ngIf="sales.length > 0">
+                        <td>
+                            <b style="text-transform: uppercase;">amount received</b>
+                        </td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td style="text-align: right;">
+                            <b>
+                                {{getAmountReceived() | currency:'':''}}
+                            </b>
+                        </td>
+                    </tr>
+                    <tr *ngIf="sales.length > 0">
+                        <td>
+                            <b style="text-transform: uppercase;">left to pay</b>
+                        </td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td style="text-align: right;">
+                            <b>
+                                {{order.reduction ? TOTAL - order.reduction - getAmountReceived() : TOTAL - getAmountReceived() | currency:'':''}}
                             </b>
                         </td>
                     </tr>
@@ -103,9 +137,9 @@
                         <td>{{s.productpack.name}}</td>
                         <td style="text-align: right;">{{s.productpack.price | currency:'':''}}</td>
                         <td style="text-align: center;">
-                            <div class="input-group mb-3 shadow-lg" style="width: 400px;">
+                            <div class="input-group input-group-sm shadow-lg" style="width: 400px;">
                                 <span class="input-group-text">Quantity</span>
-                                <input [(ngModel)]="s.quantity" type="number" class="form-control">
+                                <input (ngModelChange)="calculerTotalSale()" [(ngModel)]="s.quantity" type="number" class="form-control form-control-sm">
                             </div>
                         </td>
                         <td style="text-align: right;">{{getTotalSaleline(s) | currency:'':''}}</td>
@@ -118,7 +152,7 @@
                         <td></td>
                         <td style="text-align: right;">
                             <b>
-                                {{TOTAL | currency:'':''}}
+                                {{TOTALSALE | currency:'':''}}
                             </b>
                         </td>
                     </tr>
@@ -141,9 +175,12 @@
                         <td></td>
                         <td></td>
                         <td style="text-align: right;">
-                            <div class="input-group mb-3 shadow-lg" style="width: 400px;">
+                            <div class="input-group shadow-lg" style="width: 400px;">
                                 <span class="input-group-text">NET PAYABLE</span>
                                 <input [(ngModel)]="sale.paid" type="number" class="form-control">
+                                <button class="btn btn-primary">
+                                    {{sale.reduction ? TOTALSALE-sale.reduction: TOTALSALE | currency:'':''}}
+                                </button>
                             </div>
                         </td>
                     </tr>
@@ -154,13 +191,13 @@
         <div *ngIf="!sale">
             <ng-container>
                 <button class="btn btn-success" (click)="generateInvoice(order)">
-                   Generate Invoice
+                    Generate Invoice
                 </button> &nbsp; &nbsp;
             </ng-container>
 
             <ng-container>
                 <button class="btn btn-success" (click)="generatePartialInvoice(order)">
-                   Generate Partial Invoice
+                    Generate Partial Invoice
                 </button> &nbsp; &nbsp;
             </ng-container>
 
@@ -178,6 +215,13 @@
                 <button class="btn btn-danger" (click)="delete(order)">
                     Cancel the order
                 </button>
+            </ng-container>
+        </div>
+        <div *ngIf="sale">
+            <ng-container>
+                <button class="btn btn-primary" (click)="saveInvoice(sale)">
+                    Generate Invoice
+                </button> &nbsp; &nbsp;
             </ng-container>
         </div>
     </div>
