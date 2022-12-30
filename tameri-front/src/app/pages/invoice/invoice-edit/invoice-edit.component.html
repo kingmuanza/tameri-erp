@@ -7,6 +7,9 @@
         </ol>
     </nav>
     <h1>
+        <button style="float: right;" (click)="delete(sale)" class="btn btn-danger btn-error">
+            Delete
+        </button>
         <div>BILL {{sale.code}}</div>
     </h1>
     <p *ngIf="sale.order && sale.order._id">

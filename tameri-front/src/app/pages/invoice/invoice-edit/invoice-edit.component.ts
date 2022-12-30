@@ -154,7 +154,7 @@ export class InvoiceEditComponent implements OnInit {
     if (yes) {
       this.billService.delete('bill', bill._id).then((data) => {
         this.notifierService.notify('success', "Delete successfully");
-        this.router.navigate(['bill']);
+        this.router.navigate(['invoice']);
       }).catch((e) => {
       });
     }

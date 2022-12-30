@@ -67,6 +67,9 @@ import { InventorygroupViewComponent } from './pages/inventorygroup/inventorygro
 import { ClientgroupListComponent } from './pages/clientgroup/clientgroup-list/clientgroup-list.component';
 import { ClientgroupEditComponent } from './pages/clientgroup/clientgroup-edit/clientgroup-edit.component';
 import { ClientgroupViewComponent } from './pages/clientgroup/clientgroup-view/clientgroup-view.component';
+import { OrderListComponent } from './pages/order/order-list/order-list.component';
+import { OrderEditComponent } from './pages/order/order-edit/order-edit.component';
+import { OrderViewComponent } from './pages/order/order-view/order-view.component';
 
 @NgModule({
   declarations: [
@@ -131,6 +134,9 @@ import { ClientgroupViewComponent } from './pages/clientgroup/clientgroup-view/c
     ClientgroupListComponent,
     ClientgroupEditComponent,
     ClientgroupViewComponent,
+    OrderListComponent,
+    OrderEditComponent,
+    OrderViewComponent,
   ],
   imports: [
     BrowserModule,

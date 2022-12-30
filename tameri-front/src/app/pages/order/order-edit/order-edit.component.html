@@ -1,0 +1,168 @@
+<div class="container-fluid" style="margin-top: 16px;">
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a>Home</a></li>
+            <li class="breadcrumb-item"><a [routerLink]="'/order'">Orders</a></li>
+            <li class="breadcrumb-item active">New</li>
+        </ol>
+    </nav>
+    <h1>
+        <div>New order</div>
+    </h1>
+    <p>
+
+    </p>
+    <div class="row">
+        <div style="display: NONE;" class="col-lg-2">
+            <div class="hauteur">
+                <div class="mb-3">
+                    <button (click)="newBill()" class="btn btn-primary" style="width: 100%;">
+                        New order
+                    </button>
+                </div>
+                <ul class="list-group list-group-flush">
+                    <li (click)="viewBill(order)" *ngFor="let order of orders" class="list-group-item" [ngClass]="{'bold': order.code === code}">
+                        <span *ngIf="order.good" class="paid">
+                            PAID
+                        </span> BILL {{order.code}}
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="col-lg-12">
+            <div class="card  p-2" [ngClass]="{'shadow-lg': !isView}">
+                <div class="card-body">
+                    <div class="mb-3">
+                        <div>ORDER {{code}}</div>
+                    </div>
+                    <div *ngIf="!orderUse.good || !isView" class="row">
+                        <div class="col-lg-6">
+                            <div class="input-group mb-3">
+                                <span class="input-group-text">Product</span>
+                                <select (ngModelChange)="verifyProductDispo($event)" [(ngModel)]="orderline.productpack" type="text" class="form-control">
+                                    <option [ngValue]="p" *ngFor="let p of productpacks">
+                                        {{p.name}}
+                                    </option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-lg-4">
+                            <div class="input-group mb-3">
+                                <span class="input-group-text">Quantity</span>
+                                <input [(ngModel)]="orderline.quantity" type="number" class="form-control">
+                                <button class="btn btn-primary">
+                                    / {{quantityCurrent}}
+                                </button>
+                            </div>
+                        </div>
+                        <div class="col-lg-2">
+                            <div class="input-group mb-3">
+                                <button (click)="add(orderline); calculReductionClient(client)" style="width: 100%;" class="btn btn-primary">Add</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <div>
+                            <table class="row-border cell-border hover table table-bordered">
+                                <thead>
+                                    <tr>
+                                        <th>Product</th>
+                                        <th style="text-align: right;">Price</th>
+                                        <th style="text-align: right;">Quantity</th>
+                                        <th style="text-align: right;">Total</th>
+                                        <th *ngIf="!orderUse.good || !isView" style="text-align: right;">Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let s of orderlines">
+                                        <td>{{s.productpack.name}}</td>
+                                        <td style="text-align: right;">{{s.productpack.price | currency:'':''}}</td>
+                                        <td style="text-align: right;">{{s.quantity | number}}</td>
+                                        <td style="text-align: right;">{{getTotal(s) | currency:'':''}}</td>
+                                        <td *ngIf="!orderUse.good || !isView" style="text-align: right;">
+                                            <button (click)="delete(s); calculReductionClient(client)" class="btn btn-danger btn-sm">Delete</button>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <b>TOTAL</b>
+                                        </td>
+                                        <td></td>
+                                        <td></td>
+                                        <td style="text-align: right;">
+                                            <b>
+                                                {{TOTAL | currency:'':''}}
+                                            </b>
+                                        </td>
+                                        <td *ngIf="!isView" style="text-align: right;">
+                                            <ng-container>
+                                                <ng-container *ngIf="orderlines.length > 0">
+                                                    <button (click)="deleteAll(); calculReductionClient(client)" class="btn btn-danger btn-sm">Delete
+                                                        all</button>
+                                                </ng-container>
+                                            </ng-container>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+
+                        </div>
+
+                        <div class="mt-4">
+                            <div class="row">
+                                <div class="col-lg-3">
+                                    <div>
+                                        <div class="input-group mb-3">
+                                            <span class="input-group-text">Client</span>
+                                            <select (ngModelChange)="calculReductionClient($event)" [(ngModel)]="client" class="form-control">
+                                                <option *ngIf="isView && isClient" [ngValue]="client">{{client.firstname}}
+                                                    {{client.name}}</option>
+                                                <option [ngValue]="c" *ngFor="let c of clients">
+                                                    {{c.firstname}} {{c.name}}
+                                                </option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-3">
+                                    <div class="input-group mb-3">
+                                        <span class="input-group-text">Discount</span>
+                                        <input [(ngModel)]="reduction" type="number" class="form-control">
+                                    </div>
+                                </div>
+                                <div class="col-lg-3">
+                                    <div class="input-group mb-3">
+                                        <span class="input-group-text">Net payable</span>
+                                        <input [(ngModel)]="netAPayer" type="number" class="form-control">
+                                    </div>
+                                </div>
+                                <div class="col-lg-3">
+                                    <div class="input-group mb-3">
+                                        <span class="input-group-text">Delivery date</span>
+                                        <input type="datetime" class="form-control" [ngModel]="deliveryDate | date:'yyyy-MM-dd HH:mm'" (ngModelChange)="deliveryDate = $event">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <ng-container *ngIf="!isView">
+                            <div *ngIf="orderlines.length > 0" class="mt-4">
+                                <div class="mb-3">
+                                    <button (click)="save()" class="btn btn-primary">Save</button>&nbsp;&nbsp;
+                                    <button (click)="save(true)" class="btn btn-primary">Save as paid</button>
+                                </div>
+                            </div>
+                        </ng-container>
+                        <ng-container *ngIf="isView && !orderUse.good">
+                            <div *ngIf="orderlines.length > 0" class="mt-4">
+                                <div class="mb-3">
+                                    <button (click)="modify(orderUse)" class="btn btn-primary">Save</button>&nbsp;&nbsp;
+                                    <button (click)="setPaid(orderUse)" class="btn btn-primary">Set as paid</button>
+                                </div>
+                            </div>
+                        </ng-container>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

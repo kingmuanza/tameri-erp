@@ -56,6 +56,9 @@ import { InventorygroupViewComponent } from './pages/inventorygroup/inventorygro
 import { ClientgroupEditComponent } from './pages/clientgroup/clientgroup-edit/clientgroup-edit.component';
 import { ClientgroupListComponent } from './pages/clientgroup/clientgroup-list/clientgroup-list.component';
 import { ClientgroupViewComponent } from './pages/clientgroup/clientgroup-view/clientgroup-view.component';
+import { OrderEditComponent } from './pages/order/order-edit/order-edit.component';
+import { OrderListComponent } from './pages/order/order-list/order-list.component';
+import { OrderViewComponent } from './pages/order/order-view/order-view.component';
 
 const routes: Routes = [
   
@@ -97,6 +100,11 @@ const routes: Routes = [
   { path: 'employee/edit', component: EmployeeEditComponent },
   { path: 'employee/edit/:id', component: EmployeeEditComponent },
   { path: 'employee/view/:id', component: EmployeeViewComponent },
+  
+  { path: 'order', component: OrderListComponent },
+  { path: 'order/edit', component: OrderEditComponent },
+  { path: 'order/edit/:id', component: OrderEditComponent },
+  { path: 'order/view/:id', component: OrderViewComponent },
   
   { path: 'product', component: ProductListComponent },
   { path: 'product/edit', component: ProductEditComponent },

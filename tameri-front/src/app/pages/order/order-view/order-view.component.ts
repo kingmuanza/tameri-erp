@@ -3,24 +3,23 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { NotifierService } from 'angular-notifier';
 import { DatatablesOptions } from 'src/app/_data/datatable.option';
 import { Client } from 'src/app/_models/client.model';
+import { Clientgroup } from 'src/app/_models/clientgroup.model';
 import { Company } from 'src/app/_models/company.model';
-import { Product } from 'src/app/_models/product.model';
-import { Productitem } from 'src/app/_models/productitem.model';
-import { Productpack } from 'src/app/_models/productpack.model';
 import { Order } from 'src/app/_models/order.model';
 import { Orderline } from 'src/app/_models/orderline.model';
-import { AuthenticationService } from 'src/app/_services/authentication.service';
-import { CrudService } from 'src/app/_services/crud.service';
+import { Productitem } from 'src/app/_models/productitem.model';
+import { Productpack } from 'src/app/_models/productpack.model';
 import { Sale } from 'src/app/_models/sale.model';
 import { Saleline } from 'src/app/_models/saleline.model';
-import { Clientgroup } from 'src/app/_models/clientgroup.model';
+import { AuthenticationService } from 'src/app/_services/authentication.service';
+import { CrudService } from 'src/app/_services/crud.service';
 
 @Component({
-  selector: 'app-bill-view',
-  templateUrl: './bill-view.component.html',
-  styleUrls: ['./bill-view.component.scss']
+  selector: 'app-order-view',
+  templateUrl: './order-view.component.html',
+  styleUrls: ['./order-view.component.scss']
 })
-export class BillViewComponent implements OnInit {
+export class OrderViewComponent implements OnInit {
 
   orderlines = new Array<Orderline>();
   sales = new Array<Sale>();
@@ -50,15 +49,10 @@ export class BillViewComponent implements OnInit {
 
   constructor(
     private orderService: CrudService<Order>,
-    private productService: CrudService<Product>,
     private notifierService: NotifierService,
-    private productpackService: CrudService<Productpack>,
     private authService: AuthenticationService,
-    private clientService: CrudService<Client>,
-    private orderlineService: CrudService<Orderline>,
     private billService: CrudService<Sale>,
     private clientgroupService: CrudService<Clientgroup>,
-    private productitemService: CrudService<Productitem>,
     private route: ActivatedRoute,
     private router: Router,
   ) {
@@ -89,7 +83,7 @@ export class BillViewComponent implements OnInit {
     let that = this;
     let nouveau = {
       text: 'Nouveau',
-      action: function (e: any, dt: any, node: any, config: any) {
+      action: function () {
         that.edit();
       },
       className: 'btn btn-primary nouveau',
@@ -108,7 +102,7 @@ export class BillViewComponent implements OnInit {
 
   setDelivered(order: Order) {
     order.delivery = true;
-    this.orderService.modify('order', order._id, order).then((data) => {
+    this.orderService.modify('order', order._id, order).then(() => {
       this.notifierService.notify('success', "saved successfully");
     });
   }
@@ -139,25 +133,25 @@ export class BillViewComponent implements OnInit {
   modify(bill: Order, paid?: boolean) {
     bill.orderlines = this.orderlines;
     bill.good = paid ? paid : false;
-    this.orderService.modify('order', bill._id, bill).then((data) => {
+    this.orderService.modify('order', bill._id, bill).then(() => {
       this.notifierService.notify('success', "saved successfully");
-    }).catch((e) => {
+    }).catch(() => {
     });
   }
 
   setPaid(bill: Order) {
     bill.good = true;
-    this.orderService.modify('order', bill._id, bill).then((data) => {
+    this.orderService.modify('order', bill._id, bill).then(() => {
       this.notifierService.notify('success', "saved successfully");
-    }).catch((e) => {
+    }).catch(() => {
     });
   }
 
   setNotPaid(bill: Order) {
     bill.good = false;
-    this.orderService.modify('order', bill._id, bill).then((data) => {
+    this.orderService.modify('order', bill._id, bill).then(() => {
       this.notifierService.notify('success', "saved successfully");
-    }).catch((e) => {
+    }).catch(() => {
     });
   }
 
@@ -216,10 +210,10 @@ export class BillViewComponent implements OnInit {
     console.log(sale);
     sale.order = this.order;
     if (sale.paid <= this.TOTALSALE - sale.reduction) {
-      this.billService.create('bill', sale).then((data) => {
+      this.billService.create('bill', sale).then(() => {
         this.notifierService.notify('success', "Invoice successfully created");
         window.location.reload();
-      }).catch((e) => {
+      }).catch(() => {
       });
     } else {
       this.notifierService.notify('error', "The amount is under the net payable");
@@ -254,7 +248,7 @@ export class BillViewComponent implements OnInit {
   }
 
   calculReductionClient(sale: Sale): Promise<number> {
-    return new Promise((resolve, reject) => {
+    return new Promise((resolve) => {
       const client = sale.client;
       let reduction = 0;
       if (client) {
@@ -300,7 +294,7 @@ export class BillViewComponent implements OnInit {
   }
 
   orderToSale(order: Order): Promise<Sale> {
-    return new Promise((resolve, reject) => {
+    return new Promise((resolve) => {
       const sale = new Sale(this.company);
       sale.good = order.good;
       sale.delivery = order.delivery;
@@ -334,10 +328,10 @@ export class BillViewComponent implements OnInit {
   delete(bill: Order) {
     const yes = confirm('Are you sure to cancel this order ?');
     if (yes) {
-      this.orderService.delete('order', bill._id).then((data) => {
+      this.orderService.delete('order', bill._id).then(() => {
         this.notifierService.notify('success', "Delete successfully");
         this.router.navigate(['bill']);
-      }).catch((e) => {
+      }).catch(() => {
       });
     }
   }
