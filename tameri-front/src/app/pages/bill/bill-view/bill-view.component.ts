@@ -306,12 +306,13 @@ export class BillViewComponent implements OnInit {
       const saleline = new Saleline();
       saleline.id = orderline.id;
       saleline.productpack = orderline.productpack;
-      saleline.quantity = orderline.quantity;
+      saleline.quantity = orderline.quantity - this.getQuantityDelivered(orderline);
       sale.salelines.push(saleline);
       sale.paid += this.getTotal(orderline)
     });
     sale.paid -= order.reduction;
-    this.TOTALSALE = this.TOTAL;
+    sale.paid -= this.getAmountReceived();
+    this.calculerTotalSale();
     return sale;
 
   }

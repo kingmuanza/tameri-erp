@@ -9,6 +9,9 @@
     <h1>
         <div>BILL {{sale.code}}</div>
     </h1>
+    <p *ngIf="sale.order && sale.order._id">
+        Order : <a [routerLink]="'/bill/view/'+ sale.order._id">{{sale.order.id}}</a>
+    </p>
     <p>
         <button *ngIf="sale.good" type="button" class="btn btn-outline-primary btn-sm" style="margin-right: 10px;">PAID</button>
         <button *ngIf="sale.delivery" type="button" class="btn btn-outline-primary btn-sm">DELIVERED</button>

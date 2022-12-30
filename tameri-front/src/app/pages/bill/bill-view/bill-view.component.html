@@ -9,8 +9,11 @@
     <h1>
         <div>BILL {{order.code}}</div>
     </h1>
-    <p>
-        {{sales.length}}
+    <p *ngIf="sales.length > 0">
+        Invoices :
+        <ng-container *ngFor="let s of sales">
+            <a [routerLink]="'/invoice/edit/'+ s._id">{{s.id}}</a> ;
+        </ng-container>
     </p>
     <p>
         <button *ngIf="order.good" type="button" class="btn btn-outline-primary btn-sm" style="margin-right: 10px;">PAID</button>
