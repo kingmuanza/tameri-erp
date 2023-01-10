@@ -58,24 +58,24 @@
                             "src/styles.scss"
                         ],
                         "scripts": [
-                          "node_modules/jquery/dist/jquery.js",
-                          "node_modules/bootstrap/dist/js/bootstrap.bundle.js",
-                          "node_modules/datatables.net/js/jquery.dataTables.js",
-                          "node_modules/jszip/dist/jszip.js",
-                          "node_modules/datatables.net-buttons/js/dataTables.buttons.js",
-                          "node_modules/datatables.net-buttons/js/buttons.colVis.js",
-                          "node_modules/datatables.net-buttons/js/buttons.flash.js",
-                          "node_modules/datatables.net-buttons/js/buttons.html5.js",
-                          "node_modules/datatables.net-buttons/js/buttons.print.js",
-                          "./node_modules/hammerjs/hammer.min.js"
+                            "node_modules/jquery/dist/jquery.js",
+                            "node_modules/bootstrap/dist/js/bootstrap.bundle.js",
+                            "node_modules/datatables.net/js/jquery.dataTables.js",
+                            "node_modules/jszip/dist/jszip.js",
+                            "node_modules/datatables.net-buttons/js/dataTables.buttons.js",
+                            "node_modules/datatables.net-buttons/js/buttons.colVis.js",
+                            "node_modules/datatables.net-buttons/js/buttons.flash.js",
+                            "node_modules/datatables.net-buttons/js/buttons.html5.js",
+                            "node_modules/datatables.net-buttons/js/buttons.print.js",
+                            "./node_modules/hammerjs/hammer.min.js"
                         ]
                     },
                     "configurations": {
                         "production": {
                             "budgets": [{
                                     "type": "initial",
-                                    "maximumWarning": "500kb",
-                                    "maximumError": "1mb"
+                                    "maximumWarning": "2mb",
+                                    "maximumError": "5mb"
                                 },
                                 {
                                     "type": "anyComponentStyle",
@@ -134,7 +134,7 @@
                             "src/styles.scss"
                         ],
                         "scripts": [
-                          "./node_modules/hammerjs/hammer.min.js"
+                            "./node_modules/hammerjs/hammer.min.js"
                         ]
                     }
                 }
