@@ -43,7 +43,10 @@ mongoose.connect(lien, {
         useUnifiedTopology: true
     })
     .then(() => console.log('Connexion à MongoDB réussie !'))
-    .catch(() => console.error('Connexion à MongoDB échouée !'));
+    .catch((e) => {
+        console.error('Connexion à MongoDB échouée !');
+        console.error(e);
+    });
 
 const app = express();
 
