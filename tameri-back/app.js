@@ -35,8 +35,11 @@ const clientgroupRoutes = require('./_routes/clientgroup.route');
 const orderRoutes = require('./_routes/order.route');
 const orderlineRoutes = require('./_routes/orderline.route');
 
-mongoose.set('strictQuery', true);
-mongoose.connect('mongodb+srv://tameri:tameri@cluster0.hotc5.mongodb.net/test?retryWrites=true&w=majority', {
+
+// const lien = 'mongodb+srv://tameri:tameri@cluster0.hotc5.mongodb.net/test?retryWrites=true&w=majority';
+const lien = 'mongodb://localhost/test';
+mongoose.set(lien, true);
+mongoose.connect(lien, {
         useNewUrlParser: true,
         useUnifiedTopology: true
     })
