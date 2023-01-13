@@ -13,7 +13,6 @@
                 <table datatable [dtOptions]="dtOptions " [dtTrigger]="dtTrigger " class="row-border hover ">
                     <thead>
                         <tr>
-                            <th>ID</th>
                             <th>Name</th>
                             <th>Product</th>
                             <th>Quantity</th>
@@ -22,7 +21,6 @@
                     </thead>
                     <tbody>
                         <tr *ngFor="let productpack of productpacks" (click)="edit(productpack)">
-                            <td>{{productpack.id}}</td>
                             <td>{{productpack.name}}</td>
                             <td>{{productpack.product.name}}</td>
                             <td>{{productpack.quantity}}</td>

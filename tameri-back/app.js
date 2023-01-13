@@ -35,7 +35,7 @@ const clientgroupRoutes = require('./_routes/clientgroup.route');
 const orderRoutes = require('./_routes/order.route');
 const orderlineRoutes = require('./_routes/orderline.route');
 
-// const lien = 'mongodb+srv://tameri:tameri@cluster0.hotc5.mongodb.net/test?retryWrites=true&w=majority';
+//const lien = 'mongodb+srv://tameri:tameri@cluster0.hotc5.mongodb.net/test?retryWrites=true&w=majority';
 const lien = 'mongodb://127.0.0.1/tameri';
 mongoose.set('strictQuery', true);
 mongoose.connect(lien, {

@@ -13,13 +13,11 @@
                 <table datatable [dtOptions]="dtOptions " [dtTrigger]="dtTrigger " class="row-border hover ">
                     <thead>
                         <tr>
-                            <th>ID</th>
                             <th>Date</th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr *ngFor="let inventorygroup of inventorygroups" (click)="edit(inventorygroup)">
-                            <td>{{inventorygroup.id}}</td>
                             <td>{{inventorygroup.date | date: 'yyyy-MM-dd HH:mm'}}</td>
                         </tr>
                     </tbody>

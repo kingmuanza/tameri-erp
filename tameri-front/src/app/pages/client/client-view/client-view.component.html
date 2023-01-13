@@ -43,7 +43,6 @@
                         <table datatable [dtOptions]="dtOptions " [dtTrigger]="dtTrigger " class="row-border hover ">
                             <thead>
                                 <tr>
-                                    <th>ID</th>
                                     <th>Name</th>
                                     <th>Montant</th>
                                     <th>Reduction</th>
@@ -51,7 +50,6 @@
                             </thead>
                             <tbody>
                                 <tr *ngFor="let sale of companies" (click)="viewSale(sale)">
-                                    <td>{{sale.id}}</td>
                                     <td>{{sale.client.firstname}} {{sale.client.name}}</td>
                                     <td>{{calculTotalSalelines(sale.salelines) | currency:'':''}}</td>
                                     <td>0</td>

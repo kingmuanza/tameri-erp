@@ -16,7 +16,6 @@
                 <table datatable [dtOptions]="dtOptions " [dtTrigger]="dtTrigger " class="row-border hover ">
                     <thead>
                         <tr>
-                            <th>ID</th>
                             <th>Name</th>
                             <th>Type</th>
                             <th>Description</th>
@@ -24,7 +23,6 @@
                     </thead>
                     <tbody>
                         <tr *ngFor="let community of communities" (click)="edit(community)">
-                            <td>{{community.id}}</td>
                             <td>{{community.name}}</td>
                             <td>{{community.type}}</td>
                             <td>{{community.description}}</td>

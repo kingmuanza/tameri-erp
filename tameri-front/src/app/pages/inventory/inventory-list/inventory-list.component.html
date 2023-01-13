@@ -13,7 +13,6 @@
                 <table datatable [dtOptions]="dtOptions " [dtTrigger]="dtTrigger " class="row-border hover ">
                     <thead>
                         <tr>
-                            <th>ID</th>
                             <th>Name</th>
                             <th>Category</th>
                             <th style="text-align: right;">Content</th>
@@ -27,7 +26,6 @@
                     </thead>
                     <tbody>
                         <tr *ngFor="let resource of resources">
-                            <td>{{resource.id}}</td>
                             <td>
                                 <a [routerLink]="'/inventory/view/' + resource._id">
                                     {{resource.name}}

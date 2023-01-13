@@ -13,7 +13,6 @@
                 <table datatable [dtOptions]="dtOptions " [dtTrigger]="dtTrigger " class="row-border hover ">
                     <thead>
                         <tr>
-                            <th>ID</th>
                             <th>Name</th>
                             <th>Resource</th>
                             <th>Quantity</th>
@@ -22,7 +21,6 @@
                     </thead>
                     <tbody>
                         <tr *ngFor="let resourcepack of resourcepacks" (click)="edit(resourcepack)">
-                            <td>{{resourcepack.id}}</td>
                             <td>{{resourcepack.name}}</td>
                             <td>{{resourcepack.resource.name}}</td>
                             <td>{{resourcepack.quantity}}</td>

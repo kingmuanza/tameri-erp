@@ -23,7 +23,6 @@
                 <table datatable [dtOptions]="dtOptions " [dtTrigger]="dtTrigger " class="row-border hover ">
                     <thead>
                         <tr>
-                            <th>ID</th>
                             <th>Name</th>
                             <th>Type</th>
                             <th>Owner</th>
@@ -31,7 +30,6 @@
                     </thead>
                     <tbody>
                         <tr *ngFor="let company of companies" (click)="viewCompany(company)">
-                            <td>{{company.id}}</td>
                             <td>{{company.name}}</td>
                             <td>{{company.type}}</td>
                             <td>{{company.owner.names}}</td>

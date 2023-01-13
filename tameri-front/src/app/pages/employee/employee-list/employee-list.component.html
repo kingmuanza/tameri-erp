@@ -13,7 +13,6 @@
                 <table datatable [dtOptions]="dtOptions " [dtTrigger]="dtTrigger " class="row-border hover ">
                     <thead>
                         <tr>
-                            <th>ID</th>
                             <th>Name</th>
                             <th>Login</th>
                             <th>Position</th>
@@ -22,7 +21,6 @@
                     </thead>
                     <tbody>
                         <tr *ngFor="let employee of employees" (click)="edit(employee)">
-                            <td>{{employee.id}}</td>
                             <td>{{employee.names}}</td>
                             <td>{{employee.login}}</td>
                             <td>{{employee.position.name}}</td>

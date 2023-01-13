@@ -16,14 +16,12 @@
                 <table datatable [dtOptions]="dtOptions " [dtTrigger]="dtTrigger " class="row-border hover ">
                     <thead>
                         <tr>
-                            <th>ID</th>
                             <th>Name</th>
                             <th>Description</th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr *ngFor="let companytype of companytypes" (click)="edit(companytype)">
-                            <td>{{companytype.id}}</td>
                             <td>{{companytype.name}}</td>
                             <td>{{companytype.description}}</td>
                         </tr>

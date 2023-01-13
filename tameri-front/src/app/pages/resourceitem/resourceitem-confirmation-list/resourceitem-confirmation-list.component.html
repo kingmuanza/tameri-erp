@@ -12,7 +12,6 @@
                 <table datatable [dtOptions]="dtOptions " [dtTrigger]="dtTrigger " class="row-border hover ">
                     <thead>
                         <tr>
-                            <th>ID</th>
                             <th>Date</th>
                             <th>Resource/Pack</th>
                             <th style="text-align: right;">Quantity</th>
@@ -23,7 +22,6 @@
                     </thead>
                     <tbody>
                         <tr *ngFor="let resourceitem of resourceitems">
-                            <td>{{resourceitem.id}}</td>
                             <td>{{resourceitem.date | date: 'yyyy-MM-dd'}}</td>
                             <td>
                                 <ng-container *ngIf="resourceitem.resource">
