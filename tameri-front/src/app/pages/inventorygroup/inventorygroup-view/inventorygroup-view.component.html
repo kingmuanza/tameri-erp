@@ -19,13 +19,23 @@
                         <tr>
                             <th>Date</th>
                             <th>Resource</th>
+                            <th style="text-align: right;">Whole</th>
+                            <th style="text-align: right;">Opened</th>
                             <th style="text-align: right;">Quantity</th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr *ngFor="let inventory of inventories" (click)="viewInventoryResource(inventory)">
                             <td>{{inventory.date | date: 'yyyy-MM-dd HH:mm'}}</td>
-                            <td>{{inventory.resource.name}}</td>
+                            <td>
+                                <span style="float: right;">
+                                    {{inventory.resource.content}}
+                                    {{inventory.resource.unit}}
+                                </span> {{inventory.resource.name}}
+
+                            </td>
+                            <td style="text-align: right;">{{inventory.whole}}</td>
+                            <td style="text-align: right;">{{inventory.opened}} {{inventory.resource.unit}}</td>
                             <td style="text-align: right;">{{inventory.quantity | number}} {{inventory.resource.unit}}</td>
                         </tr>
                     </tbody>

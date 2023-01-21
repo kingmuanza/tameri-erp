@@ -20,7 +20,8 @@
                             <th>Category</th>
                             <th style="text-align: right;">Content</th>
                             <th>Unit</th>
-                            <th style="text-align: right;">Estimate</th>
+                            <th>Whole</th>
+                            <th>Opened</th>
                             <th style="text-align: right;">Now</th>
                         </tr>
                     </thead>
@@ -32,14 +33,23 @@
                             <td>{{inventory.resource.category.name}}</td>
                             <td style="text-align: right;">{{inventory.resource.content | number}}</td>
                             <td>{{inventory.resource.unit}}</td>
-                            <td style="text-align: right;">{{getNow(inventory.resource)}}</td>
                             <td style="text-align: right;">
                                 <div class="input-group input-group-sm">
-                                    <input #elem [attr.id]="inventory.id" style="text-align: right;" type="number" class="form-control" [(ngModel)]="inventory.quantity">
+                                    <input style="text-align: right;" type="number" class="form-control" [(ngModel)]="inventory.whole">
+                                    <span class="input-group-text"> * {{inventory.resource.content}}</span>
                                     <span class="input-group-text">{{inventory.resource.unit}}</span>
-                                    <button [hidden]="true" (click)="saveInventory(inventory.resource, elem)" class="btn btn-primary">
-                                        save
-                                    </button>
+                                </div>
+                            </td>
+                            <td style="text-align: right;">
+                                <div class="input-group input-group-sm">
+                                    <input style="text-align: right;" type="number" class="form-control" [(ngModel)]="inventory.opened">
+                                    <span class="input-group-text">{{inventory.resource.unit}}</span>
+                                </div>
+                            </td>
+                            <td style="text-align: right;">
+                                <div class="input-group input-group-sm">
+                                    <input style="text-align: right;" type="number" readonly class="form-control" [value]="getInventoryQuantity(inventory)">
+                                    <span class="input-group-text">{{inventory.resource.unit}}</span>
                                 </div>
                             </td>
                         </tr>

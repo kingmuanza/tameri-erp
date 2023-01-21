@@ -133,6 +133,10 @@ export class InventoryEditComponent implements OnInit {
     }
   }
 
+  getInventoryQuantity(inventory: Inventory):number {
+    return inventory.whole * inventory.resource.content + inventory.opened;
+  }
+
   async saveGlobalInventory() {
     console.log(this.inventories);
     const inventorygroup = new Inventorygroup();
@@ -144,6 +148,7 @@ export class InventoryEditComponent implements OnInit {
     for (let index = 0; index < this.inventories.length; index++) {
       const inventory = this.inventories[index];
       inventory.inventorygroup = inventorygroup;
+      inventory.quantity = this.getInventoryQuantity(inventory);
       await this.inventoryService.create('inventory', inventory)
     }
     

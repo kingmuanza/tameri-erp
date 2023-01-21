@@ -8,6 +8,8 @@ export class Inventory {
     date = new Date('2000-01-01');
     resource = new Resource();
     quantity = 0;
+    whole = 0;
+    opened = 0;
     company = new Company();
     inventorygroup = new Inventorygroup();
 }

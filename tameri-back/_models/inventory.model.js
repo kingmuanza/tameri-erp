@@ -7,6 +7,8 @@ const InventorySchema = mongoose.Schema({
     company: Object,
     inventorygroup: Object,
     quantity: Number,
+    whole: Number,
+    opened: Number,
 });
 
 module.exports = mongoose.model('Inventory', InventorySchema);
