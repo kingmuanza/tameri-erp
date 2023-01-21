@@ -5,6 +5,7 @@ const ResourceSchema = mongoose.Schema({
     name: String,
     category: Object,
     content: Number,
+    msl: Number,
     type: String,
     unit: String,
     price: Number,

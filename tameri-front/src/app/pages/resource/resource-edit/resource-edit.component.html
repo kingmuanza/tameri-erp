@@ -68,6 +68,13 @@
                 </div>
                 <div class="col-lg-4">
                     <div class="input-group mb-3">
+                        <span class="input-group-text">Minimum Stock Level</span>
+                        <input [(ngModel)]="resource.msl" type="number" class="form-control">
+                        <span *ngIf="resource.unit" class="input-group-text">{{resource.unit}}</span>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="input-group mb-3">
                         <span class="input-group-text">Supplier</span>
                         <select [(ngModel)]="resource.supplier" type="text" class="form-control">
                             <option *ngFor="let s of suppliers" [ngValue]="s">{{s.name}}</option>

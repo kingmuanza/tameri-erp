@@ -8,6 +8,7 @@ export class Resource {
     name = '';
     category = new Resourcetype();
     content = 1;
+    msl = 0;
     unit = '';
     price = 0;
     company = new Company();
