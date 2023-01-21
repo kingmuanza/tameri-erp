@@ -25,7 +25,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr *ngFor="let resource of resources" (click)="edit(resource)">
+                        <tr *ngFor="let resource of resources" (click)="edit(resource)" style="cursor: pointer;" [ngClass]="{'msl': getNow(resource) <=  resource.msl}">
                             <td>{{resource.name}}</td>
                             <td>{{resource.category.name}}</td>
                             <td style="text-align: right;">{{resource.content | number}}</td>
@@ -39,7 +39,7 @@
                             <td style="text-align: right;">{{getResourceItems(resource) | number}}</td>
                             <td style="text-align: right;">{{getProductItems(resource) | number}}</td>
                             <td style="text-align: right;">
-                                <span class="badge text-bg-primary">
+                                <span class="badge text-bg-primary" [ngClass]="{'text-bg-danger': getNow(resource) <=  resource.msl}">
                                     {{getNow(resource) | number}}
                                 </span>
                             </td>
