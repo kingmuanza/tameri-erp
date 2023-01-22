@@ -42,6 +42,8 @@ export class CrudService<T> {
         },
         error: (e) => {
           this.connexionEtablieSubject.next(false);
+          console.log('ERREUR DE CONNEXION AU SERVEUR');
+          console.log(e);
           resolve([])
         }
       });
