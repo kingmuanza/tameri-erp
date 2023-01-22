@@ -1,5 +1,6 @@
 import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import { Router } from '@angular/router';
+import { Subscription } from 'rxjs';
 import { Company } from 'src/app/_models/company.model';
 import { User } from 'src/app/_models/user.model';
 import { AuthenticationService } from 'src/app/_services/authentication.service';
@@ -14,6 +15,8 @@ export class AppbarComponent implements OnInit, OnChanges {
 
   @Input() user: User | undefined;
   @Input() company: any;
+  connexionEtablie = true;
+  connexionEtablieSubscription: Subscription;
 
   access = {
     employee: false, 
@@ -51,6 +54,9 @@ export class AppbarComponent implements OnInit, OnChanges {
     private authService: AuthenticationService,
     private router: Router,
   ) {
+    this.connexionEtablieSubscription = this.companyService.connexionEtablieSubject.subscribe((connexionEtablie) => {
+      this.connexionEtablie = connexionEtablie;
+    });
     this.company = this.user?.company;
     console.log('this.company AppbarComponent');
     console.log(this.company);

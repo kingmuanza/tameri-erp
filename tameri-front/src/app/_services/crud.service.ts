@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { Subject, Subscription } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -7,6 +8,9 @@ import { HttpClient } from '@angular/common/http';
 export class CrudService<T> {
 
   URL = 'http://localhost:3000/';
+
+  connexionEtablie = true;
+  connexionEtablieSubject = new Subject<boolean>();
 
   constructor(
     private http: HttpClient,
@@ -33,10 +37,12 @@ export class CrudService<T> {
         next: (data) => {
           const result = data as Array<T>;
           this.hideLoader();
+          this.connexionEtablieSubject.next(true);
           resolve(result);
         },
         error: (e) => {
-          reject(e);
+          this.connexionEtablieSubject.next(false);
+          resolve([])
         }
       });
     });
