@@ -23,17 +23,17 @@ export class AppbarComponent implements OnInit, OnChanges {
     pos: false,
     supplier: false,
     product: {
-      menu: true,
-      it: true,
-      pack: true,
-      item: true,
+      menu: false,
+      it: false,
+      pack: false,
+      item: false,
     },
     resource: {
-      menu: true,
-      it: true,
-      pack: true,
-      item: true,
-      confirmation: true,
+      menu: false,
+      it: false,
+      pack: false,
+      item: false,
+      confirmation: false,
     },
     param: false,
     client: false,
@@ -41,9 +41,10 @@ export class AppbarComponent implements OnInit, OnChanges {
     order: false,
     invoice: false,
     inventory: {      
-      menu: true,
-      fill: true,
-      analysis: true,
+      menu: false,
+      fill: false,
+      analysis: false,
+      history: false,
     },
   }
 
@@ -95,62 +96,50 @@ export class AppbarComponent implements OnInit, OnChanges {
 
   getAcess() {
     this.setAllFalse();
-    if (this.user?.role.indexOf('ADMIN') !== -1 || this.user?.role.indexOf('Manager') !== -1) {
+    if (this.user?.role.indexOf('ADMIN') !== -1) {
       this.isAdmin = true;
-      this.access = {
-        employee: true,
-        pos: false,
-        supplier: true,
-        product: {
-          menu: true,
-          it: true,
-          pack: true,
-          item: true,
-        },
-        resource: {
-          menu: true,
-          it: true,
-          pack: true,
-          item: true,
-          confirmation: false,
-        },
-        param: true,
-        client: true,
-        dashboard: true,
-        order: true,
-        invoice: true,
-        inventory: {      
-          menu: true,
-          fill: false,
-          analysis: true,
-        },
-      }
+      this.access.param = true;
+      this.access.resource.menu = true;
+      this.access.resource.it = true;
+      this.access.resource.pack = true;
+      this.access.product.menu = true;
+      this.access.product.it = true;
+      this.access.product.pack = true;
+      this.access.employee = true;
     }
     if (this.user?.role.indexOf('Manager') !== -1) {      
-      this.access.inventory.fill = false;
-      this.access.product.item = false;
-    }
-    if (this.user?.role.indexOf('Warehouseman') !== -1) {
-      this.access.resource.menu = true;
-      this.access.resource.confirmation = true;        
+      this.access.dashboard = true;
+      this.access.order = true;
+      this.access.resource.item = true;
       this.access.inventory.menu = true;
-      this.access.inventory.fill = true;
       this.access.inventory.analysis = true;
+      this.access.inventory.history = true;
+      this.access.employee = true;
+      this.access.supplier = true;
+      this.access.client = true;
     }
     if (this.user?.role.indexOf('Productionman') !== -1) {
+      this.access.order = true;
+      this.access.client = true;
       this.access.product.menu = true;
       this.access.product.item = true;
       this.access.product.it = true;
-      this.access.order = true;
-      this.access.client = true;
+      this.access.product.pack = true;
+    }
+    if (this.user?.role.indexOf('Warehouseman') !== -1) {
+      this.access.resource.menu = true;
+      this.access.resource.item = true;        
+      this.access.resource.confirmation = true;        
+      this.access.inventory.menu = true;
+      this.access.inventory.fill = true;
+      this.access.inventory.history = true;
     }
     if (this.user?.role.indexOf('Cashier') !== -1) {
-      this.access.pos = true;
-      this.access.product.menu = false;
-      this.access.product.item = false;
+      this.access.dashboard = true;
       this.access.order = true;
-      this.access.invoice = true;
       this.access.client = true;
+      this.access.pos = true;
+      this.access.invoice = true;    
     }
     if (this.user?.role.indexOf('Waitress') !== -1) {
     }
@@ -203,6 +192,7 @@ export class AppbarComponent implements OnInit, OnChanges {
         menu: false,
         fill: false,
         analysis: false,
+        history: false,
       }
     }
   }
