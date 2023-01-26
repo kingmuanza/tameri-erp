@@ -57,11 +57,12 @@
                     <div class="input-group mb-3">
                         <span class="input-group-text">Role</span>
                         <select [(ngModel)]="employee.role" type="text" class="form-control" multiple>
+                            <option value="ADMIN">Admin</option>
                             <option value="Manager">Manager</option>
-                            <option value="Warehouseman">Warehouseman</option>
                             <option value="Productionman">Production Man</option>
+                            <option value="Warehouseman">Warehouseman</option>
+                            <option value="keyAccountManager">Key Account Manager</option>
                             <option value="Cashier">Cashier</option>
-                            <option value="Waitress">Waitress</option>
                         </select>
                     </div>
                 </div>

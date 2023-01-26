@@ -134,14 +134,19 @@ export class AppbarComponent implements OnInit, OnChanges {
       this.access.inventory.fill = true;
       this.access.inventory.history = true;
     }
+    if (this.user?.role.indexOf('keyAccountManager') !== -1) {
+      this.access.order = true;
+      this.access.client = true;
+      this.access.invoice = true;
+      this.access.product.menu = true;
+      this.access.product.item = true;
+    }
     if (this.user?.role.indexOf('Cashier') !== -1) {
       this.access.dashboard = true;
       this.access.order = true;
       this.access.client = true;
       this.access.pos = true;
       this.access.invoice = true;    
-    }
-    if (this.user?.role.indexOf('Waitress') !== -1) {
     }
 
     console.log('this.access');
@@ -161,6 +166,9 @@ export class AppbarComponent implements OnInit, OnChanges {
     }
     if (role === 'Productionman') {
       return 'Production Man';
+    }
+    if (role === 'keyAccountManager') {
+      return 'Key Account Manager';
     }
     return role
   }
