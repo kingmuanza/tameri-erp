@@ -101,7 +101,7 @@ export class ProductListComponent implements OnInit {
 
   getProductItems(product: Product) {
     const productitems = this.productitems.filter((d) => {
-      const isProduit = d.product && d.product.id === product.id;
+      const isProduit = d.product && d.product.id === product.id && d.status && d.status === Productitem.CONFIRMED;
       return isProduit;
     });
     const totalItems = this.calculTotalItems(productitems);

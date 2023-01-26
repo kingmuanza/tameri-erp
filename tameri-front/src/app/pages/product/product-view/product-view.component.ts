@@ -104,7 +104,7 @@ export class ProductViewComponent implements OnInit {
       this.productitems = data.filter((d) => {
         const isCompany = d.company && d.company.id === this.company.id;
         const isProduit = d.product && d.product.id === this.product.id;
-        return isCompany && isProduit;
+        return isCompany && isProduit && d.status === Productitem.CONFIRMED;;
       });
       this.totalItems = this.calculTotalItems(this.productitems);
       this.product.now = this.totalItems - this.totalSales;

@@ -239,7 +239,7 @@ export class PosComponent implements OnInit {
         const isCompany = d.company && d.company.id === this.company.id;
         const isProduit = d.product && d.product.id === product.id;
         const isProduitPack = d.productpack && d.productpack.product.id === product.id;
-        return isCompany && (isProduit || isProduitPack);
+        return isCompany && (isProduit || isProduitPack) && d.status === Productitem.CONFIRMED;;
       });
       const totalItems = this.calculTotalItems(productitems);
       this.quantityCurrent = Math.floor((totalItems - totalSales) / quantity);

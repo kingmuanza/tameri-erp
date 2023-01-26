@@ -24,6 +24,8 @@ export class ProductitemListComponent implements OnInit {
   productitems = new Array<Productitem>();
   company = new Company();
 
+  CONFIRMED = Productitem.CONFIRMED;
+
   constructor(
     private router: Router,
     private productitemService: CrudService<Productitem>,
