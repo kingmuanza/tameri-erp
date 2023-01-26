@@ -121,6 +121,13 @@
                                     <a class="dropdown-item" aria-current="page" [routerLink]="'productitem'" routerLinkActive="active">Product Items</a>
                                 </li>
                             </ng-container>
+                            <ng-container *ngIf="access.product.confirmation">
+                                <li>
+                                    <a class="dropdown-item" aria-current="page" [routerLink]="'productitem-confirmation'" routerLinkActive="active">
+                                        Product items confirmation
+                                    </a>
+                                </li>
+                            </ng-container>
                         </ul>
                     </li>
                 </ng-container>

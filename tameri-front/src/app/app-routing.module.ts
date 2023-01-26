@@ -59,6 +59,7 @@ import { ClientgroupViewComponent } from './pages/clientgroup/clientgroup-view/c
 import { OrderEditComponent } from './pages/order/order-edit/order-edit.component';
 import { OrderListComponent } from './pages/order/order-list/order-list.component';
 import { OrderViewComponent } from './pages/order/order-view/order-view.component';
+import { ProductitemConfirmationListComponent } from './pages/productitem/productitem-confirmation-list/productitem-confirmation-list.component';
 
 const routes: Routes = [
   
@@ -115,6 +116,8 @@ const routes: Routes = [
   { path: 'productitem/edit', component: ProductitemEditComponent },
   { path: 'productitem/edit/:id', component: ProductitemEditComponent },
   { path: 'productitem/view/:id', component: ProductitemViewComponent },
+
+  { path: 'productitem-confirmation', component: ProductitemConfirmationListComponent },
 
   { path: 'productpack', component: ProductpackListComponent },
   { path: 'productpack/edit', component: ProductpackEditComponent },

@@ -27,6 +27,7 @@ export class AppbarComponent implements OnInit, OnChanges {
       it: false,
       pack: false,
       item: false,
+      confirmation: false,
     },
     resource: {
       menu: false,
@@ -139,7 +140,7 @@ export class AppbarComponent implements OnInit, OnChanges {
       this.access.client = true;
       this.access.invoice = true;
       this.access.product.menu = true;
-      this.access.product.item = true;
+      this.access.product.confirmation = true;
     }
     if (this.user?.role.indexOf('Cashier') !== -1) {
       this.access.dashboard = true;
@@ -183,6 +184,7 @@ export class AppbarComponent implements OnInit, OnChanges {
         it: false,
         pack: false,
         item: false,
+        confirmation: false,
       },
       resource: {
         menu: false,

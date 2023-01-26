@@ -70,6 +70,7 @@ import { ClientgroupViewComponent } from './pages/clientgroup/clientgroup-view/c
 import { OrderListComponent } from './pages/order/order-list/order-list.component';
 import { OrderEditComponent } from './pages/order/order-edit/order-edit.component';
 import { OrderViewComponent } from './pages/order/order-view/order-view.component';
+import { ProductitemConfirmationListComponent } from './pages/productitem/productitem-confirmation-list/productitem-confirmation-list.component';
 
 @NgModule({
   declarations: [
@@ -137,6 +138,7 @@ import { OrderViewComponent } from './pages/order/order-view/order-view.componen
     OrderListComponent,
     OrderEditComponent,
     OrderViewComponent,
+    ProductitemConfirmationListComponent,
   ],
   imports: [
     BrowserModule,
