@@ -79,6 +79,27 @@
                     </table>
                 </div>
             </div>
+            <div class="card shadow-lg mt-4">
+                <div class="card-body">
+                    <div class="card-title">
+                        Accumulated Resources
+                    </div>
+                    <table datatable [dtOptions]="dtOptionsResources" [dtTrigger]="dtTriggerResources" class="row-border hover ">
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th style="text-align: right;">Acc.</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let s of resources" style="cursor: pointer;">
+                                <td>{{s.name}}</td>
+                                <td style="text-align: right;">{{getResourceItems(s) | number}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
         </div>
         <div class="col-lg-5">
             <div class="card shadow-lg">
@@ -125,6 +146,27 @@
                         </table>
 
                     </div>
+                </div>
+            </div>
+            <div class="card shadow-lg mt-4">
+                <div class="card-body">
+                    <div class="card-title">
+                        Accumulated Products
+                    </div>
+                    <table datatable [dtOptions]="dtOptionsProduct" [dtTrigger]="dtTriggerProduct" class="row-border hover ">
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th style="text-align: right;">Acc.</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let s of products" style="cursor: pointer;">
+                                <td>{{s.name}}</td>
+                                <td style="text-align: right;">{{getProductItems(s) | number}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </div>

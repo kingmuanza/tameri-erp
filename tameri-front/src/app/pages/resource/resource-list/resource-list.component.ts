@@ -71,7 +71,7 @@ export class ResourceListComponent implements OnInit {
     });
   }
 
-  getResourceItems(resource: Resource) {
+  getResourceItems(resource: Resource): number {
     return this.recurrentService.getResourceItems(resource);
   }
 

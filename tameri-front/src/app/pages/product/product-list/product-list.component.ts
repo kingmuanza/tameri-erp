@@ -25,14 +25,14 @@ export class ProductListComponent implements OnInit {
   dtInstance!: Promise<DataTables.Api>;
 
   products = new Array<Product>();
-  salelines = new Array<Saleline>();
   productitems = new Array<Productitem>();
+  salelines = new Array<Saleline>();
   company = new Company();
 
   constructor(
     private router: Router,
-    private productService: CrudService<Product>,
     private authService: AuthenticationService,
+    private productService: CrudService<Product>,
     private productitemService: CrudService<Productitem>,
     private salelineService: CrudService<Saleline>,
   ) {
@@ -106,7 +106,6 @@ export class ProductListComponent implements OnInit {
     });
     const totalItems = this.calculTotalItems(productitems);
     return totalItems;
-
   }
 
   calculTotalSales(salelines: Array<Saleline>) {
