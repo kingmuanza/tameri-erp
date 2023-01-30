@@ -118,7 +118,7 @@
                             </ng-container>
                             <ng-container *ngIf="access.product.item">
                                 <li>
-                                    <a class="dropdown-item" aria-current="page" [routerLink]="'productitem'" routerLinkActive="active">Product Items</a>
+                                    <a class="dropdown-item" aria-current="page" [routerLink]="'productitem'" routerLinkActive="active">{{getNomProductsItem()}}</a>
                                 </li>
                             </ng-container>
                             <ng-container *ngIf="access.product.confirmation">

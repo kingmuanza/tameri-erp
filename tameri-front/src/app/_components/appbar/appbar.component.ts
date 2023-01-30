@@ -124,8 +124,8 @@ export class AppbarComponent implements OnInit, OnChanges {
       this.access.client = true;
       this.access.product.menu = true;
       this.access.product.item = true;
-      this.access.product.it = true;
-      this.access.product.pack = true;
+      // this.access.product.it = true;
+      // this.access.product.pack = true;
     }
     if (this.user?.role.indexOf('Warehouseman') !== -1) {
       this.access.resource.menu = true;
@@ -152,6 +152,13 @@ export class AppbarComponent implements OnInit, OnChanges {
 
     console.log('this.access');
     console.log(this.access);
+  }
+
+  getNomProductsItem() {
+    if (this.user?.role.indexOf('Productionman') !== -1) {
+      return "Product";
+    }
+    return "Product Items";
   }
 
   signOut() {
