@@ -10,6 +10,8 @@ export class Productitem {
   id: string = 'Productitem'.toUpperCase() + new Date().getTime();
   date = new Date()
   quantity = 1;
+  quantityValidated = 0;
+  quantityNotValidated = 0;
   price = 0;
   company = new Company();
   product: Product | undefined;

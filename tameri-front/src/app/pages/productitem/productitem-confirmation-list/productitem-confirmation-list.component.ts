@@ -74,9 +74,15 @@ export class ProductitemConfirmationListComponent implements OnInit {
   confirmProductItem(productitem: Productitem) {
     const yes = confirm('Are you sure to confirm this product item ?');
     if (yes) {
+      productitem.quantityNotValidated = productitem.quantity;
+      productitem.quantity = productitem.quantityValidated;
       productitem.status = Productitem.CONFIRMED;
       this.save(productitem);
     }
+  }
+
+  isNotEqual(productitem: Productitem) {
+    return productitem.quantityNotValidated && productitem.quantityNotValidated !== productitem.quantity
   }
 
   save(productitem: Productitem) {

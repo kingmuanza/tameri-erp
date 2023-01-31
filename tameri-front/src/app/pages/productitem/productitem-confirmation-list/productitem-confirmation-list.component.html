@@ -14,9 +14,8 @@
                         <tr>
                             <th>Date</th>
                             <th>Product/Pack</th>
-                            <th style="text-align: right;">Quantity</th>
-                            <th style="text-align: right;">Quantity Category</th>
-                            <th>Category</th>
+                            <th style="text-align: right;">Quantity Announced</th>
+                            <th style="text-align: right;">Quantity Received</th>
                             <th style="text-align: center;">Actions</th>
                         </tr>
                     </thead>
@@ -35,22 +34,22 @@
                                     </span> {{productitem.productpack.name}}
                                 </ng-container>
                             </td>
-                            <td style="text-align: right;">{{productitem.quantity | number}}</td>
                             <td style="text-align: right;">
-                                <ng-container *ngIf="productitem.product">
-                                    {{productitem.quantity * productitem.product.content | number}} {{productitem.product.unit}}
-                                </ng-container>
-                                <ng-container *ngIf="productitem.productpack">
-                                    {{productitem.quantity * productitem.productpack.quantity *productitem.productpack.product.content}} {{productitem.productpack.product.unit}}
-                                </ng-container>
+                                <div *ngIf="productitem.quantityNotValidated">
+                                    {{productitem.quantityNotValidated | number}}
+                                </div>
+                                <div *ngIf="!productitem.quantityNotValidated">
+                                    {{productitem.quantity | number}}
+                                </div>
                             </td>
-                            <td>
-                                <ng-container *ngIf="productitem.product">
-                                    {{productitem.product.category.name }}
-                                </ng-container>
-                                <ng-container *ngIf="productitem.productpack">
-                                    {{productitem.productpack.product.category.name }}
-                                </ng-container>
+                            <td style="text-align: right;" [ngClass]="{'prix-rouge': isNotEqual(productitem)}">
+                                <div *ngIf="productitem.status !== CONFIRMED" class="input-group input-group-sm">
+                                    <input style="text-align: right;" type="number" class="form-control" [(ngModel)]="productitem.quantityValidated">
+                                    <span class="input-group-text">{{productitem.quantity | number}}</span>
+                                </div>
+                                <div *ngIf="CONFIRMED === productitem.status">
+                                    {{productitem.quantity | number}}
+                                </div>
                             </td>
                             <td style="text-align: center;">
                                 <button *ngIf="CONFIRMED !== productitem.status" class="btn btn-primary btn-sm" (click)="confirmProductItem(productitem)">
