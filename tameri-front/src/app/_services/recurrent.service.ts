@@ -132,6 +132,26 @@ export class RecurrentService {
     return totalResourceitems
   }
 
+  getResourceItemsNoInventory(resource: Resource) {
+    const resourceitems = this.resourceitems.filter((d) => {
+      const isRessource = d.resource?.id === resource.id;
+      const isRessourcepack = d.resourcepack?.resource.id === resource.id;
+      return (isRessource || isRessourcepack);
+    });
+    const totalResourceitems = this.calculTotalResourceitems(resourceitems) * resource.content;
+    return totalResourceitems
+  }
+
+  getResourceItemsNoInventoryValidated(resource: Resource) {
+    const resourceitems = this.resourceitems.filter((d) => {
+      const isRessource = d.resource?.id === resource.id;
+      const isRessourcepack = d.resourcepack?.resource.id === resource.id;
+      return (isRessource || isRessourcepack) && d.status && d.status === Resourceitem.CONFIRMED;
+    });
+    const totalResourceitems = this.calculTotalResourceitems(resourceitems) * resource.content;
+    return totalResourceitems
+  }
+
   getProductItems(resource: Resource) {
 
     const inventory = this.getLastInventory(resource);

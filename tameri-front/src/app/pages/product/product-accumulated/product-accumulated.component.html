@@ -1,0 +1,42 @@
+<div class="container-fluid" style="margin-top: 16px;">
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a>Home</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Products</li>
+        </ol>
+    </nav>
+    <h1>Products</h1>
+
+    <div class=" page-contenu ">
+        <div class="">
+            <div class="">
+                <table datatable [dtOptions]="dtOptions " [dtTrigger]="dtTrigger " class="row-border hover ">
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th style="text-align: right;">Accumulated</th>
+                            <th style="text-align: right;">Validated</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let product of products" (click)="edit(product)">
+                            <td>
+                                <span style="float: right;">
+                                    {{product.content}}
+                                    {{product.unit}}
+                                </span> {{product.name}}
+                            </td>
+                            <td style="text-align: right;">{{getProductItems(product) | number}}</td>
+                            <td style="text-align: right;">
+                                <b>
+                                    {{getProductItemsValidated(product) | number}}
+                                </b>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+
+            </div>
+        </div>
+    </div>
+</div>

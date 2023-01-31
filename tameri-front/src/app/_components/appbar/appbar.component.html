@@ -128,6 +128,13 @@
                                     </a>
                                 </li>
                             </ng-container>
+                            <ng-container *ngIf="access.product.accumulated">
+                                <li>
+                                    <a class="dropdown-item" aria-current="page" [routerLink]="'product/accumulated'" routerLinkActive="active">
+                                        Product items accumulated
+                                    </a>
+                                </li>
+                            </ng-container>
                         </ul>
                     </li>
                 </ng-container>
@@ -157,6 +164,13 @@
                                 <li *ngIf="company?.option.productResource">
                                     <a class="dropdown-item" aria-current="page" [routerLink]="'resourceitem-confirmation'" routerLinkActive="active">
                                         Resource items confirmation
+                                    </a>
+                                </li>
+                            </ng-container>
+                            <ng-container *ngIf="access.resource.accumulated">
+                                <li *ngIf="company?.option.productResource">
+                                    <a class="dropdown-item" aria-current="page" [routerLink]="'resource/accumulated'" routerLinkActive="active">
+                                        Resource items accumulated
                                     </a>
                                 </li>
                             </ng-container>

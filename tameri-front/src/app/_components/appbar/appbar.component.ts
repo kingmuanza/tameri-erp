@@ -28,6 +28,7 @@ export class AppbarComponent implements OnInit, OnChanges {
       pack: false,
       item: false,
       confirmation: false,
+      accumulated: false,
     },
     resource: {
       menu: false,
@@ -35,6 +36,7 @@ export class AppbarComponent implements OnInit, OnChanges {
       pack: false,
       item: false,
       confirmation: false,
+      accumulated: false,
     },
     param: false,
     client: false,
@@ -118,13 +120,20 @@ export class AppbarComponent implements OnInit, OnChanges {
       this.access.employee = true;
       this.access.supplier = true;
       this.access.client = true;
+      this.access.product.menu = true;
+      this.access.resource.menu = true;
+      this.access.product.accumulated = true;
+      this.access.resource.accumulated = true;
     }
     if (this.user?.role.indexOf('Productionman') !== -1) {
       this.access.order = true;
       this.access.client = true;
       this.access.product.menu = true;
       this.access.product.item = true;
-      // this.access.product.it = true;
+      this.access.product.accumulated = true;
+      this.access.resource.accumulated = true;
+      this.access.resource.menu = true;
+      // this.access.resource.item = true;
       // this.access.product.pack = true;
     }
     if (this.user?.role.indexOf('Warehouseman') !== -1) {
@@ -192,6 +201,7 @@ export class AppbarComponent implements OnInit, OnChanges {
         pack: false,
         item: false,
         confirmation: false,
+        accumulated: false,
       },
       resource: {
         menu: false,
@@ -199,6 +209,7 @@ export class AppbarComponent implements OnInit, OnChanges {
         pack: false,
         item: false,
         confirmation: false,
+        accumulated: false,
       },
       param: false,
       client: false,

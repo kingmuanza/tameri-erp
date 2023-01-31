@@ -71,6 +71,8 @@ import { OrderListComponent } from './pages/order/order-list/order-list.componen
 import { OrderEditComponent } from './pages/order/order-edit/order-edit.component';
 import { OrderViewComponent } from './pages/order/order-view/order-view.component';
 import { ProductitemConfirmationListComponent } from './pages/productitem/productitem-confirmation-list/productitem-confirmation-list.component';
+import { ProductAccumulatedComponent } from './pages/product/product-accumulated/product-accumulated.component';
+import { ResourceAccumulatedComponent } from './pages/resource/resource-accumulated/resource-accumulated.component';
 
 @NgModule({
   declarations: [
@@ -139,6 +141,8 @@ import { ProductitemConfirmationListComponent } from './pages/productitem/produc
     OrderEditComponent,
     OrderViewComponent,
     ProductitemConfirmationListComponent,
+    ProductAccumulatedComponent,
+    ResourceAccumulatedComponent,
   ],
   imports: [
     BrowserModule,

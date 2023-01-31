@@ -1,0 +1,39 @@
+<div class="container-fluid" style="margin-top: 16px;">
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a>Home</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Resources</li>
+        </ol>
+    </nav>
+    <h1>Resources</h1>
+
+    <div class=" page-contenu ">
+        <div class="">
+            <div class="">
+                <table datatable [dtOptions]="dtOptions " [dtTrigger]="dtTrigger " class="row-border hover ">
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Category</th>
+                            <th style="text-align: right;">Content</th>
+                            <th>Unit</th>
+                            <th style="text-align: right;">Accumulated</th>
+                            <th style="text-align: right;">Accumulated Validated</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let resource of resources" (click)="edit(resource)" style="cursor: pointer;" [ngClass]="{'msl': getNow(resource) <=  resource.msl}">
+                            <td>{{resource.name}}</td>
+                            <td>{{resource.category.name}}</td>
+                            <td style="text-align: right;">{{resource.content | number}}</td>
+                            <td>{{resource.unit}}</td>
+                            <td style="text-align: right;">{{getResourceItemsNoInventory(resource) | number}} {{resource.unit}}</td>
+                            <td style="text-align: right;">{{getResourceItemsNoInventoryValidated(resource) | number}} {{resource.unit}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+            </div>
+        </div>
+    </div>
+</div>

@@ -60,6 +60,8 @@ import { OrderEditComponent } from './pages/order/order-edit/order-edit.componen
 import { OrderListComponent } from './pages/order/order-list/order-list.component';
 import { OrderViewComponent } from './pages/order/order-view/order-view.component';
 import { ProductitemConfirmationListComponent } from './pages/productitem/productitem-confirmation-list/productitem-confirmation-list.component';
+import { ProductAccumulatedComponent } from './pages/product/product-accumulated/product-accumulated.component';
+import { ResourceAccumulatedComponent } from './pages/resource/resource-accumulated/resource-accumulated.component';
 
 const routes: Routes = [
   
@@ -108,6 +110,7 @@ const routes: Routes = [
   { path: 'order/view/:id', component: OrderViewComponent },
   
   { path: 'product', component: ProductListComponent },
+  { path: 'product/accumulated', component: ProductAccumulatedComponent },
   { path: 'product/edit', component: ProductEditComponent },
   { path: 'product/edit/:id', component: ProductEditComponent },
   { path: 'product/view/:id', component: ProductViewComponent },
@@ -138,6 +141,7 @@ const routes: Routes = [
   { path: 'parameter/resourcecategory/view/:id', component: ResourcetypeViewComponent },
 
   { path: 'resource', component: ResourceListComponent },
+  { path: 'resource/accumulated', component: ResourceAccumulatedComponent },
   { path: 'resource/edit', component: ResourceEditComponent },
   { path: 'resource/edit/:id', component: ResourceEditComponent },
   { path: 'resource/view/:id', component: ResourceViewComponent },
