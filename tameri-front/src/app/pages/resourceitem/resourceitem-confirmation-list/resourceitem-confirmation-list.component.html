@@ -14,9 +14,9 @@
                         <tr>
                             <th>Date</th>
                             <th>Resource/Pack</th>
-                            <th style="text-align: right;">Quantity</th>
-                            <th style="text-align: right;">Quantity Category</th>
                             <th>Category</th>
+                            <th style="text-align: right;">Quantity Announced</th>
+                            <th style="text-align: right;">Quantity Received</th>
                             <th style="text-align: center;">Actions</th>
                         </tr>
                     </thead>
@@ -35,15 +35,6 @@
                                     </span> {{resourceitem.resourcepack.name}}
                                 </ng-container>
                             </td>
-                            <td style="text-align: right;">{{resourceitem.quantity | number}}</td>
-                            <td style="text-align: right;">
-                                <ng-container *ngIf="resourceitem.resource">
-                                    {{resourceitem.quantity * resourceitem.resource.content | number}} {{resourceitem.resource.unit}}
-                                </ng-container>
-                                <ng-container *ngIf="resourceitem.resourcepack">
-                                    {{resourceitem.quantity * resourceitem.resourcepack.quantity *resourceitem.resourcepack.resource.content}} {{resourceitem.resourcepack.resource.unit}}
-                                </ng-container>
-                            </td>
                             <td>
                                 <ng-container *ngIf="resourceitem.resource">
                                     {{resourceitem.resource.category.name }}
@@ -51,6 +42,23 @@
                                 <ng-container *ngIf="resourceitem.resourcepack">
                                     {{resourceitem.resourcepack.resource.category.name }}
                                 </ng-container>
+                            </td>
+                            <td style="text-align: right;">
+                                <div *ngIf="resourceitem.quantityNotValidated">
+                                    {{resourceitem.quantityNotValidated | number}}
+                                </div>
+                                <div *ngIf="!resourceitem.quantityNotValidated">
+                                    {{resourceitem.quantity | number}}
+                                </div>
+                            </td>
+                            <td style="text-align: right;" [ngClass]="{'prix-rouge': isNotEqual(resourceitem)}">
+                                <div *ngIf="resourceitem.status !== CONFIRMED" class="input-group input-group-sm">
+                                    <input style="text-align: right;" type="number" class="form-control" [(ngModel)]="resourceitem.quantityValidated">
+                                    <span class="input-group-text">{{resourceitem.quantity | number}}</span>
+                                </div>
+                                <div *ngIf="CONFIRMED === resourceitem.status">
+                                    {{resourceitem.quantity | number}}
+                                </div>
                             </td>
                             <td style="text-align: center;">
                                 <button *ngIf="CONFIRMED !== resourceitem.status" class="btn btn-primary btn-sm" (click)="confirmResourceItem(resourceitem)">

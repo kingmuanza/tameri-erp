@@ -35,8 +35,8 @@ const clientgroupRoutes = require('./_routes/clientgroup.route');
 const orderRoutes = require('./_routes/order.route');
 const orderlineRoutes = require('./_routes/orderline.route');
 
-//const lien = 'mongodb+srv://tameri:tameri@cluster0.hotc5.mongodb.net/test?retryWrites=true&w=majority';
- const lien = 'mongodb://127.0.0.1/tameri';
+const lien = 'mongodb+srv://tameri:tameri@cluster0.hotc5.mongodb.net/test?retryWrites=true&w=majority';
+// const lien = 'mongodb://127.0.0.1/tameri';
 mongoose.set('strictQuery', true);
 mongoose.connect(lien, {
         useNewUrlParser: true,
@@ -49,7 +49,6 @@ mongoose.connect(lien, {
     });
 
 const app = express();
-
 app.use((req, res, next) => {
     res.setHeader('Access-Control-Allow-Origin', '*');
     res.setHeader('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content, Accept, Content-Type, Authorization');

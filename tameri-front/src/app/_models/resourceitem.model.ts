@@ -11,6 +11,8 @@ export class Resourceitem {
   id: string = 'Resourceitem'.toUpperCase() + new Date().getTime();
   date = new Date()
   quantity = 0;
+  quantityValidated = 0;
+  quantityNotValidated = 0;
   price = 0;
   company = new Company();
   resource: Resource | undefined;

@@ -65,6 +65,12 @@ export class ResourceitemConfirmationListComponent implements OnInit {
       this.resourceitems = data.filter((d) => {
         return d.company && d.company.id === this.company.id;
       });
+      this.resourceitems.forEach((d) => {
+        if (d.status != Resourceitem.CONFIRMED) {
+          d.quantityValidated = d.quantity;
+          d.quantityNotValidated = d.quantity;
+        }
+      });
       this.dtTrigger.next('');
     }).catch((e)=> {
       this.dtTrigger.next('');
@@ -75,6 +81,8 @@ export class ResourceitemConfirmationListComponent implements OnInit {
     const yes = confirm('Are you sure to confirm this resource item ?');
     if (yes) {
       resourceitem.status = Resourceitem.CONFIRMED;
+      resourceitem.quantityNotValidated = resourceitem.quantity;
+      resourceitem.quantity = resourceitem.quantityValidated;
       this.save(resourceitem);
     }
   }
@@ -83,6 +91,10 @@ export class ResourceitemConfirmationListComponent implements OnInit {
     this.resourceitemService.modify('resourceitem', resourceitem._id, resourceitem).then(() => {
       this.notifierService.notify('success', "saved successfully");      
     });
+  }
+
+  isNotEqual(resourceitem: Resourceitem) {
+    return resourceitem.quantityNotValidated && resourceitem.quantityNotValidated !== resourceitem.quantity
   }
 
   ngOnDestroy(): void {
