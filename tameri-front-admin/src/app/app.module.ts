@@ -3,6 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { IgxStepperModule } from 'igniteui-angular';
 import { DataTablesModule } from "angular-datatables";
 import { NotifierModule } from 'angular-notifier';
+import { HashLocationStrategy, LocationStrategy } from '@angular/common';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -87,7 +88,7 @@ import { PositionEditComponent } from './pages/position/position-edit/position-e
     HttpClientModule,
     BrowserAnimationsModule
   ],
-  providers: [],
+  providers: [{provide: LocationStrategy, useClass: HashLocationStrategy}],
   bootstrap: [AppComponent]
 })
 export class AppModule {
