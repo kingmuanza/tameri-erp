@@ -3,6 +3,7 @@ import { Subscription } from 'rxjs';
 import { Company } from './_models/company.model';
 import { AuthenticationService } from './_services/authentication.service';
 import { CrudService } from './_services/crud.service';
+import { ConfigService } from './_services/config.service';
 
 @Component({
   selector: 'app-root',
@@ -21,6 +22,7 @@ export class AppComponent {
   constructor(
     private authService: AuthenticationService,
     private pricingService: CrudService<any>,
+    private configService: ConfigService,
     private companyService: CrudService<Company>
   ) {
     this.userSubscription = this.authService.userSubject.subscribe((user) => {
@@ -31,6 +33,10 @@ export class AppComponent {
       }
     });
     this.authService.autoConnexion();
+  }
+
+  isLaConfigurationAEteRecuperee(): boolean {
+    return this.configService.isLaConfigurationAEteRecuperee();
   }
 
   getCompany(company: Company) {

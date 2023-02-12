@@ -4,6 +4,7 @@ import { Subject } from 'rxjs';
 import { Company } from '../_models/company.model';
 import { User } from '../_models/user.model';
 import { CrudService } from './crud.service';
+import { ConfigService } from './config.service';
 
 @Injectable({
   providedIn: 'root'
@@ -18,13 +19,14 @@ export class AuthenticationService {
 
   constructor(
     private http: HttpClient,
+    private configService: ConfigService,
     private companyService: CrudService<Company>
-  ) { }
-
+  ) {
+  }
 
   conexion(login: string, passe: string): Promise<any> {
     return new Promise((resolve, reject) => {
-      this.http.post(this.URL + 'auth/connexion', { login: login, password: passe }).subscribe({
+      this.http.post(this.configService.getUrlServeur() + 'auth/connexion', { login: login, password: passe }).subscribe({
         next: (data) => {
           const result = data;
           console.log('data from connexion');
@@ -90,7 +92,7 @@ export class AuthenticationService {
         console.log('avaible : ' + avaible);
         if (avaible) {
           console.log('On va faire la requete post : ' + avaible);
-          this.http.post(this.URL + 'auth/create', user).subscribe({
+          this.http.post(this.configService.getUrlServeur() + 'auth/create', user).subscribe({
             next: (_id) => {
               console.log('_id ');
               console.log(_id);
@@ -114,7 +116,7 @@ export class AuthenticationService {
     console.log('updateUser');
     console.log(user);
     return new Promise((resolve, reject) => {
-      this.http.put(this.URL + 'auth/' + user._id, user).subscribe({
+      this.http.put(this.configService.getUrlServeur() + 'auth/' + user._id, user).subscribe({
         next: (data) => {
           resolve(data);
         }
@@ -125,7 +127,7 @@ export class AuthenticationService {
   isLoginAvaible(login: string): Promise<boolean> {
     console.log('isLoginAvaible');
     return new Promise((resolve, reject) => {
-      this.http.get(this.URL + 'auth/verifylogin/' + login).subscribe({
+      this.http.get(this.configService.getUrlServeur() + 'auth/verifylogin/' + login).subscribe({
         next: (data) => {
           console.log('isLoginAvaible data ' + JSON.stringify(data));
           if (JSON.parse(JSON.stringify(data)).length > 0) {

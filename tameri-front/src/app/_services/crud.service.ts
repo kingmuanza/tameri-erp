@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Subject, Subscription } from 'rxjs';
+import { ConfigService } from './config.service';
 
 @Injectable({
   providedIn: 'root'
@@ -14,11 +15,12 @@ export class CrudService<T> {
 
   constructor(
     private http: HttpClient,
+    private configService: ConfigService,
   ) {
   }
 
   infos() {
-    console.log(this.URL);
+    console.log(this.configService.getUrlServeur());
   }
 
   showLoader() {
@@ -33,7 +35,7 @@ export class CrudService<T> {
     this.infos();
     this.showLoader();
     return new Promise((resolve, reject) => {
-      this.http.get(this.URL + table).subscribe({
+      this.http.get(this.configService.getUrlServeur() + table).subscribe({
         next: (data) => {
           const result = data as Array<T>;
           this.hideLoader();
@@ -54,7 +56,7 @@ export class CrudService<T> {
     this.infos();
     this.showLoader();
     return new Promise((resolve, reject) => {
-      this.http.get(this.URL + table + '/' + id).subscribe({
+      this.http.get(this.configService.getUrlServeur() + table + '/' + id).subscribe({
         next: (data) => {
           const result = data as T;
           this.hideLoader();
@@ -71,7 +73,7 @@ export class CrudService<T> {
     this.infos();
     this.showLoader();
     return new Promise((resolve, reject) => {
-      this.http.post(this.URL + table, objet).subscribe({
+      this.http.post(this.configService.getUrlServeur() + table, objet).subscribe({
         next: (objetUpdate) => {
           this.hideLoader();
           resolve(objetUpdate);
@@ -87,7 +89,7 @@ export class CrudService<T> {
     this.infos();
     this.showLoader();
     return new Promise((resolve, reject) => {
-      this.http.put(this.URL + table + '/' + id, objet).subscribe({
+      this.http.put(this.configService.getUrlServeur() + table + '/' + id, objet).subscribe({
         next: (data) => {
           const result = data as T;
           this.hideLoader();
@@ -104,7 +106,7 @@ export class CrudService<T> {
     this.infos();
     this.showLoader();
     return new Promise((resolve, reject) => {
-      this.http.delete(this.URL + table + '/' + id).subscribe({
+      this.http.delete(this.configService.getUrlServeur() + table + '/' + id).subscribe({
         next: (data) => {
           this.hideLoader();
           resolve(true);

@@ -62,8 +62,8 @@ export class AppbarComponent implements OnInit, OnChanges {
       this.connexionEtablie = connexionEtablie;
     });
     this.company = this.user?.company;
-    console.log('this.company AppbarComponent');
-    console.log(this.company);
+    // console.log('this.company AppbarComponent');
+    // console.log(this.company);
     if (this.company) {
       this.getCompany(this.company);
     }
@@ -71,8 +71,8 @@ export class AppbarComponent implements OnInit, OnChanges {
 
   ngOnInit(): void {
     this.company = this.user?.company;
-    console.log('this.company AppbarComponent');
-    console.log(this.company);
+    // console.log('this.company AppbarComponent');
+    // console.log(this.company);
     if (this.company) {
       this.getCompany(this.company);
     }
@@ -83,17 +83,17 @@ export class AppbarComponent implements OnInit, OnChanges {
     if (this.company) {
       this.getCompany(this.company);
     }
-    console.log('this.company AppbarComponent SimpleChanges');
-    console.log(this.company);
+    // console.log('this.company AppbarComponent SimpleChanges');
+    // console.log(this.company);
     this.getAcess();
   }
 
   getCompany(company: Company) {
-    console.log('appbar get company...');
+    // console.log('appbar get company...');
     this.companyService.get('company', company._id).then((data) => {
       this.company = data;
-      console.log('appbar company');
-      console.log(this.company.option);
+      // console.log('appbar company');
+      // console.log(this.company.option);
     });
   }
 
@@ -159,8 +159,8 @@ export class AppbarComponent implements OnInit, OnChanges {
       this.access.invoice = true;    
     }
 
-    console.log('this.access');
-    console.log(this.access);
+    // console.log('this.access');
+    // console.log(this.access);
   }
 
   getNomProductsItem() {
