@@ -6,7 +6,7 @@ import { Injectable } from '@angular/core';
 })
 export class ConfigService {
 
-  urlServeur = 'http://localhost:3000/';
+  urlServeur = 'http://192.168.1.102/api';
   laConfigurationAEteRecuperee = false;
 
   constructor(
@@ -20,7 +20,8 @@ export class ConfigService {
       next: (data: any) => {
         console.log('data from assets/config.json');
         console.log(data);
-        this.urlServeur = data.protocole + '://' + data.urlServeur + ':' + data.port + '/';
+        //this.urlServeur = data.protocole + '://' + data.urlServeur + ':' + data.port + '/';
+        this.urlServeur = data.protocole + '://' + data.urlServeur;
         console.log('La nouvelle urlServeur est donc');
         console.log(this.urlServeur);
         setTimeout(() => {
