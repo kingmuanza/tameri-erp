@@ -21,7 +21,7 @@ export class ConfigService {
         console.log('data from assets/config.json');
         console.log(data);
         //this.urlServeur = data.protocole + '://' + data.urlServeur + ':' + data.port + '/';
-        this.urlServeur = data.protocole + '://' + data.urlServeur;
+        this.urlServeur = data.protocole + '://' + data.urlServeur + '/';
         console.log('La nouvelle urlServeur est donc');
         console.log(this.urlServeur);
         setTimeout(() => {
