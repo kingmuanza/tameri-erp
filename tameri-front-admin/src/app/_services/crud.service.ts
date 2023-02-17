@@ -6,7 +6,7 @@ import { HttpClient } from '@angular/common/http';
 })
 export class CrudService<T> {
 
-  URL = 'http://192.168.1.102/api';
+  URL = 'http://192.168.1.102/api/';
 
   constructor(
     private http: HttpClient,

@@ -6,7 +6,7 @@ import { Injectable } from '@angular/core';
 })
 export class ConfigService {
 
-  urlServeur = 'http://192.168.1.102/api';
+  urlServeur = 'http://192.168.1.102/api/';
   laConfigurationAEteRecuperee = false;
 
   constructor(
