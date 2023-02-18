@@ -8,7 +8,7 @@ import { ConfigService } from './config.service';
 })
 export class CrudService<T> {
 
-  URL = 'http://192.168.1.102/api/';
+  URL = 'http://192.168.8.111/api/';
 
   connexionEtablie = true;
   connexionEtablieSubject = new Subject<boolean>();

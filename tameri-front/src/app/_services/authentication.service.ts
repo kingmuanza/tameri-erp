@@ -15,7 +15,7 @@ export class AuthenticationService {
   userSubject = new Subject<any>();
   company: any;
 
-  URL = 'http://192.168.1.102/api/';
+  URL = 'http://192.168.8.111/api/';
 
   constructor(
     private http: HttpClient,
