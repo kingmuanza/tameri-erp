@@ -1,0 +1,29 @@
+<div class="container-fluid" style="margin-top: 16px;">
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a>Home</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Resources used History</li>
+        </ol>
+    </nav>
+    <h1>Resources used History</h1>
+
+    <div class=" page-contenu ">
+        <div class="">
+            <div class="">
+                <table datatable [dtOptions]="dtOptions " [dtTrigger]="dtTrigger " class="row-border hover ">
+                    <thead>
+                        <tr>
+                            <th>Date</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let resourceusedgroup of resourceusedgroups" (click)="edit(resourceusedgroup)">
+                            <td>{{resourceusedgroup.date | date: 'yyyy-MM-dd HH:mm'}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+            </div>
+        </div>
+    </div>
+</div>

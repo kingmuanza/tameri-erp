@@ -1,12 +1,11 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { Router, ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { DataTableDirective } from 'angular-datatables';
 import { NotifierService } from 'angular-notifier';
 import { Subject } from 'rxjs';
 import { DatatablesOptions } from 'src/app/_data/datatable.option';
 import { Company } from 'src/app/_models/company.model';
-import { Inventory } from 'src/app/_models/inventory.model';
-import { Inventorygroup } from 'src/app/_models/inventorygroup.model';
+import { Resourceused } from 'src/app/_models/resourceused.model';
 import { Resource } from 'src/app/_models/resource.model';
 import { Resourceitem } from 'src/app/_models/resourceitem.model';
 import { AuthenticationService } from 'src/app/_services/authentication.service';
@@ -14,11 +13,12 @@ import { CrudService } from 'src/app/_services/crud.service';
 import { RecurrentService } from 'src/app/_services/recurrent.service';
 
 @Component({
-  selector: 'app-inventorygroup-view',
-  templateUrl: './inventorygroup-view.component.html',
-  styleUrls: ['./inventorygroup-view.component.scss']
+  selector: 'app-resourceused-view',
+  templateUrl: './resourceused-view.component.html',
+  styleUrls: ['./resourceused-view.component.scss']
 })
-export class InventorygroupViewComponent implements OnInit {
+
+export class ResourceusedViewComponent implements OnInit {
 
   // Datatables
   dtOptions: any = DatatablesOptions;
@@ -27,17 +27,15 @@ export class InventorygroupViewComponent implements OnInit {
   dtInstance!: Promise<DataTables.Api>;
 
   resources = new Array<Resource>();
-  inventories = new Array<Inventory>();
+  inventories = new Array<Resourceused>();
   resource = new Resource();
   company = new Company();
-  inventorygroup = new Inventorygroup();
 
   constructor(
     private router: Router,
     private route: ActivatedRoute,
     private resourceService: CrudService<Resource>,
-    private inventoryService: CrudService<Inventory>,
-    private inventorygroupService: CrudService<Inventorygroup>,
+    private resourceusedService: CrudService<Resourceused>,
     private notifierService: NotifierService,
     private authService: AuthenticationService,
     private recurrentService: RecurrentService,
@@ -59,11 +57,11 @@ export class InventorygroupViewComponent implements OnInit {
       console.log('id');
       console.log(id);
       if (id) {
-        this.inventorygroupService.get('inventorygroup', id).then((data) => {
-          this.inventorygroup = data;
-          this.inventoryService.getAll('inventory').then((data) => {
+        this.resourceService.get('resource', id).then((data) => {
+          this.resource = data;
+          this.resourceusedService.getAll('resourceused').then((data) => {
             this.inventories = data.filter((d) => {
-              return d.company && d.company.id === this.company.id && d.inventorygroup && d.inventorygroup.id === this.inventorygroup.id;
+              return d.company && d.company.id === this.company.id && d.resource && d.resource.id === this.resource.id;
             });
             this.dtTrigger.next('');
           }).catch((e) => {
@@ -72,8 +70,6 @@ export class InventorygroupViewComponent implements OnInit {
         }); 
       }
     });
-    console.log('this.inventories--------------------------');
-    console.log(this.inventories);
   }
 
   getResourceItems(resource: Resource) {
@@ -88,34 +84,29 @@ export class InventorygroupViewComponent implements OnInit {
     return this.recurrentService.calculTotalResourceitems(resourceitems);
   }
 
-  saveInventory(resource: Resource, elem: any) {
+  saveResourceused(resource: Resource, elem: any) {
     const yes = confirm('Are you sure to update this value ?');
     if (yes) {
-      const inventory = new Inventory();
-      inventory.resource = resource;
+      const resourceused = new Resourceused();
+      resourceused.resource = resource;
       console.log(elem.value);
-      inventory.quantity = Number(elem.value);
-      inventory.company = this.company;
-      inventory.date = new Date()
-      console.log(inventory);
-      this.inventoryService.create('inventory', inventory).then((_id) => {
+      resourceused.quantity = Number(elem.value);
+      resourceused.company = this.company;
+      resourceused.date = new Date()
+      console.log(resourceused);
+      this.resourceusedService.create('resourceused', resourceused).then((_id) => {
         this.notifierService.notify('success', "saved successfully");
         window.location.reload();
       });
     }
   }
 
-  getLastInventory(resource: Resource): Inventory {
-    return this.recurrentService.getLastInventory(resource);
+  getLastResourceused(resource: Resource): Resourceused {
+    return this.recurrentService.getLastResourceused(resource);
   }
 
   getNow(resource: Resource) {
     return this.recurrentService.getNow(resource);
-  }
-
-  viewInventoryResource(inventory: Inventory) {
-    this.router.navigate(['inventory','view', inventory.resource._id]);
-
   }
 
   ngOnDestroy(): void {

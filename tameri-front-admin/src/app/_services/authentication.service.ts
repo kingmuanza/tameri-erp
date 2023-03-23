@@ -7,7 +7,7 @@ import { User } from '../_models/user.model';
 })
 export class AuthenticationService {
 
-  URL = 'http://192.168.8.111/api/';
+  URL = 'http://localhost:3000/';
 
   constructor(
     private http: HttpClient,

@@ -2,10 +2,10 @@
     <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
             <li class="breadcrumb-item"><a>Home</a></li>
-            <li class="breadcrumb-item active" aria-current="page">Fill Inventory</li>
+            <li class="breadcrumb-item active" aria-current="page">Resources used</li>
         </ol>
     </nav>
-    <h1>Fill Inventory</h1>
+    <h1>Resources used</h1>
 
     <div class=" page-contenu ">
         <div class="mb-4">
@@ -23,30 +23,30 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr *ngFor="let inventory of inventories">
+                        <tr *ngFor="let resourceused of resourcesused">
                             <td>
-                                {{inventory.resource.name}}
+                                {{resourceused.resource.name}}
                             </td>
-                            <td>{{inventory.resource.category.name}}</td>
-                            <td style="text-align: right;">{{inventory.resource.content | number}}</td>
-                            <td>{{inventory.resource.unit}}</td>
+                            <td>{{resourceused.resource.category.name}}</td>
+                            <td style="text-align: right;">{{resourceused.resource.content | number}}</td>
+                            <td>{{resourceused.resource.unit}}</td>
                             <td style="text-align: right;">
                                 <div class="input-group input-group-sm">
-                                    <input style="text-align: right;" type="number" class="form-control" [(ngModel)]="inventory.whole">
-                                    <span class="input-group-text"> * {{inventory.resource.content}}</span>
-                                    <span class="input-group-text">{{inventory.resource.unit}}</span>
+                                    <input style="text-align: right;" type="number" class="form-control" [(ngModel)]="resourceused.whole">
+                                    <span class="input-group-text"> * {{resourceused.resource.content}}</span>
+                                    <span class="input-group-text">{{resourceused.resource.unit}}</span>
                                 </div>
                             </td>
                             <td style="text-align: right;">
                                 <div class="input-group input-group-sm">
-                                    <input style="text-align: right;" type="number" class="form-control" [(ngModel)]="inventory.opened">
-                                    <span class="input-group-text">{{inventory.resource.unit}}</span>
+                                    <input style="text-align: right;" type="number" class="form-control" [(ngModel)]="resourceused.opened">
+                                    <span class="input-group-text">{{resourceused.resource.unit}}</span>
                                 </div>
                             </td>
                             <td style="text-align: right;">
                                 <div class="input-group input-group-sm">
-                                    <input style="text-align: right;" type="number" readonly class="form-control" [value]="getInventoryQuantity(inventory)">
-                                    <span class="input-group-text">{{inventory.resource.unit}}</span>
+                                    <input style="text-align: right;" type="number" readonly class="form-control" [value]="getResourceusedQuantity(resourceused)">
+                                    <span class="input-group-text">{{resourceused.resource.unit}}</span>
                                 </div>
                             </td>
                         </tr>
@@ -56,7 +56,7 @@
         </div>
         <div>
             <button class="btn btn-primary" (click)="saveAll()">
-                Save this inventory
+                Save this resources used
             </button>
         </div>
     </div>

@@ -74,6 +74,12 @@ import { OrderViewComponent } from './pages/order/order-view/order-view.componen
 import { ProductitemConfirmationListComponent } from './pages/productitem/productitem-confirmation-list/productitem-confirmation-list.component';
 import { ProductAccumulatedComponent } from './pages/product/product-accumulated/product-accumulated.component';
 import { ResourceAccumulatedComponent } from './pages/resource/resource-accumulated/resource-accumulated.component';
+import { ResourceusedListComponent } from './pages/resourceused/resourceused-list/resourceused-list.component';
+import { ResourceusedEditComponent } from './pages/resourceused/resourceused-edit/resourceused-edit.component';
+import { ResourceusedgroupEditComponent } from './pages/resourceusedgroup/resourceusedgroup-edit/resourceusedgroup-edit.component';
+import { ResourceusedgroupListComponent } from './pages/resourceusedgroup/resourceusedgroup-list/resourceusedgroup-list.component';
+import { ResourceusedgroupViewComponent } from './pages/resourceusedgroup/resourceusedgroup-view/resourceusedgroup-view.component';
+import { ResourceusedViewComponent } from './pages/resourceused/resourceused-view/resourceused-view.component';
 
 @NgModule({
   declarations: [
@@ -144,6 +150,12 @@ import { ResourceAccumulatedComponent } from './pages/resource/resource-accumula
     ProductitemConfirmationListComponent,
     ProductAccumulatedComponent,
     ResourceAccumulatedComponent,
+    ResourceusedListComponent,
+    ResourceusedEditComponent,
+    ResourceusedgroupEditComponent,
+    ResourceusedgroupListComponent,
+    ResourceusedgroupViewComponent,
+    ResourceusedViewComponent,
   ],
   imports: [
     BrowserModule,

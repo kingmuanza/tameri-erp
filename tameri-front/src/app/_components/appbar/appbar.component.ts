@@ -37,6 +37,8 @@ export class AppbarComponent implements OnInit, OnChanges {
       item: false,
       confirmation: false,
       accumulated: false,
+      used:false,
+      history: false,
     },
     param: false,
     client: false,
@@ -133,6 +135,8 @@ export class AppbarComponent implements OnInit, OnChanges {
       this.access.product.accumulated = true;
       this.access.resource.accumulated = true;
       this.access.resource.menu = true;
+      this.access.resource.used = true;
+      this.access.resource.history = true;
       // this.access.resource.item = true;
       // this.access.product.pack = true;
     }
@@ -210,6 +214,8 @@ export class AppbarComponent implements OnInit, OnChanges {
         item: false,
         confirmation: false,
         accumulated: false,
+        used: false,
+        history: false,
       },
       param: false,
       client: false,

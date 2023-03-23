@@ -62,6 +62,10 @@ export class InventoryListComponent implements OnInit {
   getResourceItems(resource: Resource) {
     return this.recurrentService.getResourceItems(resource);
   }
+  
+  getResourceUsedItems(resource: Resource) {
+    return this.recurrentService.getResourceUsedItems(resource);
+  }
 
   getProductItems(resource: Resource) {
     return this.recurrentService.getProductItems(resource);

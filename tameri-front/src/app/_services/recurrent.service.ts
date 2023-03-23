@@ -9,6 +9,7 @@ import { CrudService } from './crud.service';
 import { Order } from '../_models/order.model';
 import { Sale } from '../_models/sale.model';
 import { Orderline } from '../_models/orderline.model';
+import { Resourceused } from '../_models/resourceused.model';
 
 @Injectable({
   providedIn: 'root'
@@ -19,6 +20,7 @@ export class RecurrentService {
   productitems = new Array<Productitem>();
   inventories = new Array<Inventory>();
   resources = new Array<Resource>();
+  resourcesused = new Array<Resourceused>();
 
   invoices = new Array<Sale>();
 
@@ -32,6 +34,7 @@ export class RecurrentService {
     private productitemService: CrudService<Productitem>,
     private resourceitemService: CrudService<Resourceitem>,
     private inventoryService: CrudService<Inventory>,
+    private resourceusedService: CrudService<Resourceused>,
   ) {
     this.company = this.authService.user.company;
     this.init();
@@ -76,6 +79,11 @@ export class RecurrentService {
         return d.company && d.company.id === this.company.id;
       });
     });
+    this.resourceusedService.getAll('resourceused').then((resourcesused) => {
+      this.resourcesused = resourcesused.filter((m) => {
+        return m.company && m.company.id === this.company.id;
+      });
+    });
     this.inventoryService.getAll('inventory').then((data) => {
       this.inventories = data.filter((i) => {
         return i.company && i.company.id === this.company.id;
@@ -118,6 +126,23 @@ export class RecurrentService {
     }
   }
 
+  getLastResourceused(resource: Resource): Resourceused {
+    let resourcesused = this.resourcesused.filter((d) => {
+      return d.resource && d.resource.id === resource.id;
+    });
+
+    if (resourcesused.length > 0) {
+      resourcesused = resourcesused.sort((i1, i2) => {
+        return new Date(i1.date).getTime() - new Date(i2.date).getTime() > 0 ? -1 : 1;
+      });
+      return resourcesused[0];
+    } else {
+      const resourceused = new Resourceused();
+      resourceused.resource = resource;
+      return resourceused;
+    }
+  }
+
   getResourceItems(resource: Resource) {
     const inventory = this.getLastInventory(resource);
     const date = new Date(inventory.date);
@@ -130,6 +155,14 @@ export class RecurrentService {
     });
     const totalResourceitems = this.calculTotalResourceitems(resourceitems) * resource.content;
     return totalResourceitems
+  }
+
+  getResourceUsedItems(resource: Resource) {
+    const resourcesused = new Array(this.getLastResourceused(resource));
+    //const date = new Date(resourcesused.date);
+
+    const totalResourceitems = this.calculTotalResourcesUsed(resourcesused) ;
+    return totalResourceitems;
   }
 
   getResourceItemsNoInventory(resource: Resource) {
@@ -190,6 +223,16 @@ export class RecurrentService {
       }
       if (s.resourcepack) {
         total += s.quantity * s.resourcepack.quantity;
+      }
+    });
+    return total;
+  }
+
+  calculTotalResourcesUsed(resourcesused: Array<Resourceused>) {
+    let total = 0;
+    resourcesused.forEach((s) => {
+      if (s.resource) {
+        total += s.quantity;
       }
     });
     return total;

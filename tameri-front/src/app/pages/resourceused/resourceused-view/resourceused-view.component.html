@@ -1,0 +1,35 @@
+<div class="container-fluid" style="margin-top: 16px;">
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a>Home</a></li>
+            <li class="breadcrumb-item active" aria-current="page"><a [routerLink]="'/resourceused'">Resource used</a></li>
+            <li class="breadcrumb-item active" aria-current="page">{{resource.name}}</li>
+        </ol>
+    </nav>
+    <h1>Inventories : {{resource.name}} </h1>
+    <p>
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam maximus aliquam velit, sed malesuada ligula blandit vel.
+    </p>
+
+    <div class=" page-contenu ">
+        <div class="">
+            <div class="">
+                <table datatable [dtOptions]="dtOptions " [dtTrigger]="dtTrigger " class="row-border hover ">
+                    <thead>
+                        <tr>
+                            <th>Date</th>
+                            <th>Quantity</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let resourceused of inventories">
+                            <td>{{resourceused.date | date: 'yyyy-MM-dd HH:mm'}}</td>
+                            <td>{{resourceused.quantity | number}} {{resourceused.resource.unit}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+            </div>
+        </div>
+    </div>
+</div>

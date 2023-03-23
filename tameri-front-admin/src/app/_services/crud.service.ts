@@ -6,7 +6,7 @@ import { HttpClient } from '@angular/common/http';
 })
 export class CrudService<T> {
 
-  URL = 'http://192.168.8.111/api/';
+  URL = 'http://localhost:3000/';
 
   constructor(
     private http: HttpClient,

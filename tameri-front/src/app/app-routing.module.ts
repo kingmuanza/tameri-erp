@@ -62,6 +62,12 @@ import { OrderViewComponent } from './pages/order/order-view/order-view.componen
 import { ProductitemConfirmationListComponent } from './pages/productitem/productitem-confirmation-list/productitem-confirmation-list.component';
 import { ProductAccumulatedComponent } from './pages/product/product-accumulated/product-accumulated.component';
 import { ResourceAccumulatedComponent } from './pages/resource/resource-accumulated/resource-accumulated.component';
+import { ResourceusedEditComponent } from './pages/resourceused/resourceused-edit/resourceused-edit.component';
+import { ResourceusedViewComponent } from './pages/resourceused/resourceused-view/resourceused-view.component';
+import { ResourceusedListComponent } from './pages/resourceused/resourceused-list/resourceused-list.component';
+import { ResourceusedgroupListComponent } from './pages/resourceusedgroup/resourceusedgroup-list/resourceusedgroup-list.component';
+import { ResourceusedgroupViewComponent } from './pages/resourceusedgroup/resourceusedgroup-view/resourceusedgroup-view.component';
+import { ResourceusedgroupEditComponent } from './pages/resourceusedgroup/resourceusedgroup-edit/resourceusedgroup-edit.component';
 
 const routes: Routes = [
   
@@ -167,6 +173,17 @@ const routes: Routes = [
   { path: 'warehouse/edit', component: WarehouseEditComponent },
   { path: 'warehouse/edit/:id', component: WarehouseEditComponent },
   { path: 'warehouse/view/:id', component: WarehouseViewComponent },
+
+  { path: 'resourceused', component: ResourceusedListComponent },
+  { path: 'resourceused-edit', component: ResourceusedEditComponent },
+  { path: 'resourceused/edit/:id', component: ResourceusedEditComponent },
+  { path: 'resourceused/view/:id', component: ResourceusedViewComponent },
+  
+  { path: 'resourceusedgroup', component: ResourceusedgroupListComponent },
+  { path: 'resourceusedgroup/edit', component: ResourceusedgroupEditComponent },
+  { path: 'resourceusedgroup/edit/:id', component: ResourceusedgroupEditComponent },
+  { path: 'resourceusedgroup/view/:id', component: ResourceusedgroupViewComponent },
+  
 
   { path: '**', redirectTo: 'signin' },
 

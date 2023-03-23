@@ -160,6 +160,20 @@
                                     <a class="dropdown-item" aria-current="page" [routerLink]="'resourceitem'" routerLinkActive="active">Procurement</a>
                                 </li>
                             </ng-container>
+                            <ng-container *ngIf="access.resource.used">
+                                <li *ngIf="company?.option.productResource">
+                                    <a class="dropdown-item" aria-current="page" [routerLink]="'resourceused-edit'" routerLinkActive="active">
+                                        Resource used by Prod Team
+                                    </a>
+                                </li>
+                            </ng-container>
+                            <ng-container *ngIf="access.resource.used">
+                                <li *ngIf="company?.option.productResource">
+                                    <a class="dropdown-item" aria-current="page" [routerLink]="'resourceusedgroup'" routerLinkActive="active">
+                                        Resource used History
+                                    </a>
+                                </li>
+                            </ng-container>
                             <ng-container *ngIf="access.resource.confirmation">
                                 <li *ngIf="company?.option.productResource">
                                     <a class="dropdown-item" aria-current="page" [routerLink]="'resourceitem-confirmation'" routerLinkActive="active">
