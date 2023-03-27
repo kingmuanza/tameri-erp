@@ -20,7 +20,7 @@ exports.modify = (req, res, next) => {
 
 exports.get = (req, res, next) => {
     companyService.get(req.params.id).then((company) => {
-        console.log('company');
+        console.log('company-----ME');
         console.log(company);
         res.status(201).json(company);
     });

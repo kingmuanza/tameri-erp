@@ -39,7 +39,9 @@
                 <div class="col-lg-6" *ngIf=" type === 'product' ">
                     <div class="input-group mb-3">
                         <span class="input-group-text">Product</span>
-                        <select (ngModelChange)="setInfosOfProduct(); resetProductPack()" [(ngModel)]="productitem.product" type="text" class="form-control">
+                        <select (ngModelChange)="setInfosOfProduct(); resetProductPack()" [(ngModel)]="productitem.product" 
+                            type="text" class="form-control">
+                            <option></option>
                             <option *ngFor="let s of products" [ngValue]="s">{{s.name}}</option>
                         </select>
                         <button *ngIf="productitem.product" class="btn btn-primary">

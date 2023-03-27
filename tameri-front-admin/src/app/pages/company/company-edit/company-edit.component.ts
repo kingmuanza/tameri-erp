@@ -60,11 +60,11 @@ export class CompanyEditComponent implements OnInit {
     });
     this.route.paramMap.subscribe((paramMap) => {
       const id = paramMap.get('id');
-      if (id) {
-
+        if (id) {
         this.companyService.get('company', id).then((data) => {
           this.company = data;
           this.isNewCompany = false;
+
           /* this.authService.getUser(this.company.id).then((user) => {
             if (user) {
               this.user = user;

@@ -36,18 +36,38 @@ export class CrudService<T> {
     });
   }
 
-  get(table: string, id: number | string): Promise<T> {
+/*   get(table: string, id: number | string): Promise<T> {
     this.infos();
     this.showLoader();
+    console.log(id);
+    console.log("Service CRUD-------1-----");
     return new Promise((resolve, reject) => {
       this.http.get(this.URL + table + '/' + id).subscribe((data) => {
         const result = data as T;
+        console.log("Service CRUD-------2-----");
+       
         this.hideLoader();
         resolve(result);
       });
     });
+  } */
+  
+  get(table: string, id: number | string): Promise<T> {
+    this.infos();
+    this.showLoader();
+    return new Promise((resolve, reject) => {
+      this.http.get(this.URL + table + '/' + id).subscribe({
+        next: (data) => {
+          const result = data as T;
+          this.hideLoader();
+          resolve(result);
+        },
+        error: (e) => {
+          reject(e);
+        }
+      });
+    });
   }
-
   create(table: string, objet: T): Promise<any> {
     this.infos();
     this.showLoader();
