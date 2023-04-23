@@ -22,6 +22,7 @@ export class AppbarComponent implements OnInit, OnChanges {
     employee: false, 
     pos: false,
     supplier: false,
+    warehouse: false,
     product: {
       menu: false,
       it: false,
@@ -121,8 +122,13 @@ export class AppbarComponent implements OnInit, OnChanges {
       this.access.inventory.history = true;
       this.access.employee = true;
       this.access.supplier = true;
+      this.access.warehouse = true;
       this.access.client = true;
       this.access.product.menu = true;
+      //console.log("this.company---------------" + this.company);
+     // if (!this.company.option.productResource) { 
+        this.access.product.item = true;
+    //  }
       this.access.resource.menu = true;
       this.access.product.accumulated = true;
       this.access.resource.accumulated = true;
@@ -147,6 +153,7 @@ export class AppbarComponent implements OnInit, OnChanges {
       this.access.inventory.menu = true;
       this.access.inventory.fill = true;
       this.access.inventory.history = true;
+      this.access.warehouse = true;
     }
     if (this.user?.role.indexOf('keyAccountManager') !== -1) {
       this.access.order = true;
@@ -199,6 +206,7 @@ export class AppbarComponent implements OnInit, OnChanges {
       employee: false, 
       pos: false,
       supplier: false,
+      warehouse:false,
       product: {
         menu: false,
         it: false,

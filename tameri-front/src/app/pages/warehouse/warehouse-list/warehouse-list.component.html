@@ -14,12 +14,16 @@
                     <thead>
                         <tr>
                             <th>Name</th>
+                            <th>Location</th>
+                            <th>Surface</th>
                             <th>Description</th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr *ngFor="let warehouse of warehouses" (click)="edit(warehouse)">
                             <td>{{warehouse.name}}</td>
+                            <td>{{warehouse.location}}</td>
+                            <td>{{warehouse.surface}}</td>
                             <td>{{warehouse.description}}</td>
                         </tr>
                     </tbody>

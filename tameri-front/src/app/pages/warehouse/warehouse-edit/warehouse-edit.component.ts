@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { NotifierService } from 'angular-notifier';
+import { Company } from 'src/app/_models/company.model';
 import { Warehouse } from 'src/app/_models/warehouse.model';
 import { AuthenticationService } from 'src/app/_services/authentication.service';
 import { CrudService } from 'src/app/_services/crud.service';
@@ -29,6 +30,7 @@ export class WarehouseEditComponent implements OnInit {
   login = '';
   password = '';
   confirmpassword = '';
+  company = new Company();
 
   constructor(
     private router: Router,
@@ -39,10 +41,10 @@ export class WarehouseEditComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    this.company = this.authService.user.company;
     this.route.paramMap.subscribe((paramMap) => {
       const id = paramMap.get('id');
       if (id) {
-
         this.warehouseService.get('warehouse', id).then((data) => {
           this.warehouse = data;
           this.isNewWarehouse = false;
@@ -71,7 +73,8 @@ export class WarehouseEditComponent implements OnInit {
   }
 
   endSecondStep() {
-    this.warehouse.company = this.authService.user.company;
+    this.warehouse.company = this.company;
+    this.warehouse.company.id = this.company.id;
     if (this.isNewWarehouse) {
       this.warehouseService.create('warehouse', this.warehouse).then(() => {
         this.notifierService.notify('success', "saved successfully");
@@ -88,9 +91,9 @@ export class WarehouseEditComponent implements OnInit {
   }
 
   delete() {
-    const oui = confirm('Are you sure to delete this item?');
-    if (oui) {
-      this.warehouseService.delete('warehouse', this.warehouse.id).then(() => {
+    const delete_ = confirm('Are you sure to delete this item?');
+    if (delete_) {
+      this.warehouseService.delete('warehouse', this.warehouse._id).then(() => {
         this.router.navigate(['warehouse']);
       });
     }

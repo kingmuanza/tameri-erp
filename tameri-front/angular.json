@@ -5,6 +5,12 @@
     "projects": {
         "tameri-front": {
             "projectType": "application",
+            "i18n": {
+                "sourceLocale": "en-US",
+                "locales": {
+                    "fr-FR": "src/locale/messages.fr.xlf"
+                }
+            },
             "schematics": {
                 "@schematics/angular:component": {
                     "style": "scss",
@@ -39,6 +45,9 @@
                 "build": {
                     "builder": "@angular-devkit/build-angular:browser",
                     "options": {
+                        "localize": [
+                            "fr-FR"
+                        ],
                         "outputPath": "dist/tameri-front",
                         "index": "src/index.html",
                         "main": "src/main.ts",
@@ -114,7 +123,9 @@
                 "extract-i18n": {
                     "builder": "@angular-devkit/build-angular:extract-i18n",
                     "options": {
-                        "browserTarget": "tameri-front:build"
+                      "browserTarget": "tameri-front:build",
+                      "format": "xlf",
+                      "outputPath": "src/locale"
                     }
                 },
                 "test": {

@@ -10,6 +10,12 @@ const ProductitemSchema = mongoose.Schema({
     productpack: Object,
     supplier: Object,
     status: Number,
+
+    // Warehouse-location
+    warehouse: Object,
+    warehouseblock: Object,
+    locationdetails: String
+
 });
 
 module.exports = mongoose.model('Productitem', ProductitemSchema);

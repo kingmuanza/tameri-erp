@@ -41,6 +41,7 @@ export class HomeComponent implements OnInit {
     printing: 0,
     scm: 0,
     crm: 0,
+    multi_warehouse: 0
 
   };
 
@@ -94,6 +95,7 @@ export class HomeComponent implements OnInit {
         printing: 0,
         scm: 0,
         crm: 0,
+        multi_warehouse: 0,
 
       };
       this.companies.forEach((company) => {
@@ -137,6 +139,9 @@ export class HomeComponent implements OnInit {
 
       case 'crm':
         return 'CRM';
+
+      case 'multi_warehouse':
+        return 'multi_warehouse';
 
       default:
         return key;

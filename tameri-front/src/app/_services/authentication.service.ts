@@ -67,11 +67,13 @@ export class AuthenticationService {
   autoConnexion() {
     let user: any;
     const userString = localStorage.getItem('TameriUser');
+    
     if (userString) {
       user = JSON.parse(userString);
       this.user = user;
       this.userSubject.next(this.user);
       this.conexion(user.login, user.password);
+   
       return user;
     }
     return null;

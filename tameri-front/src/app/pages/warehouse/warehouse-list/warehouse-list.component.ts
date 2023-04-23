@@ -21,7 +21,7 @@ export class WarehouseListComponent implements OnInit {
   @ViewChild(DataTableDirective) dtElement!: DataTableDirective;
   dtInstance!: Promise<DataTables.Api>;
 
-  warehouses = new Array<any>();
+  warehouses = new Array<Warehouse>();
   company = new Company();
 
   constructor(
@@ -49,7 +49,7 @@ export class WarehouseListComponent implements OnInit {
 
   edit(warehouse?:Warehouse) {
     if (warehouse) {
-      this.router.navigate(['warehouse', 'view', warehouse.id]);
+      this.router.navigate(['warehouse', 'view', warehouse._id]);
     } else {
       this.router.navigate(['warehouse', 'edit']);
     }
@@ -61,6 +61,8 @@ export class WarehouseListComponent implements OnInit {
       this.warehouses = data.filter((d) => {
         return d.company && d.company.id === this.company.id;
       });
+      this.dtTrigger.next('');
+    }).catch((e) => {
       this.dtTrigger.next('');
     });
   }

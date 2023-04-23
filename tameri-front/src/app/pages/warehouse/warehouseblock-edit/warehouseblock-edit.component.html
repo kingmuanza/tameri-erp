@@ -3,49 +3,49 @@
         <ol class="breadcrumb">
             <li class="breadcrumb-item"><a>Home</a></li>
             <li class="breadcrumb-item"><a [routerLink]="'/warehouse'">Warehouses</a></li>
-            <li class="breadcrumb-item active" *ngIf="isNewWarehouse">new</li>
-            <li class="breadcrumb-item active" *ngIf="!isNewWarehouse"><a [routerLink]="'parameter/warehouse/edit/' + warehouse.id">{{warehouse.name}}</a></li>
-            <li class="breadcrumb-item active" *ngIf="!isNewWarehouse">Edit</li>
+            <li class="breadcrumb-item active" *ngIf="isNewWarehouseblock">new</li>
+            <li class="breadcrumb-item active" *ngIf="!isNewWarehouseblock"><a [routerLink]="'/warehouse/view/' + warehouse._id">{{warehouse.name}}</a></li>
+            <li class="breadcrumb-item active" *ngIf="!isNewWarehouseblock">Edit</li>
         </ol>
     </nav>
-    <h1 *ngIf="!isNewWarehouse" class="titre">
+    <h1 *ngIf="!isNewWarehouseblock" class="titre">
         <button style="float: right;" (click)="delete()" class="btn btn-danger btn-error">
             Delete
-        </button> Modify warehouse {{warehouse.id}}
+        </button> Modify warehouseblock {{warehouseblock.name}}
     </h1>
-    <h1 *ngIf="isNewWarehouse" class="titre">Add a warehouse</h1>
+    <h1 *ngIf="isNewWarehouseblock" class="titre">Add a warehouseblock to {{ warehouse.name }}'s Warehouse</h1>
 
     <div *ngIf="step === 1" class="first-step">
         <p>
-            Warehouse Infos
+            Warehouseblock Infos
         </p>
         <div class=" page-contenu ">
             <div class="row">
                 <div class="col-lg-6">
                     <div class="input-group mb-3">
                         <span class="input-group-text">Name</span>
-                        <input [(ngModel)]="warehouse.name" type="text" class="form-control" [ngClass]="{'is-invalid': showErrors1 && (errorWarehouseName)}">
+                        <input [(ngModel)]="warehouseblock.name" type="text" class="form-control" [ngClass]="{'is-invalid': showErrors1 && (errorWarehouseblockName)}">
                     </div>
 
                     <div class="input-group mb-3">
                         <span class="input-group-text">Location</span>
-                        <input [(ngModel)]="warehouse.location" type="text" class="form-control" [ngClass]="{'is-invalid': showErrors1 && (errorWarehouseName)}">
+                        <input [(ngModel)]="warehouseblock.position" type="text" class="form-control" [ngClass]="{'is-invalid': showErrors1 && (errorWarehouseblockName)}">
                     </div>
 
                     <div class="input-group mb-3">
                         <span class="input-group-text">Surface</span>
-                        <input [(ngModel)]="warehouse.surface" type="text" class="form-control" [ngClass]="{'is-invalid': showErrors1 && (errorWarehouseName)}">
+                        <input [(ngModel)]="warehouseblock.surface" type="text" class="form-control" [ngClass]="{'is-invalid': showErrors1 && (errorWarehouseblockName)}">
                     </div>
 
                     <div class="errors" style="margin-bottom: 20px; color: red; margin-top: -5px; font-size: 0.9em;">
-                        <div *ngIf="errorWarehouseName">
+                        <div *ngIf="errorWarehouseblockName">
                             Required field
                         </div>
                     </div>
 
                     <div class="input-group mb-3">
                         <span class="input-group-text">Description</span>
-                        <textarea [(ngModel)]="warehouse.description" type="text" class="form-control"></textarea>
+                        <textarea [(ngModel)]="warehouseblock.description" type="text" class="form-control"></textarea>
                     </div>
                 </div>
             </div>

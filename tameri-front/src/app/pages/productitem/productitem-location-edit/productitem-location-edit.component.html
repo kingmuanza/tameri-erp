@@ -1,0 +1,53 @@
+<div class="container-fluid" style="margin-top: 16px;">
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a>Home</a></li>
+            <li class="breadcrumb-item"><a [routerLink]="'/warehouse'">Warehouses</a></li>
+            <li class="breadcrumb-item active" *ngIf="isItemlocated">new</li>
+            <li class="breadcrumb-item active" *ngIf="!isItemlocated"><a [routerLink]="'/productitem/view/' + productitem._id">{{productitem.product}}</a></li>
+            <li class="breadcrumb-item active" *ngIf="!isItemlocated">Edit</li>
+        </ol>
+    </nav>
+    <h1 *ngIf="!isItemlocated" class="titre">
+        <button style="float: right;" (click)="delete()" class="btn btn-danger btn-error">
+            Delete
+        </button>
+        Product location: 
+         <span *ngIf="productitem.product">{{productitem.product.name}} - {{productitem.quantity}} produits</span>
+         <span *ngIf="productitem.productpack">{{productitem.productpack.name}} - {{productitem.quantity}} packs</span>
+    </h1>
+    
+    <div *ngIf="step === 1" class="first-step">
+        <p>
+            Product Infos
+        </p>
+        <div class=" page-contenu ">
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="input-group mb-3">
+                        <span class="input-group-text">Select a warehouse</span>
+                        <select (ngModelChange)="getWarehouseblocks($event)" [(ngModel)]="productitem.warehouse" type="text" class="form-control">
+                            <option *ngFor="let warehouse of warehouses" [ngValue]="warehouse">{{warehouse.name}}</option>
+                        </select>
+                    </div>
+
+                    <div class="input-group mb-3">
+                        <span class="input-group-text">Select a block</span>
+                        <select [(ngModel)]="productitem.warehouseblock" type="text" class="form-control">
+                            <option *ngFor="let warehouseblock of warehouseblocks" [ngValue]="warehouseblock">{{warehouseblock.name}}</option>
+                        </select>
+                    </div>
+
+                    <div class="input-group mb-3">
+                        <span class="input-group-text">Description</span>
+                        <textarea [(ngModel)]="productitem.locationdetails" type="text" class="form-control"></textarea>
+                    </div>
+                </div>
+            </div>
+            <div>
+                <button (click)="endFirstStep()" class="btn btn-primary">Save</button>
+            </div>
+        </div>
+    </div>
+
+</div>

@@ -68,6 +68,10 @@ import { ResourceusedListComponent } from './pages/resourceused/resourceused-lis
 import { ResourceusedgroupListComponent } from './pages/resourceusedgroup/resourceusedgroup-list/resourceusedgroup-list.component';
 import { ResourceusedgroupViewComponent } from './pages/resourceusedgroup/resourceusedgroup-view/resourceusedgroup-view.component';
 import { ResourceusedgroupEditComponent } from './pages/resourceusedgroup/resourceusedgroup-edit/resourceusedgroup-edit.component';
+import { WarehouseblockListComponent } from './pages/warehouse/warehouseblock-list/warehouseblock-list.component';
+import { WarehouseblockEditComponent } from './pages/warehouse/warehouseblock-edit/warehouseblock-edit.component';
+import { WarehouseblockViewComponent } from './pages/warehouse/warehouseblock-view/warehouseblock-view.component';
+import { ProductitemLocationEditComponent } from './pages/productitem/productitem-location-edit/productitem-location-edit.component';
 
 const routes: Routes = [
   
@@ -127,6 +131,7 @@ const routes: Routes = [
   { path: 'productitem/view/:id', component: ProductitemViewComponent },
 
   { path: 'productitem-confirmation', component: ProductitemConfirmationListComponent },
+  { path: 'productitem-location/edit/:id', component: ProductitemLocationEditComponent },
 
   { path: 'productpack', component: ProductpackListComponent },
   { path: 'productpack/edit', component: ProductpackEditComponent },
@@ -173,6 +178,11 @@ const routes: Routes = [
   { path: 'warehouse/edit', component: WarehouseEditComponent },
   { path: 'warehouse/edit/:id', component: WarehouseEditComponent },
   { path: 'warehouse/view/:id', component: WarehouseViewComponent },
+
+  { path: 'warehouseblock', component: WarehouseblockListComponent },
+  { path: 'warehouseblock/edit', component: WarehouseblockEditComponent },
+  { path: 'warehouseblock/edit/:id', component: WarehouseblockEditComponent },
+  { path: 'warehouseblock/view/:id', component: WarehouseblockViewComponent },
 
   { path: 'resourceused', component: ResourceusedListComponent },
   { path: 'resourceused-edit', component: ResourceusedEditComponent },

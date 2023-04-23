@@ -94,5 +94,9 @@ export class ProductitemConfirmationListComponent implements OnInit {
   ngOnDestroy(): void {
     this.dtTrigger.unsubscribe();
   }
+
+  addLocation(productitem: Productitem) {
+    this.router.navigate(['productitem-location', 'edit', productitem._id]);
+  }
   
 }

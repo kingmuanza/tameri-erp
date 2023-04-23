@@ -18,6 +18,8 @@ const PricingSchema = mongoose.Schema({
     printing: Number,
     scm: Number,
     crm: Number,
+    
+    multi_warehouse: Number,
 });
 
 module.exports = mongoose.model('Pricing', PricingSchema);

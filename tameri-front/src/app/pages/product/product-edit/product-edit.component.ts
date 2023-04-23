@@ -68,8 +68,8 @@ export class ProductEditComponent implements OnInit {
   }
 
   save() {
-    console.log('save this.product');
-    console.log(this.product);
+   // console.log('save this.product');
+    //console.log(this.product);
     this.product.company.id = this.authService.user.company.id;
     if (this.isNewProduct) {
       this.productService.create('product', this.product).then((_id) => {

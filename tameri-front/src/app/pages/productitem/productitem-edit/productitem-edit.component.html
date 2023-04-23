@@ -39,9 +39,7 @@
                 <div class="col-lg-6" *ngIf=" type === 'product' ">
                     <div class="input-group mb-3">
                         <span class="input-group-text">Product</span>
-                        <select (ngModelChange)="setInfosOfProduct(); resetProductPack()" [(ngModel)]="productitem.product" 
-                            type="text" class="form-control">
-                            <option></option>
+                        <select (ngModelChange)="setInfosOfProduct(); resetProductPack()" [(ngModel)]="productitem.product" type="text" class="form-control">
                             <option *ngFor="let s of products" [ngValue]="s">{{s.name}}</option>
                         </select>
                         <button *ngIf="productitem.product" class="btn btn-primary">
@@ -50,7 +48,7 @@
                         </button>
                     </div>
 
-                    <div *ngIf="productitem.product">
+                    <div *ngIf="productitem.product && company.option.productResource">
                         <div>
                             Resources needed to produce {{productitem.quantity}} {{productitem.product.name}}
                         </div>
@@ -77,7 +75,7 @@
                         </select>
                     </div>
 
-                    <div *ngIf="productitem.productpack">
+                    <div *ngIf="productitem.productpack && company.option.productResource">
                         <div>
                             Resources needed to produce {{productitem.quantity}} {{productitem.productpack.name}}
                         </div>

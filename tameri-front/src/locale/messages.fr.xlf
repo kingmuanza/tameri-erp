@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
+  <file source-language="en-US" datatype="plaintext" original="ng2.template">
+    <body>
+      <trans-unit id="8002267386201604078" datatype="html">
+        <source><x id="START_LINK" ctype="x-a" equiv-text="&lt;a&gt;"/>Home<x id="CLOSE_LINK" ctype="x-a" equiv-text="&lt;/a&gt;"/></source>
+        <target><x id="START_LINK" ctype="x-a" equiv-text="&lt;a&gt;"/>Maison<x id="CLOSE_LINK" ctype="x-a" equiv-text="&lt;/a&gt;"/></target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/warehouse/warehouse-view/warehouse-view.component.html</context>
+          <context context-type="linenumber">5</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="4114809643190100476" datatype="html">
+        <source><x id="START_LINK" ctype="x-a" equiv-text="&lt;a [routerLink]=&quot;&apos;/warehouse&apos;&quot;&gt;"/>Warehouses<x id="CLOSE_LINK" ctype="x-a" equiv-text="&lt;/a&gt;"/></source>
+        <target><x id="START_LINK" ctype="x-a" equiv-text="&lt;a [routerLink]=&quot;&apos;/warehouse&apos;&quot;&gt;"/>Magasins<x id="CLOSE_LINK" ctype="x-a" equiv-text="&lt;/a&gt;"/></target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/warehouse/warehouse-view/warehouse-view.component.html</context>
+          <context context-type="linenumber">6</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="5443531070800992721" datatype="html">
+        <source>Warehouse: <x id="INTERPOLATION" equiv-text="{{warehouse.name}}"/></source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/warehouse/warehouse-view/warehouse-view.component.html</context>
+          <context context-type="linenumber">7</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="423699095937196309" datatype="html">
+        <source> Warehouse: <x id="INTERPOLATION" equiv-text="{{warehouse.name}}"/> </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/warehouse/warehouse-view/warehouse-view.component.html</context>
+          <context context-type="linenumber">11,13</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="4435737976003447486" datatype="html">
+        <source> Company : <x id="INTERPOLATION" equiv-text="{{company.name}}"/> <x id="LINE_BREAK" ctype="lb" equiv-text="&lt;br&gt;"/></source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/warehouse/warehouse-view/warehouse-view.component.html</context>
+          <context context-type="linenumber">14,16</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="7430681010219674033" datatype="html">
+        <source>Warehouse Infos</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/warehouse/warehouse-view/warehouse-view.component.html</context>
+          <context context-type="linenumber">20</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="5981464769762700597" datatype="html">
+        <source>Warehouse blocks Infos</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/warehouse/warehouse-view/warehouse-view.component.html</context>
+          <context context-type="linenumber">46</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="5929482738215591665" datatype="html">
+        <source>Add Block</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/warehouse/warehouse-view/warehouse-view.component.html</context>
+          <context context-type="linenumber">48</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="8953033926734869941" datatype="html">
+        <source>Name</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/warehouse/warehouse-view/warehouse-view.component.html</context>
+          <context context-type="linenumber">52</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="1172866303261737245" datatype="html">
+        <source>Position</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/warehouse/warehouse-view/warehouse-view.component.html</context>
+          <context context-type="linenumber">53</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="8892474519242682669" datatype="html">
+        <source>Surface</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/warehouse/warehouse-view/warehouse-view.component.html</context>
+          <context context-type="linenumber">54</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="4902817035128594900" datatype="html">
+        <source>Description</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/warehouse/warehouse-view/warehouse-view.component.html</context>
+          <context context-type="linenumber">55</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="7585826646011739428" datatype="html">
+        <source>Edit</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/warehouse/warehouse-view/warehouse-view.component.html</context>
+          <context context-type="linenumber">66</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="2438528726916792928" datatype="html">
+        <source>saved successfully</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/warehouse/warehouse-view/warehouse-view.component.ts</context>
+          <context context-type="linenumber">101</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/warehouse/warehouse-view/warehouse-view.component.ts</context>
+          <context context-type="linenumber">107</context>
+        </context-group>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

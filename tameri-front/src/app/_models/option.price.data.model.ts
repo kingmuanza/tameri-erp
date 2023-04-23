@@ -16,4 +16,6 @@ export const OptionPriceData = {
     printing : 5000,
     scm : 5000,
     crm : 5000,
+    
+    multi_warehouse: 5000
 };

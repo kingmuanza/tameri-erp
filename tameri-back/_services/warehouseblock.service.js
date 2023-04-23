@@ -4,25 +4,23 @@ if (typeof localStorage === "undefined" || localStorage === null) {
     localStorage = new LocalStorage('./localbd');
 }
 
-const Pricing = require('../_models/pricing.model.js');
+const Warehouseblock = require('../_models/warehouseblock.model.js');
 
 exports.create = (item) => {
-    console.log('CREATE NEW CLIENT');
-    console.log(item);
     return new Promise((resolve, reject) => {
-        delete item._id;
-        const pricing = new Pricing(item);
-        pricing.save().then((err, data) => {
-            resolve(pricing._id)
+
+        const warehouseblock = new Warehouseblock(item);
+        warehouseblock.save().then((err, data) => {
+            resolve(warehouseblock._id)
         }).catch(() => {
-            console.log(err);
+
         });
     });
 }
 
 exports.modify = (item) => {
     return new Promise((resolve, reject) => {
-        Pricing.updateOne({
+        Warehouseblock.updateOne({
             _id: item._id
         }, {
             $set: item
@@ -36,19 +34,19 @@ exports.modify = (item) => {
 
 exports.get = (id) => {
     return new Promise((resolve, reject) => {
-        Pricing.findOne({
+        Warehouseblock.findOne({
             _id: id
         }).then((item) => {
             resolve(item);
         }).catch(() => {
-
+            //reject(error)
         });
     });
 }
 
 exports.getAll = () => {
     return new Promise((resolve, reject) => {
-        Pricing.find().then((items) => {
+        Warehouseblock.find().then((items) => {
             resolve(items);
         }).catch((error) => {
             reject(error)
@@ -58,7 +56,7 @@ exports.getAll = () => {
 
 exports.delete = (id) => {
     return new Promise((resolve, reject) => {
-        Pricing.deleteOne({
+        Warehouseblock.deleteOne({
             _id: id
         }).then(() => {
             resolve(id);

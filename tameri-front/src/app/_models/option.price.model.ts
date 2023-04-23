@@ -15,5 +15,6 @@ export class OptionPrice {
     printing = false;
     scm = false;
     crm = false;
+    multi_warehouse = false;
 
 }

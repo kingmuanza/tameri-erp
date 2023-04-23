@@ -94,9 +94,9 @@
                     </li>
                 </ng-container>
 
-                <ng-container *ngIf="access.supplier && false">
-                    <li class="nav-item" *ngIf="company?.option.productResource">
-                        <a class="nav-link " aria-current="page" [routerLink]="'warehouse'" routerLinkActive="active">Warehouse</a>
+                <ng-container *ngIf="access.warehouse">
+                    <li class="nav-item">
+                        <a class="nav-link " aria-current="page" [routerLink]="'warehouse'" routerLinkActive="active">Warehouses</a>
                     </li>
                 </ng-container>
 
@@ -158,20 +158,6 @@
                             <ng-container *ngIf="access.resource.item && !isAdmin">
                                 <li *ngIf="company?.option.productResource">
                                     <a class="dropdown-item" aria-current="page" [routerLink]="'resourceitem'" routerLinkActive="active">Procurement</a>
-                                </li>
-                            </ng-container>
-                            <ng-container *ngIf="access.resource.used">
-                                <li *ngIf="company?.option.productResource">
-                                    <a class="dropdown-item" aria-current="page" [routerLink]="'resourceused-edit'" routerLinkActive="active">
-                                        Resource used by Prod Team
-                                    </a>
-                                </li>
-                            </ng-container>
-                            <ng-container *ngIf="access.resource.used">
-                                <li *ngIf="company?.option.productResource">
-                                    <a class="dropdown-item" aria-current="page" [routerLink]="'resourceusedgroup'" routerLinkActive="active">
-                                        Resource used History
-                                    </a>
                                 </li>
                             </ng-container>
                             <ng-container *ngIf="access.resource.confirmation">

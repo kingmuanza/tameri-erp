@@ -80,6 +80,10 @@ import { ResourceusedgroupEditComponent } from './pages/resourceusedgroup/resour
 import { ResourceusedgroupListComponent } from './pages/resourceusedgroup/resourceusedgroup-list/resourceusedgroup-list.component';
 import { ResourceusedgroupViewComponent } from './pages/resourceusedgroup/resourceusedgroup-view/resourceusedgroup-view.component';
 import { ResourceusedViewComponent } from './pages/resourceused/resourceused-view/resourceused-view.component';
+import { WarehouseblockEditComponent } from './pages/warehouse/warehouseblock-edit/warehouseblock-edit.component';
+import { WarehouseblockViewComponent } from './pages/warehouse/warehouseblock-view/warehouseblock-view.component';
+import { WarehouseblockListComponent } from './pages/warehouse/warehouseblock-list/warehouseblock-list.component';
+import { ProductitemLocationEditComponent } from './pages/productitem/productitem-location-edit/productitem-location-edit.component';
 
 @NgModule({
   declarations: [
@@ -156,6 +160,10 @@ import { ResourceusedViewComponent } from './pages/resourceused/resourceused-vie
     ResourceusedgroupListComponent,
     ResourceusedgroupViewComponent,
     ResourceusedViewComponent,
+    WarehouseblockEditComponent,
+    WarehouseblockViewComponent,
+    WarehouseblockListComponent,
+    ProductitemLocationEditComponent,
   ],
   imports: [
     BrowserModule,

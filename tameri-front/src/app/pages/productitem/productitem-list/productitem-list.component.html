@@ -24,7 +24,6 @@
                         <tr *ngFor="let productitem of productitems" (click)="edit(productitem)">
                             <td>{{productitem.date | date: 'yyyy-MM-dd'}}</td>
                             <td>
-
                                 <ng-container *ngIf="productitem.product">
                                     {{productitem.product.name}}
                                 </ng-container>

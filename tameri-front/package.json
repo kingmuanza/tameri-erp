@@ -36,6 +36,7 @@
     "@angular-devkit/build-angular": "^14.2.5",
     "@angular/cli": "~14.2.5",
     "@angular/compiler-cli": "^14.2.0",
+    "@angular/localize": "^14.2.7",
     "@types/datatables.net": "^1.10.24",
     "@types/datatables.net-buttons": "^1.4.7",
     "@types/jasmine": "~4.0.0",

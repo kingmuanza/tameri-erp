@@ -17,6 +17,8 @@
                             <th style="text-align: right;">Quantity Announced</th>
                             <th style="text-align: right;">Quantity Received</th>
                             <th style="text-align: center;">Actions</th>
+
+                            <th *ngIf="company.option.multi_warehouse" style="text-align: center;">Location</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -52,12 +54,24 @@
                                 </div>
                             </td>
                             <td style="text-align: center;">
-                                <button *ngIf="CONFIRMED !== productitem.status" class="btn btn-primary btn-sm" (click)="confirmProductItem(productitem)">
+                                <button *ngIf="!company.option.multi_warehouse && CONFIRMED !== productitem.status" class="btn btn-primary btn-sm" (click)="confirmProductItem(productitem)">
                                     Confirm
                                 </button>
+                                <button *ngIf="company.option.multi_warehouse && CONFIRMED !== productitem.status" class="btn btn-primary btn-sm" (click)="addLocation(productitem)">
+                                    Put in place
+                                </button>
+
                                 <b *ngIf="CONFIRMED === productitem.status">
                                     CONFIRMED
                                 </b>
+                            </td>
+                            <td *ngIf="company.option.multi_warehouse" style="text-align: center;">
+                                <p>
+                                    {{productitem.warehouse?.name}} - {{productitem.warehouseblock?.name}} - {{productitem.warehouseblock?.position}}
+                                </p>
+                                <p>
+                                    {{productitem.locationdetails}}
+                                </p>
                             </td>
                         </tr>
                     </tbody>

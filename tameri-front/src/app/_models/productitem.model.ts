@@ -2,6 +2,8 @@ import { Company } from "./company.model";
 import { Product } from "./product.model";
 import { Productpack } from "./productpack.model";
 import { Supplier } from "./supplier.model";
+import { Warehouse } from "./warehouse.model";
+import { Warehouseblock } from "./warehouseblock.model";
 
 export class Productitem {
 
@@ -19,5 +21,12 @@ export class Productitem {
   supplier: Supplier | undefined;
   _id: any;
   status = 0;
+
+  // Warehouse-location
+  warehouse = new Warehouse();
+  warehouseblock = new Warehouseblock();
+  locationdetails: string = '';
+
+
 
 }

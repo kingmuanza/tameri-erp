@@ -4,69 +4,64 @@ if (typeof localStorage === "undefined" || localStorage === null) {
     localStorage = new LocalStorage('./localbd');
 }
 
+const Warehouse = require('../_models/warehouse.model.js');
 
 exports.create = (item) => {
-    var items = [];
-    var itemsString = localStorage.getItem('warehouse');
-    if (itemsString) {
-        items = JSON.parse(itemsString);
-    }
-    items.push(item);
-    localStorage.setItem('warehouse', JSON.stringify(items));
+    return new Promise((resolve, reject) => {
+
+        const warehouse = new Warehouse(item);
+        warehouse.save().then((err, data) => {
+            resolve(warehouse._id)
+        }).catch(() => {
+
+        });
+    });
 }
 
 exports.modify = (item) => {
-    var items = [];
-    var nouveauxitems = [];
-    var itemsString = localStorage.getItem('warehouse');
-    if (itemsString) {
-        items = JSON.parse(itemsString);
-    }
-    items.forEach((element) => {
-        if (element.id === item.id) {
-            nouveauxitems.push(item);
-        } else {
-            nouveauxitems.push(element);
-        }
+    return new Promise((resolve, reject) => {
+        Warehouse.updateOne({
+            _id: item._id
+        }, {
+            $set: item
+        }).then(() => {
+            resolve(item);
+        }).catch(() => {
+
+        });
     });
-    localStorage.setItem('warehouse', JSON.stringify(nouveauxitems));
 }
 
 exports.get = (id) => {
-    var items = [];
-    var itemsString = localStorage.getItem('warehouse');
-    if (itemsString) {
-        items = JSON.parse(itemsString);
-    }
-    var item;
-    items.forEach((element) => {
-        if (element.id === id) {
-            item = element;
-        }
+    return new Promise((resolve, reject) => {
+        Warehouse.findOne({
+            _id: id
+        }).then((item) => {
+            resolve(item);
+        }).catch(() => {
+            //reject(error)
+        });
     });
-    return item;
 }
 
 exports.getAll = () => {
-    var items = [];
-    var itemsString = localStorage.getItem('warehouse');
-    if (itemsString) {
-        items = JSON.parse(itemsString);
-    }
-    return items;
+    return new Promise((resolve, reject) => {
+        Warehouse.find().then((items) => {
+            resolve(items);
+        }).catch((error) => {
+            reject(error)
+        });
+    });
 }
 
 exports.delete = (id) => {
-    var items = [];
-    var nouveauxitems = [];
-    var itemsString = localStorage.getItem('warehouse');
-    if (itemsString) {
-        items = JSON.parse(itemsString);
-    }
-    items.forEach((element) => {
-        if (element.id === id) {} else {
-            nouveauxitems.push(element);
-        }
+    return new Promise((resolve, reject) => {
+        Warehouse.deleteOne({
+            _id: id
+        }).then(() => {
+            resolve(id);
+        }).catch(() => {
+
+        });
     });
-    localStorage.setItem('warehouse', JSON.stringify(nouveauxitems));
 }

@@ -10,6 +10,8 @@ import { Order } from '../_models/order.model';
 import { Sale } from '../_models/sale.model';
 import { Orderline } from '../_models/orderline.model';
 import { Resourceused } from '../_models/resourceused.model';
+import { Warehouse } from '../_models/warehouse.model';
+import { Warehouseblock } from '../_models/warehouseblock.model';
 
 @Injectable({
   providedIn: 'root'
@@ -21,7 +23,8 @@ export class RecurrentService {
   inventories = new Array<Inventory>();
   resources = new Array<Resource>();
   resourcesused = new Array<Resourceused>();
-
+  warehouseblocks = new Array<Warehouseblock>();
+  
   invoices = new Array<Sale>();
 
   company = new Company();
@@ -35,6 +38,7 @@ export class RecurrentService {
     private resourceitemService: CrudService<Resourceitem>,
     private inventoryService: CrudService<Inventory>,
     private resourceusedService: CrudService<Resourceused>,
+    private warehouseblockService: CrudService<Warehouseblock>
   ) {
     this.company = this.authService.user.company;
     this.init();
@@ -82,6 +86,11 @@ export class RecurrentService {
     this.resourceusedService.getAll('resourceused').then((resourcesused) => {
       this.resourcesused = resourcesused.filter((m) => {
         return m.company && m.company.id === this.company.id;
+      });
+    });
+    this.warehouseblockService.getAll('warehouseblock').then((warehouseblocks) => {
+      this.warehouseblocks = warehouseblocks.filter((wb) => {
+        return wb.warehouse.company && wb.warehouse.company.id === this.company.id;
       });
     });
     this.inventoryService.getAll('inventory').then((data) => {
@@ -236,6 +245,14 @@ export class RecurrentService {
       }
     });
     return total;
+  }
+
+  getBlocks(warehouse: Warehouse) {
+    const blocks = this.warehouseblocks.filter((wb) => {
+      return wb.warehouse.id === warehouse.id;
+    });
+
+    return blocks;
   }
 
 }
